@@ -3,7 +3,8 @@ import Component from "@/components/Component";
 
 export default async function Page() {
 
-  const response = await fetch("http://localhost:3000/api/testendpoint");
+  const baseUrl = process.env.BASE_URL;
+  const response = await fetch(`${baseUrl}/api/testendpoint`);
   const json = await response.json();
   const content = json.content;
 
