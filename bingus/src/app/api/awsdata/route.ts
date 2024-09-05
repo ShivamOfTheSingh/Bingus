@@ -1,27 +1,32 @@
 import handleError from "@/lib/errors";
 import { NextRequest } from "next/server";
 import pg from "pg";
-const { Client } = pg;
+const { Pool } = pg;
 
-//get aws data here
-export async function GET(request: NextRequest): Promise<Response> {
+export async function GET(request: NextRequest) {
     try {
-        const client = new Client({
+        const pool = new Pool({
+            user: "postgres",
             password: "Bingus_LLC",
-            host: "bingus-postgres-1.criiocw0mlgp.us-east-2.rds.amazonaws.com",
-            post: 5432,
-            databse: "Bingus-DB"
-        })
+            host: "bingus-db-1.c9ayqsiuu3wz.us-east-1.rds.amazonaws.com",
+            port: 5432,
+            database: "postgres",
+            ssl: {
+                rejectUnauthorized: false,
+            },
+        });
 
-        console.log("___________BEFORE CONNECTING______________________")
+        const client = await pool.connect();
+        const result = await client.query("select * from bingus_tdb");
+        client.release();
 
-        await client.connect()
+        return new Response(JSON.stringify(result.rows), {
+            status: 200,
+        });
 
-        console.log("____________________AFTER_______________________________")
-
-        return new Response();
-    }
-    catch (error) {
-        return handleError(error);
+    } catch (error) {
+        return new Response("Failed to retrieve data", {
+            status: 500,
+        });
     }
 }

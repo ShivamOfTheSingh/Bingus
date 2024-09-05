@@ -8,9 +8,9 @@ export default function Content() {
     return (
         <form action={formAction}>
             <div>
-                {state?.data.content}
+                {JSON.stringify(state?.data)}
             </div>
-            <button type="submit">Fetch Data</button>
+            <button type="submit" style={{backgroundColor: "red"}}>Fetch Data</button>
         </form>
     );
 }
