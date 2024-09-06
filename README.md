@@ -53,7 +53,7 @@ Bingus LLC
   ```js
   /**
   *  Use server actions when you have to use async/await from a client component.
-  *  We'll have to use this a lot when submitting forms.
+  *  We'll have to use this a lot when submitting forms because they usually use some React hooks so have to be client components.
   *  Create an async function in a separate file and use as "action" parameter in form or button element.
   */
 
