@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.navbar-main {
+    color: white;
+    font-family: sans-serif;
+}
+
+.navbar-main a {
+    border-radius: 40px;
+    padding: 10px;
+}
+
+.navbar-main img {
+    border-radius: 50%;
+}
+
+.navbar-main a:hover {
+    background-color: white;
+    color: rgb(168 85 247);
+}
+
+
