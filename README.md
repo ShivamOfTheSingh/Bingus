@@ -22,7 +22,10 @@ Bingus LLC
 
   export default function Button({ text, onClick, className }: ButtonProps) {
         return (
-          <button className={className} onClick={onClick}>{text}<button/>
+          /**
+          * Give HTML elements IDs so they can be referenced in CSS files if we need to do that.
+          */
+          <button className={className} onClick={onClick} id="button1">{text}<button/>
         );
   }
   ```
