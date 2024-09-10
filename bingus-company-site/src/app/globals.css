@@ -10,6 +10,8 @@
 .navbar-main a {
     border-radius: 40px;
     padding: 10px;
+    color: white;
+    text-decoration-line: none;
 }
 
 .navbar-main img {

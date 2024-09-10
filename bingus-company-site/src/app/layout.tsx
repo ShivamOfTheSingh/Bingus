@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import NavbarHorizontal from "../components/NavbarHorizontal";
-import bingusPicture from "@/src/public/bingus.jpg";
+import bingusPicture from "@/src/public/bingus.jpg"
 
 export const metadata: Metadata = {
   title: "Binugs LLC",
@@ -39,7 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-purple-500">
-        <NavbarHorizontal hrefs={navbarHrefs} logo={bingusPicture} className="navbar-main" />
+        <NavbarHorizontal hrefs={navbarHrefs} brand="Bingus LLC" logo={bingusPicture} className="navbar-main" />
         {children}
       </body>
     </html>
