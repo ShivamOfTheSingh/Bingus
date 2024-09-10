@@ -26,13 +26,13 @@ export default async function Page() {
     const logsRows: any[] = logs.rows;
 
     return (
-        <div>
+        <div className="flex flex-col items-center w-full">
             {logDatesRows.map(e1 =>
                 <ExpandableContainer 
                     key={e1.log_date} 
                     title={"Daily Log " + e1.log_date.toISOString().split("T")[0]}
                     content={logsRows.filter(e2 => e2.log_date.getTime() == e1.log_date.getTime()).map(e2 => 
-                        <Log logDate={e2.log_date} name={e2.name} logPrevious={e2.log_previous} logNext={e2.log_next} />)} 
+                        <Log key={e2.id} logDate={e2.log_date} name={e2.name} logPrevious={e2.log_previous} logNext={e2.log_next} />)} 
                 />
             )}
         </div>

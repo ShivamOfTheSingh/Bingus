@@ -16,14 +16,14 @@ export default function ExpandableContainer({ title, content, className }: Expan
     }
 
     return (
-        <div className={`${className}`}>
-            <div className="flex gap-6 items-center">
-                <div id="title">
+        <div className={`${className} flex flex-col justify-center gap-3`}>
+            <div className="flex gap-9 items-center text-2xl self-center">
+                <div id="title" className="text-white">
                     {title}
                 </div>
-                <div onClick={onClickExpand} id="dropdown-button">
+                <button onClick={onClickExpand} id="dropdown-button" className="border-white border-2 rounded p-[0.2rem] text-white hover:text-purple-500 hover:bg-white">
                     {expanded ? "Collapse" : "Expand"}
-                </div>
+                </button>
             </div>
             {expanded ?
                 <div id="content-container" className="flex flex-col gap-3">
