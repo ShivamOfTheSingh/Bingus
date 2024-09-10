@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
-import dropdownIcon from "@/src/public/triangle.svg";
 
 interface ExpandableContainerProps {
     title: string;
@@ -18,17 +16,19 @@ export default function ExpandableContainer({ title, content, className }: Expan
     }
 
     return (
-        <div className={`${className} flex justify-between items-center`}>
-            <div id="title">
-                {title}
+        <div className={`${className}`}>
+            <div className="flex gap-6 items-center">
+                <div id="title">
+                    {title}
+                </div>
+                <div onClick={onClickExpand} id="dropdown-button">
+                    {expanded ? "Collapse" : "Expand"}
+                </div>
             </div>
-            <div onClick={onClickExpand} id="dropdown-icon">
-                <Image src={dropdownIcon} alt="dropdown-icon" height={10} width={10} />
-            </div>
-            {expanded ? 
-                <div id="content-container">
+            {expanded ?
+                <div id="content-container" className="flex flex-col gap-3">
                     {content}
-                </div> 
+                </div>
             : null}
         </div>
     );

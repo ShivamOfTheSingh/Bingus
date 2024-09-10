@@ -7,11 +7,11 @@ const { Pool } = pg;
 
 export default async function Page() {
     const pool = new Pool({
-        user: "postgres",
-        password: "Bingus_LLC",
-        host: "bingus-postgres-1.criiocw0mlgp.us-east-2.rds.amazonaws.com",
-        port: 5432,
-        database: "bingusdevopsdb",
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        host: process.env.DB_HOST,
+        port: process.env.DB_PORT,
+        database: process.env.DB_NAME,
         ssl: {
             rejectUnauthorized: false,
         },
@@ -27,13 +27,14 @@ export default async function Page() {
 
     return (
         <div>
-            {logDatesRows.map(e1 => {
-                return <ExpandableContainer
-                            key={e1.id}
-                            title={`Daily Log ${e1}`} 
-                            content={logsRows.filter(e2 => e2.date == e1).map(e2 => <Log key={e2.id} logDate={new Date(e2.log_date)} name={e2.name} logPrevious={e2.log_previous} logNext={e2.log_next} />)} 
-                    />;
-            })}
+            {logDatesRows.map(e1 =>
+                <ExpandableContainer 
+                    key={e1.log_date} 
+                    title={"Daily Log " + e1.log_date.toISOString().split("T")[0]}
+                    content={logsRows.filter(e2 => e2.log_date.getTime() == e1.log_date.getTime()).map(e2 => 
+                        <Log logDate={e2.log_date} name={e2.name} logPrevious={e2.log_previous} logNext={e2.log_next} />)} 
+                />
+            )}
         </div>
     );
 }

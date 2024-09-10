@@ -3,16 +3,24 @@ interface LogProps {
     name: string;
     logPrevious: string;
     logNext: string;
+    className?: string;
 }
 
-export default function Log({ logDate, name, logPrevious, logNext }: LogProps) {
-    const date = new Date(logDate);
+export default function Log({ logDate, name, logPrevious, logNext, className }: LogProps) {
     return (
-        <div>
-            Name: {name}
-            Date: {date.toISOString()}
-            Previous log: {logPrevious}
-            Next log: {logNext}
+        <div className={className}>
+            <div id="column-names">
+                <div>Name</div>
+                <div>Date</div>
+                <div>Previous Day Log</div>
+                <div>Today Log</div>
+            </div>
+            <div id="column-content">
+                <div>{name}</div>
+                <div>{logDate.toISOString().split("T")[0]}</div>
+                <div>{logPrevious}</div>
+                <div>{logNext}</div>
+            </div>
         </div>
     );
 }
