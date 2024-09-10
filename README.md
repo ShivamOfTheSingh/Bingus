@@ -2,7 +2,22 @@
 Bingus LLC
 
 # File guidelines
-## 1. React Components
+
+## 1. Documenting Functions
+  ```js
+  /**
+ * Function description.
+ *
+ * @param {ParameterType} parameter1 - Parameter 1 description.
+ * @param {ParameterType} parameter2 - Parameter 2 description.
+ * @returns {ReturnType} - Return var description.
+ */
+  function funct(parameter1: ParameterType, parameter2: ParameterType): ReturnType {
+    return;
+  }
+  ```
+
+## 2. React Components
   ```js
   /**
   * If you have to, specify client or server component.
@@ -29,7 +44,7 @@ Bingus LLC
         );
   }
   ```
-  ## 2. API Routes
+  ## 3. API Routes
   ```js
   /**
   * Use NextRequest and NextResponse for extended funcionality.
@@ -52,7 +67,7 @@ Bingus LLC
     }
   }
   ```
-  ## 3. Server Actions
+  ## 4. Server Actions
   ```js
   /**
   *  Use server actions when you have to use async/await from a client component.
