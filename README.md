@@ -1,6 +1,9 @@
 # Bingus
 Bingus LLC
 
+# Database Model
+https://app.diagrams.net/#G1VxIOJO4zmWKR50GdPvAjej72hiJJFCUX#%7B%22pageId%22%3A%22R2lEEEUBdFMjLlhIrx00%22%7D
+
 # File guidelines
 
 ## 1. Documenting Functions
