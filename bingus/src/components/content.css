@@ -22,6 +22,33 @@
     color: plum;
 }
 
+.each-endpoint button:active {
+    background-color: plum;
+    border-color: plum;
+    transform: scale(0.99);
+    transition: 0.1s;
+}
+
 .data-row {
+    padding: 0.5vh;
+    margin: 0.5vh 0vh;
     display: flex;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+    transition: 0.5s;
+}
+
+.data-row:hover {
+    transform: scale(1.05);
+}
+    
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }

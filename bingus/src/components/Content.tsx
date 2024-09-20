@@ -3,7 +3,7 @@ import { useState } from "react";
 import "./content.css";
 
 interface DataState {
-    [key: string]: any[]; // Data will be an array of objects with varying structures
+    [key: string]: any[];
 }
 
 const Content = () => {
@@ -40,19 +40,18 @@ const Content = () => {
                     <button onClick={() => fetchData(endpoint)}>
                         Fetch {endpoint}
                     </button>
-                    <ul>
-                        {data[endpoint] && data[endpoint].map((row, rowIndex) => (
-                            <li key={rowIndex}>
-                                <div className="data-row">
-                                    {Object.entries(row).map(([key, value]) => (
-                                        <div key={key}>
-                                            <strong>{key}</strong>: {JSON.stringify(value)},&nbsp;&nbsp;&nbsp;
-                                        </div>
-                                    ))}
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
+                    {data[endpoint] && data[endpoint].map((row, rowIndex) => (
+                        <div key={rowIndex}>
+                            <div className="data-row" style={{ animationDelay: `${0.25 * rowIndex}s` }}>
+                                &#8594;&nbsp;
+                                {Object.entries(row).map(([key, value]) => (
+                                    <div key={key}>
+                                        <strong>{key}</strong>: {JSON.stringify(value)},&nbsp;&nbsp;&nbsp;
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    ))}
                 </div>
             ))}
         </div>
