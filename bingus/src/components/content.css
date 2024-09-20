@@ -1,0 +1,27 @@
+.content-main {
+    background-color: beige;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.each-endpoint {
+    width: 100%;
+}
+
+.each-endpoint button {
+    border: solid 1px black;
+    background-color: plum;
+    padding: 1vh;
+    transition: 0.5s;
+}
+
+.each-endpoint button:hover {
+    transform: scale(1.05);
+    background-color: black;
+    color: plum;
+}
+
+.data-row {
+    display: flex;
+}
