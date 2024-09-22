@@ -16,6 +16,11 @@ export const registerUserSchema = z.object({
       .min(8, "Password must be at least 8 characters long")
       .max(45, "Password must be at most 45 characters long"),
   
+    passwordRepeat: z
+      .string()
+      .min(8, "Password must be at least 8 characters long")
+      .max(45, "Password must be at most 45 characters long"),
+
     firstName: z
       .string()
       .min(1, "First name is required")
@@ -31,5 +36,32 @@ export const registerUserSchema = z.object({
   
     birthDate: z
       .string()
-      .regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid birth date format (YYYY-MM-DD)"),
+      .regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid birth date format (YYYY-MM-DD)")
+      .refine((date) => {
+        const [year, month, day] = date.split('-').map(Number);
+        const inputDate = new Date(year, month - 1, day);
+        const today = new Date();
+        
+        // Check if the date is valid (no impossible dates like Feb 30)
+        if (inputDate.getFullYear() !== year || inputDate.getMonth() !== month - 1 || inputDate.getDate() !== day) {
+          return false;
+        }
+  
+        // Check for reasonable age range (e.g., between 18 and 120 years old)
+        const age = today.getFullYear() - year;
+        if (age < 18 || age > 120) {
+          return false;
+        }
+  
+        // Ensure the date is not in the future
+        if (inputDate > today) {
+          return false;
+        }
+  
+        return true;
+      }, { message: "Invalid or unrealistic birth date" }),
+  })
+  .refine((data) => data.password === data.passwordRepeat, {
+    message: "Passwords must match",
+    path: ["passwordRepeat"], // This will show the error under passwordRepeat field
   });

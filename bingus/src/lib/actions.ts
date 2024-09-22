@@ -2,7 +2,7 @@ import bcrypt from "bcrypt";
 import { registerUserSchema } from "./formSchemas";
 import { User } from "./interfaces";
 
-interface FormState {
+export interface FormState {
     data?: any;
     error?: Error | undefined;
     status?: number;
@@ -84,6 +84,6 @@ export async function registerAction(prevState: FormState, formData: FormData): 
  * 
  * @returns {Promise<FormState>} - The form state object including data, error, status.
  */
-export async function loginUserAction(prevState: FormState, formData: FormData): Promise<FormState> {
+// export async function loginUserAction(prevState: FormState, formData: FormData): Promise<FormState> {
 
-}
+// }
