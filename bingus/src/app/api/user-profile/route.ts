@@ -27,7 +27,13 @@ export async function POST(request: Request): Promise<Response> {
 
         // Open DB connection
         const client = await pool.connect();
-        await client.query(`
+        // Check if user already exists
+        const userExistsResult = await client.query(`SELECT * FROM user_profile WHERE user_name = '${userProfile.username}' OR email = '${userProfile.email}'`);
+        if (userExistsResult.rows.length > 0) {
+            return new Response("User already exists", { status: 409 });
+        }
+        else {
+            await client.query(`
                 INSERT INTO user_profile
                 (
                     user_name,
@@ -47,13 +53,15 @@ export async function POST(request: Request): Promise<Response> {
                     '${userProfile.birthDate}'
                 )
             `);
-        // Get user ID to return
-        const userIdResult = await client.query(`SELECT user_id FROM user_profile WHERE user_name = '${userProfile.username}'`);
-        const userId = userIdResult.rows[0].user_id;
-        // Return newly created user ID
-        return Response.json({ userId: userId }, { status: 201 });
+            // Get user ID to return
+            const userIdResult = await client.query(`SELECT user_id FROM user_profile WHERE user_name = '${userProfile.username}'`);
+            const userId = userIdResult.rows[0].user_id;
+            // Return newly created user ID
+            return Response.json({ userId: userId }, { status: 201 });
+        }
     }
     catch (error: any) {
+        console.log(error);
         return new Response("Error while creating user profile.", { status: 500 });
-    }   
+    }
 }
