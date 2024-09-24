@@ -1,13 +1,18 @@
-export interface User {
+export interface UserProfile {
     userId?: number;
     username: string;
     email: string;
-    password: string;
     firstName: string;
     lastName: string;
     gender: string;
     birthDate: string;
-    about: string;
-    dateRegistered: string;
+    about?: string;
     profilePicutre?: Blob;
+}
+
+export interface UserAuth {
+    userAuthId?: number;
+    password: string;
+    dateRegistered: string;
+    userId: number;
 }
