@@ -40,11 +40,11 @@ export async function PATCH(request: Request): Promise<Response> {
                 return new Response("Logged out", { status: 200 });
             }
             else {
-                return new Response("Session not found in database", { status: 404 });
+                return new Response("Database session not found", { status: 404 });
             }
         }
         else {
-            return new Response("Session not found", { status: 404 });
+            return new Response("Browser session not found", { status: 404 });
         }
     }
     catch (error: any) {
