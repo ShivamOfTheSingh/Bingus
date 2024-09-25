@@ -10,6 +10,7 @@ const { Pool } = pg;
  * @returns {Response} - The HTTP response. 
  */
 export async function POST(request: Request): Promise<Response> {
+    let client;
     try {
         // Get data from request body
         const userAuth: UserAuth = await request.json();
@@ -30,7 +31,7 @@ export async function POST(request: Request): Promise<Response> {
         });
 
         // Open DB connection
-        const client = await pool.connect();
+        client = await pool.connect();
         // Check if user already exists
         const userExistsResult = await client.query(`SELECT * FROM user_auth WHERE user_id = '${userAuth.userId}'`);
         if (userExistsResult.rows.length > 0) {
@@ -46,16 +47,20 @@ export async function POST(request: Request): Promise<Response> {
                 )
                 VALUES
                 (
-                    '${encryptedPassword}',
-                    '${userAuth.dateRegistered}',
-                    '${userAuth.userId}'
+                    $1,
+                    $2,
+                    $3
                 )
-            `);
+            `, [encryptedPassword, userAuth.dateRegistered, userAuth.userId]);
             return new Response("User successfully registered", { status: 201 });
         }
     }
     catch (error: any) {
-        console.log(error.message);
-        return new Response("Error registering user.", { status: 500 });
+        return new Response("Internal Server Error", { status: 500 });
+    }
+    finally {
+        if (client) {
+            client.release();
+        }
     }
 }

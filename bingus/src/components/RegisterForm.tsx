@@ -68,6 +68,17 @@ export default function RegisterForm() {
    async function onSubmit() {
       // Set pending state
       setPending(true);
+      setUserExistsError(false);
+      setValidateErrors({
+         firstName: null,
+         lastName: null,
+         username: null,
+         email: null,
+         birthdate: null,
+         gender: null,
+         password: null,
+         passwordRepeat: null
+      });
       // Validate form data
       const validateFields = registerUserSchema.safeParse({
          firstName: firstName,
@@ -138,12 +149,12 @@ export default function RegisterForm() {
             }
             // Unhandled error response from API - throw Error so page redirects to error page
             else {
-               throw new Error(registerUserResponse.statusText);
+               throw new Error(JSON.stringify(registerUserResponse));
             }
          }
          // Unhandled error response from API - throw Error so page redirects to error page
          else {
-            throw new Error(userProfileResponse.statusText);
+            throw new Error(JSON.stringify(userProfileResponse));
          }
       }
    }
