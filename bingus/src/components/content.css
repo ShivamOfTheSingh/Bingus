@@ -9,20 +9,21 @@
     width: 100%;
 }
 
-.each-endpoint button {
+.each-endpoint .button {
     border: solid 1px black;
     background-color: plum;
     padding: 1vh;
+    margin: 0.5vh;
     transition: 0.5s;
 }
 
-.each-endpoint button:hover {
+.each-endpoint .button:hover {
     transform: scale(1.05);
     background-color: black;
     color: plum;
 }
 
-.each-endpoint button:active {
+.each-endpoint .button:active {
     background-color: plum;
     border-color: plum;
     transform: scale(0.99);
@@ -51,4 +52,8 @@
     to {
         opacity: 1;
     }
+}
+
+.makeForm {
+    background-color: red;
 }
