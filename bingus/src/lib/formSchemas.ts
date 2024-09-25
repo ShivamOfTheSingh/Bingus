@@ -48,6 +48,14 @@ export const registerUserSchema = z.object({
 .refine((data) => data.password === data.passwordRepeat, {
   message: "Passwords must match",
   path: ["passwordRepeat"],
+})
+.refine((data) => {
+  const age = new Date().getFullYear() - data.birthdate.getFullYear();
+  const monthDiff = new Date().getMonth() - data.birthdate.getMonth();
+  return age > 13 || (age === 13 && monthDiff >= 0);
+}, {
+  message: "You must be at least 13 years old to register",
+  path: ["birthdate"],
 });
 
 export const loginUserSchema = z.object({
@@ -56,7 +64,7 @@ export const loginUserSchema = z.object({
     .min(1, "Email is required")
     .email("Invalid email format"),
 
-    password: z
+  password: z
     .string()
     .min(1, "Password is required")
 });
