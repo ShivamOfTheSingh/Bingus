@@ -1,5 +1,7 @@
 "use client";
 
+import ApiError from "@/lib/ApiError";
+
 export default function Error({
     error,
     reset,
@@ -9,8 +11,9 @@ export default function Error({
 }) {
     return (
         <div>
-            Error occured.
-            {error.stack}
+            API error occured.
+            {error.message}
+            {error instanceof ApiError ? error.httpStatus : null}
         </div>
     );
 }

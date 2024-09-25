@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { loginUserSchema } from '@/lib/formSchemas';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
+import ApiError from '@/lib/ApiError';
 
 interface LoginValidateErrors {
     email: string | null,
@@ -63,7 +64,8 @@ export default function LoginForm() {
             }
             // Unhandled error response from API - throw Error so page redirects to error page
             else {
-                throw new Error(JSON.stringify(response));
+                const responseText = await response.text();
+                throw new ApiError(responseText, response.status);
             }
         }
     }

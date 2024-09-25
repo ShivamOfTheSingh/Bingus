@@ -10,6 +10,7 @@ import { redirect } from 'next/navigation';
 import { UserAuth, UserProfile } from '@/lib/models';
 import { Alert } from 'react-bootstrap';
 import Link from 'next/link';
+import ApiError from "@/lib/ApiError";
 
 interface RegisterValidateErrors {
    firstName: string | null,
@@ -149,12 +150,14 @@ export default function RegisterForm() {
             }
             // Unhandled error response from API - throw Error so page redirects to error page
             else {
-               throw new Error(JSON.stringify(registerUserResponse));
+               const responseText = await registerUserResponse.text();
+               throw new ApiError(responseText, registerUserResponse.status);
             }
          }
          // Unhandled error response from API - throw Error so page redirects to error page
          else {
-            throw new Error(JSON.stringify(userProfileResponse));
+            const responseText = await userProfileResponse.text();
+            throw new ApiError(responseText, userProfileResponse.status);
          }
       }
    }
