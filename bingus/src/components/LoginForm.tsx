@@ -71,7 +71,10 @@ export default function LoginForm() {
     }
 
     return (
-        <Form action={onSubmit}>
+        <Form action={onSubmit} className="flex flex-col gap-2 bg-white p-3 border-[#8f6ccc] border-solid border-3 rounded">
+            <Form.Label className="text-4xl font-semibold">
+                Welcome to Bingus
+            </Form.Label>
             <Form.Group controlId="email">
                 <Form.Label>Email</Form.Label>
                 <Form.Control type="email" placeholder="Email" value={email} onChange={(e) => { setEmail(e.target.value) }} disabled={pending} />
@@ -82,14 +85,14 @@ export default function LoginForm() {
                 <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => { setPassword(e.target.value) }} disabled={pending} />
                 {validateErrors.password ? <Form.Label className="text-red-600">{validateErrors.password}</Form.Label> : null}
             </Form.Group>
-            <Form.Group controlId="submit">
-                <Button variant="primary" type="submit" disabled={pending}>
+            <Form.Group controlId="submit" className="flex justify-center">
+                <Button variant="primary" type="submit" disabled={pending} className="flex justify-center">
                     {pending ? <div className="flex gap-2 items-center"><Spinner size="sm" animation="border" />Submitting...</div> : "Login"}
                 </Button>
                 {invalid ? <Form.Label className="text-red-600">Email and/or password is incorrect.</Form.Label> : null}
             </Form.Group>
             <div>
-                Don't have an account? <Link href="/register">Register</Link>
+                Don't have an account? <Link href="/register" className="text-[#8f6ccc]">Register</Link>
             </div>
         </Form>
     );

@@ -213,7 +213,7 @@ export default function RegisterForm() {
             {validateErrors.passwordRepeat ? <Form.Label className="text-red-600">{validateErrors.passwordRepeat}</Form.Label> : null}
          </Form.Group>
          <Form.Group controlId="submit" className="flex justify-center">
-            <Button variant="primary" type="submit" disabled={pending} className="bg-[#8f6ccc]">
+            <Button variant="primary" type="submit" disabled={pending}>
                {pending ? <div className="flex gap-2 items-center"><Spinner size="sm" animation="border" />Submitting...</div> : "Register"}
             </Button>
             {userExistsError ? <Form.Label className="text-red-600">User already exsits.</Form.Label> : null}
