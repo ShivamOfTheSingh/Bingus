@@ -1,31 +1,60 @@
+// api/post_vote
 import { NextRequest } from "next/server";
-import pg from "pg";
-const { Pool } = pg;
+import pool from "../pool";
 
 export async function GET(request: NextRequest) {
     try {
-        const pool = new Pool({
-            user: "postgres",
-            password: "Bingus_LLC",
-            host: "bingus-db-1.c9ayqsiuu3wz.us-east-1.rds.amazonaws.com",
-            port: 5432,
-            database: "bingus",
-            ssl: {
-                rejectUnauthorized: false,
-            },
-        });
-
         const client = await pool.connect();
-        const result = await client.query("select * from post_vote");
+        const result = await client.query("SELECT * FROM post_vote");
         client.release();
 
-        return new Response(JSON.stringify(result.rows), {
-            status: 200,
-        });
-
+        return new Response(JSON.stringify(result.rows), { status: 200 });
     } catch (error) {
-        return new Response("Failed to retrieve data", {
-            status: 500,
-        });
+        return new Response("Failed to retrieve data", { status: 500 });
+    }
+}
+
+export async function POST(request: NextRequest) {
+    try {
+        const { post_id, user_id, vote_value } = await request.json();
+        const client = await pool.connect();
+        const result = await client.query(
+            "INSERT INTO post_vote (post_id, user_id, vote_value) VALUES ($1, $2, $3) RETURNING *",
+            [post_id, user_id, vote_value]
+        );
+        client.release();
+
+        return new Response(JSON.stringify(result.rows[0]), { status: 201 });
+    } catch (error) {
+        return new Response("Failed to create data", { status: 500 });
+    }
+}
+
+export async function PUT(request: NextRequest) {
+    try {
+        const { post_vote_id, post_id, user_id, vote_value } = await request.json();
+        const client = await pool.connect();
+        const result = await client.query(
+            "UPDATE post_vote SET post_id = $2, user_id = $3, vote_value = $4 WHERE post_vote_id = $1 RETURNING *",
+            [post_vote_id, post_id, user_id, vote_value]
+        );
+        client.release();
+
+        return new Response(JSON.stringify(result.rows[0]), { status: 200 });
+    } catch (error) {
+        return new Response("Failed to update data", { status: 500 });
+    }
+}
+
+export async function DELETE(request: NextRequest) {
+    try {
+        const { id } = await request.json();
+        const client = await pool.connect();
+        const result = await client.query("DELETE FROM post_vote WHERE post_vote_id = $1", [id]);
+        client.release();
+
+        return new Response(JSON.stringify({ message: "Vote deleted successfully" }), { status: 200 });
+    } catch (error) {
+        return new Response("Failed to delete data", { status: 500 });
     }
 }

@@ -1,11 +1,11 @@
-// api/post_comment
+// api/user_profile
 import { NextRequest } from "next/server";
 import pool from "../pool";
 
 export async function GET(request: NextRequest) {
     try {
         const client = await pool.connect();
-        const result = await client.query("SELECT * FROM post_comment");
+        const result = await client.query("SELECT * FROM user_profile");
         client.release();
 
         return new Response(JSON.stringify(result.rows), { status: 200 });
@@ -16,11 +16,11 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
     try {
-        const { post_id, user_id, post_comment, date_commented } = await request.json();
+        const { user_name, email, first_name, last_name, gender, birth_date, about, profile_pic } = await request.json();
         const client = await pool.connect();
         const result = await client.query(
-            "INSERT INTO post_comment (post_id, user_id, post_comment, date_commented) VALUES ($1, $2, $3, $4) RETURNING *",
-            [post_id, user_id, post_comment, date_commented]
+            "INSERT INTO user_profile (user_name, email, first_name, last_name, gender, birth_date, about, profile_pic) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
+            [user_name, email, first_name, last_name, gender, birth_date, about, profile_pic]
         );
         client.release();
 
@@ -32,11 +32,11 @@ export async function POST(request: NextRequest) {
 
 export async function PUT(request: NextRequest) {
     try {
-        const { post_comment_id, post_id, user_id, post_comment, date_commented } = await request.json();
+        const { user_id, user_name, email, first_name, last_name, gender, birth_date, about, profile_pic } = await request.json();
         const client = await pool.connect();
         const result = await client.query(
-            "UPDATE post_comment SET post_id = $2, user_id = $3, post_comment = $4, date_commented = $5 WHERE post_comment_id = $1 RETURNING *",
-            [post_comment_id, post_id, user_id, post_comment, date_commented]
+            "UPDATE user_profile SET user_name = $2, email = $3, first_name = $4, last_name = $5, gender = $6, birth_date = $7, about = $8, profile_pic = $9 WHERE user_id = $1 RETURNING *",
+            [user_id, user_name, email, first_name, last_name, gender, birth_date, about, profile_pic]
         );
         client.release();
 
@@ -50,10 +50,10 @@ export async function DELETE(request: NextRequest) {
     try {
         const { id } = await request.json();
         const client = await pool.connect();
-        const result = await client.query("DELETE FROM post_comment WHERE post_comment_id = $1", [id]);
+        const result = await client.query("DELETE FROM user_profile WHERE user_id = $1", [id]);
         client.release();
 
-        return new Response(JSON.stringify(result.rows), { status: 200 });
+        return new Response(JSON.stringify({ message: "User profile deleted successfully" }), { status: 200 });
     } catch (error) {
         return new Response("Failed to delete data", { status: 500 });
     }

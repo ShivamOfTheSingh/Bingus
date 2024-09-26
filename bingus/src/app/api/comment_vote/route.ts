@@ -1,4 +1,4 @@
-// api/comemnt_vote
+// api/comment_vote
 import { NextRequest } from "next/server";
 import pool from "../pool";
 

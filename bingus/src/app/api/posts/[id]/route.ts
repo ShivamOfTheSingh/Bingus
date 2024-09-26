@@ -1,4 +1,4 @@
-// api/comment_reply/[id]
+// api/posts/[id]
 import { NextRequest } from "next/server";
 import pool from "../../pool";
 
@@ -6,7 +6,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: numb
     try {
         const { id } = params
         const client = await pool.connect();
-        const result = await client.query("select * from comment_vote where comment_vote_id = $1", [id]);
+        const result = await client.query("select * from posts where post_id = $1", [id]);
         client.release();
 
         return new Response(JSON.stringify(result.rows), { status: 200 });
