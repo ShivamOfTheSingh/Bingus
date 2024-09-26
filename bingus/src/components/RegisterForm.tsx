@@ -178,7 +178,7 @@ export default function RegisterForm() {
          </Form.Group>
          <Form.Group controlId="username">
             <Form.Label>Username</Form.Label>
-            <Form.Control type="text" placeholder="Username" value={username} onChange={(e) => { setUsername(e.target.value) }} disabled={pending} />
+            <Form.Control type="text" placeholder="BingusFanPage224" value={username} onChange={(e) => { setUsername(e.target.value) }} disabled={pending} />
             {validateErrors.username ? <Form.Label className="text-red-600">{validateErrors.username}</Form.Label> : null}
          </Form.Group>
          <Form.Group controlId="email">
