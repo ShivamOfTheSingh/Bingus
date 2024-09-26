@@ -1,44 +1,13 @@
-body {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    border: 10px solid black;
-  }
-.container{
-    display: flex;
-    flex-direction: column; /* or row */
-    align-items: center; /* centers items horizontally */
-    justify-content: center; /* centers items vertically */
-    
-}
-h1{
-    font-family: 'Papyrus';
-    justify-content: end;
-    font-size: 70px;
-    width: fit-content;
-    text-align: right; /* Aligns text to the right */
-    border: 10px solid black;
-}
-form{
-    border: 10px solid black;
-    height: fit-content;
+#bg-image {
+    filter: blur(10px);
 }
 
-
-
-Button{
-    color: white;
-    background: #a75cf2;
-    width: 200px;
-    padding-left: 100px;
-    margin-left: 10px;
+.btn-primary {
+    background-color: #8f6ccc !important;
+    border-color: #8f6ccc !important;
 }
 
-#register:hover{
-    color: whitesmoke;
-    background:rgb(25, 195, 113);
-    
+.btn-primary:hover {
+    background-color: #6a5396 !important;
+    border-color: #6a5396 !important;
 }

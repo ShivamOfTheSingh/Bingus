@@ -4,24 +4,30 @@ import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 import Error from "./error";
 import Image from "next/image";
 import logo from "@/public/logo.jpg";
+import background from "@/public/bingusBackground.png";
+import "@/public/RegisterFormStyle.css";
+import { Col, Container, Row } from "react-bootstrap";
 
 export default async function Page() {
-  return (
-    <div >
-    <div >
-        <div > 
-            <div>
-                <h1>Hello sigma</h1>
-                <Image src={logo} alt="bingus-logo" width={300} height={300} />
-            </div>
-            <h1>Sign Up</h1>
-            <div >
-                <ErrorBoundary errorComponent={Error}>
-                    <RegisterForm />
-                </ErrorBoundary>
+    return (
+        <div className="w-[100vw] h-[100vh] flex items-center justify-center">
+            <Container>
+                <Row>
+                    <Col lg={8}>
+                        <Image src={logo} alt="bingus-logo" width={600} height={683} className="rounded border-black border-solid border-3" />
+                    </Col>
+                    <Col lg={4}>
+                        <div>
+                            <ErrorBoundary errorComponent={Error}>
+                                <RegisterForm />
+                            </ErrorBoundary>
+                        </div>
+                    </Col>
+                </Row>
+            </Container>
+            <div id="background-img" className="absolute z-[-1] opacity-50">
+                <Image src={background} alt="background-img" width={900} height={900} id="bg-image" />
             </div>
         </div>
-    </div>
-</div>
-  );
+    );
 }

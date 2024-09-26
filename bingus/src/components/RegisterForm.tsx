@@ -1,6 +1,5 @@
 'use client';
 
-import "@/public/RegisterFormStyle.css";
 import Form from 'react-bootstrap/Form';
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
@@ -163,7 +162,10 @@ export default function RegisterForm() {
    }
 
    return (
-      <Form action={onSubmit}>
+      <Form action={onSubmit} className="flex flex-col gap-2 bg-white p-3 border-[#8f6ccc] border-solid border-3 rounded">
+         <Form.Label className="text-4xl font-semibold">
+            Sign Up for Bingus
+         </Form.Label>
          <Form.Group controlId="firstname">
             <Form.Label>First Name</Form.Label>
             <Form.Control type="text" placeholder="First Name" value={firstName} onChange={(e) => { setFirstName(e.target.value) }} disabled={pending} />
@@ -210,14 +212,14 @@ export default function RegisterForm() {
             <Form.Control type="password" placeholder="Confirm Password" value={passwordRepeat} onChange={(e) => { setPasswordRepeat(e.target.value) }} disabled={pending} />
             {validateErrors.passwordRepeat ? <Form.Label className="text-red-600">{validateErrors.passwordRepeat}</Form.Label> : null}
          </Form.Group>
-         <Form.Group controlId="submit">
-            <Button variant="primary" type="submit" disabled={pending}>
+         <Form.Group controlId="submit" className="flex justify-center">
+            <Button variant="primary" type="submit" disabled={pending} className="bg-[#8f6ccc]">
                {pending ? <div className="flex gap-2 items-center"><Spinner size="sm" animation="border" />Submitting...</div> : "Register"}
             </Button>
             {userExistsError ? <Form.Label className="text-red-600">User already exsits.</Form.Label> : null}
          </Form.Group>
          <div>
-            Already have an account? <Link href="/login">Log In</Link>
+            Already have an account? <Link href="/login" className="text-[#8f6ccc]">Log In</Link>
          </div>
          {success && (
             <div className="position-fixed top-0 end-0 p-3" style={{ zIndex: 1050 }}>
