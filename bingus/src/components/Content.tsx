@@ -24,7 +24,7 @@ const Content = () => {
     const fetchData = async (endpoint: string) => {
         try {
             let t = { ...data };
-            const response = await fetch(`http://localhost:3000/api/${endpoint}/5`);
+            const response = await fetch(`http://localhost:3000/api/${endpoint}/4 `);
             const jsonData = await response.json();
             t[endpoint] = jsonData;
             setData(t);
