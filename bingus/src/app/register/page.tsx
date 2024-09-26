@@ -25,7 +25,7 @@ export default async function Page() {
                     </Col>
                 </Row>
             </Container>
-            <div id="background-img" className="absolute z-[-1] opacity-50">
+            <div className="absolute z-[-1] opacity-50">
                 <Image src={background} alt="background-img" width={900} height={900} id="bg-image" />
             </div>
         </div>
