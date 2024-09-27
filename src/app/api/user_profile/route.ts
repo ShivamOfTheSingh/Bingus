@@ -66,7 +66,7 @@ export async function POST(request: Request): Promise<Response> {
     }
     finally {
         if (client) {
-            client.release();
+            //client.release();
         }
     }
 }
