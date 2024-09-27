@@ -120,7 +120,7 @@ export default function RegisterForm() {
             gender: gender,
             birthDate: birthdate
          };
-         const userProfileResponse = await fetch("http://localhost:3000/api/user_profile", {
+         const userProfileResponse = await fetch("https://production.d3drl1bcjmxovs.amplifyapp.com/api/user_profile", {
             method: "POST",
             body: JSON.stringify(userProfile)
          });
@@ -139,7 +139,7 @@ export default function RegisterForm() {
                dateRegistered: today.toISOString(),
                userId: userId
             };
-            const registerUserResponse = await fetch("http://localhost:3000/api/session/register", {
+            const registerUserResponse = await fetch("https://production.d3drl1bcjmxovs.amplifyapp.com/api/session/register", {
                method: "POST",
                body: JSON.stringify(userAuth)
             });
