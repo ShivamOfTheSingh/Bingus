@@ -31,6 +31,7 @@ export async function POST(request: Request): Promise<Response> {
         const userProfile: UserProfile = await request.json();
 
         // Open DB connection
+        return new Response("Response from before pool.connect", { status: 500 });
         client = await pool.connect();
         // Check if user already exists
         const userExistsResult = await client.query(`SELECT * FROM user_profile WHERE user_name = '${userProfile.username}' OR email = '${userProfile.email}'`);
