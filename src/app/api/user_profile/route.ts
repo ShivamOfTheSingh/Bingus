@@ -69,9 +69,9 @@ export async function POST(request: Request): Promise<Response> {
         return new Response(error.stack, { status: 500 });
     }
     finally {
-        if (client) {
-            client.release();
-        }
+        //if (client) {
+       //     client.release();
+        //}
     }
 }
 
