@@ -14,7 +14,7 @@ pnpm dev
 bun dev
 ```
 
-Open [https://production.d3drl1bcjmxovs.amplifyapp.com:3000](https://production.d3drl1bcjmxovs.amplifyapp.com:3000) with your browser to see the result.
+Open [https://production.d3drl1bcjmxovs.amplifyapp.com](https://production.d3drl1bcjmxovs.amplifyapp.com) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 

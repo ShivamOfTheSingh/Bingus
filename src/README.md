@@ -79,7 +79,7 @@ Bingus LLC
   */
   export async function action(prevState: FormState, formData: FormData): Promise<FormState> {
     try {
-        const response = await fetch("https://production.d3drl1bcjmxovs.amplifyapp.com:3000/api/awsdata");
+        const response = await fetch("https://production.d3drl1bcjmxovs.amplifyapp.com/api/awsdata");
         const json = await response.json();
         if (json.data) {
             return {
