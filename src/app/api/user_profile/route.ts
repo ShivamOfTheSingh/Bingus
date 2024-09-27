@@ -26,7 +26,6 @@ export async function POST(request: Request): Promise<Response> {
     try {
         // Get user profile from HTTP request data
         const userProfile: UserProfile = await request.json();
-        return new Response("DB_HOST: " + process.env.DB_HOST, { status: 500 });
         // Open DB connection
         client = await pool.connect();
         // Check if user already exists
