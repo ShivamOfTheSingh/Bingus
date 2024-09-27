@@ -1,7 +1,6 @@
 import { cookies } from "next/headers";
 import { decrypt } from "@/lib/objectEncryption";
-import pg from "pg";
-const { Pool } = pg;
+import pool from "../../../../lib/pool";
 
 export async function PATCH(request: Request): Promise<Response> {
     let client;
@@ -9,17 +8,6 @@ export async function PATCH(request: Request): Promise<Response> {
         const currentSession = cookies().get("session")?.value;
         if (currentSession){
             const decryptedSession = JSON.parse(decrypt(currentSession));
-            
-            const pool = new Pool({
-                user: process.env.DB_USER,
-                password: process.env.DB_PASSWORD,
-                host: process.env.DB_HOST,
-                port: 5432,
-                database: process.env.DB_NAME,
-                ssl: {
-                    rejectUnauthorized: false
-                }
-            });
             client = await pool.connect();
 
             const selectResult = await client.query(`

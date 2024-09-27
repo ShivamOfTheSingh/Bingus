@@ -1,8 +1,7 @@
 import bcrypt from "bcrypt";
 import { cookies } from "next/headers";
 import { decrypt, encrypt } from "@/lib/objectEncryption";
-import pg from "pg";
-const { Pool } = pg;
+import pool from "../../../../lib/pool";
 
 /**
  * Login as an existing user and create a user session.
@@ -14,16 +13,6 @@ export async function POST(request: Request): Promise<Response> {
     let client;
     try {
         const userData = await request.json();
-        const pool = new Pool({
-            user: process.env.DB_USER,
-            password: process.env.DB_PASSWORD,
-            host: process.env.DB_HOST,
-            port: 5432,
-            database: process.env.DB_NAME,
-            ssl: {
-                rejectUnauthorized: false
-            }
-        });
         client = await pool.connect();
         const result = await client.query(`SELECT up.email, ua.user_password, ua.user_auth_id
                                             FROM user_profile AS up
@@ -66,16 +55,6 @@ async function createSession(userAuthId: number): Promise<boolean> {
     let client;
     try {
         const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000); // Expire after 1 day
-        const pool = new Pool({
-            user: process.env.DB_USER,
-            password: process.env.DB_PASSWORD,
-            host: process.env.DB_HOST,
-            port: 5432,
-            database: process.env.DB_NAME,
-            ssl: {
-                rejectUnauthorized: false
-            }
-        });
         client = await pool.connect();
         const result = await client.query(`
                 INSERT INTO user_session

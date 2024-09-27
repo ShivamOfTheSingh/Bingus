@@ -1,7 +1,6 @@
 import { UserAuth } from "@/lib/models";
 import bcrypt from "bcrypt";
-import pg from "pg";
-const { Pool } = pg;
+import pool from "../../../../lib/pool";
 
 /**
  * Registers a user with an encrypted password.
@@ -17,18 +16,6 @@ export async function POST(request: Request): Promise<Response> {
 
         // Encrypt password
         const encryptedPassword = await bcrypt.hash(userAuth.password, 10);
-
-        // Register DB
-        const pool = new Pool({
-            user: process.env.DB_USER,
-            password: process.env.DB_PASSWORD,
-            host: process.env.DB_HOST,
-            port: 5432,
-            database: process.env.DB_NAME,
-            ssl: {
-                rejectUnauthorized: false
-            }
-        });
 
         // Open DB connection
         client = await pool.connect();

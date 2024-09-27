@@ -1,6 +1,6 @@
 // api/comment_vote
 import { NextRequest } from "next/server";
-import pool from "../pool";
+import pool from "../../../lib/pool";
 
 export async function GET(request: NextRequest) {
     try {
