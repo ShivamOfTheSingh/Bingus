@@ -1,6 +1,8 @@
-// Centralized pool so we dont have to authenticate with every single api call
-// We simply import this pool and ask it for a client in our api - reducing overhead
 import pg from "pg";
+import dotenv from "dotenv";
+
+dotenv.config();
+
 const { Pool } = pg;
 
 const pool = new Pool({
@@ -14,4 +16,4 @@ const pool = new Pool({
     },
 });
 
-export default pool
+export default pool;
