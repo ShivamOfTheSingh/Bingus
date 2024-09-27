@@ -14,6 +14,7 @@ export async function GET(request: NextRequest) {
     }
 }
 
+// REPALCE WITH DAMIANS
 export async function POST(request: NextRequest) {
     try {
         const { user_name, email, first_name, last_name, gender, birth_date, about, profile_pic } = await request.json();
