@@ -1,5 +1,6 @@
 // api/user_profile
 import { NextRequest } from "next/server";
+import { UserProfile } from "@/lib/models";
 import pool from "../../../lib/pool";
 
 export async function GET(request: NextRequest) {
@@ -14,10 +15,6 @@ export async function GET(request: NextRequest) {
     }
 }
 
-import { UserProfile } from "@/lib/models";
-import pg from "pg";
-const { Pool } = pg;
-
 /**
  * Creates a new user profile in the database.
  * 
@@ -31,17 +28,7 @@ export async function POST(request: Request): Promise<Response> {
         const userProfile: UserProfile = await request.json();
 
         // Open DB connection
-        const pool1 = new Pool({
-                user: process.env.DB_USER,
-                password: process.env.DB_PASSWORD,
-                host: process.env.DB_HOST,
-                port: 5432,
-                database: process.env.DB_NAME,
-                ssl: {
-                    rejectUnauthorized: false,
-                },
-        });
-        client = await pool1.connect();
+        client = await pool.connect();
         // Check if user already exists
         const userExistsResult = await client.query(`SELECT * FROM user_profile WHERE user_name = '${userProfile.username}' OR email = '${userProfile.email}'`);
         if (userExistsResult.rows.length > 0) {
