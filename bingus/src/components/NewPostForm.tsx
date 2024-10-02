@@ -70,9 +70,24 @@ export default function NewPostForm() {
       else{ //inputs are valid
         const today = new Date();
 
-        const result = await fetch("http://localhost:3000/api/posts", {method: "POST", body: JSON.stringify({caption: postCaption, datePosted: today.toISOString()}) });
+        const resultPost = await fetch("http://localhost:3000/api/posts", {method: "POST", body: JSON.stringify({caption: postCaption, datePosted: today.toISOString()}) });
+        const jsonPost = await resultPost.json();
+        const postId = jsonPost.post_id;
 
-        console.log(result);
+        postFile.map(async (file) => {
+            const buffer = await handleFileToBuffer(file); // Convert file to Buffer
+            const newMedia: Media = {
+                postId: postId,
+                mediaUrl: buffer // Buffer here
+            };
+            
+            await fetch("http://localhost:3000/api/media", {
+                method: "POST",
+                body: JSON.stringify(newMedia)
+            });
+        });
+
+        // const resultMedia = await fetch("http://localhost:3000/api/media", { method: "POST", {  } });
 
       }
       // Handle the form submission logic here (e.g., send form data to the server)
@@ -88,7 +103,7 @@ export default function NewPostForm() {
     // Update handle file input to set files as an array of files
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
-            setPostFile(Array.from(e.target.files)); // Convert FileList to an array of File objects
+            setPostFile([...postFile, ...Array.from(e.target.files)]); // Convert FileList to an array of File objects
         }
     };
 
@@ -97,6 +112,22 @@ export default function NewPostForm() {
         const updatedFiles = [...postFile];
         updatedFiles.splice(index, 1); // Remove the selected file from the array
         setPostFile(updatedFiles); // Update the file array state
+    };
+
+    const handleFileToBuffer = async (file: File): Promise<Buffer> => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+    
+            // Read the file as an ArrayBuffer
+            reader.readAsArrayBuffer(file);
+    
+            reader.onloadend = () => {
+                const buffer = Buffer.from(reader.result as ArrayBuffer); // Convert ArrayBuffer to Buffer
+                resolve(buffer);
+            };
+    
+            reader.onerror = reject;
+        });
     };
 
 
@@ -123,14 +154,16 @@ export default function NewPostForm() {
                 {/* Display the list of files the user has uploaded */}
                 {postFile.length > 0 && (
                     <ul className="mt-3">
-                        {postFile.map((file, index) => (
+                        {postFile.map((file, index) => {
+                            console.log(postFile);
+                            return (
                             <li key={index} className="flex justify-between items-center">
                                 <span>{file.name}</span>
                                 <Button variant="outline-danger" size="sm" onClick={() => removeFile(index)}>
                                     Remove
                                 </Button>
                             </li>
-                        ))}
+                        )})}
                     </ul>
                 )}
             </Form.Group>
