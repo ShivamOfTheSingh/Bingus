@@ -17,7 +17,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 export default function NavBar() {
-  const handleLogout = () => {};
+  const handleLogout = () => { };
   return (
     <div className="navbar">
       <div className="branding">
@@ -25,61 +25,61 @@ export default function NavBar() {
       </div>
       <Nav defaultActiveKey="/profile" className="flex-column">
         <Nav.Item className="nav-item-custom">
-          <Nav.Link href="/profile">
+          <Link href="/">
             <span className="icon">
               <FontAwesomeIcon icon={faHome} style={{ color: "black" }} />
             </span>
             Home
-          </Nav.Link>
+          </Link>
         </Nav.Item>
         <Nav.Item className="nav-item-custom">
-          <Nav.Link href="/profile">
+          <Link href="/profile">
             <span className="icon">
               <FontAwesomeIcon icon={faSearch} style={{ color: "black" }} />
             </span>
             Search
-          </Nav.Link>
+          </Link>
         </Nav.Item>
         <Nav.Item className="nav-item-custom">
-          <Nav.Link href="/profile">
-            <span className="icon">
-              <FontAwesomeIcon icon={faComment} style={{ color: "black" }} />
-            </span>
-            Messages
-          </Nav.Link>
+          <Link href="/profile">
+              <span className="icon">
+                <FontAwesomeIcon icon={faComment} style={{ color: "black" }} />
+              </span>
+              Messages
+          </Link>
         </Nav.Item>
         <Nav.Item className="nav-item-custom">
-          <Nav.Link href="/profile">
+          <Link href="/profile">
             <span className="icon">
               <FontAwesomeIcon icon={faBell} style={{ color: "black" }} />
             </span>
             Notifications
-          </Nav.Link>
+          </Link>
         </Nav.Item>
         <Nav.Item className="nav-item-custom">
-          <Nav.Link href="/profile">
+          <Link href="/profile">
             <span className="icon">
               <FontAwesomeIcon icon={faPlus} style={{ color: "black" }} />
             </span>
             Post
-          </Nav.Link>
+          </Link>
         </Nav.Item>
         <Nav.Item className="nav-item-custom profile">
-          <Nav.Link href="/profile">
+          <Link href="/profile">
             <img
               src="https://via.placeholder.com/50"
               alt="Profile"
               className="profile-pic"
             />
             Profile
-          </Nav.Link>
+          </Link>
         </Nav.Item>
       </Nav>
       <Nav.Item className="nav-item-custom logout">
-        <Nav.Link href="/logout">
+        <Link href="/logout">
           <FontAwesomeIcon icon={faRightFromBracket} className="icon" />
           Logout
-        </Nav.Link>
+        </Link>
       </Nav.Item>
     </div>
   );
