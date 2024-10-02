@@ -68,3 +68,22 @@ export const loginUserSchema = z.object({
     .string()
     .min(1, "Password is required")
 });
+
+//Schema for creating posts
+export const createPostSchema = z.object({
+  postCaption: z
+    .string()
+    .min(1, "Caption is required")
+    .max(100, "Caption is exceeding 100 characters"),
+    
+    postFile: z
+    .array(z.instanceof(File)) // Expect an array of File objects
+    .min(1, "At least one file is required")
+    .max(5, "You can upload up to 5 files")
+    .refine(
+      (files) => files.every((file) => ["image/jpeg", "image/png", "video/mp4", "image/gif"].includes(file.type)),
+      {
+        message: "Only JPG, PNG, GIF, and MP4 formats are allowed",
+      }
+    ),
+})

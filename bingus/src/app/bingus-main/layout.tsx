@@ -19,7 +19,7 @@ export default function Layout({
             </Col>
           </Row>
         </Container>
-        <div className="absolute z-[-1] opacity-50">
+        {/* <div className="absolute z-[-1] opacity-50">
           <Image
             src={background}
             alt="background-img"
@@ -27,7 +27,7 @@ export default function Layout({
             height={900}
             id="bg-image"
           />
-        </div>
+        </div> */}
       </div>
       {children}
     </div>

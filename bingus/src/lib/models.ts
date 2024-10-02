@@ -7,7 +7,7 @@ export interface UserProfile {
     gender: string;
     birthDate: string;
     about?: string;
-    profilePicutre?: Blob;
+    profilePicture?: Blob;
 }
 
 export interface UserAuth {
@@ -15,4 +15,17 @@ export interface UserAuth {
     password: string;
     dateRegistered: string;
     userId: number;
+}
+
+export interface Post {
+    postId?: number;
+    userId?: number;
+    caption: string;
+    datePosted: string;
+}
+
+export interface Media{
+    mediaId?: number;
+    postId: number;
+    mediaUrl: Buffer;
 }
