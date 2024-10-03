@@ -12,22 +12,6 @@ import pool from "@/lib/pool";
 import { Post, UserProfile, Media } from "@/lib/models";
 
 export default async function Page() {
-
-  // async function getMedia(postId: number | undefined) {
-  //   const res = await fetch(`http://localhost:3000/api/posts/media/${postId}`);
-  //   const json = await res.json();
-  //   const arr: Media[] = json.map((m: any) => {
-  //     const media: Media = {
-  //       mediaId: m.media_id,
-  //       postId: m.post_id,
-  //       mediaUrl: Buffer.from(m.media_url)
-  //     };
-  //     return media;
-  //   });
-  //   return arr;
-  // }
-
-
   const session = cookies().get("session");
   if (session) {
     const sessionJson = JSON.parse(decrypt(session.value));
@@ -46,43 +30,37 @@ export default async function Page() {
       gender: jsonProfile[0].gender,
       birthDate: jsonProfile[0].birth_date,
       about: jsonProfile[0].about,
-      profilePicture: jsonProfile[0].profile_pic
-    }
+      profilePicture: jsonProfile[0].profile_pic,
+    };
 
     const resPosts = await fetch(`http://localhost:3000/api/user_profile/posts/${userId}`);
     const jsonPosts = await resPosts.json();
-    const posts: Post[] = jsonPosts.map((p: any) => {
-      return {
-        postId: p.post_id,
-        userId: p.user_id,
-        caption: p.caption,
-        datePosted: p.date_posted
-      }
+    const posts: Post[] = jsonPosts.map((p: any) => ({
+      postId: p.post_id,
+      userId: p.user_id,
+      caption: p.caption,
+      datePosted: p.date_posted,
+    }));
+
+    // Fetch media for all posts
+
+    // Wait for all media fetches to complete
+    const listOfMedias = posts.map(async (p: Post, index: number) => {
+      const t = await fetch(`http://localhost:3000/api/posts/media/${p.postId}`); // THIS LINE BREAKS IT
+      return p.postId
     });
 
-    // const media: { postId: number | undefined; media: Media[] }[] = [];
+    console.log(typeof (listOfMedias))
     
-    // posts.forEach(async (p: Post) => {
-    //   const m: Media[] = await getMedia(p.postId);
-    //   media.push({
-    //     postId: p.postId,
-    //     media: m
-    //   });
-    // });
-
-    // console.log("Media", media);
-
     return (
       <div className="flex justify-center items-center">
         <div>
-          {posts.map((p: Post) => {
-            return (
-              <div>
-                {p.postId}
-                {p.caption}
-              </div>
-            );
-          })}
+          {posts.map((p: Post) => (
+            <div key={p.postId}>
+              <div>{p.postId}</div>
+              <div>{p.caption}</div>
+            </div>
+          ))}
         </div>
         <NewPostForm />
       </div>
