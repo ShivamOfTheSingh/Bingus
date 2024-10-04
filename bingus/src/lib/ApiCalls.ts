@@ -26,7 +26,7 @@ export async function getProfilePageData(userId: number) {
       }
     });
 
-    const postMedia: { post: Post, media: Media[] }[] = [];
+    const postsWithMedia: { post: Post, media: Media[] }[] = [];
     for (let i = 0; i < posts.length; i++) {
       const resMedia = await fetch(`http://localhost:3000/api/posts/media/${posts[i].postId}`);
       const jsonMedia = await resMedia.json();
@@ -34,10 +34,10 @@ export async function getProfilePageData(userId: number) {
         return {
           mediaId: m.media_id,
           postId: m.post_id,
-          mediaUrl: Buffer.from(m.media_url)
+          mediaUrl: m.media_url
         }
       });
-      postMedia.push({
+      postsWithMedia.push({
         post: posts[i],
         media: media
       });
@@ -45,6 +45,7 @@ export async function getProfilePageData(userId: number) {
 
     return {
       profile: profile,
-      posts: postMedia
+      numPosts: posts.length,
+      posts: postsWithMedia
     };
 }

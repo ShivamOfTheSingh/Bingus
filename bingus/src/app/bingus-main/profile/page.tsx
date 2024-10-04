@@ -23,8 +23,8 @@ export default async function Page() {
     return (
       <div className="flex justify-center items-center">
         <ProfilePageInfo
-          profile={pageData}
-          posts={/*send number of posts over*/}
+          profile={pageData.profile}
+          numPosts={pageData.numPosts}
         />
       </div>
     );

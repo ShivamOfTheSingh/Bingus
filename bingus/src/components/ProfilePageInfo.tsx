@@ -1,24 +1,18 @@
 import React from "react";
 import { Container, Row, Col, Image, Button } from "react-bootstrap";
+import { UserProfile } from "@/lib/models";
 
-interface UserProfile {
-  userId: number;
-  username: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  gender: string;
-  birthDate: string;
-  about: string;
-  profilePicture: string;
-}
-
-interface UserProfileProps {
+interface ProfilePageInfoProps {
   profile: UserProfile;
-  posts: any[];
+  numPosts: number;
+  className?: string;
 }
 
-const ProfilePageInfo: React.FC<UserProfileProps> = ({ profile, posts }) => {
+const ProfilePageInfo: React.FC<ProfilePageInfoProps> = ({
+  profile,
+  numPosts,
+  className,
+}) => {
   return (
     <Container className="py-4">
       <Row className="justify-content-center">
@@ -42,7 +36,7 @@ const ProfilePageInfo: React.FC<UserProfileProps> = ({ profile, posts }) => {
           {/* Stats */}
           <Row className="justify-content-center justify-content-md-start my-3">
             <Col xs={4} className="text-center">
-              <strong>{posts.length}</strong>
+              <strong>{numPosts}</strong>
               <p>Posts</p>
             </Col>
             <Col xs={4} className="text-center">
