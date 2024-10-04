@@ -14,14 +14,9 @@ interface ProfilePagePostGridProps {
 export default function ProfilePagePostGrid({ postData, className }: ProfilePagePostGridProps) {
     const [posting, setPosting] = useState(false);
 
-    console.log(postData.slice(0, 3))
-    console.log(postData.slice(3))
-
     return (
         <Container>
             <Row>
-                {/** The button to display new post form will go here */}
-                {/** Show first three in row. */}
                 <Col xs={12} sm={6} md={4} lg={3}>
                     { posting ?
                         <div>

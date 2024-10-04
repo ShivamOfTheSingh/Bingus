@@ -4,15 +4,10 @@ import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 
 import { useEffect, useState } from 'react';
-import { createPostSchema, registerUserSchema } from '@/lib/formSchemas';
+import { createPostSchema} from '@/lib/formSchemas';
 import { redirect } from 'next/navigation';
 
-import {Post, Media} from '@/lib/models'
-
-import { Alert } from 'react-bootstrap';
-
-import Link from 'next/link';
-import ApiError from "@/lib/ApiError";
+import {Media} from '@/lib/models'
 
 interface NewPostValidateErrors {
     postFile: string | null,
