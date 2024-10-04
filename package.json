@@ -13,6 +13,7 @@
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@types/bcrypt": "^5.0.2",
     "@types/pg": "^8.11.10",
+    "dotenv": "^16.4.5",
     "bcrypt": "^5.1.1",
     "bootstrap": "^5.3.3",
     "class-variance-authority": "^0.7.0",
