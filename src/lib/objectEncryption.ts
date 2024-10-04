@@ -1,4 +1,7 @@
 import { createCipheriv, randomBytes, createDecipheriv } from 'crypto';
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const ALGORITHM = 'aes-256-ctr';
 const SECRET_KEY = process.env.SESSION_SECRET_KEY || "";
