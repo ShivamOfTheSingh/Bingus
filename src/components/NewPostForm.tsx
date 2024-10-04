@@ -114,6 +114,10 @@ export default function NewPostForm() {
     };
 
     const handleFileToBuffer = async (file: File): Promise<Buffer> => {
+        if (typeof window === 'undefined') {
+            throw new Error('This code must run on the client side');
+        }
+        
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
     
