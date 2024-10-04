@@ -1,8 +1,6 @@
 'use client';
 import Form from 'react-bootstrap/Form';
 import Button from "react-bootstrap/Button";
-import CloseButton from 'react-bootstrap/CloseButton';
-import InputGroup from 'react-bootstrap/InputGroup';
 import Spinner from "react-bootstrap/Spinner";
 
 import { useEffect, useState } from 'react';
@@ -24,22 +22,27 @@ interface NewPostValidateErrors {
 
 
 export default function NewPostForm() {
-
     // States for each field
     const [postFile, setPostFile] = useState<File[]>([]); // Change to an array to handle files correctly
     const [postCaption, setPostCaption] = useState("");
+    const [redirecting, setRedirecting] = useState(false);
 
     // Pending submission state
     const [pending, setPending] = useState(false);
     // Success state
     const [success, setSuccess] = useState(false);
-    const [redirectSeconds, setRedirectSeconds] = useState(3);
     // Validate form errors state
     const [validateErrors, setValidateErrors] = useState<NewPostValidateErrors>({
         postFile: null,
         postCaption: null
     
     });
+
+    useEffect(() => {
+        if (redirecting) {
+            redirect("/bingus-main/profile");
+        }
+    }, [redirecting]);
 
     async function onSubmit(e: React.FormEvent) {
         e.preventDefault(); // Prevent default form submission
@@ -64,8 +67,8 @@ export default function NewPostForm() {
         setValidateErrors({
            postFile: errors.postFile?._errors[0] || null,
            postCaption: errors.postCaption?._errors[0] || null
-           
         });
+        setPending(false);
       }
       else{ //inputs are valid
         const today = new Date();
@@ -88,16 +91,17 @@ export default function NewPostForm() {
         });
 
         // const resultMedia = await fetch("http://localhost:3000/api/media", { method: "POST", {  } });
-
-      }
-      // Handle the form submission logic here (e.g., send form data to the server)
-      console.log("Form submitted successfully", {
+        console.log("Form submitted successfully", {
             postFile,
             postCaption
         });
 
         setPending(false);
         setSuccess(true);
+        console.log("setting redirecting state to true");
+        setRedirecting(true);
+      }
+      // Handle the form submission logic here (e.g., send form data to the server)
     }
 
     // Update handle file input to set files as an array of files
@@ -132,11 +136,7 @@ export default function NewPostForm() {
 
 
     return (
-        <Form onSubmit={onSubmit} className="flex flex-col gap-2 bg-white p-3 border-[#8f6ccc] border-solid border-3 rounded w-80">
-            <Form.Group controlId="exitform">
-                <CloseButton />
-            </Form.Group>
-
+        <Form onSubmit={onSubmit} className="flex flex-col gap-2 bg-white p-3 w-80">
             <Form.Label className="text-4xl font-semibold">
                 New Post!
             </Form.Label>

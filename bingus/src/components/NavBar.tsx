@@ -1,10 +1,7 @@
 "use client";
-import Button from "react-bootstrap/Button";
+
 import Nav from "react-bootstrap/Nav";
-import { useState } from "react";
-import Link from "next/link";
-import { redirect } from "next/navigation";
-import ApiError from "@/lib/ApiError";
+import Link from "next/link";;
 import "@/public/NavBarStyle.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -17,13 +14,12 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 export default function NavBar() {
-  const handleLogout = () => { };
   return (
     <div className="navbar">
       <div className="branding">
         <h2>Bingus</h2>
       </div>
-      <Nav defaultActiveKey="/profile" className="flex-column">
+      <Nav defaultActiveKey="/bingus-main/profile" className="flex-column">
         <Nav.Item className="nav-item-custom">
           <Link href="/">
             <span className="icon">
@@ -33,7 +29,7 @@ export default function NavBar() {
           </Link>
         </Nav.Item>
         <Nav.Item className="nav-item-custom">
-          <Link href="/profile">
+          <Link href="/bingus-main/profile">
             <span className="icon">
               <FontAwesomeIcon icon={faSearch} style={{ color: "black" }} />
             </span>
@@ -41,7 +37,7 @@ export default function NavBar() {
           </Link>
         </Nav.Item>
         <Nav.Item className="nav-item-custom">
-          <Link href="/profile">
+          <Link href="/bingus-main/profile">
               <span className="icon">
                 <FontAwesomeIcon icon={faComment} style={{ color: "black" }} />
               </span>
@@ -49,7 +45,7 @@ export default function NavBar() {
           </Link>
         </Nav.Item>
         <Nav.Item className="nav-item-custom">
-          <Link href="/profile">
+          <Link href="/bingus-main/profile">
             <span className="icon">
               <FontAwesomeIcon icon={faBell} style={{ color: "black" }} />
             </span>
@@ -57,7 +53,7 @@ export default function NavBar() {
           </Link>
         </Nav.Item>
         <Nav.Item className="nav-item-custom">
-          <Link href="/profile">
+          <Link href="/bingus-main/profile">
             <span className="icon">
               <FontAwesomeIcon icon={faPlus} style={{ color: "black" }} />
             </span>
@@ -65,7 +61,7 @@ export default function NavBar() {
           </Link>
         </Nav.Item>
         <Nav.Item className="nav-item-custom profile">
-          <Link href="/profile">
+          <Link href="/bingus-main/profile">
             <img
               src="https://via.placeholder.com/50"
               alt="Profile"
@@ -76,7 +72,7 @@ export default function NavBar() {
         </Nav.Item>
       </Nav>
       <Nav.Item className="nav-item-custom logout">
-        <Link href="/logout">
+        <Link href="/bingus-main/profile">
           <FontAwesomeIcon icon={faRightFromBracket} className="icon" />
           Logout
         </Link>

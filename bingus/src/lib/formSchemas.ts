@@ -78,7 +78,7 @@ export const createPostSchema = z.object({
     
     postFile: z
     .array(z.instanceof(File)) // Expect an array of File objects
-    .min(1, "At least one file is required")
+    // .min(1, "At least one file is required")
     .max(5, "You can upload up to 5 files")
     .refine(
       (files) => files.every((file) => ["image/jpeg", "image/png", "video/mp4", "image/gif"].includes(file.type)),
