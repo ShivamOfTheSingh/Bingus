@@ -43,7 +43,7 @@ export async function POST(request: Request): Promise<Response> {
         }
     }
     catch (error: any) {
-        return new Response("Internal Server Error", { status: 500 });
+        return new Response(error.message, { status: 500 });
     }
     finally {
         if (client) {

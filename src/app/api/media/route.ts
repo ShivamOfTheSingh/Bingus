@@ -16,11 +16,11 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
     try {
-        const { postId, mediaUrl } = await request.json();
+        const { post_id, media_url } = await request.json();
         const client = await pool.connect();
         const result = await client.query(
             "INSERT INTO media (post_id, media_url) VALUES ($1, $2) RETURNING *",
-            [postId, mediaUrl]
+            [post_id, media_url]
         );
         client.release();
 

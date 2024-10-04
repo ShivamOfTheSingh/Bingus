@@ -1,5 +1,6 @@
 // api/user_profile
 import { NextRequest } from "next/server";
+import { UserProfile } from "@/lib/models";
 import pool from "../../../lib/pool";
 
 export async function GET(request: NextRequest) {
@@ -14,10 +15,6 @@ export async function GET(request: NextRequest) {
     }
 }
 
-import { UserProfile } from "@/lib/models";
-import pg from "pg";
-const { Pool } = pg;
-
 /**
  * Creates a new user profile in the database.
  * 
@@ -29,7 +26,6 @@ export async function POST(request: Request): Promise<Response> {
     try {
         // Get user profile from HTTP request data
         const userProfile: UserProfile = await request.json();
-
         // Open DB connection
         client = await pool.connect();
         // Check if user already exists
@@ -65,11 +61,11 @@ export async function POST(request: Request): Promise<Response> {
         }
     }
     catch (error: any) {
-        return new Response("Internal Server Error", { status: 500 });
+        return new Response(error.stack, { status: 500 });
     }
     finally {
         if (client) {
-            client.release();
+            //client.release();
         }
     }
 }
