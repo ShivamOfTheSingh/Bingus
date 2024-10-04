@@ -18,7 +18,7 @@ interface NewPostValidateErrors {
 
 export default function NewPostForm() {
     // States for each field
-    const [postFile, setPostFile] = useState<File[]>([]); // Change to an array to handle files correctly
+    const [postFile, setPostFile] = useState([]); // Change to an array to handle files correctly
     const [postCaption, setPostCaption] = useState("");
     const [redirecting, setRedirecting] = useState(false);
 
