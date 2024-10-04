@@ -92,7 +92,7 @@ export default function LoginForm() {
                 {invalid ? <Form.Label className="text-red-600">Email and/or password is incorrect.</Form.Label> : null}
             </Form.Group>
             <div>
-                Don't have an account? <Link href="/register" className="text-[#8f6ccc]">Register</Link>
+                Don&apos;t have an account? <Link href="/register" className="text-[#8f6ccc]">Register</Link>
             </div>
         </Form>
     );
