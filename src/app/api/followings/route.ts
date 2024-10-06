@@ -1,60 +1,112 @@
-// api/followings
-import { NextRequest } from "next/server";
+import { Following } from "@/lib/models";
 import pool from "../../../lib/pool";
 
-export async function GET(request: NextRequest) {
+/**
+ * GET endpoint for table followings (Fetch all followings)
+ * 
+ * @param {Request} request The incoming HTTP request
+ * @returns {Response} The HTTP response containing an array of Following objects or an error code
+ */
+export async function GET(request: Request): Promise<Response> {
+    let client;
     try {
-        const client = await pool.connect();
+        client = await pool.connect();
         const result = await client.query("SELECT * FROM followings");
-        client.release();
-
-        return new Response(JSON.stringify(result.rows), { status: 200 });
-    } catch (error) {
-        return new Response("Failed to retrieve data", { status: 500 });
+        const followings: Following[] = result.rows.map((row: any) => (
+            {
+                followingId: row.following_status_id,
+                userId: row.user_id,
+                followedUserId: row.following_id
+            }
+        ));
+        return new Response(JSON.stringify(followings), { status: 200 });
+    }
+    catch (error) {
+        return new Response("Failed to fetch data", { status: 500 });
+    }
+    finally {
+        if (client) {
+            client.release();
+        }
     }
 }
 
-export async function POST(request: NextRequest) {
+/**
+ * POST endpoint for table followings (Create a new following record)
+ * 
+ * @param {Request} request The incoming HTTP request with Following object as the body
+ * @returns {Response} Status code HTTP response
+ */
+export async function POST(request: Request): Promise<Response> {
+    let client;
     try {
-        const { user_id, following_id } = await request.json();
-        const client = await pool.connect();
-        const result = await client.query(
-            "INSERT INTO followings (user_id, following_id) VALUES ($1, $2) RETURNING *",
-            [user_id, following_id]
+        const following: Following = await request.json();
+        client = await pool.connect();
+        await client.query(
+            "INSERT INTO followings (user_id, following_id) VALUES ($1, $2)", 
+            [following.userId, following.followedUserId]
         );
-        client.release();
-
-        return new Response(JSON.stringify(result.rows[0]), { status: 201 });
-    } catch (error) {
+        return new Response("OK", { status: 201 });
+    } 
+    catch (error) {
         return new Response("Failed to create data", { status: 500 });
     }
-}
-
-export async function PUT(request: NextRequest) {
-    try {
-        const { followings_status_id, user_id, following_id } = await request.json();
-        const client = await pool.connect();
-        const result = await client.query(
-            "UPDATE followings SET user_id = $2, following_id = $3 WHERE followings_status_id = $1 RETURNING *",
-            [followings_status_id, user_id, following_id]
-        );
-        client.release();
-
-        return new Response(JSON.stringify(result.rows[0]), { status: 200 });
-    } catch (error) {
-        return new Response("Failed to update data", { status: 500 });
+    finally {
+        if (client) {
+            client.release();
+        }
     }
 }
 
-export async function DELETE(request: NextRequest) {
+/**
+ * PUT endpoint for table followings (Update an existing following record)
+ * 
+ * @param {Request} request The incoming HTTP request with Following object as the body
+ * @returns {Response} Status code HTTP response
+ */
+export async function PUT(request: Request): Promise<Response> {
+    let client;
+    try {
+        const following: Following = await request.json();
+        client = await pool.connect();
+        await client.query(
+            "UPDATE followings SET user_id = $2, following_id = $3 WHERE following_status_id = $1", 
+            [following.followingId, following.userId, following.followedUserId]
+        );
+
+        return new Response("OK", { status: 200 });
+    } 
+    catch (error) {
+        return new Response("Failed to update data", { status: 500 });
+    }
+    finally {
+        if (client) {
+            client.release();
+        }
+    }
+}
+
+/**
+ * DELETE endpoint for table followings (Delete a following record by ID)
+ * 
+ * @param {Request} request The incoming HTTP request containing the ID of the following to delete
+ * @returns {Response} Status code HTTP response
+ */
+export async function DELETE(request: Request): Promise<Response> {
+    let client;
     try {
         const { id } = await request.json();
-        const client = await pool.connect();
-        const result = await client.query("DELETE FROM followings WHERE followings_status_id = $1", [id]);
-        client.release();
+        client = await pool.connect();
+        await client.query("DELETE FROM followings WHERE following_status_id = $1", [id]);
 
-        return new Response(JSON.stringify(result.rows), { status: 200 });
-    } catch (error) {
+        return new Response("OK", { status: 200 });
+    } 
+    catch (error) {
         return new Response("Failed to delete data", { status: 500 });
+    }
+    finally {
+        if (client) {
+            client.release();
+        }
     }
 }

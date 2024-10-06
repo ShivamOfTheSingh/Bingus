@@ -1,16 +1,30 @@
-// api/followings/[id]
-import { NextRequest } from "next/server";
+import { Following } from "@/lib/models";
 import pool from "../../../../lib/pool";
 
-export async function GET(request: NextRequest, { params }: { params: { id: number } }) {
+export async function GET(request: Request, { params }: { params: { id: string } }): Promise<Response> {
+    let client;
     try {
-        const { id } = params
-        const client = await pool.connect();
-        const result = await client.query("select * from followings where followings_status_id = $1", [id]);
-        client.release();
+        const id = parseInt(params.id);
+        client = await pool.connect();
+        const result = await client.query("SELECT * FROM followings WHERE following_status_id = $1", [id]);
 
-        return new Response(JSON.stringify(result.rows), { status: 200 });
-    } catch (error) {
-        return new Response("Failed to delete data", { status: 500 });
+        if (result.rows.length === 0) {
+            return new Response("Following record not found", { status: 404 });
+        }
+
+        const following: Following = {
+            followingId: result.rows[0].following_status_id,
+            userId: result.rows[0].user_id,
+            followedUserId: result.rows[0].following_id
+        };
+        return new Response(JSON.stringify(following), { status: 200 });
+    } 
+    catch (error) {
+        return new Response("Failed to retrieve data", { status: 500 });
+    }
+    finally {
+        if (client) {
+            client.release();
+        }
     }
 }
