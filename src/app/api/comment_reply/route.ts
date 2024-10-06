@@ -1,20 +1,31 @@
-// api/comment_reply
-import { NextRequest } from "next/server";
 import pool from "../../../lib/pool";
 
-export async function GET(request: NextRequest) {
+/**
+ * GET endpoint for table comment_reply
+ * 
+ * @param {Request} request The incoming HTTP request
+ * @returns {Response} The HTTP response containg an error code or an array of CommentReply objects
+ */
+export async function GET(request: Request): Promise<Response> {
+    let client;
     try {
-        const client = await pool.connect();
+        client = await pool.connect();
         const result = await client.query("SELECT * FROM comment_reply");
         client.release();
 
         return new Response(JSON.stringify(result.rows), { status: 200 });
-    } catch (error) {
-        return new Response("Failed to retrieve data", { status: 500 });
+    }
+    catch (error) {
+        return new Response("Failed to fetch data", { status: 500 });
+    }
+    finally {
+        if (client) {
+            client.release();
+        }
     }
 }
 
-export async function POST(request: NextRequest) {
+export async function POST(request: Request): Promise<Response> {
     try {
         const { post_comment_id, user_id, reply, date_replied } = await request.json();
         const client = await pool.connect();
@@ -30,7 +41,7 @@ export async function POST(request: NextRequest) {
     }
 }
 
-export async function PUT(request: NextRequest) {
+export async function PUT(request: Request): Promise<Response> {
     try {
         const { comment_reply_id, post_comment_id, user_id, reply, date_replied } = await request.json();
         const client = await pool.connect();
@@ -46,7 +57,7 @@ export async function PUT(request: NextRequest) {
     }
 }
 
-export async function DELETE(request: NextRequest) {
+export async function DELETE(request: Request): Promise<Response> {
     try {
         const { id } = await request.json();
         const client = await pool.connect();
