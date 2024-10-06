@@ -1,6 +1,13 @@
 import { CommentVote } from "@/lib/models";
 import pool from "../../../../lib/pool";
 
+/**
+ * GET endpoint for table comment_vote - single row by id
+ * 
+ * @param {Request} request The incoming HTTP request
+ * @param {string} param1 The id of the row to return
+ * @returns {Response} Status code HTTP response
+ */
 export async function GET(request: Request, { params }: { params: { id: string } }): Promise<Response> {
     let client;
     try {
