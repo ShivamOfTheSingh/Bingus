@@ -1,13 +1,13 @@
 "use server";
 
-import { CommentReply } from "@/lib/models";
+import { CommentVote } from "@/lib/models";
 
 export default async function Page() {
 
-    const result = await fetch("http://localhost:3000/api/comment_reply/15");
-    const commentReply: CommentReply = await result.json();
-
-    console.log(commentReply);
+    // API GET BY ID TEST
+    const getResult = await fetch("http://localhost:3000/api/comment_vote/20");
+    const commentVote: CommentVote = await getResult.json();
+    console.log(commentVote);
 
     return (
         <div>Hi</div>
