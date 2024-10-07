@@ -35,7 +35,7 @@ export interface Post {
 export interface Media {
     mediaId?: number;
     postId: number;
-    mediaUrl: Buffer;
+    mediaUrl: string;
 }
 
 export interface CommentReply {
