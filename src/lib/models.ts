@@ -74,3 +74,10 @@ export interface PostVote {
     postVoteValue: boolean;
 }
 
+export interface UserSettings {
+    userSettingsId?: number;
+    userId: number;
+    showName: boolean;
+    profilePublic: boolean;
+}
+

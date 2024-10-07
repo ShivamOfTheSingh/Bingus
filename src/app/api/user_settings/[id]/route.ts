@@ -1,16 +1,38 @@
-// api/user_settings/[id]
-import { NextRequest } from "next/server";
+import { UserSettings } from "@/lib/models";
 import pool from "../../../../lib/pool";
 
-export async function GET(request: NextRequest, { params }: { params: { id: number } }) {
+/**
+ * GET endpoint for table user_settings - single row by id
+ * 
+ * @param {Request} request The incoming HTTP request
+ * @param {string} param1 The id of the row to return
+ * @returns {Response} Status code HTTP response
+ */
+export async function GET(request: Request, { params }: { params: { id: string } }): Promise<Response> {
+    let client;
     try {
-        const { id } = params
-        const client = await pool.connect();
-        const result = await client.query("select * from user_settings where user_settings_id = $1", [id]);
-        client.release();
+        const id = parseInt(params.id);
+        client = await pool.connect();
+        const result = await client.query("SELECT * FROM user_settings WHERE user_settings_id = $1", [id]);
 
-        return new Response(JSON.stringify(result.rows), { status: 200 });
-    } catch (error) {
-        return new Response("Failed to delete data", { status: 500 });
+        if (result.rows.length === 0) {
+            return new Response("User settings record not found", { status: 404 });
+        }
+
+        const userSettings: UserSettings = {
+            userSettingsId: result.rows[0].user_settings_id,
+            userId: result.rows[0].user_id,
+            showName: result.rows[0].show_name,
+            profilePublic: result.rows[0].profile_public
+        };
+        return new Response(JSON.stringify(userSettings), { status: 200 });
+    } 
+    catch (error) {
+        return new Response("Failed to retrieve data", { status: 500 });
+    } 
+    finally {
+        if (client) {
+            client.release();
+        }
     }
 }
