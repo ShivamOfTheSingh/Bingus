@@ -68,7 +68,7 @@ export default function NewPostForm() {
       else{ //inputs are valid
         const today = new Date();
 
-        const resultPost = await fetch("http://localhost:3000/api/posts", {method: "POST", body: JSON.stringify({caption: postCaption, datePosted: today.toISOString()}) });
+        const resultPost = await fetch("http://localhost:3000/api/crud/posts", {method: "POST", body: JSON.stringify({caption: postCaption, datePosted: today.toISOString()}) });
         const jsonPost = await resultPost.json();
         const postId = jsonPost.post_id;
 
@@ -79,13 +79,13 @@ export default function NewPostForm() {
                 mediaUrl: buffer // Buffer here
             };
             
-            await fetch("http://localhost:3000/api/media", {
+            await fetch("http://localhost:3000/api/crud/media", {
                 method: "POST",
                 body: JSON.stringify(newMedia)
             });
         });
 
-        // const resultMedia = await fetch("http://localhost:3000/api/media", { method: "POST", {  } });
+        // const resultMedia = await fetch("http://localhost:3000/api/crud/media", { method: "POST", {  } });
         console.log("Form submitted successfully", {
             postFile,
             postCaption

@@ -1,7 +1,7 @@
 import { UserProfile, Post, Media } from "./models";
 
 export async function getProfilePageData(userId: number) {
-    const resProfile = await fetch(`http://localhost:3000/api/user_profile/${userId}`);
+    const resProfile = await fetch(`http://localhost:3000/api/crud/user_profile/${userId}`);
     const jsonProfile = await resProfile.json();
     const profile: UserProfile = {
       userId: jsonProfile[0].user_id,
@@ -15,7 +15,7 @@ export async function getProfilePageData(userId: number) {
       profilePicture: jsonProfile[0].profile_pic
     }
     
-    const resPosts = await fetch(`http://localhost:3000/api/user_profile/posts/${userId}`);
+    const resPosts = await fetch(`http://localhost:3000/api/crud/user_profile/posts/${userId}`);
     const jsonPosts = await resPosts.json();
     const posts: Post[] = jsonPosts.map((p: any) => {
       return {
@@ -28,7 +28,7 @@ export async function getProfilePageData(userId: number) {
 
     const postsWithMedia: { post: Post, media: Media[] }[] = [];
     for (let i = 0; i < posts.length; i++) {
-      const resMedia = await fetch(`http://localhost:3000/api/posts/media/${posts[i].postId}`);
+      const resMedia = await fetch(`http://localhost:3000/api/crud/posts/media/${posts[i].postId}`);
       const jsonMedia = await resMedia.json();
       const media: Media[] = jsonMedia.map((m: any) => {
         return {

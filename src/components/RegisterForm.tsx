@@ -120,7 +120,7 @@ export default function RegisterForm() {
             gender: gender,
             birthDate: new Date(birthdate)
          };
-         const userProfileResponse = await fetch("http://localhost:3000/api/user_profile", {
+         const userProfileResponse = await fetch("http://localhost:3000/api/crud/user_profile", {
             method: "POST",
             body: JSON.stringify(userProfile)
          });
