@@ -7,7 +7,7 @@ export interface UserProfile {
     gender: string;
     birthDate: Date;
     about?: string;
-    profilePicture?: Buffer;
+    profilePicture?: string;
 }
 
 export interface UserAuth {
