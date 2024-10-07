@@ -1,7 +1,5 @@
 "use server";
 import RegisterForm from "@/components/RegisterForm";
-import { ErrorBoundary } from "next/dist/client/components/error-boundary";
-import Error from "../error";
 import Image from "next/image";
 import logo from "@/public/logo.jpg";
 import background from "@/public/bingusBackground.png";

@@ -1,7 +1,5 @@
 "use server";
 import LoginForm from "@/components/LoginForm";
-import { ErrorBoundary } from "next/dist/client/components/error-boundary";
-import Error from "./error";
 import Image from "next/image";
 import logo from "@/public/logo.jpg";
 import background from "@/public/bingusBackground.png";
@@ -18,9 +16,7 @@ export default async function Page() {
                     </Col>
                     <Col lg={4}>
                         <div>
-                            <ErrorBoundary errorComponent={Error}>
-                                <LoginForm />
-                            </ErrorBoundary>
+                            <LoginForm />
                         </div>
                     </Col>
                 </Row>
