@@ -22,13 +22,13 @@ export default async function getCurrentSession(): Promise<number> {
         }
         else {
             client.release();
-            redirect("/");
+            redirect("/session_inactive");
         }
     }
     catch (error) {
         if (client) {
             client.release();
         }
-        redirect("/");
+        redirect("/session_inactive");
     }
 }
