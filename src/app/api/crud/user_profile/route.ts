@@ -22,12 +22,13 @@ export async function GET(request: Request): Promise<Response> {
                 gender: row.gender,
                 birthDate: new Date(row.birth_date),
                 about: row.about,
-                profilePicture: row.pic_mime_type_prefix + Buffer.from(row.profile_pic, 'base64').toString('base64')
+                profilePicture: row.profile_pic ? row.pic_mime_type_prefix + Buffer.from(row.profile_pic, 'base64').toString('base64') : ""
             }
         ));
         return new Response(JSON.stringify(userProfiles), { status: 200 });
     }
-    catch (error) {
+    catch (error: any) {
+        console.log(error);
         return new Response("Failed to fetch data", { status: 500 });
     }
     finally {
