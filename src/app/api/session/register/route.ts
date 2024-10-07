@@ -13,6 +13,7 @@ export async function POST(request: Request): Promise<Response> {
     try {
         // Get data from request body
         const userAuth: UserAuth = await request.json();
+        console.log(userAuth);
 
         // Encrypt password
         const encryptedPassword = await bcrypt.hash(userAuth.password, 10);
@@ -20,7 +21,7 @@ export async function POST(request: Request): Promise<Response> {
         // Open DB connection
         client = await pool.connect();
         // Check if user already exists
-        const userExistsResult = await client.query(`SELECT * FROM user_auth WHERE user_id = '${userAuth.userId}'`);
+        const userExistsResult = await client.query("SELECT * FROM user_auth WHERE user_id = $1", [userAuth.userId]);
         if (userExistsResult.rows.length > 0) {
             return new Response("User already exists", { status: 409 });
         }

@@ -44,11 +44,12 @@ export async function POST(request: Request): Promise<Response> {
     try {
         const postComment: PostComment = await request.json();
         client = await pool.connect();
-        await client.query(
-            "INSERT INTO post_comment (post_id, user_id, post_comment, date_commented) VALUES ($1, $2, $3, $4)", 
+        const result = await client.query(
+            "INSERT INTO post_comment (post_id, user_id, post_comment, date_commented) VALUES ($1, $2, $3, $4) RETURNING post_comment_id", 
             [postComment.postId, postComment.userId, postComment.postComment, postComment.dateCommented]
         );
-        return new Response("OK", { status: 201 });
+        const id = result.rows[0].post_comment_id;
+        return new Response(JSON.stringify({ postCommentId: id }), { status: 201 });
     } 
     catch (error) {
         return new Response("Failed to create data", { status: 500 });

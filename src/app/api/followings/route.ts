@@ -42,11 +42,12 @@ export async function POST(request: Request): Promise<Response> {
     try {
         const following: Following = await request.json();
         client = await pool.connect();
-        await client.query(
-            "INSERT INTO followings (user_id, following_id) VALUES ($1, $2)", 
+        const result = await client.query(
+            "INSERT INTO followings (user_id, following_id) VALUES ($1, $2) RETURNING followings_status_id", 
             [following.userId, following.followedUserId]
         );
-        return new Response("OK", { status: 201 });
+        const id = result.rows[0].following_status_id;
+        return new Response(JSON.stringify({ follwingId: id }), { status: 201 });
     } 
     catch (error) {
         return new Response("Failed to create data", { status: 500 });

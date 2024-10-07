@@ -118,7 +118,7 @@ export default function RegisterForm() {
             firstName: firstName,
             lastName: lastName,
             gender: gender,
-            birthDate: birthdate
+            birthDate: new Date(birthdate)
          };
          const userProfileResponse = await fetch("http://localhost:3000/api/user_profile", {
             method: "POST",
@@ -133,10 +133,9 @@ export default function RegisterForm() {
             // Register user with password (another API call).
             const userProfileResponseBody = await userProfileResponse.json();
             const userId = userProfileResponseBody.userId;
-            const today = new Date();
             const userAuth: UserAuth = {
                password: password,
-               dateRegistered: today.toISOString(),
+               dateRegistered: new Date(),
                userId: userId
             };
             const registerUserResponse = await fetch("http://localhost:3000/api/session/register", {
