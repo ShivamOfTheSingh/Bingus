@@ -1,5 +1,6 @@
 import { Following } from "@/lib/models";
 import pool from "../../../lib/pool";
+import getCurrentSession from "@/lib/getCurrentSession";
 
 /**
  * GET endpoint for table followings (Fetch all followings)
@@ -40,7 +41,9 @@ export async function GET(request: Request): Promise<Response> {
 export async function POST(request: Request): Promise<Response> {
     let client;
     try {
+        const userId = await getCurrentSession();
         const following: Following = await request.json();
+        following.userId = userId;
         client = await pool.connect();
         const result = await client.query(
             "INSERT INTO followings (user_id, following_id) VALUES ($1, $2) RETURNING followings_status_id", 
@@ -68,7 +71,9 @@ export async function POST(request: Request): Promise<Response> {
 export async function PUT(request: Request): Promise<Response> {
     let client;
     try {
+        const userId = await getCurrentSession();
         const following: Following = await request.json();
+        following.userId = userId;
         client = await pool.connect();
         await client.query(
             "UPDATE followings SET user_id = $2, following_id = $3 WHERE following_status_id = $1", 

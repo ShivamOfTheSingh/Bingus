@@ -1,5 +1,6 @@
 import { CommentVote } from "@/lib/models";
 import pool from "../../../lib/pool";
+import getCurrentSession from "@/lib/getCurrentSession";
 
 /**
  * GET endpoint for table comment_vote
@@ -41,7 +42,9 @@ export async function GET(request: Request): Promise<Response> {
 export async function POST(request: Request): Promise<Response> {
     let client;
     try {
+        const userId = await getCurrentSession();
         const commentVote: CommentVote = await request.json();
+        commentVote.userId = userId;
         client = await pool.connect();
         const result = await client.query(
             "INSERT INTO comment_vote (post_comment_id, user_id, comment_vote_value) VALUES ($1, $2, $3) RETURNING comment_vote_id", 
@@ -69,7 +72,9 @@ export async function POST(request: Request): Promise<Response> {
 export async function PUT(request: Request): Promise<Response> {
     let client;
     try {
+        const userId = await getCurrentSession();
         const commentVote: CommentVote = await request.json();
+        commentVote.userId = userId;
         client = await pool.connect();
         await client.query(
             "UPDATE comment_vote SET post_comment_id = $2, user_id = $3, comment_vote_value = $4 WHERE comment_vote_id = $1", 

@@ -1,5 +1,6 @@
 import { Post } from "@/lib/models";
 import pool from "../../../lib/pool";
+import getCurrentSession from "@/lib/getCurrentSession";
 
 /**
  * GET endpoint for table posts (Fetch all posts)
@@ -41,7 +42,9 @@ export async function GET(request: Request): Promise<Response> {
 export async function POST(request: Request): Promise<Response> {
     let client;
     try {
+        const userId = await getCurrentSession();
         const post: Post = await request.json();
+        post.userId = userId;
         client = await pool.connect();
         const result = await client.query(
             "INSERT INTO posts (user_id, caption, date_posted) VALUES ($1, $2, $3) RETURNING post_id", 
@@ -69,7 +72,9 @@ export async function POST(request: Request): Promise<Response> {
 export async function PUT(request: Request): Promise<Response> {
     let client;
     try {
+        const userId = await getCurrentSession();
         const post: Post = await request.json();
+        post.userId = userId;
         client = await pool.connect();
         await client.query(
             "UPDATE posts SET user_id = $2, caption = $3, date_posted = $4 WHERE post_id = $1", 

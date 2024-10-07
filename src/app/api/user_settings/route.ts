@@ -1,5 +1,6 @@
 import { UserSettings } from "@/lib/models";
 import pool from "../../../lib/pool";
+import getCurrentSession from "@/lib/getCurrentSession";
 
 /**
  * GET endpoint for table user_settings (Fetch all user settings)
@@ -41,7 +42,9 @@ export async function GET(request: Request): Promise<Response> {
 export async function POST(request: Request): Promise<Response> {
     let client;
     try {
+        const userId = await getCurrentSession();
         const userSettings: UserSettings = await request.json();
+        userSettings.userId = userId;
         client = await pool.connect();
         const result = await client.query(
             "INSERT INTO user_settings (user_id, show_name, profile_public) VALUES ($1, $2, $3) RETURNING user_settings_id", 
@@ -69,7 +72,9 @@ export async function POST(request: Request): Promise<Response> {
 export async function PUT(request: Request): Promise<Response> {
     let client;
     try {
+        const userId = await getCurrentSession();
         const userSettings: UserSettings = await request.json();
+        userSettings.userId = userId;
         client = await pool.connect();
         await client.query(
             "UPDATE user_settings SET user_id = $2, show_name = $3, profile_public = $4 WHERE user_settings_id = $1", 

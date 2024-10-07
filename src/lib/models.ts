@@ -41,7 +41,7 @@ export interface Media {
 export interface CommentReply {
     commentReplyId?: number;
     postCommentId: number;
-    userId: number;
+    userId?: number;
     reply: string;
     dateReplied: Date;
 }
@@ -49,20 +49,20 @@ export interface CommentReply {
 export interface CommentVote {
     commentVoteId?: number;
     postCommentId: number;
-    userId: number;
+    userId?: number;
     commentVoteValue: boolean;
 }
 
 export interface Following {
     followingId?: number;
-    userId: number;
+    userId?: number;
     followedUserId: number;
 }
 
 export interface PostComment {
     postCommentId?: number;
     postId: number;
-    userId: number;
+    userId?: number;
     postComment: string;
     dateCommented: Date;
 }
@@ -70,13 +70,13 @@ export interface PostComment {
 export interface PostVote {
     postVoteId?: number;
     postId: number;
-    userId: number;
+    userId?: number;
     postVoteValue: boolean;
 }
 
 export interface UserSettings {
     userSettingsId?: number;
-    userId: number;
+    userId?: number;
     showName: boolean;
     profilePublic: boolean;
 }

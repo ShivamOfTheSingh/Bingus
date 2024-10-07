@@ -1,5 +1,8 @@
 import { CommentReply } from "@/lib/models";
 import pool from "../../../lib/pool";
+import { cookies } from "next/headers";
+import { decrypt } from "@/lib/objectEncryption";
+import getCurrentSession from "@/lib/getCurrentSession";
 
 /**
  * GET endpoint for table comment_reply
@@ -42,15 +45,17 @@ export async function GET(request: Request): Promise<Response> {
 export async function POST(request: Request): Promise<Response> {
     let client;
     try {
+        const userId = await getCurrentSession();
         const commentReply: CommentReply = await request.json();
+        commentReply.userId = userId;
         client = await pool.connect();
         const result = await client.query(
-            "INSERT INTO comment_reply (post_comment_id, user_id, reply, date_replied) VALUES ($1, $2, $3, $4) RETURNING comment_reply_id", 
+            "INSERT INTO comment_reply (post_comment_id, user_id, reply, date_replied) VALUES ($1, $2, $3, $4) RETURNING comment_reply_id",
             [commentReply.postCommentId, commentReply.userId, commentReply.reply, commentReply.dateReplied]
         );
         const id = result.rows[0].comment_reply_id
         return new Response(JSON.stringify({ commentReplyId: id }), { status: 201 });
-    } 
+    }
     catch (error) {
         return new Response("Failed to create data", { status: 500 });
     }
@@ -70,15 +75,17 @@ export async function POST(request: Request): Promise<Response> {
 export async function PUT(request: Request): Promise<Response> {
     let client;
     try {
+        const userId = await getCurrentSession();
         const commentReply: CommentReply = await request.json();
+        commentReply.userId = userId;
         client = await pool.connect();
         await client.query(
-            "UPDATE comment_reply SET post_comment_id = $2, user_id = $3, reply = $4, date_replied = $5 WHERE comment_reply_id = $1", 
+            "UPDATE comment_reply SET post_comment_id = $2, user_id = $3, reply = $4, date_replied = $5 WHERE comment_reply_id = $1",
             [commentReply.commentReplyId, commentReply.postCommentId, commentReply.userId, commentReply.reply, commentReply.dateReplied]
         );
 
         return new Response("OK", { status: 200 });
-    } 
+    }
     catch (error) {
         return new Response("Failed to update data", { status: 500 });
     }
@@ -103,7 +110,7 @@ export async function DELETE(request: Request): Promise<Response> {
         await client.query("DELETE FROM comment_reply WHERE comment_reply_id=$1", [id]);
 
         return new Response("OK", { status: 200 });
-    } 
+    }
     catch (error) {
         return new Response("Failed to delete data", { status: 500 });
     }

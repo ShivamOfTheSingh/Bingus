@@ -1,5 +1,6 @@
 import { PostVote } from "@/lib/models";
 import pool from "../../../lib/pool";
+import getCurrentSession from "@/lib/getCurrentSession";
 
 /**
  * GET endpoint for table post_vote (Fetch all post votes)
@@ -41,7 +42,9 @@ export async function GET(request: Request): Promise<Response> {
 export async function POST(request: Request): Promise<Response> {
     let client;
     try {
+        const userId = await getCurrentSession();
         const postVote: PostVote = await request.json();
+        postVote.userId = userId;
         client = await pool.connect();
         const result = await client.query(
             "INSERT INTO post_vote (post_id, user_id, post_vote_value) VALUES ($1, $2, $3) RETURNING post_likes_id", 
@@ -69,7 +72,9 @@ export async function POST(request: Request): Promise<Response> {
 export async function PUT(request: Request): Promise<Response> {
     let client;
     try {
+        const userId = await getCurrentSession();
         const postVote: PostVote = await request.json();
+        postVote.userId = userId;
         client = await pool.connect();
         await client.query(
             "UPDATE post_vote SET post_id = $2, user_id = $3, post_vote_value = $4 WHERE post_likes_id = $1", 
