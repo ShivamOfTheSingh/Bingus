@@ -52,6 +52,14 @@ export async function POST(request: Request): Promise<Response> {
         const profilePictureUrlBuffer = userProfile.profilePicture ? Buffer.from(userProfile.profilePicture.slice(picMimeTypePrefix.length), 'base64') : null;
 
         client = await pool.connect();
+        
+        const userExists = await client.query("SELECT * FROM user_profile WHERE user_name = $1 OR email = $2", [userProfile.username, userProfile.email]);
+        console.log("John Pork", userExists.rows.length);
+        if (userExists.rows.length >= 1) {
+            console.log("Hi");
+            return new Response("User already exists", { status: 409 });
+        }
+
         const result = await client.query(
             "INSERT INTO user_profile (user_name, email, first_name, last_name, gender, birth_date, about, profile_pic, pic_mime_type_prefix) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING user_id",
             [userProfile.username, userProfile.email, userProfile.firstName, userProfile.lastName, userProfile.gender, userProfile.birthDate, userProfile.about, profilePictureUrlBuffer, picMimeTypePrefix]
@@ -62,11 +70,11 @@ export async function POST(request: Request): Promise<Response> {
     catch (error) {
         return new Response("Failed to create data", { status: 500 });
     }
-    finally {
-        if (client) {
-            client.release();
-        }
-    }
+    // finally {
+    //     if (client) {
+    //         client.release();
+    //     }
+    // }
 }
 
 /**

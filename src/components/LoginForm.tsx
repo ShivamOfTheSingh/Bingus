@@ -64,8 +64,7 @@ export default function LoginForm() {
             }
             // Unhandled error response from API - throw Error so page redirects to error page
             else {
-                const responseText = await response.text();
-                throw new ApiError(responseText, response.status);
+                throw new ApiError("What the Bingus? An error occured.", response.status);
             }
         }
     }
@@ -85,7 +84,7 @@ export default function LoginForm() {
                 <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => { setPassword(e.target.value) }} disabled={pending} />
                 {validateErrors.password ? <Form.Label className="text-red-600">{validateErrors.password}</Form.Label> : null}
             </Form.Group>
-            <Form.Group controlId="submit" className="flex justify-center">
+            <Form.Group controlId="submit" className="flex justify-center flex-col">
                 <Button variant="primary" type="submit" disabled={pending} className="flex justify-center">
                     {pending ? <div className="flex gap-2 items-center"><Spinner size="sm" animation="border" />Submitting...</div> : "Login"}
                 </Button>

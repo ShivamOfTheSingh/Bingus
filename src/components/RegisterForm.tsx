@@ -148,14 +148,12 @@ export default function RegisterForm() {
             }
             // Unhandled error response from API - throw Error so page redirects to error page
             else {
-               const responseText = await registerUserResponse.text();
-               throw new ApiError(responseText, registerUserResponse.status);
+               throw new ApiError("What the Bingus?", registerUserResponse.status);
             }
          }
          // Unhandled error response from API - throw Error so page redirects to error page
          else {
-            const responseText = await userProfileResponse.text();
-            throw new ApiError(responseText, userProfileResponse.status);
+            throw new ApiError("What the Bingus? An error occured.", userProfileResponse.status);
          }
       }
    }
@@ -211,7 +209,7 @@ export default function RegisterForm() {
             <Form.Control type="password" placeholder="Confirm Password" value={passwordRepeat} onChange={(e) => { setPasswordRepeat(e.target.value) }} disabled={pending} />
             {validateErrors.passwordRepeat ? <Form.Label className="text-red-600">{validateErrors.passwordRepeat}</Form.Label> : null}
          </Form.Group>
-         <Form.Group controlId="submit" className="flex justify-center">
+         <Form.Group controlId="submit" className="flex justify-center flex-col">
             <Button variant="primary" type="submit" disabled={pending}>
                {pending ? <div className="flex gap-2 items-center"><Spinner size="sm" animation="border" />Submitting...</div> : "Register"}
             </Button>

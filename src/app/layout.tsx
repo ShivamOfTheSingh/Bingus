@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 import "./globals.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Error from "./error";
 
 export const metadata: Metadata = {
   title: "Bingus",
@@ -14,7 +16,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <ErrorBoundary errorComponent={Error}>
+        <body>{children}</body>
+      </ErrorBoundary>
     </html>
   );
 }
