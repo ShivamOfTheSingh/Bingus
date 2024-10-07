@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
-import { decrypt } from "@/lib/objectEncryption";
-import pool from "../../../../lib/pool";
+import { decrypt } from "@/lib/utils/objectEncryption";
+import pool from "../../../../lib/db/pool";
 
 export async function PATCH(request: Request): Promise<Response> {
     let client;

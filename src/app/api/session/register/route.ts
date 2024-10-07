@@ -1,6 +1,6 @@
-import { UserAuth } from "@/lib/models";
+import { UserAuth } from "@/lib/db/models";
 import bcrypt from "bcrypt";
-import pool from "../../../../lib/pool";
+import pool from "../../../../lib/db/pool";
 
 /**
  * Registers a user with an encrypted password.

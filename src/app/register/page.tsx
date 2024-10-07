@@ -1,5 +1,5 @@
 "use server";
-import RegisterForm from "@/components/RegisterForm";
+import RegisterForm from "@/components/forms/RegisterForm";
 import Image from "next/image";
 import logo from "@/public/logo.jpg";
 import background from "@/public/bingusBackground.png";

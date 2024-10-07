@@ -4,12 +4,12 @@ import Form from 'react-bootstrap/Form';
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import { useEffect, useState } from 'react';
-import { registerUserSchema } from '@/lib/formSchemas';
+import registerUserSchema from '@/lib/form_schemas/registerFormSchema';
 import { redirect } from 'next/navigation';
-import { UserAuth, UserProfile } from '@/lib/models';
+import { UserAuth, UserProfile } from '@/lib/db/models';
 import { Alert } from 'react-bootstrap';
 import Link from 'next/link';
-import ApiError from "@/lib/ApiError";
+import ApiError from "@/lib/classes/ApiError";
 
 interface RegisterValidateErrors {
    firstName: string | null,

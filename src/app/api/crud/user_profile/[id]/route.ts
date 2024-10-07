@@ -1,5 +1,5 @@
-import { UserProfile } from "@/lib/models";
-import pool from "../../../../../lib/pool";
+import { UserProfile } from "@/lib/db/models";
+import pool from "../../../../../lib/db/pool";
 
 /**
  * GET endpoint for table user_profile - single row by id
@@ -11,6 +11,7 @@ import pool from "../../../../../lib/pool";
 export async function GET(request: Request, { params }: { params: { id: string } }): Promise<Response> {
     let client;
     try {
+        console.log("Hello from user profile endpoint");
         const id = parseInt(params.id);
         client = await pool.connect();
         const result = await client.query("SELECT * FROM user_profile WHERE user_id = $1", [id]);
@@ -28,12 +29,13 @@ export async function GET(request: Request, { params }: { params: { id: string }
                 gender: result.rows[0].gender,
                 birthDate: new Date(result.rows[0].birth_date),
                 about: result.rows[0].about,
-                profilePicture: result.rows[0].pic_mime_type_prefix + Buffer.from(result.rows[0].profile_pic, 'base64').toString('base64')
+                profilePicture: result.rows[0].profile_pic ? result.rows[0].pic_mime_type_prefix + Buffer.from(result.rows[0].profile_pic, 'base64').toString('base64') : ""
         };
 
         return new Response(JSON.stringify(userProfile), { status: 200 });
     } 
     catch (error) {
+        console.log(error);
         return new Response("Failed to retrieve data", { status: 500 });
     }
     finally {

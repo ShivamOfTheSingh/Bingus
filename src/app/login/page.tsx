@@ -1,5 +1,6 @@
 "use server";
-import LoginForm from "@/components/LoginForm";
+
+import LoginForm from "@/components/forms/LoginForm";
 import Image from "next/image";
 import logo from "@/public/logo.jpg";
 import background from "@/public/bingusBackground.png";

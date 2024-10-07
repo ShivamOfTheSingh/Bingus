@@ -1,5 +1,5 @@
-import { PostVote } from "@/lib/models";
-import pool from "../../../../../lib/pool";
+import { PostVote } from "@/lib/db/models";
+import pool from "../../../../../lib/db/pool";
 
 /**
  * GET endpoint for table post_vote - single row by id

@@ -1,6 +1,7 @@
-import { CommentReply } from "@/lib/models";
-import pool from "../../../../lib/pool";
-import getCurrentSession from "@/lib/getCurrentSession";
+import { CommentReply } from "@/lib/db/models";
+import pool from "../../../../lib/db/pool";
+import getCurrentSession from "@/lib/cookies/getCurrentSession";
+import { NextResponse } from "next/server";
 
 /**
  * GET endpoint for table comment_reply
@@ -42,8 +43,8 @@ export async function GET(request: Request): Promise<Response> {
  */
 export async function POST(request: Request): Promise<Response> {
     let client;
+    const userId = await getCurrentSession();
     try {
-        const userId = await getCurrentSession();
         const commentReply: CommentReply = await request.json();
         commentReply.userId = userId;
         client = await pool.connect();
@@ -72,8 +73,8 @@ export async function POST(request: Request): Promise<Response> {
  */
 export async function PUT(request: Request): Promise<Response> {
     let client;
+    const userId = await getCurrentSession();
     try {
-        const userId = await getCurrentSession();
         const commentReply: CommentReply = await request.json();
         commentReply.userId = userId;
         client = await pool.connect();

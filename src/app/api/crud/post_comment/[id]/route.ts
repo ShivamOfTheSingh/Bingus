@@ -1,5 +1,5 @@
-import { PostComment } from "@/lib/models";
-import pool from "../../../../../lib/pool";
+import { PostComment } from "@/lib/db/models";
+import pool from "../../../../../lib/db/pool";
 
 /**
  * GET endpoint for table post_comment - single row by id

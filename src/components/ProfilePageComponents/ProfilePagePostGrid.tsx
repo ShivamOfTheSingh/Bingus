@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Post, Media } from "@/lib/models";
+import { Post, Media } from "@/lib/db/models";
 import { Container, Col, Row, CloseButton, Card, Button } from "react-bootstrap";
-import NewPostForm from "../NewPostForm";
+import NewPostForm from "../forms/NewPostForm";
 import ProfilePagePost from "./ProfilePagePost";
 
 interface ProfilePagePostGridProps {

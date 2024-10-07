@@ -1,5 +1,5 @@
-import { UserProfile } from "@/lib/models";
-import pool from "../../../../lib/pool";
+import { UserProfile } from "@/lib/db/models";
+import pool from "../../../../lib/db/pool";
 
 /**
  * GET endpoint for table user_profile (Fetch all profiles)
@@ -70,11 +70,11 @@ export async function POST(request: Request): Promise<Response> {
     catch (error) {
         return new Response("Failed to create data", { status: 500 });
     }
-    // finally {
-    //     if (client) {
-    //         client.release();
-    //     }
-    // }
+    finally {
+        if (client) {
+            client.release();
+        }
+    }
 }
 
 /**

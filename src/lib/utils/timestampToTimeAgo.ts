@@ -1,4 +1,4 @@
-export function timestampToTimeAgo(timestamp: string): string {
+export default function timestampToTimeAgo(timestamp: Date): string {
   const now = new Date(); // Current time
   const pastDate = new Date(timestamp); // Input timestamp as a Date object
 

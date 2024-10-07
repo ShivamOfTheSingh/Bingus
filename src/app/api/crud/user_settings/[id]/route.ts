@@ -1,5 +1,5 @@
-import { UserSettings } from "@/lib/models";
-import pool from "../../../../../lib/pool";
+import { UserSettings } from "@/lib/db/models";
+import pool from "../../../../../lib/db/pool";
 
 /**
  * GET endpoint for table user_settings - single row by id

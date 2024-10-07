@@ -1,5 +1,5 @@
-import { CommentVote } from "@/lib/models";
-import pool from "../../../../../lib/pool";
+import { CommentVote } from "@/lib/db/models";
+import pool from "../../../../../lib/db/pool";
 
 /**
  * GET endpoint for table comment_vote - single row by id

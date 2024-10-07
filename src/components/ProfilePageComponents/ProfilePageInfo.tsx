@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
-import { UserProfile } from "@/lib/models";
+import { UserProfile } from "@/lib/db/models";
 import Image from "next/image";
 import profilePicTemp from "@/public/profile-pic-temp.jpg";
 

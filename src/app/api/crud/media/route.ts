@@ -1,5 +1,5 @@
-import { Media } from "@/lib/models";
-import pool from "../../../../lib/pool";
+import { Media } from "@/lib/db/models";
+import pool from "../../../../lib/db/pool";
 
 /**
  * GET endpoint for table media (Fetch all media records)

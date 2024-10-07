@@ -1,6 +1,7 @@
-import { CommentVote } from "@/lib/models";
-import pool from "../../../../lib/pool";
-import getCurrentSession from "@/lib/getCurrentSession";
+import { CommentVote } from "@/lib/db/models";
+import pool from "../../../../lib/db/pool";
+import getCurrentSession from "@/lib/cookies/getCurrentSession";
+import { NextResponse } from "next/server";
 
 /**
  * GET endpoint for table comment_vote
@@ -41,18 +42,18 @@ export async function GET(request: Request): Promise<Response> {
  */
 export async function POST(request: Request): Promise<Response> {
     let client;
+    const userId = await getCurrentSession();
     try {
-        const userId = await getCurrentSession();
         const commentVote: CommentVote = await request.json();
         commentVote.userId = userId;
         client = await pool.connect();
         const result = await client.query(
-            "INSERT INTO comment_vote (post_comment_id, user_id, comment_vote_value) VALUES ($1, $2, $3) RETURNING comment_vote_id", 
+            "INSERT INTO comment_vote (post_comment_id, user_id, comment_vote_value) VALUES ($1, $2, $3) RETURNING comment_vote_id",
             [commentVote.postCommentId, commentVote.userId, commentVote.commentVoteValue]
         );
         const id = result.rows[0].comment_vote_id;
         return new Response(JSON.stringify({ commentVoteId: id }), { status: 201 });
-    } 
+    }
     catch (error) {
         return new Response("Failed to create data", { status: 500 });
     }
@@ -71,18 +72,18 @@ export async function POST(request: Request): Promise<Response> {
  */
 export async function PUT(request: Request): Promise<Response> {
     let client;
+    const userId = await getCurrentSession();
     try {
-        const userId = await getCurrentSession();
         const commentVote: CommentVote = await request.json();
         commentVote.userId = userId;
         client = await pool.connect();
         await client.query(
-            "UPDATE comment_vote SET post_comment_id = $2, user_id = $3, comment_vote_value = $4 WHERE comment_vote_id = $1", 
+            "UPDATE comment_vote SET post_comment_id = $2, user_id = $3, comment_vote_value = $4 WHERE comment_vote_id = $1",
             [commentVote.commentVoteId, commentVote.postCommentId, commentVote.userId, commentVote.commentVoteValue]
         );
 
         return new Response("OK", { status: 200 });
-    } 
+    }
     catch (error) {
         return new Response("Failed to update data", { status: 500 });
     }
@@ -107,7 +108,7 @@ export async function DELETE(request: Request): Promise<Response> {
         await client.query("DELETE FROM comment_vote WHERE comment_vote_id = $1", [id]);
 
         return new Response("OK", { status: 200 });
-    } 
+    }
     catch (error) {
         return new Response("Failed to delete data", { status: 500 });
     }

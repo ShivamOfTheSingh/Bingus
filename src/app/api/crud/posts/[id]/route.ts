@@ -1,5 +1,5 @@
-import { Post } from "@/lib/models";
-import pool from "../../../../../lib/pool";
+import { Post } from "@/lib/db/models";
+import pool from "../../../../../lib/db/pool";
 
 /**
  * GET endpoint for table posts - single row by id

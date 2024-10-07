@@ -1,5 +1,5 @@
-import { Following } from "@/lib/models";
-import pool from "../../../../../lib/pool";
+import { Following } from "@/lib/db/models";
+import pool from "../../../../../lib/db/pool";
 
 /**
  * GET endpoint for table followings - single row by id

@@ -2,8 +2,8 @@
 
 export default async function Page() {
   return (
-    <div>
-      Home Page
-    </div>
+      <div>
+        Home Page
+      </div>
   );
 }

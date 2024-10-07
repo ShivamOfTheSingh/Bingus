@@ -4,10 +4,10 @@ import Form from 'react-bootstrap/Form';
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import { useState } from 'react';
-import { loginUserSchema } from '@/lib/formSchemas';
+import loginUserSchema from '@/lib/form_schemas/loginFormSchema';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import ApiError from '@/lib/ApiError';
+import ApiError from '@/lib/classes/ApiError';
 
 interface LoginValidateErrors {
     email: string | null,

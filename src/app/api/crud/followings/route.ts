@@ -1,6 +1,7 @@
-import { Following } from "@/lib/models";
-import pool from "../../../../lib/pool";
-import getCurrentSession from "@/lib/getCurrentSession";
+import { Following } from "@/lib/db/models";
+import pool from "../../../../lib/db/pool";
+import getCurrentSession from "@/lib/cookies/getCurrentSession";
+import { NextResponse } from "next/server";
 
 /**
  * GET endpoint for table followings (Fetch all followings)
@@ -40,18 +41,18 @@ export async function GET(request: Request): Promise<Response> {
  */
 export async function POST(request: Request): Promise<Response> {
     let client;
+    const userId = await getCurrentSession();
     try {
-        const userId = await getCurrentSession();
         const following: Following = await request.json();
         following.userId = userId;
         client = await pool.connect();
         const result = await client.query(
-            "INSERT INTO followings (user_id, following_id) VALUES ($1, $2) RETURNING followings_status_id", 
+            "INSERT INTO followings (user_id, following_id) VALUES ($1, $2) RETURNING followings_status_id",
             [following.userId, following.followedUserId]
         );
         const id = result.rows[0].following_status_id;
         return new Response(JSON.stringify({ follwingId: id }), { status: 201 });
-    } 
+    }
     catch (error) {
         return new Response("Failed to create data", { status: 500 });
     }
@@ -70,18 +71,18 @@ export async function POST(request: Request): Promise<Response> {
  */
 export async function PUT(request: Request): Promise<Response> {
     let client;
+    const userId = await getCurrentSession();
     try {
-        const userId = await getCurrentSession();
         const following: Following = await request.json();
         following.userId = userId;
         client = await pool.connect();
         await client.query(
-            "UPDATE followings SET user_id = $2, following_id = $3 WHERE following_status_id = $1", 
+            "UPDATE followings SET user_id = $2, following_id = $3 WHERE following_status_id = $1",
             [following.followingId, following.userId, following.followedUserId]
         );
 
         return new Response("OK", { status: 200 });
-    } 
+    }
     catch (error) {
         return new Response("Failed to update data", { status: 500 });
     }
@@ -106,7 +107,7 @@ export async function DELETE(request: Request): Promise<Response> {
         await client.query("DELETE FROM followings WHERE following_status_id = $1", [id]);
 
         return new Response("OK", { status: 200 });
-    } 
+    }
     catch (error) {
         return new Response("Failed to delete data", { status: 500 });
     }

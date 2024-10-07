@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import { cookies } from "next/headers";
-import { decrypt, encrypt } from "@/lib/objectEncryption";
-import pool from "../../../../lib/pool";
+import { decrypt, encrypt } from "@/lib/utils/objectEncryption";
+import pool from "../../../../lib/db/pool";
 
 /**
  * Login as an existing user and create a user session.

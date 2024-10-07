@@ -1,5 +1,5 @@
-import { CommentReply } from "@/lib/models";
-import pool from "../../../../../lib/pool";
+import { CommentReply } from "@/lib/db/models";
+import pool from "../../../../../lib/db/pool";
 
 /**
  * GET endpoint for table comment_reply - single row by id
