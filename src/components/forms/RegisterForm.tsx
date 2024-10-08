@@ -9,7 +9,7 @@ import { redirect } from 'next/navigation';
 import { UserAuth, UserProfile } from '@/lib/db/models';
 import { Alert } from 'react-bootstrap';
 import Link from 'next/link';
-import ApiError from "@/lib/errors/ApiError";
+import ApiError from '@/lib/errors/ApiError';
 
 interface RegisterValidateErrors {
    firstName: string | null,

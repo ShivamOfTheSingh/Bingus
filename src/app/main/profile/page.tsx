@@ -8,7 +8,7 @@ import getCurrentSessionUserId from "@/lib/cookies/getCurrentSessionUserId";
 
 export default async function Page() {
     const userId = await getCurrentSessionUserId();
-    if (userId === -1){
+    if (userId === -1) {
       return <SessionInactive />;
     }
 
