@@ -30,6 +30,7 @@ export default async function getProfilePageData(userId: number): Promise<Return
     for (let i = 0; i < posts.length; i++) {
       console.log("getProfilePageData: before resMedia fetch");
       const resMedia = await fetch(`https://damian-codecleanup.d3drl1bcjmxovs.amplifyapp.com/api/crud/posts/media/${posts[i].postId}`);
+      console.log(`resMedia response ${i}`, resMedia);
       console.log("getProfilePageData: before resMedia JSon");
       const mediaArray: Media[] = await resMedia.json();
       postsWithMedia.push({
