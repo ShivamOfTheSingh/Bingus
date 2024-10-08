@@ -79,7 +79,7 @@ Bingus LLC
   */
   export async function action(prevState: FormState, formData: FormData): Promise<FormState> {
     try {
-        const response = await fetch("http://localhost:3000/api/crud/awsdata");
+        const response = await fetch("https://damian-codecleanup.d3drl1bcjmxovs.amplifyapp.com//api/crud/awsdata");
         const json = await response.json();
         if (json.data) {
             return {
