@@ -19,6 +19,9 @@ export default function Error({
             <div className="text-3xl">
                 {error instanceof ApiError ? error.httpStatus : null}
             </div>
+            <div>
+                Digest: {error.digest ? error.digest : null}
+            </div>
             <Button variant="danger">
                 <Link href="/">Go to Home Page.</Link>
             </Button>
