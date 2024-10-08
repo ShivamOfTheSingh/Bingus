@@ -5,6 +5,7 @@
 #### API Routes
 #### API Requests from Frontend
 #### Forms
+#### Working with Media objects
 
 ## Models
 ### All DB Tables will have their corresponding typescript interface defined in @/lib/db/models.ts
@@ -505,5 +506,67 @@ async function onSubmit() {
             throw new ApiError("What the Bingus? An error occured.", response.status);
         }
     }
+}
+```
+## Working with Media objects
+### 1. POST Media
+#### Convert the file data into a base64 string using @/lib/utils/readFile. The first argument for readFile() is a File object, and the second argument is a function (base64String: string) => void, that will take the file data and do something with it. In this example, the code reads the file and stores the data in a React state, so the arguments passed to readFile are the file, and the setFileData function
+```ts
+//....
+import readFile from "@/lib/utils/readFile";
+
+const [fileData, setFileData] = useState<string>("");
+const file: File = new File(); //Assume this file came from somewhere else
+readFile(file, setFileData); //This takes the file, decodes it, and calls setFileData(base64String)
+```
+#### When you have the converted base64File, create a new Media object and use the string as the mediaUrl field. The POST endpoint will take care of the rest
+```ts
+//....
+import readFile from "@/lib/utils/readFile";
+import { Media } from "@/lib/db/models";
+
+const [fileData, setFileData] = useState<string>("");
+const file: File = new File();
+readFile(file, setFileData);
+
+const media: Media = {
+    postId: 10, // I put a random number just for the example
+    mediaUrl: fileData //From the newly set react state above
+};
+```
+#### Once you have the Media object ready, you can simply POST it with the API call
+```ts
+//....
+import readFile from "@/lib/utils/readFile";
+import { Media } from "@/lib/db/models";
+
+const [fileData, setFileData] = useState<string>("");
+const file: File = new File();
+readFile(file, setFileData);
+
+const media: Media = {
+    postId: 10, // I put a random number just for the example
+    mediaUrl: fileData //From the newly set react state above
+};
+
+const res = await fetch("http://localhost:3000/api/crud/media", {
+    method: "POST",
+    body: JSON.stringify(media)
+});
+```
+### 2. GET and display Media
+#### Whenever you get a Media object from the API, you can just use the mediaUrl field as the image or video source. The page here is just a random example
+```ts
+"use server";
+
+import { Media } from "@/lib/db/models"l;
+
+export async default function Page() {
+    const res = await fetch("http://localhost:3000/api/crud/media/10");
+    const media: Media = await res.json();
+
+    return (
+        <img src={media.mediaUrl} />
+    );
 }
 ```
