@@ -80,15 +80,18 @@ export default function NewPostForm() {
                         body: JSON.stringify(media)
                     });
                     if (mediaResponse.status !== 201) {
-                        throw new ApiError("What the Bingus? An error occured.", postResponse.status); 
+                        throw new ApiError("What the Bingus? An unexpected error occured.", mediaResponse.status); 
                     }
                 });
 
                 setPending(false);
                 setRedirecting(true);
             }
+            else if (postResponse.status === 401) {
+                throw new ApiError("Session is ianctive. Please login again.", postResponse.status);
+            }
             else {
-                throw new ApiError("What the Bingus? An error occured.", postResponse.status);
+                throw new ApiError("What the Bingus? An unexpected error occured.", postResponse.status);
             }
         }
     }

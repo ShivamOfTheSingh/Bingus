@@ -1,5 +1,6 @@
 import { Media } from "@/lib/db/models";
 import pool from "../../../../lib/db/pool";
+import getCurrentSessionUserId from "@/lib/cookies/getCurrentSessionUserId";
 
 /**
  * GET endpoint for table media (Fetch all media records)
@@ -40,6 +41,10 @@ export async function GET(request: Request): Promise<Response> {
 export async function POST(request: Request): Promise<Response> {
     let client;
     try {
+        const userId = await getCurrentSessionUserId();
+        if (userId === -1) {
+            return new Response("Unauthorized API call", { status: 401 });
+        }
         const media: Media = await request.json();
         const mimeTypePrefix = media.mediaUrl.slice(0, media.mediaUrl.indexOf(",") + 1);
         const mediaUrlBuffer = Buffer.from(media.mediaUrl.slice(mimeTypePrefix.length), 'base64');  // Convert Base64 to Buffer
@@ -71,6 +76,10 @@ export async function POST(request: Request): Promise<Response> {
 export async function PUT(request: Request): Promise<Response> {
     let client;
     try {
+        const userId = await getCurrentSessionUserId();
+        if (userId === -1) {
+            return new Response("Unauthorized API call", { status: 401 });
+        }
         const media: Media = await request.json();
         const mimeTypePrefix = media.mediaUrl.slice(0, media.mediaUrl.indexOf(",") + 1);
         const mediaUrlBuffer = Buffer.from(media.mediaUrl.slice(mimeTypePrefix.length), 'base64');
@@ -103,6 +112,10 @@ export async function DELETE(request: Request): Promise<Response> {
     let client;
     try {
         const { id } = await request.json();
+        const userId = await getCurrentSessionUserId();
+        if (userId === -1 || userId !== id) {
+            return new Response("Unauthorized API call", { status: 401 });
+        }
         client = await pool.connect();
         await client.query("DELETE FROM media WHERE media_id = $1", [id]);
 

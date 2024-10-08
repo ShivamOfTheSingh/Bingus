@@ -1,7 +1,6 @@
 import { CommentReply } from "@/lib/db/models";
 import pool from "../../../../lib/db/pool";
-import getCurrentSession from "@/lib/cookies/getCurrentSession";
-import { NextResponse } from "next/server";
+import getCurrentSessionUserId from "@/lib/cookies/getCurrentSessionUserId";
 
 /**
  * GET endpoint for table comment_reply
@@ -43,8 +42,11 @@ export async function GET(request: Request): Promise<Response> {
  */
 export async function POST(request: Request): Promise<Response> {
     let client;
-    const userId = await getCurrentSession();
     try {
+        const userId = await getCurrentSessionUserId();
+        if (userId === -1) {
+            return new Response("Unauthorized API call", { status: 401 });
+        }
         const commentReply: CommentReply = await request.json();
         commentReply.userId = userId;
         client = await pool.connect();
@@ -73,8 +75,11 @@ export async function POST(request: Request): Promise<Response> {
  */
 export async function PUT(request: Request): Promise<Response> {
     let client;
-    const userId = await getCurrentSession();
     try {
+        const userId = await getCurrentSessionUserId();
+        if (userId === -1) {
+            return new Response("Unauthorized API call", { status: 401 });
+        }
         const commentReply: CommentReply = await request.json();
         commentReply.userId = userId;
         client = await pool.connect();
@@ -98,20 +103,24 @@ export async function PUT(request: Request): Promise<Response> {
 /**
  * DELETE endpoint for table comment_reply
  * 
- * @param request 
- * @returns 
+ * @param {Request} request Incoming HTTP request
+ * @returns {Response} Status code HTTP response
  */
 export async function DELETE(request: Request): Promise<Response> {
     let client;
     try {
         const { id } = await request.json();
+        const userId = await getCurrentSessionUserId();
+        if (userId === -1 || userId !== id) {
+            return new Response("Unauthorized API call", { status: 401 });
+        }
         client = await pool.connect();
         await client.query("DELETE FROM comment_reply WHERE comment_reply_id=$1", [id]);
 
-        return new Response("OK", { status: 200 });
+        return Response.json("OK", { status: 200 });
     }
     catch (error) {
-        return new Response("Failed to delete data", { status: 500 });
+        return Response.json("Failed to delete data", { status: 500 });
     }
     finally {
         if (client) {

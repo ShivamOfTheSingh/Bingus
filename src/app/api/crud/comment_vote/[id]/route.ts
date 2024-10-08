@@ -1,5 +1,6 @@
 import { CommentVote } from "@/lib/db/models";
 import pool from "../../../../../lib/db/pool";
+import getCurrentSessionUserId from "@/lib/cookies/getCurrentSessionUserId";
 
 /**
  * GET endpoint for table comment_vote - single row by id

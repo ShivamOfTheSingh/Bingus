@@ -1,5 +1,6 @@
 import { UserSettings } from "@/lib/db/models";
 import pool from "../../../../../lib/db/pool";
+import getCurrentSessionUserId from "@/lib/cookies/getCurrentSessionUserId";
 
 /**
  * GET endpoint for table user_settings - single row by id

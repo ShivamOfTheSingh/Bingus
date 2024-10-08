@@ -1,5 +1,6 @@
 import { Post } from "@/lib/db/models";
 import pool from "../../../../../lib/db/pool";
+import getCurrentSessionUserId from "@/lib/cookies/getCurrentSessionUserId";
 
 /**
  * GET endpoint for table posts - single row by id

@@ -1,8 +1,8 @@
 import Link from "next/link";
 
-export default function Page() {
+export default function SessionInactive() {
     return (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col items-center gap-2">
             Session is inactive.
             <Link href="/">Go to home page.</Link>
             <Link href="/login">Login</Link>

@@ -1,5 +1,6 @@
 import { UserProfile } from "@/lib/db/models";
 import pool from "../../../../../lib/db/pool";
+import getCurrentSessionUserId from "@/lib/cookies/getCurrentSessionUserId";
 
 /**
  * GET endpoint for table user_profile - single row by id
@@ -11,7 +12,6 @@ import pool from "../../../../../lib/db/pool";
 export async function GET(request: Request, { params }: { params: { id: string } }): Promise<Response> {
     let client;
     try {
-        console.log("Hello from user profile endpoint");
         const id = parseInt(params.id);
         client = await pool.connect();
         const result = await client.query("SELECT * FROM user_profile WHERE user_id = $1", [id]);

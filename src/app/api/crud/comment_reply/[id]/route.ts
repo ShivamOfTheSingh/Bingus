@@ -1,5 +1,6 @@
 import { CommentReply } from "@/lib/db/models";
 import pool from "../../../../../lib/db/pool";
+import getCurrentSessionUserId from "@/lib/cookies/getCurrentSessionUserId";
 
 /**
  * GET endpoint for table comment_reply - single row by id

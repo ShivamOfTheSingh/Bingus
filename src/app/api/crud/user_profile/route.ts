@@ -1,5 +1,6 @@
 import { UserProfile } from "@/lib/db/models";
 import pool from "../../../../lib/db/pool";
+import getCurrentSessionUserId from "@/lib/cookies/getCurrentSessionUserId";
 
 /**
  * GET endpoint for table user_profile (Fetch all profiles)
@@ -86,6 +87,10 @@ export async function POST(request: Request): Promise<Response> {
 export async function PUT(request: Request): Promise<Response> {
     let client;
     try {
+        const userId = await getCurrentSessionUserId();
+        if (userId === -1) {
+            return new Response("Unauthorized API call", { status: 401 });
+        }
         const userProfile: UserProfile = await request.json();
         const picMimeTypePrefix = userProfile.profilePicture ? userProfile.profilePicture.slice(0, userProfile.profilePicture.indexOf(",") + 1) : "";
         const profilePictureUrlBuffer = userProfile.profilePicture ? Buffer.from(userProfile.profilePicture.slice(picMimeTypePrefix.length), 'base64') : null;
@@ -118,6 +123,10 @@ export async function DELETE(request: Request): Promise<Response> {
     let client;
     try {
         const { id } = await request.json();
+        const userId = await getCurrentSessionUserId();
+        if (userId === -1 || userId !== id) {
+            return new Response("Unauthorized API call", { status: 401 });
+        }
         client = await pool.connect();
         await client.query("DELETE FROM user_profile WHERE user_id = $1", [id]);
 

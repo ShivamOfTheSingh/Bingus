@@ -1,7 +1,6 @@
 import { PostComment } from "@/lib/db/models";
 import pool from "../../../../lib/db/pool";
-import getCurrentSession from "@/lib/cookies/getCurrentSession";
-import { NextResponse } from "next/server";
+import getCurrentSessionUserId from "@/lib/cookies/getCurrentSessionUserId";
 
 /**
  * GET endpoint for table post_comment (Fetch all post comments)
@@ -43,8 +42,11 @@ export async function GET(request: Request): Promise<Response> {
  */
 export async function POST(request: Request): Promise<Response> {
     let client;
-    const userId = await getCurrentSession();
     try {
+        const userId = await getCurrentSessionUserId();
+        if (userId === -1) {
+            return new Response("Unauthorized API call", { status: 401 });
+        }
         const postComment: PostComment = await request.json();
         postComment.userId = userId;
         client = await pool.connect();
@@ -73,8 +75,11 @@ export async function POST(request: Request): Promise<Response> {
  */
 export async function PUT(request: Request): Promise<Response> {
     let client;
-    const userId = await getCurrentSession();
     try {
+        const userId = await getCurrentSessionUserId();
+        if (userId === -1) {
+            return new Response("Unauthorized API call", { status: 401 });
+        }
         const postComment: PostComment = await request.json();
         postComment.userId = userId;
         client = await pool.connect();
@@ -105,6 +110,10 @@ export async function DELETE(request: Request): Promise<Response> {
     let client;
     try {
         const { id } = await request.json();
+        const userId = await getCurrentSessionUserId();
+        if (userId === -1 || userId !== id) {
+            return new Response("Unauthorized API call", { status: 401 });
+        }
         client = await pool.connect();
         await client.query("DELETE FROM post_comment WHERE post_comment_id = $1", [id]);
 
