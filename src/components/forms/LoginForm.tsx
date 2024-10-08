@@ -7,7 +7,7 @@ import { useState } from 'react';
 import loginUserSchema from '@/lib/form_schemas/loginFormSchema';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import ApiError from '@/lib/classes/ApiError';
+import ApiError from '@/lib/errors/ApiError';
 
 interface LoginValidateErrors {
     email: string | null,

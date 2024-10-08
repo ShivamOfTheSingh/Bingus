@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import createPostSchema from '@/lib/form_schemas/createPostFormSchema';
 import { redirect } from 'next/navigation';
 import { Media, Post } from '@/lib/db/models';
-import ApiError from '@/lib/classes/ApiError';
+import ApiError from '@/lib/errors/ApiError';
 import readFile from '@/lib/utils/readFile';
 
 

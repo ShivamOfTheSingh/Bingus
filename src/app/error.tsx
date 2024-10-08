@@ -1,6 +1,6 @@
 "use client";
 
-import ApiError from "@/lib/classes/ApiError";
+import ApiError from "@/lib/errors/ApiError";
 import Link from "next/link";
 import { Button } from "react-bootstrap";
 
