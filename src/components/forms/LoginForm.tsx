@@ -48,7 +48,7 @@ export default function LoginForm() {
             setPending(false);
         }
         else {
-            const response = await fetch("https://damian-codecleanup.d3drl1bcjmxovs.amplifyapp.com//api/session/login", {
+            const response = await fetch("https://damian-codecleanup.d3drl1bcjmxovs.amplifyapp.com/api/session/login", {
                 method: "POST",
                 body: JSON.stringify({
                     email: email,
