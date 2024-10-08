@@ -23,6 +23,6 @@ export default async function getCurrentSessionUserId(): Promise<number> {
     console.log("after query");
     const userId = result.rows[0].user_id;
     client.release();
-    console.log("before return");
+    console.log("before return, userID:", userId);
     return userId;
 }
