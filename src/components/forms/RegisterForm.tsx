@@ -120,7 +120,7 @@ export default function RegisterForm() {
             gender: gender,
             birthDate: new Date(birthdate)
          };
-         const userProfileResponse = await fetch("https://damian-codecleanup.d3drl1bcjmxovs.amplifyapp.com//api/crud/user_profile", {
+         const userProfileResponse = await fetch("https://damian-codecleanup.d3drl1bcjmxovs.amplifyapp.com/api/crud/user_profile", {
             method: "POST",
             body: JSON.stringify(userProfile)
          });
@@ -138,7 +138,7 @@ export default function RegisterForm() {
                dateRegistered: new Date(),
                userId: userId
             };
-            const registerUserResponse = await fetch("https://damian-codecleanup.d3drl1bcjmxovs.amplifyapp.com//api/session/register", {
+            const registerUserResponse = await fetch("https://damian-codecleanup.d3drl1bcjmxovs.amplifyapp.com/api/session/register", {
                method: "POST",
                body: JSON.stringify(userAuth)
             });
