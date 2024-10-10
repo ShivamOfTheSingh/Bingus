@@ -1,0 +1,65 @@
+html, body {
+    height: 100%;
+    margin: 0; 
+    overflow: hidden; 
+}
+
+.inbox {
+    margin-top:auto;
+    padding: 0;
+    margin: 0;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh; 
+    overflow: hidden; 
+}
+
+.inbox-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin: 5px;
+    overflow: hidden; 
+}
+
+.message-list-container {
+    padding-inline: 40px;
+    padding-bottom: 20px;
+    flex-grow: 1;
+    overflow-y: auto; 
+    max-height: 100%; 
+}
+
+.scrollable {
+    position: relative;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
+.compose {
+    flex-basis: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #e1e1e1cc;
+    width: 100%;
+    background-color: #ffffffcc;
+    backdrop-filter: blur(20px);
+}
+input[type="text"] {
+    flex-grow: 1; /* Allows the input to expand */
+    border: 1px solid #ccc; /* Add border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 1px; /* Add padding */
+    font-size: 16px; /* Adjust font size */
+}
+.send {
+    flex-basis: 50px;
+    border-left: 1px solid #0000002a;
+    padding-inline: 10px;
+}
+
+
