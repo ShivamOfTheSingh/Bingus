@@ -13,6 +13,11 @@ const io = new Server(server, {
 
 io.on('connection', (socket) => {
     console.log('a skibidi joined the chat');
+
+    socket.on('message', ({userName, message}) => {
+        console.log(`${userName}: ${msg}`);
+    });
+    
     socket.on('disconnect', () => {
         console.log('skibidi left');
     });
