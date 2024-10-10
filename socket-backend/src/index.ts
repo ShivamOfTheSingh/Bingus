@@ -3,9 +3,8 @@ import { createServer } from "http";
 import { Server } from "socket.io";
 import authenticate from "./lib/authenticate";
 import { Message } from "./lib/models";
+import * as MessageAPI from "./api/messages";
 import "dotenv/config";
-import loadMessages from "./lib/loadMessages";
-import storeMessage from "./lib/storeMessage";
 
 const app = express();
 const server = createServer(app);
@@ -18,10 +17,10 @@ io.on("connection", (socket) => {
             socket.emit("authenticate", "Failed to authenticate");
         }
         else {
-            socket.emit("authenticate", "authenticated");
+            socket.emit("authenticate", "Authenticated");
 
             socket.on("loadMessages", async () => {
-                const messages: Message[] | string = await loadMessages();
+                const messages: Message[] | string = await MessageAPI.GET();
                 socket.emit("loadMessages", JSON.stringify(messages));
             });
 
@@ -31,7 +30,7 @@ io.on("connection", (socket) => {
                 messageObject.chatId = 1;
                 socket.broadcast.emit("message", JSON.stringify(messageObject));
 
-                await storeMessage(messageObject);
+                await MessageAPI.POST(messageObject);
                 console.log("Message stored");
             })
         }
