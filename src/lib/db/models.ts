@@ -1,3 +1,5 @@
+import { LargeNumberLike } from "crypto";
+
 export interface UserProfile {
     userId?: number;
     username: string;
@@ -81,3 +83,35 @@ export interface UserSettings {
     profilePublic: boolean;
 }
 
+export interface Chat {
+    chatId?: number;
+    chatName: string;
+}
+
+export interface ChatSettings {
+    chatSettingsId?: number; 
+    chatId: number;
+    mute: boolean;
+    notifications: boolean; 
+    chatPic?: string;  
+}
+
+export interface GroupMembers {
+    groupMemberId?: number; 
+    userId: number;
+    chatId: number; 
+}
+
+export interface Messages {
+    messagesId?: number; 
+    chatId: number;
+    userId: number; 
+    messagesText: string; 
+    messagesTimestamp: Date;  
+}
+
+export interface MessagesMedia {
+    messagesMediaId?: number; 
+    messagesId: number; 
+    messagesMedia: string; 
+}
