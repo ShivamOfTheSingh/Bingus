@@ -14,8 +14,8 @@ const io = new Server(server, {
 io.on('connection', (socket) => {
     console.log('a skibidi joined the chat');
 
-    socket.on('message', ({userName, message}) => {
-        console.log(`${userName}: ${message}`);
+    socket.on('message', ({name, message}) => {
+        console.log(`${name}: ${message}`);
     });
     
     socket.on('disconnect', () => {
