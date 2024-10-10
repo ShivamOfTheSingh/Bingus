@@ -5,6 +5,7 @@ import authenticate from "./lib/authenticate";
 import { Message } from "./lib/models";
 import "dotenv/config";
 import loadMessages from "./lib/loadMessages";
+import storeMessage from "./lib/storeMessage";
 
 const app = express();
 const server = createServer(app);
@@ -24,9 +25,14 @@ io.on("connection", (socket) => {
                 socket.emit("loadMessages", JSON.stringify(messages));
             });
 
-            socket.on("message", (message) => {
+            socket.on("message", async (message) => {
                 const messageObject: Message = JSON.parse(message);
+                messageObject.userId = userId;
+                messageObject.chatId = 1;
                 socket.broadcast.emit("message", JSON.stringify(messageObject));
+
+                await storeMessage(messageObject);
+                console.log("Message stored");
             })
         }
     });

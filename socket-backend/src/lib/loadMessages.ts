@@ -4,7 +4,6 @@ import { Message } from "./models";
 export default async function loadMessages(): Promise<Message[] | string> {
     let client;
     try {
-        throw new Error();
         client = await pool.connect();
         const result = await client.query("SELECT * FROM messages");
         const messages: Message[] = result.rows.map((row: any) => {
@@ -18,12 +17,12 @@ export default async function loadMessages(): Promise<Message[] | string> {
         });
         return messages;
     }
-    catch (error) {
+    catch (error: any) {
         return "An error occured";
     }
     finally {
         if (client) {
-            // client.release();
+            client.release();
         }
     }
 }
