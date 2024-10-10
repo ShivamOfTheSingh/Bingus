@@ -74,7 +74,7 @@ const Inbox: React.FC = () => {
 
       {/* input to type message */}
       <div className="inbox-content">
-        <div className="message-list-container crollable">
+        <div className="message-list-container scrollable">
           {messages.map((msg, index) => (
             <Message
               key={index}
