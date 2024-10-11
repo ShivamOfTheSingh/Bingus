@@ -16,7 +16,7 @@ app.use(cors({
 const server = createServer(app);
 const io = new Server(server, {
       cors: {
-        origin: "http://localhost:3000",  // Allow Socket.IO requests from your frontend
+        origin: "http://localhost:3000",
         methods: ["GET", "POST"],
         credentials: true
     }
@@ -24,6 +24,7 @@ const io = new Server(server, {
 
 io.on("connection", (socket) => {
     socket.on("authenticate", async (session) => {
+        console.log("Session from frontend", session);
         const userId = await authenticate(session);
         if (userId === -1) {
             socket.emit("authenticate", "Failed to authenticate");
