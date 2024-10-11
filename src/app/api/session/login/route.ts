@@ -74,7 +74,7 @@ async function createSession(userAuthId: number): Promise<boolean> {
 
         cookies().set("session", encryptedSession, {
             httpOnly: true,
-            secure: true,
+            secure: false,
             expires: expiresAt,
             path: "/"
         });

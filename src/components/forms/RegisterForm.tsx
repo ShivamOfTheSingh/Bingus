@@ -119,7 +119,7 @@ export default function RegisterForm() {
         birthDate: new Date(birthdate),
       };
       const userProfileResponse = await fetch(
-        "http://localhost:3000/api/crud/user_profile",
+        "http://ec2-54-211-63-47.compute-1.amazonaws.com:3000/api/crud/user_profile",
         {
           method: "POST",
           body: JSON.stringify(userProfile),
@@ -139,7 +139,7 @@ export default function RegisterForm() {
           userId: userId,
         };
         const registerUserResponse = await fetch(
-          "http://localhost:3000/api/session/register",
+          "http://ec2-54-211-63-47.compute-1.amazonaws.com:3000/api/session/register",
           {
             method: "POST",
             body: JSON.stringify(userAuth),
