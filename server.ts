@@ -8,7 +8,7 @@ import "dotenv/config";
 
 const dev = process.env.NODE_ENV !== "production";
 const hostname = "production.d3drl1bcjmxovs.amplifyapp.com";
-const port = 3000;
+const port = process.env.PORT ? parseInt(process.env.PORT) : 3000;
 
 const app = next({ dev, hostname, port });
 const handler = app.getRequestHandler();
