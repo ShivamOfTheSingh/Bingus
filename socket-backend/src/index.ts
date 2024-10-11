@@ -39,6 +39,7 @@ io.on("connection", (socket) => {
             socket.on("message", async (message) => {
                 console.log("Message received", message);
                 const messageObject: Message = JSON.parse(message);
+                console.log("Message object", messageObject);
                 messageObject.userId = userId;
                 messageObject.chatId = 1;
                 socket.broadcast.emit("message", JSON.stringify(messageObject));
