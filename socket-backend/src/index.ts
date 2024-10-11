@@ -14,7 +14,13 @@ app.use(cors({
     credentials: true
 }));
 const server = createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+      cors: {
+        origin: "http://localhost:3000",  // Allow Socket.IO requests from your frontend
+        methods: ["GET", "POST"],
+        credentials: true
+    }
+});
 
 io.on("connection", (socket) => {
     socket.on("authenticate", async (session) => {
