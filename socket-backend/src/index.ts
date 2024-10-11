@@ -3,10 +3,16 @@ import { createServer } from "http";
 import { Server } from "socket.io";
 import authenticate from "./lib/authenticate";
 import { Message } from "./lib/models";
+import cors from "cors";
 import * as MessageAPI from "./api/messages";
 import "dotenv/config";
 
 const app = express();
+app.use(cors({
+    origin: "http://localhost:3000/",
+    methods: ["GET", "POST"],
+    credentials: true
+}));
 const server = createServer(app);
 const io = new Server(server);
 
