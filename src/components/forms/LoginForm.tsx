@@ -20,7 +20,7 @@ export default function LoginForm() {
   const [password, setPassword] = useState("");
   // Pending submit state
   const [pending, setPending] = useState(false);
-  // Validate form errors state
+  // Validate form errors state 
   const [validateErrors, setValidateErrors] = useState<LoginValidateErrors>({
     email: null,
     password: null,
