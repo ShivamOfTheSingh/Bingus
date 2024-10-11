@@ -7,7 +7,7 @@ import * as MessageAPI from "./src/sockets/api/messages";
 import "dotenv/config";
 
 const dev = process.env.NODE_ENV !== "production";
-const hostname = "localhost";
+const hostname = "https://production.d3drl1bcjmxovs.amplifyapp.com";
 const port = 3000;
 
 const app = next({ dev, hostname, port });
