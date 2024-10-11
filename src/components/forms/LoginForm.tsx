@@ -60,7 +60,7 @@ export default function LoginForm() {
       } else if (response.status === 200) {
         redirect("/");
       }
-      // Unhandled error response from API - throw Error so page redirects to error page
+      // Unhandled error response from API - throw Error so page redirects to error pages
       else {
         throw new ApiError(
           "What the Bingus? An error occured.",
