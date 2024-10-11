@@ -4,7 +4,7 @@ import { Message } from "@/lib/db/models";
 // Define the types for props
 interface MessageProps {
   type: "me" | "other"; // "me" for the current user's messages, "other" for others
-  position?: "last";
+  position: "last" | "";
   message: Message;
 }
 

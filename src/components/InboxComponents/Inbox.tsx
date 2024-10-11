@@ -4,8 +4,7 @@ import { io } from "socket.io-client";
 import MessageComponent from "./Message";
 import { Message } from "@/lib/db/models";
 import "@/public/Inbox.css";
-
-const newSocket = io("ws://ec2-3-90-106-242.compute-1.amazonaws.com:3000");
+import { socket as newSocket } from "@/socket";
 
 export default function Inbox({
   session,
@@ -14,6 +13,7 @@ export default function Inbox({
   session: string;
   userId: number;
 }) {
+  console.log("rendering inbox component");
   // State to store current message
   const [message, setMessage] = useState("");
 
@@ -27,9 +27,8 @@ export default function Inbox({
   //const [authenticated, setAuthenticated] = useState(false);
 
   useEffect(() => {
-    console.log("what the sigma");
+    console.log("running useEffect");
     socket.emit("authenticate", session);
-    console.log("sigma");
 
     const onLoadMessages = (messages: string) => {
       const messageObjects: Message[] = JSON.parse(messages);
@@ -37,22 +36,28 @@ export default function Inbox({
       setMessages(messageObjects);
     };
 
-    socket.on("authenticate", (authenticated: string) => {
+    const onMessage = (message: string) => {
+      const mObject: Message = JSON.parse(message);
+      setMessages([...messages, mObject]);
+    }
+
+    const onAuthenticate = (authenticated: boolean) => {
       if (!authenticated) {
         console.log("bruh");
       }
       socket.emit("loadMessages");
       socket.on("loadMessages", onLoadMessages);
-      socket.on("message", (m: string) => {
-        const mObject: Message = JSON.parse(m);
-        setMessages([...messages, mObject]);
-      });
-    });
+      socket.on("message", onMessage);
+    }
+
+    socket.on("authenticate", onAuthenticate);
 
     return () => {
-      socket.off("loadMessages", onLoadMessages); // Cleanup
+      socket.off("authenticate", onAuthenticate);
+      socket.off("loadMessages", onLoadMessages);
+      socket.off("message", onMessage);
     };
-  }, [socket]);
+  }, []);
 
   const sendMessage = () => {
     // Alert if message input is empty
@@ -69,7 +74,6 @@ export default function Inbox({
         messageTime: new Date(),
         userId: userId,
       };
-
       socket.emit("message", JSON.stringify(newMessage));
       setMessages([...messages, newMessage]);
       setMessage("");
@@ -111,7 +115,6 @@ export default function Inbox({
             type="text"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            //onKeyPress={handleKeyPress}
             placeholder="Type a message"
           />
           <button className="send" onClick={sendMessage}>

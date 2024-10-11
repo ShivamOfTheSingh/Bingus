@@ -12,5 +12,7 @@ export default async function Page() {
 
   const value = session.value;
   const userId = await getCurrentSessionUserId();
-  return <Inbox session={value} userId={userId} />;
+  return (
+    <Inbox session={value} userId={userId} />
+  );
 }
