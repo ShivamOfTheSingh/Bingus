@@ -119,7 +119,7 @@ export default function RegisterForm() {
         birthDate: new Date(birthdate),
       };
       const userProfileResponse = await fetch(
-        "https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/user_profile",
+        "http://localhost:3000/api/crud/user_profile",
         {
           method: "POST",
           body: JSON.stringify(userProfile),
@@ -139,7 +139,7 @@ export default function RegisterForm() {
           userId: userId,
         };
         const registerUserResponse = await fetch(
-          "https://production.d3drl1bcjmxovs.amplifyapp.com/api/session/register",
+          "http://localhost:3000/api/session/register",
           {
             method: "POST",
             body: JSON.stringify(userAuth),

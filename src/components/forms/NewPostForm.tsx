@@ -62,7 +62,7 @@ export default function NewPostForm() {
                 caption: postCaption,
                 datePosted: new Date()
             };
-            const postResponse = await fetch("https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/posts", {
+            const postResponse = await fetch("http://localhost:3000/api/crud/posts", {
                 method: "POST",
                 body: JSON.stringify(post)
             });
@@ -75,7 +75,7 @@ export default function NewPostForm() {
                         postId: postId,
                         mediaUrl: data
                     };
-                    const mediaResponse = await fetch("https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/media", {
+                    const mediaResponse = await fetch("http://localhost:3000/api/crud/media", {
                         method: "POST",
                         body: JSON.stringify(media)
                     });
