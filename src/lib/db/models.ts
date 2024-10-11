@@ -81,3 +81,12 @@ export interface UserSettings {
     profilePublic: boolean;
 }
 
+export interface Message {
+    messageId?: number;
+    chatId?: number;
+    userId: number;
+    messageText: string;
+    messageTime: Date;
+}
+
+

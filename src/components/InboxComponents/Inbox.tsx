@@ -1,40 +1,60 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { io, Socket } from "socket.io-client";
-import Message from "./Message";
+import { io } from "socket.io-client";
+import MessageComponent from "./Message";
+import { Message } from "@/lib/db/models";
 import "@/public/Inbox.css";
 
-const Inbox: React.FC = () => {
+const newSocket = io("ws://ec2-3-90-106-242.compute-1.amazonaws.com:3000");
+
+export default function Inbox({
+  session,
+  userId,
+}: {
+  session: string;
+  userId: number;
+}) {
   // State to store current message
   const [message, setMessage] = useState("");
 
   // State to update list of messages
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState<Message[]>([]);
 
   // State to store socket instance
-  const [socket, setSocket] = useState(null);
+  const [socket, setSocket] = useState(newSocket);
+
+  // State for authenticated
+  //const [authenticated, setAuthenticated] = useState(false);
 
   useEffect(() => {
-    // Connect to the socket server
-    const newSocket = io("http://localhost:3000");
-    setSocket(newSocket);
+    console.log("what the sigma");
+    socket.emit("authenticate", session);
+    console.log("sigma");
 
-    // Listen for incoming messages
-    newSocket.on("message", (message: any) => {
-      console.log(message);
-      setMessages((prevMessages) => [...prevMessages, message]);
+    const onLoadMessages = (messages: string) => {
+      const messageObjects: Message[] = JSON.parse(messages);
+      console.log(messageObjects);
+      setMessages(messageObjects);
+    };
+
+    socket.on("authenticate", (authenticated: string) => {
+      if (!authenticated) {
+        console.log("bruh");
+      }
+      socket.emit("loadMessages");
+      socket.on("loadMessages", onLoadMessages);
+      socket.on("message", (m: string) => {
+        const mObject: Message = JSON.parse(m);
+        setMessages([...messages, mObject]);
+      });
     });
 
-    // Cleanup when component unmounts
     return () => {
-      newSocket.disconnect();
+      socket.off("loadMessages", onLoadMessages); // Cleanup
     };
-  }, []);
+  }, [socket]);
 
   const sendMessage = () => {
-    // Get current user id
-    // const currentUserId = id
-
     // Alert if message input is empty
     if (!message.trim()) {
       alert("Message cannot be empty");
@@ -42,16 +62,16 @@ const Inbox: React.FC = () => {
     }
 
     // If socket connection exists, then send the message
-    if (Socket) {
-      const newMessage = {
-        text: message,
-        // Change the sender to user id
-        sender: "me",
-        timestamp: new Date().toISOString(),
-        position: "last",
+    if (socket) {
+      // Get current user id
+      const newMessage: Message = {
+        messageText: message,
+        messageTime: new Date(),
+        userId: userId,
       };
 
-      socket.emit("message", newMessage);
+      socket.emit("message", JSON.stringify(newMessage));
+      setMessages([...messages, newMessage]);
       setMessage("");
     }
 
@@ -61,12 +81,12 @@ const Inbox: React.FC = () => {
     }
   };
 
-  // Press enter to send message
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      sendMessage();
-    }
-  };
+  // // Press enter to send message
+  // const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  //   if (e.key === "Enter") {
+  //     sendMessage();
+  //   }
+  // };
 
   return (
     <div className="inbox">
@@ -76,12 +96,11 @@ const Inbox: React.FC = () => {
       <div className="inbox-content">
         <div className="message-list-container scrollable">
           {messages.map((msg, index) => (
-            <Message
+            <MessageComponent
               key={index}
               // Check if user id is same if not the set as other
-              type={msg.sender === "me" ? "me" : "other"}
-              text={msg.text}
-              timestamp={msg.timestamp}
+              type={msg.userId === userId ? "me" : "other"}
+              message={msg}
               position={index === messages.length - 1 ? "last" : ""}
             />
           ))}
@@ -92,7 +111,7 @@ const Inbox: React.FC = () => {
             type="text"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            onKeyPress={handleKeyPress}
+            //onKeyPress={handleKeyPress}
             placeholder="Type a message"
           />
           <button className="send" onClick={sendMessage}>
@@ -102,6 +121,4 @@ const Inbox: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default Inbox;
+}
