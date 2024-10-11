@@ -24,13 +24,12 @@ const io = new Server(server, {
 
 io.on("connection", (socket) => {
     socket.on("authenticate", async (session) => {
-        console.log("Session from frontend", session);
         const userId = await authenticate(session);
         if (userId === -1) {
-            socket.emit("authenticate", "Failed to authenticate");
+            socket.emit("authenticate", false);
         }
         else {
-            socket.emit("authenticate", "Authenticated");
+            socket.emit("authenticate", true);
 
             socket.on("loadMessages", async () => {
                 const messages: Message[] | string = await MessageAPI.GET();
@@ -44,7 +43,6 @@ io.on("connection", (socket) => {
                 socket.broadcast.emit("message", JSON.stringify(messageObject));
 
                 await MessageAPI.POST(messageObject);
-                console.log("Message stored");
             })
         }
     });
