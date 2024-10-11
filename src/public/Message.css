@@ -1,0 +1,72 @@
+.Message {
+    display: flex;
+    flex-direction: column;
+}
+
+.Message .bubble-container {
+    font-size: 16px;
+    display: flex;
+    
+}
+
+.Message.me .bubble-container {
+    justify-content: flex-end;
+    
+}
+
+.Message.other .bubble-contianer{
+    justify-content: flex-start;
+}
+
+.Message .bubble-container .bubble {
+    margin: 1px 0;
+    background: #f4f4f8;
+    padding: 10px 15px;
+    border-radius: 20px;
+    max-width: 75%;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    
+}
+
+.Message.me .bubble-container .bubble {
+    background: #1e6ddc;
+    color: #fff;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+
+.timestamp {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.timestamp.me {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.timestamp p {
+    font-size: 15px;
+    padding: 0;
+    margin: 0;
+}
+
+.large-timestamp {
+    display: flex;
+    justify-content: center;
+    color: #999;
+    font-weight: 800;
+    font-size: 15px;
+    margin: 10px 0;
+    text-transform: uppercase;
+    }
