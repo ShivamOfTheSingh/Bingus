@@ -3,10 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "ts-node server.ts",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "NODE_ENV=production ts-node server.ts"
   },
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
@@ -17,6 +16,7 @@
     "bootstrap": "^5.3.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "input-otp": "^1.2.4",
     "lucide-react": "^0.445.0",
@@ -29,6 +29,7 @@
     "socket.io-client": "^4.8.0",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
+    "ts-node": "^10.9.2",
     "zod": "^3.23.8"
   },
   "devDependencies": {
