@@ -62,7 +62,7 @@ export default function NewPostForm() {
                 caption: postCaption,
                 datePosted: new Date()
             };
-            const postResponse = await fetch("http://ec2-54-81-37-78.compute-1.amazonaws.com:3000//api/crud/posts", {
+            const postResponse = await fetch("http://ec2-54-81-37-78.compute-1.amazonaws.com:3000/api/crud/posts", {
                 method: "POST",
                 body: JSON.stringify(post)
             });
@@ -75,7 +75,7 @@ export default function NewPostForm() {
                         postId: postId,
                         mediaUrl: data
                     };
-                    const mediaResponse = await fetch("http://ec2-54-81-37-78.compute-1.amazonaws.com:3000//api/crud/media", {
+                    const mediaResponse = await fetch("http://ec2-54-81-37-78.compute-1.amazonaws.com:3000/api/crud/media", {
                         method: "POST",
                         body: JSON.stringify(media)
                     });
