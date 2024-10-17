@@ -16,20 +16,20 @@ interface ReturnData {
  */
 export default async function getProfilePageData(userId: number): Promise<ReturnData> {
     console.log("getProfilePageData: before resProfile fetch");
-    const resProfile = await fetch(`http://localhost:3000/api/crud/user_profile/${userId}`);
+  const resProfile = await fetch(`https://bingus.wesite/api/crud/user_profile/${userId}`);
     if (resProfile.status === 404) notFound();
     console.log("getProfilePageData: before resProfile.json");
     const profile: UserProfile = await resProfile.json();
 
     console.log("getProfilePageData: before resPosts fetch");
-    const resPosts = await fetch(`http://localhost:3000/api/crud/user_profile/posts/${userId}`);
+  const resPosts = await fetch(`https://bingus.wesite/api/crud/user_profile/posts/${userId}`);
     console.log("getProfilePageData: before resPosts.json");
     const posts: Post[] = await resPosts.json();
 
     const postsWithMedia: { post: Post, media: Media[] }[] = [];
     for (let i = 0; i < posts.length; i++) {
       console.log("getProfilePageData: before resMedia fetch");
-      const resMedia = await fetch(`http://localhost:3000/api/crud/posts/media/${posts[i].postId}`);
+      const resMedia = await fetch(`https://bingus.wesite/api/crud/posts/media/${posts[i].postId}`);
       console.log(`resMedia response ${i}`, resMedia);
       console.log("getProfilePageData: before resMedia JSon");
       const mediaArray: Media[] = await resMedia.json();

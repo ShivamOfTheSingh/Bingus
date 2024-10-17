@@ -119,7 +119,7 @@ export default function RegisterForm() {
         birthDate: new Date(birthdate),
       };
       const userProfileResponse = await fetch(
-        "http://ec2-54-81-37-78.compute-1.amazonaws.com:3000/api/crud/user_profile",
+        "https://bingus.wesite/api/crud/user_profile",
         {
           method: "POST",
           body: JSON.stringify(userProfile),
@@ -139,7 +139,7 @@ export default function RegisterForm() {
           userId: userId,
         };
         const registerUserResponse = await fetch(
-          "http://ec2-54-81-37-78.compute-1.amazonaws.com:3000/api/session/register",
+          "https://bingus.wesite/api/session/register",
           {
             method: "POST",
             body: JSON.stringify(userAuth),
