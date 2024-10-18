@@ -2,10 +2,11 @@ import Cors from 'cors';
 
 // Initialize the CORS middleware with desired options
 const cors = Cors({
-    origin: "https://bingus.website", // Replace with your frontend domain
-    methods: ["GET", "POST", "PUT", "DELETE"],  // Specify allowed HTTP methods
-    allowedHeaders: ["Content-Type", "Authorization"],  // Specify allowed headers
+    origin: ["http://localhost:3000", "https://bingus.website"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
 });
+
 
 // Helper function to wait for the middleware to run
 function runMiddleware(req: any, res: any, fn: any) {
