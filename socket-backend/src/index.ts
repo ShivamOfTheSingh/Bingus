@@ -3,21 +3,34 @@ import { createServer } from "http";
 import { Server } from "socket.io";
 import authenticate from "./lib/authenticate";
 import { Message } from "./lib/models";
-import cors from "cors";
+import cors from "cors"; // Import cors
 import * as MessageAPI from "./api/messages";
 import "dotenv/config";
 
 const app = express();
+
+// Add CORS middleware
+app.use(cors({
+    origin: "http://localhost:3000", // Allow only your frontend to access
+    methods: ["GET", "POST"], // Define allowed methods
+    credentials: true, // Allow cookies and authentication headers
+}));
+
 const server = createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+    cors: {
+        origin: "http://localhost:3000", // Allow WebSocket connections from your frontend
+        methods: ["GET", "POST"], // Define allowed WebSocket methods
+        credentials: true,
+    },
+});
 
 io.on("connection", (socket) => {
     socket.on("authenticate", async (session) => {
         const userId = await authenticate(session);
         if (userId === -1) {
             socket.emit("authenticate", false);
-        }
-        else {
+        } else {
             socket.emit("authenticate", true);
 
             socket.on("loadMessages", async () => {
@@ -34,7 +47,7 @@ io.on("connection", (socket) => {
                 socket.broadcast.emit("message", JSON.stringify(messageObject));
 
                 await MessageAPI.POST(messageObject);
-            })
+            });
         }
     });
 });
