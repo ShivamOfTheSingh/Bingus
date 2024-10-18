@@ -17,6 +17,7 @@
     "bootstrap": "^5.3.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "input-otp": "^1.2.4",
