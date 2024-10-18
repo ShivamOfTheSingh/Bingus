@@ -16,7 +16,7 @@ const Inbox: React.FC = () => {
 
   useEffect(() => {
     // Connect to the socket server
-    const newSocket = io("http://localhost:3000");
+    const newSocket = io("wss://api.bingus.website/");
     setSocket(newSocket);
 
     // Listen for incoming messages
