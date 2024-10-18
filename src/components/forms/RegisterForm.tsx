@@ -119,7 +119,7 @@ export default function RegisterForm() {
         birthDate: new Date(birthdate),
       };
       const userProfileResponse = await fetch(
-        "http://localhost:3000/api/crud/user_profile",
+        "https://bingus.website/api/crud/user_profile",
         {
           method: "POST",
           body: JSON.stringify(userProfile),
@@ -139,7 +139,7 @@ export default function RegisterForm() {
           userId: userId,
         };
         const registerUserResponse = await fetch(
-          "http://localhost:3000/api/session/register",
+          "https://bingus.website/api/session/register",
           {
             method: "POST",
             body: JSON.stringify(userAuth),

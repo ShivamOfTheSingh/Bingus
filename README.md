@@ -203,15 +203,15 @@ interface ReturnData {
 ```
 #### 4. Make each API request sequentially, type checking the response object, and building the return object correctly
 ```ts
-const resProfile = await fetch(`http://localhost:3000/api/crud/user_profile/${userId}`);
+const resProfile = await fetch(`https://bingus.website/api/crud/user_profile/${userId}`);
 const profile: UserProfile = await resProfile.json();
 
-const resPosts = await fetch(`http://localhost:3000/api/crud/user_profile/posts/${userId}`);
+const resPosts = await fetch(`https://bingus.website/api/crud/user_profile/posts/${userId}`);
 const posts: Post[] = await resPosts.json();
 
 const postsWithMedia: { post: Post, media: Media[] }[] = [];
 for (let i = 0; i < posts.length; i++) {
-    const resMedia = await fetch(`http://localhost:3000/api/crud/posts/media/${posts[i].postId}`);
+    const resMedia = await fetch(`https://bingus.website/api/crud/posts/media/${posts[i].postId}`);
     const mediaArray: Media[] = await resMedia.json();
     postsWithMedia.push({
         post: posts[i],
@@ -224,7 +224,7 @@ for (let i = 0; i < posts.length; i++) {
 import { notFound } from "next/navigation";
 
 export default async function getProfilePageData(userId: number): Promise<ReturnData> {
-    const resProfile = await fetch(`http://localhost:3000/api/crud/user_profile/${userId}`);
+    const resProfile = await fetch(`https://bingus.website/api/crud/user_profile/${userId}`);
     if (resProfile.status === 404) notFound(); // Here
     const profile: UserProfile = await resProfile.json();
     //....
@@ -444,7 +444,7 @@ async function onSubmit() {
     //....
 
     else {
-        const response = await fetch("http://localhost:3000/api/session/login", {
+        const response = await fetch("https://bingus.website/api/session/login", {
             method: "POST",
             body: JSON.stringify({
                 email: email,
@@ -549,7 +549,7 @@ const media: Media = {
     mediaUrl: fileData //From the newly set react state above
 };
 
-const res = await fetch("http://localhost:3000/api/crud/media", {
+const res = await fetch("https://bingus.website/api/crud/media", {
     method: "POST",
     body: JSON.stringify(media)
 });
@@ -562,7 +562,7 @@ const res = await fetch("http://localhost:3000/api/crud/media", {
 import { Media } from "@/lib/db/models"l;
 
 export async default function Page() {
-    const res = await fetch("http://localhost:3000/api/crud/media/10");
+    const res = await fetch("https://bingus.website/api/crud/media/10");
     const media: Media = await res.json();
 
     return (
