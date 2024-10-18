@@ -6,6 +6,8 @@ import { Message } from "./lib/models";
 import cors from "cors"; // Import cors
 import * as MessageAPI from "./api/messages";
 import "dotenv/config";
+import https from "https"; // Add https
+import fs from "fs"; // Add fs
 
 const app = express();
 
@@ -16,7 +18,11 @@ app.use(cors({
     credentials: true, // Allow cookies and authentication headers
 }));
 
-const server = createServer(app);
+const server = https.createServer({
+    key: fs.readFileSync('/etc/letsencrypt/live/api.bingus.website/privkey.pem', 'utf8'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/api.bingus.website/fullchain.pem', 'utf8')
+}, app);
+
 const io = new Server(server, {
     cors: {
         origin: "http://localhost:3000", // Allow WebSocket connections from your frontend
@@ -52,6 +58,6 @@ io.on("connection", (socket) => {
     });
 });
 
-server.listen(3000, () => {
-    console.log("Starting on port 3000");
+server.listen(443, () => {
+    console.log("Starting on port 443");
 });
