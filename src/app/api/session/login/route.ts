@@ -1,7 +1,6 @@
 import bcrypt from "bcrypt";
 import { cookies } from "next/headers";
 import { decrypt, encrypt } from "@/lib/utils/objectEncryption";
-import cors, { runMiddleware } from "@/lib/middleware/middleware";
 import pool from "../../../../lib/db/pool";
 
 /**
@@ -11,7 +10,7 @@ import pool from "../../../../lib/db/pool";
  * @returns {Response} - The HTTP response. 
  */
 export async function POST(request: Request): Promise<Response> {
-    await runMiddleware(request, { status: () => { } }, cors);
+    // await runMiddleware(request, { status: () => { } }, cors);
     let client;
     try {
         const userData = await request.json();
@@ -44,7 +43,8 @@ export async function POST(request: Request): Promise<Response> {
         }
     }
     catch (error: any) {
-        return new Response("Internal Server Error", { status: 500 });
+        console.log(error);
+        return new Response("Internal server error", { status: 500 });
     }
     finally {
         if (client) {
@@ -76,7 +76,7 @@ async function createSession(userAuthId: number): Promise<boolean> {
 
         cookies().set("session", encryptedSession, {
             httpOnly: true,
-            secure: false,
+            secure: true,
             expires: expiresAt,
             path: "/"
         });
