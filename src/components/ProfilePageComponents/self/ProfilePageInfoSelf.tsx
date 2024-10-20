@@ -1,18 +1,19 @@
-import React from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { UserProfile } from "@/lib/db/models";
 import Image from "next/image";
 import profilePicTemp from "@/public/profile-pic-temp.jpg";
 
-interface ProfilePageInfoProps {
+interface ProfilePageInfoSelfProps {
   profile: UserProfile;
   numPosts: number;
+  numFollowers: number;
+  numFollowing: number;
   className?: string;
 }
 
-export default function ProfilePageInfo({ profile, numPosts, className }: ProfilePageInfoProps) {
+export default function ProfilePageInfoSelf({ profile, numPosts, numFollowers, numFollowing, className }: ProfilePageInfoSelfProps) {
   return (
-    <Container className="py-4">
+    <Container className={`${className} py-4`}>
       <Row className="justify-content-center">
         {/* Profile Picture */}
         <Col xs={12} md={4} className="text-center mb-4">
@@ -38,11 +39,11 @@ export default function ProfilePageInfo({ profile, numPosts, className }: Profil
               <p>Posts</p>
             </Col>
             <Col xs={4} className="text-center">
-              <strong>1000</strong>
+              <strong>{numFollowers}</strong>
               <p>Followers</p>
             </Col>
             <Col xs={4} className="text-center">
-              <strong>0</strong>
+              <strong>{numFollowing}</strong>
               <p>Following</p>
             </Col>
           </Row>

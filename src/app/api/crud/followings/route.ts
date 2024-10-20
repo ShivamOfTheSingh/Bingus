@@ -82,7 +82,7 @@ export async function PUT(request: Request): Promise<Response> {
         following.userId = userId;
         client = await pool.connect();
         await client.query(
-            "UPDATE followings SET user_id = $2, following_id = $3 WHERE following_status_id = $1",
+            "UPDATE followings SET user_id = $2, following_id = $3 WHERE followings_status_id = $1",
             [following.followingId, following.userId, following.followedUserId]
         );
 
@@ -109,11 +109,11 @@ export async function DELETE(request: Request): Promise<Response> {
     try {
         const { id } = await request.json();
         const userId = await getCurrentSessionUserId();
-        if (userId === -1 || userId !== id) {
+        if (userId === -1) {
             return new Response("Unauthorized API call", { status: 401 });
         }
         client = await pool.connect();
-        await client.query("DELETE FROM followings WHERE following_status_id = $1", [id]);
+        await client.query("DELETE FROM followings WHERE followings_status_id = $1", [id]);
 
         return new Response("OK", { status: 200 });
     }

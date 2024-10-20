@@ -3,15 +3,15 @@
 import { useState } from "react";
 import { Post, Media } from "@/lib/db/models";
 import { Container, Col, Row, CloseButton, Card, Button } from "react-bootstrap";
-import NewPostForm from "../forms/NewPostForm";
-import ProfilePagePost from "./ProfilePagePost";
+import NewPostForm from "../../forms/NewPostForm";
+import ProfilePagePost from "../ProfilePagePost";
 
-interface ProfilePagePostGridProps {
+interface ProfilePagePostGridSelfProps {
     postData: { post: Post, media: Media[] }[];
     className?: string;
 }
 
-export default function ProfilePagePostGrid({ postData, className }: ProfilePagePostGridProps) {
+export default function ProfilePagePostGridSelf({ postData, className }: ProfilePagePostGridSelfProps) {
     const [posting, setPosting] = useState(false);
 
     return (
