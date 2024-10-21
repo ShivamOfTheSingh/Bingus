@@ -19,7 +19,7 @@ export default function NavBar() {
       <div className="branding">
         <h2>Bingus</h2>
       </div>
-      <Nav defaultActiveKey="/bingus-main/profile" className="flex-column">
+      <Nav defaultActiveKey="/main/profile" className="flex-column">
         <Nav.Item className="nav-item-custom">
           <Link href="/">
             <span className="icon">
@@ -29,7 +29,7 @@ export default function NavBar() {
           </Link>
         </Nav.Item>
         <Nav.Item className="nav-item-custom">
-          <Link href="/bingus-main/profile">
+          <Link href="/main/profile">
             <span className="icon">
               <FontAwesomeIcon icon={faSearch} style={{ color: "black" }} />
             </span>
@@ -37,7 +37,7 @@ export default function NavBar() {
           </Link>
         </Nav.Item>
         <Nav.Item className="nav-item-custom">
-          <Link href="/bingus-main/profile">
+          <Link href="/main/profile">
               <span className="icon">
                 <FontAwesomeIcon icon={faComment} style={{ color: "black" }} />
               </span>
@@ -45,7 +45,7 @@ export default function NavBar() {
           </Link>
         </Nav.Item>
         <Nav.Item className="nav-item-custom">
-          <Link href="/bingus-main/profile">
+          <Link href="/main/profile">
             <span className="icon">
               <FontAwesomeIcon icon={faBell} style={{ color: "black" }} />
             </span>
@@ -53,7 +53,7 @@ export default function NavBar() {
           </Link>
         </Nav.Item>
         <Nav.Item className="nav-item-custom">
-          <Link href="/bingus-main/profile">
+          <Link href="/main/profile">
             <span className="icon">
               <FontAwesomeIcon icon={faPlus} style={{ color: "black" }} />
             </span>
@@ -61,7 +61,7 @@ export default function NavBar() {
           </Link>
         </Nav.Item>
         <Nav.Item className="nav-item-custom profile">
-          <Link href="/bingus-main/profile">
+          <Link href="/main/profile">
             <img
               src="https://via.placeholder.com/50"
               alt="Profile"
@@ -72,7 +72,7 @@ export default function NavBar() {
         </Nav.Item>
       </Nav>
       <Nav.Item className="nav-item-custom logout">
-        <Link href="/bingus-main/profile">
+        <Link href="/main/profile">
           <FontAwesomeIcon icon={faRightFromBracket} className="icon" />
           Logout
         </Link>
