@@ -33,13 +33,14 @@ export default async function Page({ params }: { params: { id: string } }) {
     }
 
     const pageData = await getProfilePageData(parseInt(params.id));
+
     const following = await getFollowingStatus(selfId, parseInt(params.id));
 
     console.log(following);
     return (
         <div>
             <ProfilePageInfoOther profile={pageData.profile} numPosts={pageData.numPosts} following={following} numFollowers={pageData.numFollowers} numFollowing={pageData.numFollowing} />
-            {/* <ProfilePagePostGridOther postData={pageData.posts} /> */}
+            <ProfilePagePostGridOther postData={pageData.posts} />
         </div>
     );
 }
