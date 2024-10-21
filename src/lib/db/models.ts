@@ -55,7 +55,7 @@ export interface CommentVote {
 
 export interface Following {
     followingId?: number;
-    userId?: number;
+    userId: number;
     followedUserId: number;
 }
 

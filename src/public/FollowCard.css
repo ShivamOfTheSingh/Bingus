@@ -1,0 +1,34 @@
+.user-profile-card {
+    display: flex; 
+    align-items: center; 
+    border: 1px solid #ddd; 
+    padding: 10px; 
+    border-radius: 5px; 
+    max-width: 310px; 
+    margin: 10px; 
+  }
+  .profile-image {
+    width: 50px;
+    height: 50px; 
+    border-radius: 50%; 
+    margin-right: 10px; 
+  }
+  h3 {
+    margin: 0 10px; 
+    font-size: 1.2rem; 
+  }
+  .follow-btn {
+    background-color: #8f6ccc; 
+    color: white; 
+    border: none; 
+    padding: 5px 10px; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    transition: background-color 0.3s; 
+  }
+  .follow-btn.following {
+    background-color: #a09c9c; 
+  }
+  .follow-btn:hover {
+    opacity: 0.9; 
+  }

@@ -3,6 +3,9 @@
 import { Following } from "@/lib/db/models";
 import { useState } from "react";
 import { Button } from "react-bootstrap";
+import { followUser} from "@/lib/GET_api_calls/followUser";
+import { unfollowUser } from "@/lib/GET_api_calls/followUser";
+
 import ApiError from "@/lib/errors/ApiError";
 
 interface FollowButtonProps {
@@ -16,45 +19,18 @@ export default function FollowButton({following, className }: FollowButtonProps)
     const [loading, setLoading] = useState<boolean>(false);
 
     async function onClick() {
-        try {
+        
             setLoading(true);
-
             // follow
-            if (!followingStatus) {
-                const response = await fetch("http://localhost:3000/api/crud/followings", {
-                    method: "POST",
-                    body: JSON.stringify(followingObject)
-                });
-
-                if (response.status !== 201) {
-                    throw new ApiError("What the Bingus? An error occured.", 500);
-                }
-
-                const json = await response.json();
-                const followingId = json.followingId;
+            if (!followingObject.followingId) {
+                const following: Following = await followUser(followingObject.userId, followingObject.followedUserId);
                 setLoading(false);
-                setFollowingObject((prev: Following) => {
-                    return {
-                        followingId: followingId,
-                        userId: prev.userId,
-                        followedUserId: prev.followedUserId
-                    };
-                });
+                setFollowingObject(following);
                 setFollowingStatus(true);
             }
             // unfollow
             else {
-                const response = await fetch("http://localhost:3000/api/crud/followings", {
-                    method: "DELETE",
-                    body: JSON.stringify({
-                        id: followingObject.followingId
-                    })
-                });
-
-                if (response.status !== 200) {
-                    throw new ApiError("What the Bingus? An error occured.", 500);
-                }
-
+                await unfollowUser(followingObject.followingId);
                 setLoading(false);
                 setFollowingObject((prev: Following) => {
                     return {
@@ -64,11 +40,6 @@ export default function FollowButton({following, className }: FollowButtonProps)
                 });
                 setFollowingStatus(false);
             }
-        }
-        catch (error: any) {
-            console.log(error);
-            throw new ApiError("What the Bingus? An error occured.", 500);
-        }
     }
 
     return (
