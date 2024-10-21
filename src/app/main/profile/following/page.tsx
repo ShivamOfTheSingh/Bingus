@@ -1,7 +1,7 @@
 import UserProfile from "@/components/Followers/UserProfileCardFollower"
 import getCurrentSessionUserId from "@/lib/cookies/getCurrentSessionUserId";
 import SessionInactive from "@/components/SessionInactive";
-import { getFollowerPageData } from "@/lib/GET_api_calls/getFollowerPageData";
+import { getFollowingPageData } from "@/lib/GET_api_calls/getFollowingPageData";
 
 
 export default async function Page() {
@@ -9,13 +9,11 @@ export default async function Page() {
     if (userId === -1) {
       return <SessionInactive />;
     }
-    const pageData = await getFollowerPageData(userId);
-
-    console.log(pageData);
+    const pageData = await getFollowingPageData(userId);
     return (
         <div>
             <div className="container" style={{paddingLeft: '200px'}} >
-                <h3>Followers</h3>
+                <h3>Following</h3>
                 {pageData.length > 0 ? (
                     pageData.map((user, index) => (
                         <UserProfile key={index} userProfile={user} />

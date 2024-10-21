@@ -3,9 +3,10 @@
 import { UserProfile } from "@/lib/db/models";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { Following } from "@/lib/db/models";
-import FollowButton from "./FollowButton";
+import FollowButton from "../FollowButton";
 import Image from "next/image";
 import profilePicTemp from "@/public/profile-pic-temp.jpg";
+import Link from "next/link";
 
 interface ProfilePageInfoOtherProps {
     profile: UserProfile;
@@ -33,9 +34,6 @@ export default function ProfilePageInfoOther({ profile, numPosts, following, num
                 <Col xs={12} md={8} className="text-center text-md-left">
                     <div className="text-2xl font-semibold">{profile.firstName} {profile.lastName}</div>
                     <div>{profile.username}</div>
-                    <Button variant="outline-secondary" size="sm" className="mb-2">
-                        Edit Profile
-                    </Button>
 
                     <FollowButton following={following} />
 
@@ -47,11 +45,11 @@ export default function ProfilePageInfoOther({ profile, numPosts, following, num
                         </Col>
                         <Col xs={4} className="text-center">
                             <strong>{numFollowers}</strong>
-                            <p>Followers</p>
+                            <Link href={`/main/profile/followers/${profile.userId}`}>Followers</Link>
                         </Col>
                         <Col xs={4} className="text-center">
                             <strong>{numFollowing}</strong>
-                            <p>Following</p>
+                            <Link href={`/main/profile/following/${profile.userId}`}>Following</Link>
                         </Col>
                     </Row>
 

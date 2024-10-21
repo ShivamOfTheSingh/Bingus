@@ -2,6 +2,7 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import { UserProfile } from "@/lib/db/models";
 import Image from "next/image";
 import profilePicTemp from "@/public/profile-pic-temp.jpg";
+import Link from "next/link";
 
 interface ProfilePageInfoSelfProps {
   profile: UserProfile;
@@ -40,11 +41,11 @@ export default function ProfilePageInfoSelf({ profile, numPosts, numFollowers, n
             </Col>
             <Col xs={4} className="text-center">
               <strong>{numFollowers}</strong>
-              <p>Followers</p>
+              <Link href="/main/profile/followers">Followers</Link>
             </Col>
             <Col xs={4} className="text-center">
               <strong>{numFollowing}</strong>
-              <p>Following</p>
+              <Link href="/main/profile/following">Following</Link>
             </Col>
           </Row>
 
