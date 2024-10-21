@@ -13,7 +13,7 @@ const app = express();
 
 // Add CORS middleware
 app.use(cors({
-    origin: "http://localhost:3000", // Allow only your frontend to access
+    origin: ["http://localhost:3000", "https://production.d3drl1bcjmxovs.amplifyapp.com"], // Allow only your frontend to access
     methods: ["GET", "POST"], // Define allowed methods
     credentials: true, // Allow cookies and authentication headers
 }));
@@ -25,7 +25,7 @@ const server = https.createServer({
 
 const io = new Server(server, {
     cors: {
-        origin: "http://localhost:3000", // Allow WebSocket connections from your frontend
+        origin: ["http://localhost:3000", "https://production.d3drl1bcjmxovs.amplifyapp.com"], // Allow WebSocket connections from your frontend
         methods: ["GET", "POST"], // Define allowed WebSocket methods
         credentials: true,
     },
