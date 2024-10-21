@@ -3,93 +3,61 @@ import { createServer } from "http";
 import { Server } from "socket.io";
 import authenticate from "./lib/authenticate";
 import { Message } from "./lib/models";
-import cors from "cors";
+import cors from "cors"; // Import cors
 import * as MessageAPI from "./api/messages";
 import "dotenv/config";
-import https from "https";
-import fs from "fs";
+import https from "https"; // Add https
+import fs from "fs"; // Add fs
 
-// Initialize Express app
 const app = express();
 
-// CORS Configuration
-const corsOptions = {
-    origin: ["http://localhost:3000", "https://production.d3drl1bcjmxovs.amplifyapp.com"], // Allow multiple origins
-    methods: ["GET", "POST"],
-    credentials: true,
-};
-app.use(cors(corsOptions));
+// Add CORS middleware
+app.use(cors({
+    origin: "http://localhost:3000", // Allow only your frontend to access
+    methods: ["GET", "POST"], // Define allowed methods
+    credentials: true, // Allow cookies and authentication headers
+}));
 
-// HTTPS Server Configuration
-const serverOptions = {
+const server = https.createServer({
     key: fs.readFileSync('/etc/letsencrypt/live/api.bingus.website/privkey.pem', 'utf8'),
     cert: fs.readFileSync('/etc/letsencrypt/live/api.bingus.website/fullchain.pem', 'utf8')
-};
-const server = https.createServer(serverOptions, app);
+}, app);
 
-// Socket.IO Configuration
 const io = new Server(server, {
     cors: {
-        origin: ["http://localhost:3000", "https://production.d3drl1bcjmxovs.amplifyapp.com"],
-        methods: ["GET", "POST"],
+        origin: "http://localhost:3000", // Allow WebSocket connections from your frontend
+        methods: ["GET", "POST"], // Define allowed WebSocket methods
         credentials: true,
     },
 });
 
-// Define types for socket events
-interface MessageObject {
-    userId: number;
-    chatId: number;
-    content: string;
-    timestamp?: string;
-}
-
-// Socket.IO Connection Handling
 io.on("connection", (socket) => {
-    console.log("New socket connection established");
-
-    socket.on("authenticate", async (session: string) => {
-        const userId: number = await authenticate(session);
+    socket.on("authenticate", async (session) => {
+        const userId = await authenticate(session);
         if (userId === -1) {
             socket.emit("authenticate", false);
-            return;
-        }
-        socket.emit("authenticate", true);
+        } else {
+            socket.emit("authenticate", true);
 
-        setupMessageHandlers(socket, userId);
+            socket.on("loadMessages", async () => {
+                const messages: Message[] | string = await MessageAPI.GET();
+                socket.emit("loadMessages", JSON.stringify(messages));
+            });
+
+            socket.on("message", async (message) => {
+                console.log("Message received", message);
+                const messageObject: Message = JSON.parse(message);
+                console.log("Message object", messageObject);
+                messageObject.userId = userId;
+                messageObject.chatId = 1;
+                socket.broadcast.emit("message", JSON.stringify(messageObject));
+
+                await MessageAPI.POST(messageObject);
+            });
+        }
     });
 });
 
-// Setup message-related socket events
-const setupMessageHandlers = (socket: any, userId: number) => {
-    socket.on("loadMessages", async () => {
-        const messages = await loadMessages();
-        socket.emit("loadMessages", messages);
-    });
-
-    socket.on("message", async (message: string) => {
-        console.log("Message received:", message);
-        const messageObject: MessageObject = JSON.parse(message);
-        messageObject.userId = userId;
-        messageObject.chatId = 1;
-
-        io.emit("message", JSON.stringify(messageObject)); // Broadcast to all connected clients
-        await MessageAPI.POST(messageObject);
-    });
-};
-
-// Load Messages Helper Function
-const loadMessages = async (): Promise<string> => {
-    try {
-        const messages = await MessageAPI.GET();
-        return JSON.stringify(messages);
-    } catch (error) {
-        console.error("Error loading messages:", error);
-        return "[]"; // Return an empty array in case of failure
-    }
-};
-
-// Start Server on Port 443
 server.listen(443, () => {
-    console.log("Server started on port 443");
+    console.log("Starting on port 443");
 });
