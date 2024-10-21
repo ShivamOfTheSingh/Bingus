@@ -3,7 +3,7 @@ import { createServer } from "http";
 import { Server } from "socket.io";
 import authenticate from "./lib/authenticate";
 import { Message } from "./lib/models";
-import cors from "cors"; 
+import cors from "cors";
 import * as MessageAPI from "./api/messages";
 import "dotenv/config";
 import https from "https";
@@ -15,8 +15,8 @@ const app = express();
 // CORS Configuration
 const corsOptions = {
     origin: ["http://localhost:3000", "https://production.d3drl1bcjmxovs.amplifyapp.com"], // Allow multiple origins
-    methods: ["GET", "POST"], // Define allowed HTTP methods
-    credentials: true, // Allow cookies and authentication headers
+    methods: ["GET", "POST"],
+    credentials: true,
 };
 app.use(cors(corsOptions));
 
@@ -30,38 +30,46 @@ const server = https.createServer(serverOptions, app);
 // Socket.IO Configuration
 const io = new Server(server, {
     cors: {
-        origin: ["http://localhost:3000", "https://production.d3drl1bcjmxovs.amplifyapp.com"], // Allow WebSocket connections from multiple origins
-        methods: ["GET", "POST"], // Define allowed WebSocket methods
+        origin: ["http://localhost:3000", "https://production.d3drl1bcjmxovs.amplifyapp.com"],
+        methods: ["GET", "POST"],
         credentials: true,
     },
 });
+
+// Define types for socket events
+interface MessageObject {
+    userId: number;
+    chatId: number;
+    content: string;
+    timestamp?: string;
+}
 
 // Socket.IO Connection Handling
 io.on("connection", (socket) => {
     console.log("New socket connection established");
 
-    socket.on("authenticate", async (session) => {
-        const userId = await authenticate(session);
+    socket.on("authenticate", async (session: string) => {
+        const userId: number = await authenticate(session);
         if (userId === -1) {
             socket.emit("authenticate", false);
             return;
         }
         socket.emit("authenticate", true);
 
-        setupMessageHandlers(socket, userId); // Handle message-related events
+        setupMessageHandlers(socket, userId);
     });
 });
 
 // Setup message-related socket events
-const setupMessageHandlers = (socket, userId) => {
+const setupMessageHandlers = (socket: any, userId: number) => {
     socket.on("loadMessages", async () => {
         const messages = await loadMessages();
         socket.emit("loadMessages", messages);
     });
 
-    socket.on("message", async (message) => {
+    socket.on("message", async (message: string) => {
         console.log("Message received:", message);
-        const messageObject = JSON.parse(message);
+        const messageObject: MessageObject = JSON.parse(message);
         messageObject.userId = userId;
         messageObject.chatId = 1;
 
@@ -71,7 +79,7 @@ const setupMessageHandlers = (socket, userId) => {
 };
 
 // Load Messages Helper Function
-const loadMessages = async () => {
+const loadMessages = async (): Promise<string> => {
     try {
         const messages = await MessageAPI.GET();
         return JSON.stringify(messages);
