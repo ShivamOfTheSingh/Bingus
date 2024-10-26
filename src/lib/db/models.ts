@@ -76,7 +76,7 @@ export interface PostVote {
 
 export interface UserSettings {
     userSettingsId?: number;
-    userId?: number;
+    userId: number;
     showName: boolean;
     profilePublic: boolean;
 }

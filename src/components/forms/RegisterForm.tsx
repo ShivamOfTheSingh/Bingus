@@ -6,7 +6,7 @@ import Spinner from "react-bootstrap/Spinner";
 import { useEffect, useState } from "react";
 import registerUserSchema from "@/lib/form_schemas/registerFormSchema";
 import { redirect } from "next/navigation";
-import { UserAuth, UserProfile } from "@/lib/db/models";
+import { UserAuth, UserProfile, UserSettings } from "@/lib/db/models";
 import { Alert } from "react-bootstrap";
 import Link from "next/link";
 import ApiError from "@/lib/errors/ApiError";
@@ -131,29 +131,50 @@ export default function RegisterForm() {
       if (userProfileResponse.status === 409) {
         setUserExistsError(true);
         setPending(false);
-      } else if (userProfileResponse.status === 201) {
-        // Register user with password (another API call).
+      }
+      else if (userProfileResponse.status === 201) {
         const userProfileResponseBody = await userProfileResponse.json();
         const userId = userProfileResponseBody.userId;
-        const userAuth: UserAuth = {
-          password: password,
-          dateRegistered: new Date(),
+
+        const userSettings: UserSettings = {
           userId: userId,
+          showName: false,
+          profilePublic: true
         };
-        const registerUserResponse = await fetch(
-          "http://localhost:3000/api/session/register",
-          {
-            method: "POST",
-            body: JSON.stringify(userAuth),
+        const userSettingsResponse = await fetch("http://localhost:3000/api/crud/user_settings", {
+          method: "POST",
+          body: JSON.stringify(userSettings)
+        });
+
+        if (userSettingsResponse.status === 409) {
+          setUserExistsError(true);
+          setPending(false);
+        }
+        else if (userSettingsResponse.status === 201) {
+          const userAuth: UserAuth = {
+            password: password,
+            dateRegistered: new Date(),
+            userId: userId,
+          };
+          const registerUserResponse = await fetch(
+            "http://localhost:3000/api/session/register",
+            {
+              method: "POST",
+              body: JSON.stringify(userAuth),
+            }
+          );
+          if (registerUserResponse.status === 201) {
+            // Show success message
+            setSuccess(true);
           }
-        );
-        if (registerUserResponse.status === 201) {
-          // Show success message
-          setSuccess(true);
+          // Unhandled error response from API - throw Error so page redirects to error page
+          else {
+            throw new ApiError("What the Bingus?", registerUserResponse.status);
+          }
         }
         // Unhandled error response from API - throw Error so page redirects to error page
         else {
-          throw new ApiError("What the Bingus?", registerUserResponse.status);
+          throw new ApiError("What the Bingus?", userSettingsResponse.status);
         }
       }
       // Unhandled error response from API - throw Error so page redirects to error page
