@@ -30,7 +30,7 @@ export default function ProfilePageInfoSelf({ profile, numPosts, numFollowers, n
           <div className="text-2xl font-semibold">{profile.firstName} {profile.lastName}</div>
           <div>{profile.username}</div>
           <Button variant="outline-secondary" size="sm" className="mb-2">
-            Edit Profile
+            <Link href="/main/profile/settings">Edit Profile</Link>
           </Button>
 
           {/* Stats */}

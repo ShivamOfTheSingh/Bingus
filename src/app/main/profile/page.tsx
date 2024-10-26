@@ -1,6 +1,6 @@
 "use server";
 
-import ProfilePageInfo from "@/components/ProfilePageComponents/self/ProfilePageInfoSelf";
+import ProfilePageInfoSelf from "@/components/ProfilePageComponents/self/ProfilePageInfoSelf";
 import ProfilePagePostGridSelf from "@/components/ProfilePageComponents/self/ProfilePagePostGridSelf";
 import SessionInactive from "@/components/SessionInactive";
 import getProfilePageData from "@/lib/GET_api_calls/getProfilePageData";
@@ -16,7 +16,7 @@ export default async function Page() {
     return (
         <div>
             <div>
-              <ProfilePageInfo profile={pageData.profile} numPosts={pageData.numPosts} numFollowers={pageData.numFollowers} numFollowing={pageData.numFollowing} />
+              <ProfilePageInfoSelf profile={pageData.profile} numPosts={pageData.numPosts} numFollowers={pageData.numFollowers} numFollowing={pageData.numFollowing} />
               <ProfilePagePostGridSelf postData={pageData.posts} />
             </div>
         </div>
