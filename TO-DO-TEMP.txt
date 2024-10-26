@@ -1,6 +1,5 @@
 TO DO FOR 10/26:
 
-2. Modify REGISTER to create user settings
 3. Add API route to get user settings by USER ID
 4. Edit Profile Page (Info)
 5. Edit Profile Page (Form)
