@@ -14,7 +14,7 @@ interface ReturnData {
  */
 export async function followUser(userId: number, followedUserId: number): Promise<ReturnData> {
     try {
-        const response = await fetch('https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/followings', {
+        const response = await fetch('http://localhost:3000/api/crud/followings', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ export async function followUser(userId: number, followedUserId: number): Promis
  */
 export async function unfollowUser(followingId: number): Promise<boolean> {
     try {
-        const response = await fetch('https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/followings', {
+        const response = await fetch('http://localhost:3000/api/crud/followings', {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

@@ -42,13 +42,14 @@ export async function GET(request: Request): Promise<Response> {
 export async function POST(request: Request): Promise<Response> {
     let client;
     try {
-        const userId = await getCurrentSessionUserId();
-        if (userId === -1) {
-            return new Response("Unauthorized API call", { status: 401 });
-        }
-        const userSettings: UserSettings = await request.json();
-        userSettings.userId = userId;
         client = await pool.connect();
+        const userSettings: UserSettings = await request.json();
+
+        const exists = await client.query("SELECT * FROM user_settings WHERE user_id = $1", [userSettings.userId]);
+        if (exists.rows.length >= 1) {
+            return new Response("User settings object already exists", { status: 409 });
+        }
+
         const result = await client.query(
             "INSERT INTO user_settings (user_id, show_name, profile_public) VALUES ($1, $2, $3) RETURNING user_settings_id",
             [userSettings.userId, userSettings.showName, userSettings.profilePublic]

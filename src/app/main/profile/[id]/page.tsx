@@ -9,7 +9,7 @@ import { redirect } from "next/navigation";
 import { Following } from "@/lib/db/models";
 
 async function getFollowingStatus(selfId: number, otherId: number): Promise<Following> {
-    const response = await fetch(`https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/followings/pair?selfId=${selfId}&otherId=${otherId}`);
+    const response = await fetch(`http://localhost:3000/api/crud/followings/pair?selfId=${selfId}&otherId=${otherId}`);
     if (response.status === 200) {
         const following: Following = await response.json();
         return following;

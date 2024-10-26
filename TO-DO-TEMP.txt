@@ -1,0 +1,8 @@
+TO DO FOR 10/26:
+
+1. Modify user settings API POST to check for duplicates
+2. Modify REGISTER to create user settings
+3. Add API route to get user settings by USER ID
+4. Edit Profile Page (Info)
+5. Edit Profile Page (Form)
+5. Followers/Following pages - Follow Button
