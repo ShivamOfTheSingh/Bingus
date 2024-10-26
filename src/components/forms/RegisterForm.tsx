@@ -117,6 +117,8 @@ export default function RegisterForm() {
         lastName: lastName,
         gender: gender,
         birthDate: new Date(birthdate),
+        about: "",
+        profilePicture: ""
       };
       const userProfileResponse = await fetch(
         "http://localhost:3000/api/crud/user_profile",

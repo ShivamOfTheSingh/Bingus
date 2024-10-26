@@ -69,6 +69,7 @@ export async function POST(request: Request): Promise<Response> {
         return new Response(JSON.stringify({ userId: id }), { status: 201 });
     } 
     catch (error) {
+        console.log(error);
         return new Response("Failed to create data", { status: 500 });
     }
     finally {

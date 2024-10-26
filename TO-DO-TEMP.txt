@@ -1,6 +1,6 @@
 TO DO FOR 10/26:
 
-1. Modify user settings API POST to check for duplicates
+1. Modify user profile creationg to enter empty about and profilePic
 2. Modify REGISTER to create user settings
 3. Add API route to get user settings by USER ID
 4. Edit Profile Page (Info)

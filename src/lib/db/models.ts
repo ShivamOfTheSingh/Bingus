@@ -6,8 +6,8 @@ export interface UserProfile {
     lastName: string;
     gender: string;
     birthDate: Date;
-    about?: string;
-    profilePicture?: string;
+    about: string;
+    profilePicture: string;
 }
 
 export interface UserAuth {
