@@ -1,5 +1,5 @@
 TO DO FOR 10/26:
 
-4. Update get profile page data to get user settings
+4. 
 5. update profile page info component
 5. Followers/Following pages - Follow Button

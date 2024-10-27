@@ -39,7 +39,7 @@ export default async function Page({ params }: { params: { id: string } }) {
     console.log(following);
     return (
         <div>
-            <ProfilePageInfoOther profile={pageData.profile} numPosts={pageData.numPosts} following={following} numFollowers={pageData.numFollowers} numFollowing={pageData.numFollowing} />
+            <ProfilePageInfoOther profile={pageData.profile} numPosts={pageData.numPosts} following={following} numFollowers={pageData.numFollowers} numFollowing={pageData.numFollowing} settings={pageData.settings} />
             <ProfilePagePostGridOther postData={pageData.posts} />
         </div>
     );

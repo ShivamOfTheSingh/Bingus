@@ -1,5 +1,5 @@
 import { Container, Row, Col, Button } from "react-bootstrap";
-import { UserProfile } from "@/lib/db/models";
+import { UserProfile, UserSettings } from "@/lib/db/models";
 import Image from "next/image";
 import profilePicTemp from "@/public/profile-pic-temp.jpg";
 import Link from "next/link";
@@ -9,10 +9,11 @@ interface ProfilePageInfoSelfProps {
   numPosts: number;
   numFollowers: number;
   numFollowing: number;
+  settings: UserSettings;
   className?: string;
 }
 
-export default function ProfilePageInfoSelf({ profile, numPosts, numFollowers, numFollowing, className }: ProfilePageInfoSelfProps) {
+export default function ProfilePageInfoSelf({ profile, numPosts, numFollowers, numFollowing, settings, className }: ProfilePageInfoSelfProps) {
   return (
     <Container className={`${className} py-4`}>
       <Row className="justify-content-center">
@@ -27,8 +28,8 @@ export default function ProfilePageInfoSelf({ profile, numPosts, numFollowers, n
 
         {/* User Info */}
         <Col xs={12} md={8} className="text-center text-md-left">
-          <div className="text-2xl font-semibold">{profile.firstName} {profile.lastName}</div>
-          <div>{profile.username}</div>
+          <div className="text-2xl font-semibold">{settings.showName ? profile.firstName + profile.lastName : profile.username}</div>
+          <div>{settings.showName ? profile.username : null}</div>
           <Button variant="outline-secondary" size="sm" className="mb-2">
             <Link href="/main/profile/settings">Edit Profile</Link>
           </Button>

@@ -16,7 +16,7 @@ export default async function Page() {
     return (
         <div>
             <div>
-              <ProfilePageInfoSelf profile={pageData.profile} numPosts={pageData.numPosts} numFollowers={pageData.numFollowers} numFollowing={pageData.numFollowing} />
+              <ProfilePageInfoSelf profile={pageData.profile} numPosts={pageData.numPosts} numFollowers={pageData.numFollowers} numFollowing={pageData.numFollowing} settings={pageData.settings} />
               <ProfilePagePostGridSelf postData={pageData.posts} />
             </div>
         </div>
