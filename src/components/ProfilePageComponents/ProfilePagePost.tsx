@@ -12,13 +12,18 @@ interface ProfilePagePostProps {
 }
 
 export default function ProfilePagePost({ post, thumbnail, className }: ProfilePagePostProps) {
+    console.log(thumbnail);
     return (
         <Card className={`${className} w-72 h-80`}>
             <Card.Body>
                 <Card.Text>
                     {post.caption}
                 </Card.Text>
-                <Image src={thumbnail.mediaUrl} alt="thumbnail" width={200} height={200} />
+                {thumbnail ? 
+                    <Image src={thumbnail.mediaUrl} alt="thumbnail" width={200} height={200} />
+                    :
+                    null
+                }
             </Card.Body>
             <Card.Footer>
                 {timestampToTimeAgo(new Date(post.datePosted))}
