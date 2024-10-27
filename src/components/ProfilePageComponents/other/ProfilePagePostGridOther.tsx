@@ -3,6 +3,7 @@
 import { Post, Media } from "@/lib/db/models";
 import { Col, Container, Row } from "react-bootstrap";
 import ProfilePagePost from "../ProfilePagePost";
+import { useEffect } from "react";
 
 interface ProfilePagePostGridOtherProps {
     postData: { post: Post, media: Media[] }[];
@@ -10,6 +11,10 @@ interface ProfilePagePostGridOtherProps {
 }
 
 export default function ProfilePagePostGridOther({ postData, className }: ProfilePagePostGridOtherProps) {
+    postData.sort((a: any, b: any) => {
+        return new Date(b.post.datePosted).getTime() - new Date(a.post.datePosted).getTime();
+    });
+
     return (
         <Container>
             {postData.length > 0 && 

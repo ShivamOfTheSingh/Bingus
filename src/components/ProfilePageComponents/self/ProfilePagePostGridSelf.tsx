@@ -14,6 +14,10 @@ interface ProfilePagePostGridSelfProps {
 export default function ProfilePagePostGridSelf({ postData, className }: ProfilePagePostGridSelfProps) {
     const [posting, setPosting] = useState(false);
 
+    postData.sort((a: any, b: any) => {
+        return new Date(b.post.datePosted).getTime() - new Date(a.post.datePosted).getTime();
+    });
+
     return (
         <Container>
             <Row>
