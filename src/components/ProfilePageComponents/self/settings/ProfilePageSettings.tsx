@@ -12,7 +12,7 @@ export default function ProfilePageSettings({ profile, settings, className }: Pr
     return (
         <div className={className}>
             <div>
-                <Image src={profile.profilePicture} alt={profile.username} />
+                <Image src={profile.profilePicture} alt={profile.username} width={200} height={200} className="rounded-full" />
             </div>
             <div>
                 <div>Profile Visibility</div>

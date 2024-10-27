@@ -19,9 +19,9 @@ export default function ProfilePageInfoSelf({ profile, numPosts, numFollowers, n
         {/* Profile Picture */}
         <Col xs={12} md={4} className="text-center mb-4">
           <Image
-            src={profilePicTemp}
-            style={{ width: "150px", height: "150px", borderRadius: "50%" }}
+            src={profile.profilePicture}
             alt={`${profile.username}'s profile`}
+            width={200} height={200} className="rounded-full"
           />
         </Col>
 
