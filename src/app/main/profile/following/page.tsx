@@ -9,18 +9,15 @@ export default async function Page() {
     if (userId === -1) {
       return <SessionInactive />;
     }
-    const pageData = await getFollowingPageData(userId);
+    const { following, suggested } = await getFollowingPageData(userId);
+
     return (
         <div>
             <div className="container" style={{paddingLeft: '200px'}} >
                 <h3>Following</h3>
-                {pageData.length > 0 ? (
-                    pageData.map((user, index) => (
-                        <UserProfile key={index} userProfile={user} />
-                    ))
-                ) : (
-                    <p>No suggestions available.</p>
-                )}
+                {following.map((f: any) => <UserProfile profile={f.profile} following={f.following} />)}
+                <h3>Suggested</h3>
+                {suggested.map((s: any) => <UserProfile profile={s.profile} following={s.following} />)}
             </div>
         </div>
     );
