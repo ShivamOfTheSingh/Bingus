@@ -1,7 +1,8 @@
-import UserProfile from "@/components/Followers/UserProfileCardFollower"
+import FollowCardOther from "@/components/Followers/FollowCardOther"
 import getCurrentSessionUserId from "@/lib/cookies/getCurrentSessionUserId";
 import SessionInactive from "@/components/SessionInactive";
-import { getFollowerPageData } from "@/lib/GET_api_calls/getFollowerPageData";
+import { getFollowerPageDataOther } from "@/lib/GET_api_calls/getFollowerPageDataOther";
+import { UserProfile } from "@/lib/db/models";
 
 
 export default async function Page({ params }: { params: { id: string } }) {
@@ -9,18 +10,13 @@ export default async function Page({ params }: { params: { id: string } }) {
     if (userId === -1) {
       return <SessionInactive />;
     }
-    const pageData = await getFollowerPageData(parseInt(params.id));
+    const followers = await getFollowerPageDataOther(parseInt(params.id));
+
     return (
         <div>
             <div className="container" style={{paddingLeft: '200px'}} >
                 <h3>Followers</h3>
-                {pageData.length > 0 ? (
-                    pageData.map((user, index) => (
-                        <UserProfile key={index} userProfile={user} />
-                    ))
-                ) : (
-                    <p>No suggestions available.</p>
-                )}
+                {followers.map((profile: UserProfile) => <FollowCardOther profile={profile} />)}
             </div>
         </div>
     );

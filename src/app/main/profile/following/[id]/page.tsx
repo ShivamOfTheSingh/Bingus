@@ -1,7 +1,8 @@
-import UserProfile from "@/components/Followers/UserProfileCardFollower"
+import FollowCardOther from "@/components/Followers/FollowCardOther"
 import getCurrentSessionUserId from "@/lib/cookies/getCurrentSessionUserId";
 import SessionInactive from "@/components/SessionInactive";
-import { getFollowingPageData } from "@/lib/GET_api_calls/getFollowingPageData";
+import { getFollowingPageDataOther } from "@/lib/GET_api_calls/getFollowingPageDataOther";
+import { UserProfile } from "@/lib/db/models";
 
 
 export default async function Page({ params }: { params: { id: string } }) {
@@ -9,14 +10,13 @@ export default async function Page({ params }: { params: { id: string } }) {
     if (userId === -1) {
       return <SessionInactive />;
     }
-    const { following, suggested } = await getFollowingPageData(parseInt(params.id));
+    const following = await getFollowingPageDataOther(parseInt(params.id));
+
     return (
         <div>
             <div className="container" style={{paddingLeft: '200px'}} >
-            <h3>Following</h3>
-                {following.map((f: any) => <UserProfile profile={f.profile} following={f.following} />)}
-                <h3>Suggested</h3>
-                {suggested.map((s: any) => <UserProfile profile={s.profile} following={s.following} />)}
+                <h3>Following</h3>
+                {following.map((profile: UserProfile) => <FollowCardOther profile={profile} />)}
             </div>
         </div>
     );

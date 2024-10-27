@@ -23,22 +23,22 @@ export async function getFollowingPageData(userId: number): Promise<ReturnData> 
         // 4. Filter users you already follow into following, and users for which following was just created into suggested
         const followingReturnData: SubReturnData[] = [];
         const suggestedReturnData: SubReturnData[] = [];
-        for (let i = 0; i < users.length; i++) {
-            const followingResponse = await fetch(`http://localhost:3000/api/crud/followings/pair?selfId=${userId}&otherId=${users[i].userId}`);
+        for (let i = 0; i < usersFiltered.length; i++) {
+            const followingResponse = await fetch(`http://localhost:3000/api/crud/followings/pair?selfId=${userId}&otherId=${usersFiltered[i].userId}`);
             if (followingResponse.status === 200) {
                 const following: Following = await followingResponse.json();
                 followingReturnData.push({
-                    profile: users[i],
+                    profile: usersFiltered[i],
                     following: following
                 });
             }
             else {
                 const following: Following = {
                     userId: userId,
-                    followedUserId: users[i].userId || -1
+                    followedUserId: usersFiltered[i].userId || -1
                 };
                 suggestedReturnData.push({
-                    profile: users[i],
+                    profile: usersFiltered[i],
                     following: following
                 });
             }

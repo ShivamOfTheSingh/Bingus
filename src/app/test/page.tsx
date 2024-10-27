@@ -1,6 +1,6 @@
 "use server";
 
-import { getFollowerPageData } from "@/lib/GET_api_calls/getFollowerPageData";
+import { getFollowerPageData } from "@/lib/GET_api_calls/getFollowerPageDataSelf";
 import getCurrentSessionUserId from "@/lib/cookies/getCurrentSessionUserId";
 import SessionInactive from "@/components/SessionInactive";
 
