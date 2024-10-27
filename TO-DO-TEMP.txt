@@ -1,6 +1,5 @@
 TO DO FOR 10/26:
 
-3. GET data for profile page settings
-4. Edit Profile Page (Info)
+4. 
 5. Edit Profile Page (Form)
 5. Followers/Following pages - Follow Button

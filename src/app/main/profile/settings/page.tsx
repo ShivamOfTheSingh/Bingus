@@ -12,7 +12,7 @@ export default async function Page() {
     }
 
     const { profile, settings } = await getProfilePageSettingsData(userId);
-
+    console.log(settings);
     return (
         <div>
             <Wrapper profile={profile} settings={settings} />

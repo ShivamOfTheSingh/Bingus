@@ -16,7 +16,7 @@ export default function Wrapper({ profile, settings, className }: WrapperProps) 
     const [editing, setEditing] = useState<boolean>(false);
 
     return (
-        <div className={`${className} flex justify-center`}>
+        <div className={`${className} flex flex-col items-center`}>
             Profile Settings
             <Button onClick={() => { setEditing(!editing) }} variant={ editing ? "secondary" : "primary" }>
                 { editing ? "Cancel" : "Edit" }
