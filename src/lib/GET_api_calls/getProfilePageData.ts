@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { UserProfile, Post, Media } from "../db/models";
+import { UserProfile, Post, Media, UserSettings } from "../db/models";
 
 interface ReturnData {
   profile: UserProfile;
@@ -7,6 +7,7 @@ interface ReturnData {
   numFollowing: number;
   numFollowers: number;
   posts: { post: Post, media: Media[] }[];
+  settings: UserSettings;
 }
 
 /**
@@ -40,11 +41,16 @@ export default async function getProfilePageData(userId: number): Promise<Return
     const resFollowing = await fetch(`http://localhost:3000/api/crud/followings/numFollowing/${userId}`);
     const numFollowing = await resFollowing.json();
 
+    const resSettings = await fetch(`http://localhost:3000/api/crud/user_settings/user/${userId}`);
+    if (resSettings.status === 404) notFound();
+    const settings: UserSettings = await resSettings.json();
+
     return {
       profile: profile,
       numPosts: posts.length,
       numFollowers: numFollowers.count,
       numFollowing: numFollowing.count,
-      posts: postsWithMedia
+      posts: postsWithMedia,
+      settings: settings
     };
 }
