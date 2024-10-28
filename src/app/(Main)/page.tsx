@@ -1,12 +1,12 @@
 "use server";
 
 import getCurrentSessionUserId from "@/lib/cookies/getCurrentSessionUserId";
-import SessionInactive from "@/components/SessionInactive";
+import { redirect } from "next/navigation";
 
 export default async function Page() {
     const userId = await getCurrentSessionUserId();
     if (userId === -1) {
-        return <SessionInactive />;
+        redirect("/login");
     }
 
     return (

@@ -1,6 +1,6 @@
 import FollowCardOther from "@/components/Followers/FollowCardOther"
 import getCurrentSessionUserId from "@/lib/cookies/getCurrentSessionUserId";
-import SessionInactive from "@/components/SessionInactive";
+import { redirect } from "next/navigation";
 import { getFollowingPageDataOther } from "@/lib/GET_api_calls/getFollowingPageDataOther";
 import { UserProfile } from "@/lib/db/models";
 
@@ -8,7 +8,7 @@ import { UserProfile } from "@/lib/db/models";
 export default async function Page({ params }: { params: { id: string } }) {
     const userId = await getCurrentSessionUserId();
     if (userId === -1) {
-      return <SessionInactive />;
+      redirect("/login");
     }
     const following = await getFollowingPageDataOther(parseInt(params.id));
 
