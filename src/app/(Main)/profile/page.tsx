@@ -13,11 +13,13 @@ export default async function Page() {
     }
 
     const pageData = await getProfilePageData(userId);
+    console.log(pageData);
     return (
         <div>
             <div>
               <ProfilePageInfoSelf profile={pageData.profile} numPosts={pageData.numPosts} numFollowers={pageData.numFollowers} numFollowing={pageData.numFollowing} settings={pageData.settings} />
               <ProfilePagePostGridSelf postData={pageData.posts} />
+              
             </div>
         </div>
     );

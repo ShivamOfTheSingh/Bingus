@@ -25,7 +25,7 @@
     
 }
 
-.nav-item-custom .nav-link {
+.nav-item-custom .link {
     display: flex;
     align-items: center;
     color: black;
@@ -36,7 +36,7 @@
     transition: background-color .5s;
 }
 
-.nav-item-custom .nav-link:hover {
+.nav-item-custom .link:hover {
     background-color: #e0d4ff;
 }
 
@@ -45,7 +45,7 @@
     font-size: 25px;
 }
 
-.nav-item-custom.profile .nav-link {
+.nav-item-custom.profile .link {
     padding-top: 11px;
     padding-bottom: 11px;
 }
@@ -61,7 +61,7 @@
     margin-top:auto;
 }
 
-.nav-item-custom.logout .nav-link {
+.nav-item-custom.logout .link {
     padding-top: 11px;
     padding-bottom: 11px;
     padding-right: 75px;
