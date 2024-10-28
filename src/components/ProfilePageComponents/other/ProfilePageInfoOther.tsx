@@ -33,7 +33,7 @@ export default function ProfilePageInfoOther({ profile, numPosts, following, num
 
                 {/* User Info */}
                 <Col xs={12} md={8} className="text-center text-md-left">
-                <div className="text-2xl font-semibold">{settings.showName ? profile.firstName + profile.lastName : profile.username}</div>
+                <div className="text-2xl font-semibold">{settings.showName ? profile.firstName + " " + profile.lastName : profile.username}</div>
                 <div>{settings.showName ? profile.username : null}</div>
 
                     <FollowButton following={following} />
