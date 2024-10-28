@@ -18,7 +18,7 @@ export default async function Page() {
     return (
         <div className="flex flex-col justify-center">
             <Button variant="outline-primary">
-                <Link href="/main/profile">Back to Profile Page</Link>
+                <Link href="/profile">Back to Profile Page</Link>
             </Button>
             <Wrapper profile={profile} settings={settings} />
         </div>

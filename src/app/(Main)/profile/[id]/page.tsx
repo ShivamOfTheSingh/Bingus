@@ -28,7 +28,7 @@ export default async function Page({ params }: { params: { id: string } }) {
     }
 
     if (selfId === parseInt(params.id)) {
-        redirect("/main/profile");
+        redirect("/profile");
     }
 
     const pageData = await getProfilePageData(parseInt(params.id));

@@ -31,7 +31,7 @@ export default function ProfilePageInfoSelf({ profile, numPosts, numFollowers, n
           <div className="text-2xl font-semibold">{settings.showName ? profile.firstName + profile.lastName : profile.username}</div>
           <div>{settings.showName ? profile.username : null}</div>
           <Button variant="outline-secondary" size="sm" className="mb-2">
-            <Link href="/main/profile/settings">Edit Profile</Link>
+            <Link href="/profile/settings">Edit Profile</Link>
           </Button>
 
           {/* Stats */}
@@ -42,11 +42,11 @@ export default function ProfilePageInfoSelf({ profile, numPosts, numFollowers, n
             </Col>
             <Col xs={4} className="text-center">
               <strong>{numFollowers}</strong>
-              <Link href="/main/profile/followers">Followers</Link>
+              <Link href="/profile/followers">Followers</Link>
             </Col>
             <Col xs={4} className="text-center">
               <strong>{numFollowing}</strong>
-              <Link href="/main/profile/following">Following</Link>
+              <Link href="/profile/following">Following</Link>
             </Col>
           </Row>
 

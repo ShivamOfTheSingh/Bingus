@@ -14,7 +14,7 @@ interface UserProfileCardProps {
 export default function FollowCardSelf({ profile, following }: UserProfileCardProps) {
     return (
         <div className="user-profile-card">
-            <Link href={`/main/profile/${profile.userId}`}>
+            <Link href={`/profile/${profile.userId}`}>
                 <img src={profile.profilePicture} alt={`@${profile.username}'s profile`} className="profile-image" />
                 <h3>{'@' + profile.username}</h3>
             </Link>

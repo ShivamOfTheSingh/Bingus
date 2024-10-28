@@ -48,7 +48,7 @@ export default function ProfilePageSettingsForm({ profile, settings, className }
     useEffect(() => {
         if (success) {
             if (redirectSeconds === 0) {
-                redirect("/main/profile");
+                redirect("/profile");
             }
 
             setTimeout(() => {

@@ -10,7 +10,7 @@ interface UserProfileCardProps {
 
 export default function FollowCardOther({profile}: UserProfileCardProps){
     return (
-        <Link href={`/main/profile/${profile.userId}`} className="user-profile-card">
+        <Link href={`/profile/${profile.userId}`} className="user-profile-card">
           <img src={profile.profilePicture} alt={`@${profile.username}'s profile`} className="profile-image" />
           <h3>{'@' + profile.username}</h3>
         </Link>

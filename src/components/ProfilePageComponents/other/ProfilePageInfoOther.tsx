@@ -46,11 +46,11 @@ export default function ProfilePageInfoOther({ profile, numPosts, following, num
                         </Col>
                         <Col xs={4} className="text-center">
                             <strong>{numFollowers}</strong>
-                            <Link href={`/main/profile/followers/${profile.userId}`}>Followers</Link>
+                            <Link href={`/profile/followers/${profile.userId}`}>Followers</Link>
                         </Col>
                         <Col xs={4} className="text-center">
                             <strong>{numFollowing}</strong>
-                            <Link href={`/main/profile/following/${profile.userId}`}>Following</Link>
+                            <Link href={`/profile/following/${profile.userId}`}>Following</Link>
                         </Col>
                     </Row>
 
