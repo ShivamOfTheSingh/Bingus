@@ -53,7 +53,7 @@ export async function POST(request: Request): Promise<Response> {
             [following.userId, following.followedUserId]
         );
         const id = result.rows[0].following_status_id;
-        return new Response(JSON.stringify({ follwingId: id }), { status: 201 });
+        return new Response(JSON.stringify({ followingId: id }), { status: 201 });
     }
     catch (error) {
         return new Response("Failed to create data", { status: 500 });
@@ -113,6 +113,17 @@ export async function DELETE(request: Request): Promise<Response> {
             return new Response("Unauthorized API call", { status: 401 });
         }
         client = await pool.connect();
+        /*
+
+        const result = await client.query("SELECT user_id FROM followings WHERE following_status_id = $1", [id]);
+        if (result.rowCount === 0) {
+            return new Response("Following not found", { status: 404 });
+        }
+        if (result.rows[0].user_id !== userId) {
+            return new Response("Unauthorized API call", { status: 401 });
+        }
+        
+        */
         await client.query("DELETE FROM followings WHERE following_status_id = $1", [id]);
 
         return new Response("OK", { status: 200 });
