@@ -19,11 +19,6 @@ interface PostComponentProps {
     className?: string;
 }
 
-interface VoteCounts {
-    countPositive: number;
-    countNegative: number;
-}
-
 export default function PostComponent({ post, media, user, voteCount, userVote, userIdSelf, className }: PostComponentProps) {
     const [userVoteState, setUserVoteState] = useState<PostVote | null>(userVote);
 
