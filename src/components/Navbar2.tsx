@@ -23,7 +23,7 @@ export default function NavBar2() {
     //John Pork
     const router = useRouter();
     async function logout(){
-        const response = await fetch("https://production.d3drl1bcjmxovs.amplifyapp.com/api/session/logout",{method: "PATCH"})
+        const response = await fetch("http://localhost:3000/api/session/logout",{method: "PATCH"})
         if(response.status == 200)
         {
             router.push("/login");

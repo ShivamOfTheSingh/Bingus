@@ -19,12 +19,13 @@ export async function GET(request: Request, { params }: { params: { id: string }
             {
                 mediaId: row.media_id,
                 postId: row.post_id,
-                mediaUrl: row.mime_type_prefix + Buffer.from(row.media_url, 'base64').toString('base64')
+                mediaUrl: row.media_url ? row.mime_type_prefix + Buffer.from(row.media_url, 'base64').toString('base64') : ""
             }
         ));
         return new Response(JSON.stringify(mediaList), { status: 200 });
     }
     catch (error) {
+        console.log(error);
         return new Response("Failed to fetch data", { status: 500 });
     }
     finally {

@@ -18,10 +18,10 @@ interface ReturnData {
 }
 
 export async function getSuggestedUsers(userId: number): Promise<ReturnData[]> {
-    const usersResponse = await fetch("https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/user_profile");
+    const usersResponse = await fetch("http://localhost:3000/api/crud/user_profile");
     const users: UserProfile[] = await usersResponse.json();
 
-    const followingsResponse = await fetch(`https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/followings/followingUserId/${userId}`);
+    const followingsResponse = await fetch(`http://localhost:3000/api/crud/followings/followingUserId/${userId}`);
     const followings: Following[] = await followingsResponse.json();
 
     const returnData: ReturnData[] = [];

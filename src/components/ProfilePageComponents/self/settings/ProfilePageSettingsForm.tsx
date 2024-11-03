@@ -115,11 +115,11 @@ export default function ProfilePageSettingsForm({ profile, settings, className }
                 profilePublic: profilePublic
             };
 
-            const profileResponse = await fetch("https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/user_profile", {
+            const profileResponse = await fetch("http://localhost:3000/api/crud/user_profile", {
                 method: "PUT",
                 body: JSON.stringify(upadtedProfile)
             });
-            const settingsResponse = await fetch("https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/user_settings", {
+            const settingsResponse = await fetch("http://localhost:3000/api/crud/user_settings", {
                 method: "PUT",
                 body: JSON.stringify(updatedSettings)
             });
