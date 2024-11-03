@@ -10,6 +10,8 @@ import { UserAuth, UserProfile, UserSettings } from "@/lib/db/models";
 import { Alert } from "react-bootstrap";
 import Link from "next/link";
 import ApiError from "@/lib/errors/ApiError";
+import '@/public/RegisterFormStyle.css'
+
 
 interface RegisterValidateErrors {
   firstName: string | null;
@@ -190,103 +192,96 @@ export default function RegisterForm() {
   return (
     <Form
       action={onSubmit}
-      className="flex flex-col gap-2 bg-white p-3 border-[#8f6ccc] border-solid border-3 rounded"
+      className="form-container"
     >
-      <Form.Label className="text-4xl font-semibold">
-        Sign Up for Bingus
-      </Form.Label>
+      <h1> Sign Up for Bingus</h1>
+       
       <Form.Group controlId="firstname">
-        <Form.Label>First Name</Form.Label>
+        <Form.Label className="form-label">First Name</Form.Label>
         <Form.Control
           type="text"
           placeholder="First Name"
           value={firstName}
-          onChange={(e) => {
-            setFirstName(e.target.value);
-          }}
+          onChange={(e) => setFirstName(e.target.value)}
           disabled={pending}
+          className="form-input"
         />
-        {validateErrors.firstName ? (
+        {validateErrors.firstName && (
           <Form.Label className="text-red-600">
             {validateErrors.firstName}
           </Form.Label>
-        ) : null}
+        )}
       </Form.Group>
       <Form.Group controlId="lastname">
-        <Form.Label>Last Name</Form.Label>
+        <Form.Label className="form-label">Last Name</Form.Label>
         <Form.Control
           type="text"
           placeholder="Last Name"
           value={lastName}
-          onChange={(e) => {
-            setLastName(e.target.value);
-          }}
+          onChange={(e) => setLastName(e.target.value)}
           disabled={pending}
+          className="form-input"
         />
-        {validateErrors.lastName ? (
+        {validateErrors.lastName && (
           <Form.Label className="text-red-600">
             {validateErrors.lastName}
           </Form.Label>
-        ) : null}
+        )}
       </Form.Group>
       <Form.Group controlId="username">
-        <Form.Label>Username</Form.Label>
+        <Form.Label className="form-label">Username</Form.Label>
         <Form.Control
           type="text"
           placeholder="BingusFanPage224"
           value={username}
-          onChange={(e) => {
-            setUsername(e.target.value);
-          }}
+          onChange={(e) => setUsername(e.target.value)}
           disabled={pending}
+          className="form-input"
         />
-        {validateErrors.username ? (
+        {validateErrors.username && (
           <Form.Label className="text-red-600">
             {validateErrors.username}
           </Form.Label>
-        ) : null}
+        )}
       </Form.Group>
       <Form.Group controlId="email">
-        <Form.Label>Email</Form.Label>
+        <Form.Label className="form-label">Email</Form.Label>
         <Form.Control
           type="email"
           placeholder="Email"
           value={email}
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
+          onChange={(e) => setEmail(e.target.value)}
           disabled={pending}
+          className="form-input"
         />
-        {validateErrors.email ? (
+        {validateErrors.email && (
           <Form.Label className="text-red-600">
             {validateErrors.email}
           </Form.Label>
-        ) : null}
+        )}
       </Form.Group>
       <Form.Group controlId="birthdate">
-        <Form.Label>Birthdate</Form.Label>
+        <Form.Label className="form-label">Birthdate</Form.Label>
         <Form.Control
           type="date"
           value={birthdate}
-          onChange={(e) => {
-            setBirthdate(e.target.value);
-          }}
+          onChange={(e) => setBirthdate(e.target.value)}
           disabled={pending}
+          className="form-input"
         />
-        {validateErrors.birthdate ? (
+        {validateErrors.birthdate && (
           <Form.Label className="text-red-600">
             {validateErrors.birthdate}
           </Form.Label>
-        ) : null}
+        )}
       </Form.Group>
       <Form.Group controlId="gender">
-        <Form.Label>Gender</Form.Label>
+        <Form.Label className="form-label">Gender</Form.Label>
         <Form.Select
           value={gender}
-          onChange={(e) => {
-            setGender(e.target.value);
-          }}
+          onChange={(e) => setGender(e.target.value)}
           disabled={pending}
+          className="form-select"
         >
           <option value="">Select Gender</option>
           <option value="male">Male</option>
@@ -294,48 +289,46 @@ export default function RegisterForm() {
           <option value="other">Other</option>
           <option value="prefer_not_to_say">Prefer Not To Say</option>
         </Form.Select>
-        {validateErrors.gender ? (
+        {validateErrors.gender && (
           <Form.Label className="text-red-600">
             {validateErrors.gender}
           </Form.Label>
-        ) : null}
+        )}
       </Form.Group>
       <Form.Group controlId="password">
-        <Form.Label>Password</Form.Label>
+        <Form.Label className="form-label">Password</Form.Label>
         <Form.Control
           type="password"
           placeholder="Password"
           value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
+          onChange={(e) => setPassword(e.target.value)}
           disabled={pending}
+          className="form-input"
         />
-        {validateErrors.password ? (
+        {validateErrors.password && (
           <Form.Label className="text-red-600">
             {validateErrors.password}
           </Form.Label>
-        ) : null}
+        )}
       </Form.Group>
       <Form.Group controlId="passwordRepeat">
-        <Form.Label>Confirm Password</Form.Label>
+        <Form.Label className="form-label">Confirm Password</Form.Label>
         <Form.Control
           type="password"
           placeholder="Confirm Password"
           value={passwordRepeat}
-          onChange={(e) => {
-            setPasswordRepeat(e.target.value);
-          }}
+          onChange={(e) => setPasswordRepeat(e.target.value)}
           disabled={pending}
+          className="form-input"
         />
-        {validateErrors.passwordRepeat ? (
+        {validateErrors.passwordRepeat && (
           <Form.Label className="text-red-600">
             {validateErrors.passwordRepeat}
           </Form.Label>
-        ) : null}
+        )}
       </Form.Group>
       <Form.Group controlId="submit" className="flex justify-center flex-col">
-        <Button variant="primary" type="submit" disabled={pending}>
+        <Button variant="primary" type="submit" disabled={pending} style={{marginTop:20}}>
           {pending ? (
             <div className="flex gap-2 items-center">
               <Spinner size="sm" animation="border" />
@@ -345,9 +338,9 @@ export default function RegisterForm() {
             "Register"
           )}
         </Button>
-        {userExistsError ? (
-          <Form.Label className="text-red-600">User already exsits.</Form.Label>
-        ) : null}
+        {userExistsError && (
+          <Form.Label className="text-red-600">User already exists.</Form.Label>
+        )}
       </Form.Group>
       <div>
         Already have an account?{" "}
@@ -356,10 +349,7 @@ export default function RegisterForm() {
         </Link>
       </div>
       {success && (
-        <div
-          className="position-fixed top-0 end-0 p-3"
-          style={{ zIndex: 1050 }}
-        >
+        <div className="position-fixed top-0 end-0 p-3" style={{ zIndex: 1050 }}>
           <Alert variant="success">
             <Alert.Heading>User registered successfully.</Alert.Heading>
             <p>Redirecting to login page...</p>
@@ -367,5 +357,6 @@ export default function RegisterForm() {
         </div>
       )}
     </Form>
+
   );
 }

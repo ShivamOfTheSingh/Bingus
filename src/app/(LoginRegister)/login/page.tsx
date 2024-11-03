@@ -23,7 +23,7 @@ export default async function Page() {
                 </Row>
             </Container>
             <div className="absolute z-[-1] opacity-50">
-                <Image src={background} alt="background-img" width={900} height={900} id="bg-image" />
+                <Image src={background} alt="background-img" width={900} height={900} id="bg-image" style={{ filter: 'saturate(4) hue-rotate(-100deg) brightness(1.1)' }}/>
             </div>
         </div>
     );
