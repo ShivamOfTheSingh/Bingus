@@ -13,10 +13,10 @@ export default async function Page({ params }: { params: { id: string } }) {
     }
 
     const { post, user, media, voteCounts, userVote } = await getPostPageData(parseInt(params.id), userId);
-
+    console.log(userVote);
     return (
         <div>
-            <PostComponent post={post} media={media} user={user} voteCounts={voteCounts} />
+            <PostComponent post={post} media={media} user={user} voteCounts={voteCounts} userVote={userVote} userIdSelf={userId} />
         </div>
     );
 }

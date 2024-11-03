@@ -110,7 +110,7 @@ export async function DELETE(request: Request): Promise<Response> {
     try {
         const { id } = await request.json();
         const userId = await getCurrentSessionUserId();
-        if (userId === -1 || userId !== id) {
+        if (userId === -1) {
             return new Response("Unauthorized API call", { status: 401 });
         }
         client = await pool.connect();

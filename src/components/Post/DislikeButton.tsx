@@ -14,20 +14,11 @@ interface DislikeButtonProps {
 }
 
 export default function DislikeButton({ disliked, count, onClick, className }: DislikeButtonProps) {
-    const [dislikedState, setDislikedState] = useState<boolean>(disliked);
-    const [countState, setCountState] = useState<number>(count);
-
-    function onClickWrapper() {
-        setDislikedState(!dislikedState);
-        setCountState(dislikedState ? countState - 1 : countState + 1);
-        onClick();
-    }
-
     return (
-        <Button onClick={onClickWrapper} variant={dislikedState ? "primary" : "outline-primary"} className={className}>
+        <Button onClick={onClick} variant={disliked ? "primary" : "outline-primary"} className={className}>
             <div className="flex gap-2 items-center">
-                <FontAwesomeIcon icon={dislikedState ? solidThumbsUp : regularThumbsUp} />
-                {countState}
+                <FontAwesomeIcon icon={disliked ? solidThumbsUp : regularThumbsUp} />
+                {count}
             </div>
         </Button>
     );

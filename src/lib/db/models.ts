@@ -70,7 +70,7 @@ export interface PostComment {
 export interface PostVote {
     postVoteId?: number;
     postId: number;
-    userId?: number;
+    userId: number;
     postVoteValue: boolean;
 }
 
