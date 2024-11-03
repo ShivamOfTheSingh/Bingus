@@ -48,12 +48,13 @@ export async function POST(request: Request): Promise<Response> {
         const media: Media = await request.json();
         const mimeTypePrefix = media.mediaUrl.slice(0, media.mediaUrl.indexOf(",") + 1);
         const mediaUrlBuffer = Buffer.from(media.mediaUrl.slice(mimeTypePrefix.length), 'base64');  // Convert Base64 to Buffer
-
+        console.log("AFTER BUFFER");
         client = await pool.connect();
         const result = await client.query(
             "INSERT INTO media (post_id, media_url, mime_type_prefix) VALUES ($1, $2, $3) RETURNING media_id", 
             [media.postId, mediaUrlBuffer, mimeTypePrefix]
         );
+        console.log("AFTER QUERY");
         const id = result.rows[0].media_id;
         return new Response(JSON.stringify({ mediaId: id }), { status: 201 });
     } 
