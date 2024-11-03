@@ -9,10 +9,6 @@
     }
 }
 
-
-    
-
-
 .navbar {
     height: 100vh;
     width: 200px;
@@ -30,6 +26,10 @@
     border-right: 1.5px solid #696767;
 
     animation: fadeIn 0.5s ease-in-out;
+}
+
+h2{
+    
 }
 
 .branding {
