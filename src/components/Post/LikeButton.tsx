@@ -29,7 +29,7 @@ export default function LikeButton({ liked, count, onClick, className }: LikeBut
     }
 
     return (
-        <Button onClick={onClickWrapper} variant={likedState ? "primary" : "outline-primary"} className={className}>
+        <Button onClick={onClickWrapper} variant={likedState ? "danger" : "outline-danger"} className={className}>
             <div className="flex gap-2 items-center">
                 <FontAwesomeIcon icon={likedState ? solidHeart : regularHeart} />
                 {likeCount}
