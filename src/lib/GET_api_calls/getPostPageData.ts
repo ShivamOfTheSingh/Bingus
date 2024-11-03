@@ -4,8 +4,9 @@ interface ReturnData {
     post: Post;
     user: UserProfile;
     media: Media[];
-    voteCount: number,
-    userVote: PostVote | null
+    voteCount: number;
+    userVote: PostVote | null;
+    commentsWithReplies: { comment: PostComment, replies: CommentReply[] }[]
 }
 
 export default async function getPostPageData(postId: number, userId: number): Promise<ReturnData> {
@@ -29,5 +30,18 @@ export default async function getPostPageData(postId: number, userId: number): P
     const userResponse = await fetch(`http://localhost:3000/api/crud/user_profile/${post.userId}`);
     const user: UserProfile = await userResponse.json();
 
-    return { post, user, media, voteCount, userVote };
+    const commentsResponse = await fetch(`http://localhost:3000/api/crud/posts/comments/${post.postId}`);
+    const comments: PostComment[] = await commentsResponse.json();
+
+    const commentsWithReplies: { comment: PostComment, replies: CommentReply[] }[] = [];
+    for (let i = 0; i < comments.length; i++) {
+        const repliesResponse = await fetch(`http://localhost:3000/api/crud/post_comment/replies/${comments[i].postCommentId}`);
+        const replies: CommentReply[] = await repliesResponse.json();
+        commentsWithReplies.push({
+            comment: comments[i],
+            replies: replies
+        });
+    }
+
+    return { post, user, media, voteCount, userVote, commentsWithReplies };
 }

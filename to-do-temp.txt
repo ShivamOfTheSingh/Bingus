@@ -1,9 +1,0 @@
-REFACTOR TO ONLY LIKES:
-
-1. Change models.ts DONE
-2. Change post_vote API DONE
-3. Change comment_vote API DONE
-4. Change post voteCounts API endpoint DONE
-5. Refactor Post page DONE
-6. Alter table in db DONE
-7. Change all API DELETE endpoints (userId check bug)
