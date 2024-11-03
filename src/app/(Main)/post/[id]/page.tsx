@@ -12,11 +12,11 @@ export default async function Page({ params }: { params: { id: string } }) {
         redirect("/login");
     }
 
-    const { post, user, media, voteCounts, userVote } = await getPostPageData(parseInt(params.id), userId);
+    const { post, user, media, voteCount, userVote } = await getPostPageData(parseInt(params.id), userId);
     console.log(userVote);
     return (
         <div>
-            <PostComponent post={post} media={media} user={user} voteCounts={voteCounts} userVote={userVote} userIdSelf={userId} />
+            <PostComponent post={post} media={media} user={user} voteCount={voteCount} userVote={userVote} userIdSelf={userId} />
         </div>
     );
 }

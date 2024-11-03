@@ -4,13 +4,8 @@ interface ReturnData {
     post: Post;
     user: UserProfile;
     media: Media[];
-    voteCounts: VoteCounts,
+    voteCount: number,
     userVote: PostVote | null
-}
-
-interface VoteCounts {
-    countPositive: number;
-    countNegative: number;
 }
 
 export default async function getPostPageData(postId: number, userId: number): Promise<ReturnData> {
@@ -19,7 +14,8 @@ export default async function getPostPageData(postId: number, userId: number): P
     const votesResponse = await fetch(`http://localhost:3000/api/crud/posts/voteCounts/${postId}`);
     const post: Post = await postResponse.json();
     const media: Media[] = await mediaResponse.json();
-    const voteCounts: VoteCounts = await votesResponse.json();
+    const voteCountObject = await votesResponse.json();
+    const voteCount: number = voteCountObject.count;
     
     const userVoteResponse = await fetch(`http://localhost:3000/api/crud/post_vote/user_post_pair?userId=${userId}&postId=${postId}`);
     let userVote;
@@ -33,5 +29,5 @@ export default async function getPostPageData(postId: number, userId: number): P
     const userResponse = await fetch(`http://localhost:3000/api/crud/user_profile/${post.userId}`);
     const user: UserProfile = await userResponse.json();
 
-    return { post, user, media, voteCounts, userVote };
+    return { post, user, media, voteCount, userVote };
 }

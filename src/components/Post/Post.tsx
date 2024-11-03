@@ -7,14 +7,13 @@ import { Post, UserProfile, Media, PostVote } from "@/lib/db/models";
 import MediaScroll from "./MediaScroll";
 import timestampToTimeAgo from "@/lib/utils/timestampToTimeAgo";
 import LikeButton from "./LikeButton";
-import DislikeButton from "./DislikeButton";
 import { useState } from "react";
 
 interface PostComponentProps {
     post: Post;
     media: Media[];
     user: UserProfile;
-    voteCounts: VoteCounts;
+    voteCount: number;
     userVote: PostVote | null;
     userIdSelf: number;
     className?: string;
@@ -25,100 +24,29 @@ interface VoteCounts {
     countNegative: number;
 }
 
-export default function PostComponent({ post, media, user, voteCounts, userVote, userIdSelf, className }: PostComponentProps) {
+export default function PostComponent({ post, media, user, voteCount, userVote, userIdSelf, className }: PostComponentProps) {
     const [userVoteState, setUserVoteState] = useState<PostVote | null>(userVote);
-    const [liked, setLiked] = useState<boolean>(userVote ? userVote.postVoteValue ? true : false : false);
-    const [likeCount, setLikeCount] = useState<number>(voteCounts.countPositive);
-    const [disliked, setDisliked] = useState<boolean>(userVote ? !userVote.postVoteValue ? true : false : false);
-    const [dislikeCount, setDislikeCount] = useState<number>(voteCounts.countNegative);
 
     async function onLike() {
-        if (!userVoteState) {
-            const newUserVote: PostVote = {
-                postId: post.postId ? post.postId : -1,
-                userId: userIdSelf,
-                postVoteValue: true
-            };
-
-            const response = await fetch("http://localhost:3000/api/crud/post_vote", {
-                method: "POST",
-                body: JSON.stringify(newUserVote)
+        if (userVoteState) {
+            await fetch("http://localhost:3000/api/crud/post_vote", {
+                method: "DELETE",
+                body: JSON.stringify({ id: userVoteState.postVoteId })
             });
-
-            const { postVoteId } = await response.json();
-            newUserVote.postVoteId = postVoteId;
-            setUserVoteState(newUserVote);
-            setLiked(true);
-            setLikeCount(likeCount + 1);
+            setUserVoteState(null);
         }
         else {
-            if (userVoteState.postVoteValue) {
-                await fetch("http://localhost:3000/api/crud/post_vote", {
-                    method: "DELETE",
-                    body: JSON.stringify({ id: userVoteState.postVoteId })
-                });
-
-                setUserVoteState(null);
-                setLiked(false);
-                setLikeCount(likeCount - 1);
-            }
-            else {
-                setDisliked(false);
-                setDislikeCount(dislikeCount - 1);
-                await fetch("http://localhost:3000/api/crud/post_vote", {
-                    method: "PUT",
-                    body: JSON.stringify({ ...userVoteState, postVoteValue: true })
-                });
-
-                setUserVoteState({ ...userVoteState, postVoteValue: true });
-                setLiked(true);
-                setLikeCount(likeCount + 1);
-            }
-        }
-    }
-
-    async function onDislike() {
-        if (!userVoteState) {
-            const newUserVote: PostVote = {
-                postId: post.postId ? post.postId : -1,
+            const newVote: PostVote = {
                 userId: userIdSelf,
-                postVoteValue: false
+                postId: post.postId || -1
             };
-
             const response = await fetch("http://localhost:3000/api/crud/post_vote", {
                 method: "POST",
-                body: JSON.stringify(newUserVote)
+                body: JSON.stringify(newVote)
             });
-
             const { postVoteId } = await response.json();
-            newUserVote.postVoteId = postVoteId;
-            setUserVoteState(newUserVote);
-            setDisliked(true);
-            setDislikeCount(dislikeCount + 1);
-        }
-        else {
-            if (!userVoteState.postVoteValue) {
-                await fetch("http://localhost:3000/api/crud/post_vote", {
-                    method: "DELETE",
-                    body: JSON.stringify({ id: userVoteState.postVoteId })
-                });
-
-                setUserVoteState(null);
-                setDisliked(false);
-                setDislikeCount(dislikeCount - 1);
-            }
-            else {
-                setLiked(false);
-                setLikeCount(likeCount - 1);
-                await fetch("http://localhost:3000/api/crud/post_vote", {
-                    method: "PUT",
-                    body: JSON.stringify({ ...userVoteState, postVoteValue: false })
-                });
-
-                setUserVoteState({ ...userVoteState, postVoteValue: false });
-                setDisliked(true);
-                setDislikeCount(dislikeCount + 1);
-            }
+            newVote.postVoteId = postVoteId;
+            setUserVoteState(newVote);
         }
     }
 
@@ -145,10 +73,7 @@ export default function PostComponent({ post, media, user, voteCounts, userVote,
             </Row>
             <Row>
                 <Col>
-                    <LikeButton liked={liked} count={likeCount} onClick={onLike} />
-                </Col>
-                <Col>
-                    <DislikeButton disliked={disliked} count={dislikeCount} onClick={onDislike} />
+                    <LikeButton liked={userVoteState ? true : false} count={voteCount} onClick={onLike} />
                 </Col>
             </Row>
         </Container>

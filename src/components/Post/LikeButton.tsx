@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faThumbsUp as solidThumbsUp } from '@fortawesome/free-solid-svg-icons';
-import { faThumbsUp as regularThumbsUp } from '@fortawesome/free-regular-svg-icons';
+import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
 
 interface LikeButtonProps {
     liked: boolean;
@@ -14,11 +14,25 @@ interface LikeButtonProps {
 }
 
 export default function LikeButton({ liked, count, onClick, className }: LikeButtonProps) {
+    const [likedState, setLikedState] = useState<boolean>(liked);
+    const [likeCount, setLikeCount] = useState<number>(count);
+
+    function onClickWrapper() {
+        if (likedState) {
+            setLikeCount(likeCount - 1);
+        }
+        else {
+            setLikeCount(likeCount + 1);
+        }
+        setLikedState(!likedState);
+        onClick();
+    }
+
     return (
-        <Button onClick={onClick} variant={liked ? "primary" : "outline-primary"} className={className}>
+        <Button onClick={onClickWrapper} variant={likedState ? "primary" : "outline-primary"} className={className}>
             <div className="flex gap-2 items-center">
-                <FontAwesomeIcon icon={liked ? solidThumbsUp : regularThumbsUp} />
-                {count}
+                <FontAwesomeIcon icon={likedState ? solidHeart : regularHeart} />
+                {likeCount}
             </div>
         </Button>
     );
