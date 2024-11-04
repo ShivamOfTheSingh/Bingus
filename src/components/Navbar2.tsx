@@ -92,7 +92,7 @@ export default function NavBar2() {
         </Nav.Item>
       </Nav>
       <Nav.Item className="nav-item-custom logout">
-        <Nav.Link onClick={logout}>
+        <Nav.Link onClick={logout} className="logout">
           <FontAwesomeIcon icon={faRightFromBracket} className="icon" />
           Logout
         </Nav.Link>

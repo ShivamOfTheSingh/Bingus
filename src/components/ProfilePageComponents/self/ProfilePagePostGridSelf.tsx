@@ -7,7 +7,7 @@ import NewPostForm from "../../forms/NewPostForm";
 import ProfilePagePost from "../ProfilePagePost";
 
 interface ProfilePagePostGridSelfProps {
-    postData: { post: Post, media: Media[] }[];
+    postData: { post: Post, media: Media[] }[]; 
     className?: string;
 }
 
@@ -19,21 +19,21 @@ export default function ProfilePagePostGridSelf({ postData, className }: Profile
     });
 
     return (
-        <Container>
+        <Container fluid className={className} style={{ marginLeft: '250px', paddingTop: '60px' }}> {/* Adjust margin for the vertical navbar */}
             <Row>
                 <Col xs={12} sm={6} md={4} lg={3}>
-                    { posting ?
+                    {posting ? (
                         <div>
-                            <CloseButton onClick={() => { setPosting(false) }} />
+                            <CloseButton onClick={() => { setPosting(false); }} />
                             <NewPostForm />
                         </div>
-                        :
-                        <Card className="w-72 h-80 flex justify-center items-center">
-                            <Button size="lg" variant="secondary" onClick={() => { setPosting(true) }}>
+                    ) : (
+                        <Card className="h-100 d-flex justify-content-center align-items-center">
+                            <Button size="lg" variant="secondary" onClick={() => { setPosting(true); }}>
                                 New Post
                             </Button>
                         </Card>
-                    }
+                    )}
                 </Col>
                 {postData.slice(0, 3).map((pd: any, index: number) => (
                     <Col key={index} xs={12} sm={6} md={4} lg={3}>
@@ -54,6 +54,7 @@ export default function ProfilePagePostGridSelf({ postData, className }: Profile
                             </Row>
                         );
                     }
+                    return null; // Avoid returning undefined in the loop
                 })
             }
         </Container>

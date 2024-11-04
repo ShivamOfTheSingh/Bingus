@@ -29,7 +29,8 @@
 }
 
 h2{
-    
+    font-family: Geneva;
+    font-size: larger;
 }
 
 .branding {
@@ -56,13 +57,33 @@ h2{
     transition: background-color .5s;
     border: 1px solid transparent;
     transition: background-color 0.3s ease, transform 0.3s ease;
+    text-decoration-line: none;
 }
+
 .nav-item-custom.active .link {
     background-color: #d1c4e9; /* Different background for active */
     font-weight: bold; /* Emphasize active item */
 }
 
 .nav-item-custom .link:hover {
+    background-color: #e0d4ff;
+    border-color: #b18dd7;
+}
+
+.nav-item-custom .logout{
+    display: flex;
+    align-items: center;
+    color: black;
+    padding: 5px;
+    padding-right: 42px;
+    font-size: 15px;
+    border-radius: 5px;
+    transition: background-color .5s;
+    border: 1px solid transparent;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    text-decoration-line: none;
+}
+.nav-item-custom .logout:hover {
     background-color: #e0d4ff;
     border-color: #b18dd7;
 }

@@ -31,7 +31,7 @@ export default function NewPostForm() {
 
     useEffect(() => {
         if (redirecting) {
-            redirect("/main/profile");
+            redirect("/profile");
         }
     }, [redirecting]);
 
