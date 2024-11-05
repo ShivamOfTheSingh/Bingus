@@ -10,10 +10,11 @@ interface LikeButtonProps {
     liked: boolean;
     count: number;
     onClick: () => void;
+    size: "sm" | "lg";
     className?: string;
 }
 
-export default function LikeButton({ liked, count, onClick, className }: LikeButtonProps) {
+export default function LikeButton({ liked, count, onClick, size, className }: LikeButtonProps) {
     const [likedState, setLikedState] = useState<boolean>(liked);
     const [likeCount, setLikeCount] = useState<number>(count);
 
@@ -29,7 +30,7 @@ export default function LikeButton({ liked, count, onClick, className }: LikeBut
     }
 
     return (
-        <Button onClick={onClickWrapper} variant={likedState ? "danger" : "outline-danger"} className={className}>
+        <Button onClick={onClickWrapper} variant={likedState ? "danger" : "outline-danger"} className={className} size={size}>
             <div className="flex gap-2 items-center">
                 <FontAwesomeIcon icon={likedState ? solidHeart : regularHeart} />
                 {likeCount}
