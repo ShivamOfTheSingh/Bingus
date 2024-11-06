@@ -1,13 +1,13 @@
 "use server";
 import { cookies } from "next/headers";
-import SessionInactive from "@/components/SessionInactive";
+import { redirect } from "next/navigation";
 import Inbox from "@/components/InboxComponents/Inbox";
 import getCurrentSessionUserId from "@/lib/cookies/getCurrentSessionUserId";
 
 export default async function Page() {
   const session = cookies().get("session");
   if (!session) {
-    return <SessionInactive />;
+    redirect("/login");
   }
 
   const value = session.value;

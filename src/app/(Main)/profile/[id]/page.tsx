@@ -1,11 +1,10 @@
 "use server";
 
 import getCurrentSessionUserId from "@/lib/cookies/getCurrentSessionUserId";
-import SessionInactive from "@/components/SessionInactive";
+import { redirect } from "next/navigation";
 import getProfilePageData from "@/lib/GET_api_calls/getProfilePageData";
 import ProfilePagePostGridOther from "@/components/ProfilePageComponents/other/ProfilePagePostGridOther";
 import ProfilePageInfoOther from "@/components/ProfilePageComponents/other/ProfilePageInfoOther";
-import { redirect } from "next/navigation";
 import { Following } from "@/lib/db/models";
 
 async function getFollowingStatus(selfId: number, otherId: number): Promise<Following> {
@@ -25,11 +24,11 @@ async function getFollowingStatus(selfId: number, otherId: number): Promise<Foll
 export default async function Page({ params }: { params: { id: string } }) {
     const selfId = await getCurrentSessionUserId();
     if (selfId === -1) {
-      return <SessionInactive />;
+      redirect("/login");
     }
 
     if (selfId === parseInt(params.id)) {
-        redirect("/main/profile");
+        redirect("/profile");
     }
 
     const pageData = await getProfilePageData(parseInt(params.id));

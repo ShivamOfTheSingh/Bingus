@@ -1,13 +1,13 @@
 import FollowCardSelf from "@/components/Followers/FollowCardSelf"
 import getCurrentSessionUserId from "@/lib/cookies/getCurrentSessionUserId";
-import SessionInactive from "@/components/SessionInactive";
+import { redirect } from "next/navigation";
 import { getFollowerPageData } from "@/lib/GET_api_calls/getFollowerPageDataSelf";
 
 
 export default async function Page() {
     const userId = await getCurrentSessionUserId();
     if (userId === -1) {
-      return <SessionInactive />;
+      redirect("/login");
     }
     const { followers, suggested } = await getFollowerPageData(userId);
 

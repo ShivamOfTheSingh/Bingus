@@ -33,7 +33,7 @@ export default function ProfilePageInfoOther({ profile, numPosts, following, num
 
                 {/* User Info */}
                 <Col xs={12} md={8} className="text-center text-md-left">
-                <div className="text-2xl font-semibold">{settings.showName ? profile.firstName + profile.lastName : profile.username}</div>
+                <div className="text-2xl font-semibold">{settings.showName ? profile.firstName + " " + profile.lastName : profile.username}</div>
                 <div>{settings.showName ? profile.username : null}</div>
 
                     <FollowButton following={following} />
@@ -46,11 +46,11 @@ export default function ProfilePageInfoOther({ profile, numPosts, following, num
                         </Col>
                         <Col xs={4} className="text-center">
                             <strong>{numFollowers}</strong>
-                            <Link href={`/main/profile/followers/${profile.userId}`}>Followers</Link>
+                            <Link href={`/profile/followers/${profile.userId}`}>Followers</Link>
                         </Col>
                         <Col xs={4} className="text-center">
                             <strong>{numFollowing}</strong>
-                            <Link href={`/main/profile/following/${profile.userId}`}>Following</Link>
+                            <Link href={`/profile/following/${profile.userId}`}>Following</Link>
                         </Col>
                     </Row>
 
