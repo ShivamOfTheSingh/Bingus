@@ -1,13 +1,70 @@
-#bg-image {
-    filter: blur(10px);
+/* LoginFormStyle.css */
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1s forwards; 
 }
 
-.btn-primary {
-    background-color: #8f6ccc !important;
-    border-color: #8f6ccc !important;
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
 }
 
-.btn-primary:hover {
-    background-color: #6a5396 !important;
-    border-color: #6a5396 !important;
-}
+body {
+    background-color: #f5f5f5;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .form-container {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-heading {
+    text-align: center;
+    color: #4a4a4a;
+    font-size: 24px;
+    font-weight: 700;
+  }
+  
+  .form-label {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #4a4a4a;
+  }
+  
+  .form-input,
+  .form-select {
+    font-size: 16px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s;
+  }
+  
+  .form-input:focus,
+  .form-select:focus {
+    border-color: #8f6ccc;
+    outline: none;
+  }
+  
+  .text-red-600 {
+    color: #e53e3e;
+  }
+  
+  .btn-primary {
+    background-color: #8f6ccc;
+    border-color: #8f6ccc;
+    font-size: 16px;
+  }
+  
+  .btn-primary:disabled {
+    background-color: #ccc;
+  }
+ 

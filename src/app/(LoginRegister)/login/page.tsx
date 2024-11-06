@@ -12,10 +12,10 @@ export default async function Page() {
         <div className="w-[100vw] h-[100vh] flex items-center justify-center">
             <Container>
                 <Row>
-                    <Col lg={8}>
-                        <Image src={logo} alt="bingus-logo" width={600} height={683} className="rounded border-black border-solid border-3" />
+                    <Col lg={8} className="d-flex align-items-center">
+                        <Image src={logo} alt="bingus-logo" width={600} height={683} className="rounded-xl shadow-lg" />
                     </Col>
-                    <Col lg={4}>
+                    <Col lg={4} className="d-flex align-items-center">
                         <div>
                             <LoginForm />
                         </div>
@@ -23,7 +23,7 @@ export default async function Page() {
                 </Row>
             </Container>
             <div className="absolute z-[-1] opacity-50">
-                <Image src={background} alt="background-img" width={900} height={900} id="bg-image" />
+                <Image src={background} alt="background-img" width={900} height={900} id="bg-image" style={{ filter: 'saturate(4) hue-rotate(-100deg) brightness(1.1)' }}/>
             </div>
         </div>
     );
