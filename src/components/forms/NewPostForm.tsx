@@ -9,6 +9,7 @@ import { redirect } from 'next/navigation';
 import { Media, Post } from '@/lib/db/models';
 import ApiError from '@/lib/errors/ApiError';
 import readFile from '@/lib/utils/readFile';
+import '@/public/PostFormStyle.css'
 
 
 interface NewPostValidateErrors {
@@ -23,6 +24,11 @@ export default function NewPostForm() {
     const [postCaption, setPostCaption] = useState("");
     const [redirecting, setRedirecting] = useState(false);
     const [pending, setPending] = useState(false);
+
+    const [isVisible, setIsVisible] = useState(false); //for fade in
+    useEffect(() => {
+        setIsVisible(true);
+    }, []);
 
     const [validateErrors, setValidateErrors] = useState<NewPostValidateErrors>({
         postFiles: null,
@@ -116,52 +122,54 @@ export default function NewPostForm() {
     };
 
     return (
-        <Form action={onSubmit} className="flex flex-col gap-2 bg-white p-3 w-80">
-            <Form.Label className="text-4xl font-semibold">
-                New Post!
-            </Form.Label>
-            <Form.Group controlId="formFileMultiple">
-                <Form.Label>Please Upload Your Files</Form.Label>
-                <Form.Control
-                    type="file"
-                    multiple
-                    onChange={addFile}
-                    disabled={pending}
-                />
-                {validateErrors.postFiles && <Form.Label className="text-red-600">{validateErrors.postFiles}</Form.Label>}
+        <div className={isVisible ? 'fade-in' : ''}>
+            <Form action={onSubmit} className="form-container">
+                <Form.Label className="label-heading">
+                    New Post!
+                </Form.Label>
+                <Form.Group controlId="formFileMultiple">
+                    <Form.Label className='label'>Please Upload Your Files</Form.Label>
+                    <Form.Control
+                        type="file"
+                        multiple
+                        onChange={addFile}
+                        disabled={pending}
+                    />
+                    {validateErrors.postFiles && <Form.Label className="text-red-600">{validateErrors.postFiles}</Form.Label>}
 
-                {/* Display the list of files the user has uploaded */}
-                {postFiles.length > 0 && (
-                    <ul className="mt-3">
-                        {postFiles.map((file, index) => {
-                            return (
-                                <li key={index} className="flex justify-between items-center">
-                                    <span>{file.name}</span>
-                                    <Button variant="outline-danger" size="sm" onClick={() => removeFile(index)}>
-                                        Remove
-                                    </Button>
-                                </li>
-                            )
-                        })}
-                    </ul>
-                )}
-            </Form.Group>
-            <Form.Group controlId="postCaption">
-                <Form.Label>Post Caption</Form.Label>
-                <Form.Control
-                    as="textarea"
-                    rows={3}
-                    value={postCaption}
-                    onChange={(e) => { setPostCaption(e.target.value); setValidateErrors({ ...validateErrors, postCaption: null }) }}
-                    disabled={pending}
-                />
-                {validateErrors.postCaption ? <Form.Label className="text-red-600">{validateErrors.postCaption}</Form.Label> : null}
-            </Form.Group>
-            <Form.Group controlId="submit" className="flex justify-end">
-                <Button variant="primary" type="submit" disabled={pending}>
-                    {pending ? <div className="flex gap-2 items-center"><Spinner size="sm" animation="border" />Submitting...</div> : "Post"}
-                </Button>
-            </Form.Group>
-        </Form>
+                    {/* Display the list of files the user has uploaded */}
+                    {postFiles.length > 0 && (
+                        <ul className="mt-3">
+                            {postFiles.map((file, index) => {
+                                return (
+                                    <li key={index} className="flex justify-between items-center">
+                                        <span>{file.name}</span>
+                                        <Button variant="outline-danger" size="sm" onClick={() => removeFile(index)}>
+                                            Remove
+                                        </Button>
+                                    </li>
+                                )
+                            })}
+                        </ul>
+                    )}
+                </Form.Group>
+                <Form.Group controlId="postCaption">
+                    <Form.Label className='label'>Post Caption</Form.Label>
+                    <Form.Control
+                        as="textarea"
+                        rows={3}
+                        value={postCaption}
+                        onChange={(e) => { setPostCaption(e.target.value); setValidateErrors({ ...validateErrors, postCaption: null }) }}
+                        disabled={pending}
+                    />
+                    {validateErrors.postCaption ? <Form.Label className="text-red-600">{validateErrors.postCaption}</Form.Label> : null}
+                </Form.Group>
+                <Form.Group controlId="submit" className="flex justify-end">
+                    <Button variant="primary" type="submit" disabled={pending} className='button'>
+                        {pending ? <div className="flex gap-2 items-center"><Spinner size="sm" animation="border" />Submitting...</div> : "Post"}
+                    </Button>
+                </Form.Group>
+            </Form>
+        </div> 
     );
 }

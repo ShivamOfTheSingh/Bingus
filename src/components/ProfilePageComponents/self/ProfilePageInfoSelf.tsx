@@ -3,6 +3,7 @@ import { UserProfile, UserSettings } from "@/lib/db/models";
 import Image from "next/image";
 import profilePicTemp from "@/public/profile-pic-temp.jpg";
 import Link from "next/link";
+import '@/public/ProfileInfo.css'
 
 interface ProfilePageInfoSelfProps {
     profile: UserProfile;
@@ -15,7 +16,7 @@ interface ProfilePageInfoSelfProps {
 
 export default function ProfilePageInfoSelf({ profile, numPosts, numFollowers, numFollowing, settings, className }: ProfilePageInfoSelfProps) {
     return (
-        <Container className={`${className} py-4`} style={{ marginLeft: '250px' }}> {/* Adjust margin for the vertical navbar */}
+        <Container className={`${className} py-4 custom-container`} > {/* Adjust margin for the vertical navbar */}
             <Row className="justify-content-center">
                 {/* Profile Picture */}
                 <Col xs={12} md={4} className="text-center mb-4">

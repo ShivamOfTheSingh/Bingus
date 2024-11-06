@@ -75,7 +75,7 @@ export default function NavBar2() {
           </Link>
         </Nav.Item>
         <Nav.Item className={`nav-item-custom ${pathName === "/post" ? "active" : ""}`}>
-          <Link className="link" href="/profile">
+          <Link className="link" href="/post">
             <span className="icon">
               <FontAwesomeIcon icon={faPlus} style={{ color: "black" }} />
             </span>
