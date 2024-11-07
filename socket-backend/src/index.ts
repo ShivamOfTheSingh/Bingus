@@ -3,19 +3,18 @@ import { createServer } from "http";
 import { Server } from "socket.io";
 import authenticate from "./lib/authenticate";
 import { Message } from "./lib/models";
-import cors from "cors"; // Import cors
+import cors from "cors";
 import * as MessageAPI from "./api/messages";
 import "dotenv/config";
-import https from "https"; // Add https
-import fs from "fs"; // Add fs
+import https from "https";
+import fs from "fs";
 
 const app = express();
 
-// Add CORS middleware
 app.use(cors({
-    origin: ["http://localhost:3000", "https://production.d3drl1bcjmxovs.amplifyapp.com"], // Allow only your frontend to access
-    methods: ["GET", "POST"], // Define allowed methods
-    credentials: true, // Allow cookies and authentication headers
+    origin: ["http://localhost:3000", "https://production.d3drl1bcjmxovs.amplifyapp.com"],
+    methods: ["GET", "POST"],
+    credentials: true,
 }));
 
 const server = https.createServer({
@@ -25,8 +24,8 @@ const server = https.createServer({
 
 const io = new Server(server, {
     cors: {
-        origin: ["http://localhost:3000", "https://production.d3drl1bcjmxovs.amplifyapp.com"], // Allow WebSocket connections from your frontend
-        methods: ["GET", "POST"], // Define allowed WebSocket methods
+        origin: ["http://localhost:3000", "https://production.d3drl1bcjmxovs.amplifyapp.com"],
+        methods: ["GET", "POST"],
         credentials: true,
     },
 });
@@ -40,22 +39,23 @@ io.on("connection", (socket) => {
             socket.emit("authenticate", true);
 
             socket.on("loadMessages", async () => {
-                const messages: Message[] | string = await MessageAPI.GET();
+                const messages = await MessageAPI.GET();
                 socket.emit("loadMessages", JSON.stringify(messages));
             });
 
             socket.on("message", async (message) => {
-                console.log("Message received", message);
-                const messageObject: Message = JSON.parse(message);
-                console.log("Message object", messageObject);
+                const messageObject = JSON.parse(message);
                 messageObject.userId = userId;
                 messageObject.chatId = 1;
                 socket.broadcast.emit("message", JSON.stringify(messageObject));
-
                 await MessageAPI.POST(messageObject);
             });
         }
     });
+});
+
+app.get("/online", (req, res) => {
+    res.send("Server is online");
 });
 
 server.listen(443, () => {
