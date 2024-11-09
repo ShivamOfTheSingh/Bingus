@@ -29,8 +29,7 @@ export async function GET(request: Request): Promise<Response> {
         return new Response(JSON.stringify(userProfiles), { status: 200 });
     }
     catch (error: any) {
-        console.log(error);
-        return new Response("Failed to fetch data", { status: 500 });
+        return new Response("Internal server error", { status: 500 });
     }
     finally {
         if (client) {
