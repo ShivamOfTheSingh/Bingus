@@ -24,7 +24,7 @@ export default function PostComponent({ post, media, user, voteCount, userVote, 
 
     async function onLike() {
         if (userVoteState) {
-            await fetch("http://localhost:3000/api/crud/post_vote", {
+            await fetch("https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/post_vote", {
                 method: "DELETE",
                 body: JSON.stringify({ id: userVoteState.postVoteId })
             });
@@ -35,7 +35,7 @@ export default function PostComponent({ post, media, user, voteCount, userVote, 
                 userId: userIdSelf,
                 postId: post.postId || -1
             };
-            const response = await fetch("http://localhost:3000/api/crud/post_vote", {
+            const response = await fetch("https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/post_vote", {
                 method: "POST",
                 body: JSON.stringify(newVote)
             });

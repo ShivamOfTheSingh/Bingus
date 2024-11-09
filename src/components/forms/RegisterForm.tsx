@@ -121,7 +121,7 @@ export default function RegisterForm() {
         profilePicture: ""
       };
       const userProfileResponse = await fetch(
-        "http://localhost:3000/api/crud/user_profile",
+        "https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/user_profile",
         {
           method: "POST",
           body: JSON.stringify(userProfile),
@@ -141,7 +141,7 @@ export default function RegisterForm() {
           showName: false,
           profilePublic: true
         };
-        const userSettingsResponse = await fetch("http://localhost:3000/api/crud/user_settings", {
+        const userSettingsResponse = await fetch("https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/user_settings", {
           method: "POST",
           body: JSON.stringify(userSettings)
         });
@@ -157,7 +157,7 @@ export default function RegisterForm() {
             userId: userId,
           };
           const registerUserResponse = await fetch(
-            "http://localhost:3000/api/session/register",
+            "https://production.d3drl1bcjmxovs.amplifyapp.com/api/session/register",
             {
               method: "POST",
               body: JSON.stringify(userAuth),

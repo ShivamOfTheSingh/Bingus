@@ -49,7 +49,7 @@ export default function NewReplyForm({ onSubmitDecorator, commentId, className }
                 dateReplied: new Date()
             };
 
-            const response = await fetch("http://localhost:3000/api/crud/comment_reply", {
+            const response = await fetch("https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/comment_reply", {
                 method: "POST",
                 body: JSON.stringify(newReply)
             });
