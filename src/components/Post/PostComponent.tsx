@@ -46,7 +46,7 @@ export default function PostComponent({ post, media, user, voteCount, userVote, 
     }
 
     return (
-        <Container className={className}>
+        <Container className={`${className} flex flex-col items-center`}>
             <Row>
                 <Col>
                     <Image src={user.profilePicture} alt={user.username} height={50} width={50} />
@@ -68,7 +68,7 @@ export default function PostComponent({ post, media, user, voteCount, userVote, 
             </Row>
             <Row>
                 <Col>
-                    <LikeButton liked={userVoteState ? true : false} count={voteCount} onClick={onLike} />
+                    <LikeButton liked={userVoteState ? true : false} count={voteCount} onClick={onLike} size={"lg"} />
                 </Col>
             </Row>
         </Container>

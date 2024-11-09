@@ -1,29 +1,46 @@
 "use client";
 
-import { CommentReply, PostComment } from "@/lib/db/models";
+import { CommentReply, PostComment, UserProfile, CommentVote } from "@/lib/db/models";
 import { useState } from "react";
 import NewCommentForm from "./NewCommentForm";
+import CommentComponent from "./CommentComponent";
 
 interface CommentSectionProps {
-    commentsWithReplies: { comment: PostComment, replies: CommentReply[] }[];
+    commentsWithReplies: { user: UserProfile, userVote: CommentVote | null, voteCount: number, comment: PostComment, replies: CommentReply[] }[];
     postId: number;
-    userId: number;
+    userSelf: UserProfile;
     className?: string;
 }
 
-export default function CommentSection({ commentsWithReplies, postId, userId, className }: CommentSectionProps) {
-    const [comments, setComments] = useState<{ comment: PostComment, replies: CommentReply[] }[]>(commentsWithReplies);
+export default function CommentSection({ commentsWithReplies, postId, userSelf, className }: CommentSectionProps) {
+    const [comments, setComments] = useState<{ user: UserProfile, userVote: CommentVote | null, voteCount: number, comment: PostComment, replies: CommentReply[] }[]>(commentsWithReplies);
 
     function handleSubmitStateChange(comment: PostComment) {
-        const newCommentWithReplies = {
+        const newComment = {
+            user: userSelf,
+            userVote: null,
+            voteCount: 0,
             comment: comment,
             replies: []
         };
-        setComments([...comments, newCommentWithReplies]);
+        setComments([...comments, newComment]);
     }
 
     return (
-        <div>
+        <div className={`${className} flex flex-col items-center`}>
+            <NewCommentForm onSubmitDecorator={handleSubmitStateChange} postId={postId} />
+            <div className="flex flex-col gap-5">
+                {comments.map((comment) => {
+                    return <CommentComponent key={comment.comment.postCommentId}
+                        user={comment.user}
+                        comment={comment.comment}
+                        replies={comment.replies}
+                        voteCount={comment.voteCount}
+                        userVote={comment.userVote}
+                        userIdSelf={userSelf.userId || -1}
+                    />;
+                })}
+            </div>
         </div>
     );
 }
