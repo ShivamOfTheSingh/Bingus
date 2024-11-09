@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import { Post, PostVote, PostComment, CommentReply, CommentVote, UserProfile, Media } from "../db/models";
 
 interface ReturnData {
@@ -6,12 +7,15 @@ interface ReturnData {
     media: Media[];
     voteCount: number;
     userVote: PostVote | null;
-    commentsWithReplies: { user: UserProfile, userVote: CommentVote, voteCount: number, comment: PostComment, replies: CommentReply[] }[];
+    commentsWithReplies: { user: UserProfile, userVote: CommentVote, voteCount: number, comment: PostComment, replies: { reply: CommentReply, user: UserProfile }[] }[];
     userSelf: UserProfile;
 }
 
 export default async function getPostPageData(postId: number, userId: number): Promise<ReturnData> {
     const postResponse = await fetch(`http://localhost:3000/api/crud/posts/${postId}`);
+
+    if (postResponse.status === 404) notFound();
+
     const mediaResponse = await fetch(`http://localhost:3000/api/crud/posts/media/${postId}`);
     const votesResponse = await fetch(`http://localhost:3000/api/crud/posts/voteCounts/${postId}`);
     const post: Post = await postResponse.json();
@@ -34,7 +38,7 @@ export default async function getPostPageData(postId: number, userId: number): P
     const commentsResponse = await fetch(`http://localhost:3000/api/crud/posts/comments/${post.postId}`);
     const comments: PostComment[] = await commentsResponse.json();
 
-    const commentsWithReplies: { user: UserProfile, userVote: CommentVote, voteCount: number, comment: PostComment, replies: CommentReply[] }[] = [];
+    const commentsWithReplies: { user: UserProfile, userVote: CommentVote, voteCount: number, comment: PostComment, replies: { reply: CommentReply, user: UserProfile }[] }[] = [];
     for (let i = 0; i < comments.length; i++) {
         const repliesResponse = await fetch(`http://localhost:3000/api/crud/post_comment/replies/${comments[i].postCommentId}`);
         const userResponse = await fetch(`http://localhost:3000/api/crud/user_profile/${comments[i].userId}`);
@@ -50,13 +54,24 @@ export default async function getPostPageData(postId: number, userId: number): P
         const voteCountObject = await votesResponse.json();
         const voteCount: number = voteCountObject.count;
         const replies: CommentReply[] = await repliesResponse.json();
+        
+        const replyObjects: { reply: CommentReply, user: UserProfile }[] = [];
+        for (let j = 0; j < replies.length; j++) {
+            const replyUserResponse = await fetch(`http://localhost:3000/api/crud/user_profile/${replies[j].userId}`);
+            const replyUser: UserProfile = await replyUserResponse.json();
+            replyObjects.push({
+                reply: replies[j],
+                user: replyUser
+            });
+        }
+
         const user: UserProfile = await userResponse.json();
         commentsWithReplies.push({
             user: user,
             userVote: userVote,
             voteCount: voteCount,
             comment: comments[i],
-            replies: replies
+            replies: replyObjects
         });
     }
 

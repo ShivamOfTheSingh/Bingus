@@ -7,20 +7,29 @@ import { Col, Container, Row } from "react-bootstrap";
 import profilePicTemp from "@/public/profile-pic-temp.jpg";
 import formatDate from "@/lib/utils/formatDate";
 import LikeButton from "./LikeButton";
+import NewReplyForm from "./NewReplyForm";
 
 interface CommentComponentProps {
     user: UserProfile;
     comment: PostComment;
-    replies: CommentReply[];
+    replies: { reply: CommentReply, user: UserProfile }[];
     voteCount: number;
     userVote: CommentVote | null;
-    userIdSelf: number;
+    userSelf: UserProfile;
     className?: string;
 }
 
-export default function CommentComponent({ user, comment, replies, voteCount, userVote, userIdSelf, className }: CommentComponentProps) {
-    const [repliesState, setRepliesState] = useState<CommentReply[]>(replies);
+export default function CommentComponent({ user, comment, replies, voteCount, userVote, userSelf, className }: CommentComponentProps) {
+    const [repliesState, setRepliesState] = useState<{ reply: CommentReply, user: UserProfile }[]>(replies);
     const [userVoteState, setUserVoteState] = useState<CommentVote | null>(userVote);
+
+    function handleSubmitStateChange(reply: CommentReply) {
+        const newReply = {
+            reply: reply,
+            user: user
+        };
+        setRepliesState([...repliesState, newReply]);
+    }
 
     async function onLike() {
         if (userVoteState) {
@@ -32,7 +41,7 @@ export default function CommentComponent({ user, comment, replies, voteCount, us
         }
         else {
             const newVote: CommentVote = {
-                userId: userIdSelf,
+                userId: userSelf.userId || -1,
                 postCommentId: comment.postCommentId || -1
             };
             const response = await fetch("http://localhost:3000/api/crud/comment_vote", {
@@ -65,6 +74,26 @@ export default function CommentComponent({ user, comment, replies, voteCount, us
             </Row>
             <Row className="text-xs">
                 {formatDate(comment.dateCommented)}
+            </Row>
+            <NewReplyForm onSubmitDecorator={handleSubmitStateChange} commentId={comment.postCommentId || -1 } />
+            <Row>
+                {repliesState.map((r: { reply: CommentReply, user: UserProfile }) => {
+                    return (
+                        <div>
+                            <Row>
+                                <Col>
+                                    <Image src={r.user.profilePicture} alt={r.user.username} width={20} height={20} />
+                                </Col>
+                                <Col>
+                                    {r.user.username}
+                                </Col>
+                            </Row>
+                            <Row>
+                                {r.reply.reply}
+                            </Row>
+                        </div>
+                    );
+                })}
             </Row>
         </Container>
     );

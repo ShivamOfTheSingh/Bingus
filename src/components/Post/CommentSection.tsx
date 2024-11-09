@@ -6,14 +6,14 @@ import NewCommentForm from "./NewCommentForm";
 import CommentComponent from "./CommentComponent";
 
 interface CommentSectionProps {
-    commentsWithReplies: { user: UserProfile, userVote: CommentVote | null, voteCount: number, comment: PostComment, replies: CommentReply[] }[];
+    commentsWithReplies: { user: UserProfile, userVote: CommentVote | null, voteCount: number, comment: PostComment, replies: { reply: CommentReply, user: UserProfile }[] }[];
     postId: number;
     userSelf: UserProfile;
     className?: string;
 }
 
 export default function CommentSection({ commentsWithReplies, postId, userSelf, className }: CommentSectionProps) {
-    const [comments, setComments] = useState<{ user: UserProfile, userVote: CommentVote | null, voteCount: number, comment: PostComment, replies: CommentReply[] }[]>(commentsWithReplies);
+    const [comments, setComments] = useState<{ user: UserProfile, userVote: CommentVote | null, voteCount: number, comment: PostComment, replies: { reply: CommentReply, user: UserProfile }[] }[]>(commentsWithReplies);
 
     function handleSubmitStateChange(comment: PostComment) {
         const newComment = {
@@ -37,7 +37,7 @@ export default function CommentSection({ commentsWithReplies, postId, userSelf, 
                         replies={comment.replies}
                         voteCount={comment.voteCount}
                         userVote={comment.userVote}
-                        userIdSelf={userSelf.userId || -1}
+                        userSelf={userSelf}
                     />;
                 })}
             </div>
