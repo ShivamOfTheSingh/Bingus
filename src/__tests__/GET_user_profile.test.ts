@@ -12,6 +12,7 @@ describe("GET /api/crud/user_profile", () => {
             release: jest.fn(),
         };
 
+        // Mock the pool.connect method to resolve with the mockClient
         (pool.connect as jest.Mock).mockResolvedValue(mockClient);
     });
 
@@ -31,7 +32,7 @@ describe("GET /api/crud/user_profile", () => {
                 gender: "male",
                 birth_date: "1990-01-01",
                 about: "About John",
-                profile_pic: "some_base64_encoded_data",
+                profile_pic: "some_base64_encoded_data", // Mock the base64 data here
                 pic_mime_type_prefix: "data:image/png;base64,",
             },
         ];
@@ -41,9 +42,11 @@ describe("GET /api/crud/user_profile", () => {
         // Call the GET function
         const response = await GET(new Request("http://localhost/api/user_profiles"));
 
-        // Check the response
+        // Check the response status
         expect(response.status).toBe(200);
         const responseData = await response.json();
+        
+        // Ensure the response data matches the expected format
         expect(responseData).toEqual([
             {
                 userId: 1,
@@ -54,7 +57,7 @@ describe("GET /api/crud/user_profile", () => {
                 gender: "male",
                 birthDate: new Date("1990-01-01").toISOString(),
                 about: "About John",
-                profilePicture: "data:image/png;base64,some_base64_encoded_data",
+                profilePicture: "data:image/png;base64,some_base64_encoded_data", // Match this to the mock value
             },
         ]);
     });
