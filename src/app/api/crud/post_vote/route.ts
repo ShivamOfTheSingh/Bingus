@@ -18,7 +18,6 @@ export async function GET(request: Request): Promise<Response> {
                 postVoteId: row.post_likes_id,
                 postId: row.post_id,
                 userId: row.user_id,
-                postVoteValue: row.post_vote_value
             }
         ));
         return new Response(JSON.stringify(postVotes), { status: 200 });
@@ -50,8 +49,8 @@ export async function POST(request: Request): Promise<Response> {
         postVote.userId = userId;
         client = await pool.connect();
         const result = await client.query(
-            "INSERT INTO post_vote (post_id, user_id, post_vote_value) VALUES ($1, $2, $3) RETURNING post_likes_id",
-            [postVote.postId, postVote.userId, postVote.postVoteValue]
+            "INSERT INTO post_vote (post_id, user_id) VALUES ($1, $2) RETURNING post_likes_id",
+            [postVote.postId, postVote.userId]
         );
         const id = result.rows[0].post_likes_id;
         return new Response(JSON.stringify({ postVoteId: id }), { status: 201 });
@@ -83,8 +82,8 @@ export async function PUT(request: Request): Promise<Response> {
         postVote.userId = userId;
         client = await pool.connect();
         await client.query(
-            "UPDATE post_vote SET post_id = $2, user_id = $3, post_vote_value = $4 WHERE post_likes_id = $1",
-            [postVote.postVoteId, postVote.postId, postVote.userId, postVote.postVoteValue]
+            "UPDATE post_vote SET post_id = $2, user_id = $3 WHERE post_likes_id = $1",
+            [postVote.postVoteId, postVote.postId, postVote.userId]
         );
 
         return new Response("OK", { status: 200 });
@@ -110,7 +109,7 @@ export async function DELETE(request: Request): Promise<Response> {
     try {
         const { id } = await request.json();
         const userId = await getCurrentSessionUserId();
-        if (userId === -1 || userId !== id) {
+        if (userId === -1) {
             return new Response("Unauthorized API call", { status: 401 });
         }
         client = await pool.connect();

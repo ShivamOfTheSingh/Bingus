@@ -49,8 +49,7 @@ export interface CommentReply {
 export interface CommentVote {
     commentVoteId?: number;
     postCommentId: number;
-    userId?: number;
-    commentVoteValue: boolean;
+    userId: number;
 }
 
 export interface Following {
@@ -70,8 +69,7 @@ export interface PostComment {
 export interface PostVote {
     postVoteId?: number;
     postId: number;
-    userId?: number;
-    postVoteValue: boolean;
+    userId: number;
 }
 
 export interface UserSettings {
