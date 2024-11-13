@@ -1,3 +1,4 @@
+"use server"
 import Heartbeat from '@/components/Heartbeat';
 import getCurrentSessionUserId from "@/lib/cookies/getCurrentSessionUserId";
 
