@@ -53,7 +53,7 @@ export async function POST(request: Request): Promise<Response> {
             [following.userId, following.followedUserId]
         );
         const id = result.rows[0].following_status_id;
-        return new Response(JSON.stringify({ follwingId: id }), { status: 201 });
+        return new Response(JSON.stringify({ followingId: id }), { status: 201 });
     }
     catch (error) {
         return new Response("Failed to create data", { status: 500 });
