@@ -9,6 +9,7 @@ import { redirect } from 'next/navigation';
 import { Media, Post } from '@/lib/db/models';
 import ApiError from '@/lib/errors/ApiError';
 import readFile from '@/lib/utils/readFile';
+
 import '@/public/PostFormStyle.css'
 
 
@@ -121,6 +122,13 @@ export default function NewPostForm() {
         setPostFiles(updatedFiles);
     };
 
+    // Helper function to check if a file is an image
+    function isImage(file: File) {
+        return file.type.startsWith('image/');
+    }
+
+
+
     return (
         <div className={isVisible ? 'fade-in' : ''}>
             <Form action={onSubmit} className="form-container">
@@ -139,18 +147,32 @@ export default function NewPostForm() {
 
                     {/* Display the list of files the user has uploaded */}
                     {postFiles.length > 0 && (
-                        <ul className="mt-3">
-                            {postFiles.map((file, index) => {
-                                return (
-                                    <li key={index} className="flex justify-between items-center">
+                        <ul className="mt-3 max-h-60 overflow-y-auto p-2">
+                        {postFiles.map((file, index) => {
+                            return (
+                                <li key={index} className="flex justify-between items-center mb-2">
+                                    <div className="flex items-center">
+                                        {/* If it's an image, render a preview */}
+                                        {isImage(file) && (
+                                            <img 
+                                                src={URL.createObjectURL(file)} 
+                                                alt={file.name} 
+                                                className="w-48 h-48 object-cover mr-3" // Larger size (adjust as needed)
+                                            />
+                                        )}
+                
+                                        {/* Display the file name */}
                                         <span>{file.name}</span>
-                                        <Button variant="outline-danger" size="sm" onClick={() => removeFile(index)}>
-                                            Remove
-                                        </Button>
-                                    </li>
-                                )
-                            })}
-                        </ul>
+                                    </div>
+                
+                                    {/* Remove Button */}
+                                    <Button variant="outline-danger" size="sm" onClick={() => removeFile(index)}>
+                                        Remove
+                                    </Button>
+                                </li>
+                            );
+                        })}
+                    </ul>
                     )}
                 </Form.Group>
                 <Form.Group controlId="postCaption">

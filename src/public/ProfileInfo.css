@@ -1,7 +1,12 @@
-.custom-container{
-    width: "calc(100% - 200px)";
-    
-    
+.custom-container{ 
+   
+    justify-content: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* Align the content to the start */
+    align-items: flex-start; /* Align items to the top */
+    overflow: hidden;
+    background-color: purple;
+    max-width: 90%;
     margin-left: 200px;
     
 }
