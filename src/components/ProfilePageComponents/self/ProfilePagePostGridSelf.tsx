@@ -20,7 +20,7 @@ export default function ProfilePagePostGridSelf({ postData, className }: Profile
     });
 
     return (
-        <Container fluid className={className} style={{ marginLeft: '250px', paddingTop: '60px' }}> {/* Adjust margin for the vertical navbar */}
+        <Container fluid className={className} style={{ marginLeft: '250px', paddingTop: '60px' }}> 
             <Row>
                 <Col xs={12} sm={6} md={4} lg={3}>
                     
