@@ -17,7 +17,7 @@ import {
   faPlus,
   faRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
-import {NavLink, useLocation} from "react-router-dom";
+
 
 export default function NavBar2() {
   //John Pork
