@@ -29,7 +29,7 @@ export default function ProfilePageInfoSelf({ profile, numPosts, numFollowers, n
                 {/* User Info */}
                 <Col xs={12} md={8} className="text-center text-md-left">
                   <div className="text-2xl font-semibold">{settings.showName ? profile.firstName + "  " + profile.lastName : profile.username}</div>
-                  <div>{settings.showName ? profile.username : null}</div>
+                  <div className="italic">{settings.showName ? profile.username : null}</div>
                   <Button variant="outline-secondary" size="sm" className="mb-2">
                     <Link href="/profile/settings">Edit Profile</Link>
                   </Button>
@@ -37,21 +37,21 @@ export default function ProfilePageInfoSelf({ profile, numPosts, numFollowers, n
                   {/* Stats */}
                   <Row className="justify-content-center justify-content-md-start my-3">
                     <Col xs={4} className="text-center">
-                      <strong>{numPosts}</strong>
-                      <p>Posts</p>
+                      <strong className="large-font">{numPosts}</strong>
+                      <p className="large-font">Posts</p>
                     </Col>
                     <Col xs={4} className="text-center">
-                      <strong>{numFollowers}</strong>
-                      <Link href="/profile/followers">Followers</Link>
+                      <strong className="large-font">{numFollowers}</strong>
+                      <Link href="/profile/followers" className="large-font-link">Followers</Link>
                     </Col>
                     <Col xs={4} className="text-center">
-                      <strong>{numFollowing}</strong>
-                      <Link href="/profile/following">Following</Link>
+                      <strong className="large-font">{numFollowing}</strong>
+                      <Link className="large-font-link" href="/profile/following">Following</Link>
                     </Col>
                   </Row>
 
                     {/* Bio */}
-                    <p>{profile.about}</p>
+                    <p className="bio">{profile.about}</p>
                 </Col>
             </Row>
         </Container>
