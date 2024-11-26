@@ -1,11 +1,11 @@
 import { Message } from "../lib/models";
 import pool from "../lib/pool";
 
-export async function GET(): Promise<Message[] | string> { 
-    let client; 
-    try { 
+export async function GET(chatId: number): Promise<Message[] | string> {
+    let client;
+    try {
         client = await pool.connect();
-        const result = await client.query("SELECT * FROM messages");
+        const result = await client.query("SELECT * FROM messages WHERE chat_id = $1", [chatId]);
         const messages: Message[] = result.rows.map((row: any) => (
             {
                 messageId: row.messages_id,
@@ -57,9 +57,9 @@ export async function GET_BY_ID(id: number): Promise<Message | string> {
     }
 }
 
-export async function POST(message: Message): Promise<string> { 
-    let client; 
-    try { 
+export async function POST(message: Message): Promise<string> {
+    let client;
+    try {
         client = await pool.connect();
         const result = await client.query(
             "INSERT INTO messages (chat_id, user_id, messages_text, messages_timestamp) VALUES ($1, $2, $3, $4) RETURNING messages_id",
@@ -79,14 +79,14 @@ export async function POST(message: Message): Promise<string> {
 }
 
 export async function PUT(message: Message): Promise<string> {
-    let client; 
-    try { 
+    let client;
+    try {
         client = await pool.connect();
         await client.query(
             "UPDATE messages SET chat_id = $2, user_id = $3, messages_text = $4, messages_timestamp = $5 WHERE messages_id = $1",
             [message.messageId, message.chatId, message.userId, message.messageText, message.messageTime]
         );
-        
+
         return "OK";
     }
     catch (error) {
@@ -100,8 +100,8 @@ export async function PUT(message: Message): Promise<string> {
 }
 
 export async function DELETE(id: number): Promise<string> {
-    let client; 
-    try { 
+    let client;
+    try {
         client = await pool.connect();
         await client.query("DELETE FROM messages WHERE messages_id = $1", [id]);
         return "OK";
@@ -115,3 +115,5 @@ export async function DELETE(id: number): Promise<string> {
         }
     }
 }
+
+
