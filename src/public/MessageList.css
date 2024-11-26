@@ -1,0 +1,173 @@
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.messagesList {
+    width: 200px;
+    background: linear-gradient(135deg, #f5ebff 30%, #f3f0f9 100%);
+    position: fixed;
+    top: 0;
+    left: 200px;
+    height: 100vh;
+    padding: 1rem;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    border-right: 1.5px solid #5a6e5a;
+    text-align: center;
+}
+
+.username {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: black;
+}
+
+.searchBar {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.searchBar input {
+    width: 100%;
+    padding: 0.5rem 2rem 0.5rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+.searchBar .searchIcon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    color: #888;
+}
+
+.dmList {
+    margin-top: 1rem;
+}
+
+.dmItem {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    transition: background-color .5s ease, transform 0.2s ease;
+}
+
+.dmItem:hover {
+    background-color: #e0d4ff;
+    transform: scale(1.02);
+    box-shadow: 0 4px 10px rgba(110, 110, 250, 0.3);
+    /* Adds a shadow effect */
+}
+
+
+.dmItem.selected {
+    background-color: #e0d4ff;
+    /* Same color as hover for selected item */
+}
+
+.avatar {
+    width: 30px;
+    /* Keep the same size as other avatars */
+    height: 30px;
+    background-color: #d1c4e9;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-right: 10px;
+    color: white;
+}
+
+.dmDetails {
+    text-align: left;
+}
+
+.dmUsername {
+    font-weight: bold;
+    margin: 0;
+    color: black;
+}
+
+.lastMessage {
+    color: gray;
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+
+.userSearchResults {
+    margin-top: 10px;
+    background-color: #ffffff;
+    padding: 5px;
+    /* Reduce padding for a smaller box */
+    border-radius: 6px;
+    /* Slightly smaller corner radius */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    /* Softer shadow for a smaller box */
+    max-width: 180px;
+    /* Limit the width of the search result box */
+    margin-left: auto;
+    /* Center the search results horizontally */
+    margin-right: auto;
+}
+
+.userSearchItem {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    /* Reduce the space between elements */
+    margin-bottom: 8px;
+    /* Reduce space between items */
+}
+
+.avatar {
+    width: 30px;
+    /* Smaller avatar size */
+    height: 30px;
+    background: #ddd;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1em;
+    /* Adjust font size inside avatar */
+    font-weight: bold;
+}
+
+.userDetails {
+    display: flex;
+    flex-direction: column;
+}
+
+.username {
+    font-weight: bold;
+    font-size: 1.5rem;
+    /* Slightly smaller username text */
+    margin-bottom: 3px;
+}
+
+.startChatButton {
+    background-color: #ddd;
+    color: #333;
+    border: none;
+    padding: 3px 6px;
+    /* Further reduced padding */
+    border-radius: 15px;
+    /* Smaller rounded button */
+    font-size: 0.7em;
+    /* Smaller font size */
+    cursor: pointer;
+    align-self: flex-start;
+    /* Align button to the start */
+}
+
+.startChatButton:hover {
+    background-color: #bbb;
+}

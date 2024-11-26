@@ -89,4 +89,12 @@ export interface Message {
     messageTime: Date;
 }
 
+export interface CreateNewChat {
+    selfUserId: number;
+    otherUserId: number;
+}
+
+export interface Chat {
+    chatId: number;
+}
 
