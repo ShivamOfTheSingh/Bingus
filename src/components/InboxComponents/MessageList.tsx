@@ -71,7 +71,7 @@ const MessageList = ({ username, currentUserId, profiles }: DMListProp) => {
   // Get all existing chats
   const fetchChats = async () => {
     try {
-      const response = await fetch("/api/crud/create_chat", {
+      const response = await fetch("https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/create_chat", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -93,7 +93,7 @@ const MessageList = ({ username, currentUserId, profiles }: DMListProp) => {
   // Start new chat
   const startChat = async ({ selfUserId, otherUserId }: CreateNewChat) => {
     try {
-      const response = await fetch("/api/crud/create_chat", {
+      const response = await fetch("https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/create_chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
