@@ -7,39 +7,50 @@ import ProfilePagePostGridOther from "@/components/ProfilePageComponents/other/P
 import ProfilePageInfoOther from "@/components/ProfilePageComponents/other/ProfilePageInfoOther";
 import { Following } from "@/lib/db/models";
 
-async function getFollowingStatus(selfId: number, otherId: number): Promise<Following> {
-    const response = await fetch(`https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/followings/pair?selfId=${selfId}&otherId=${otherId}`);
-    if (response.status === 200) {
-        const following: Following = await response.json();
-        return following;
-    }
-    else {
-        return {
-            userId: selfId,
-            followedUserId: otherId
-        }
-    }
+async function getFollowingStatus(
+  selfId: number,
+  otherId: number
+): Promise<Following> {
+  const response = await fetch(
+    `https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/followings/pair?selfId=${selfId}&otherId=${otherId}`
+  );
+  if (response.status === 200) {
+    const following: Following = await response.json();
+    return following;
+  } else {
+    return {
+      userId: selfId,
+      followedUserId: otherId,
+    };
+  }
 }
 
 export default async function Page({ params }: { params: { id: string } }) {
-    const selfId = await getCurrentSessionUserId();
-    if (selfId === -1) {
-      redirect("/login");
-    }
+  const selfId = await getCurrentSessionUserId();
+  if (selfId === -1) {
+    redirect("/login");
+  }
 
-    if (selfId === parseInt(params.id)) {
-        redirect("/profile");
-    }
+  if (selfId === parseInt(params.id)) {
+    redirect("/profile");
+  }
 
-    const pageData = await getProfilePageData(parseInt(params.id));
+  const pageData = await getProfilePageData(parseInt(params.id));
 
-    const following = await getFollowingStatus(selfId, parseInt(params.id));
+  const following = await getFollowingStatus(selfId, parseInt(params.id));
 
-    console.log(following);
-    return (
-        <div>
-            <ProfilePageInfoOther profile={pageData.profile} numPosts={pageData.numPosts} following={following} numFollowers={pageData.numFollowers} numFollowing={pageData.numFollowing} settings={pageData.settings} />
-            <ProfilePagePostGridOther postData={pageData.posts} />
-        </div>
-    );
+  console.log(following);
+  return (
+    <div>
+      <ProfilePageInfoOther
+        profile={pageData.profile}
+        numPosts={pageData.numPosts}
+        following={following}
+        numFollowers={pageData.numFollowers}
+        numFollowing={pageData.numFollowing}
+        settings={pageData.settings}
+      />
+      <ProfilePagePostGridOther postData={pageData.posts} />
+    </div>
+  );
 }

@@ -9,7 +9,7 @@ import loginUserSchema from "@/lib/form_schemas/loginFormSchema";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import ApiError from "@/lib/errors/ApiError";
-import '@/public/LoginFormStyle.css'
+import "@/public/LoginFormStyle.css";
 
 interface LoginValidateErrors {
   email: string | null;
@@ -22,7 +22,7 @@ export default function LoginForm() {
   const [password, setPassword] = useState("");
   // Pending submit state
   const [pending, setPending] = useState(false);
-  // Validate form errors state  
+  // Validate form errors state
   const [validateErrors, setValidateErrors] = useState<LoginValidateErrors>({
     email: null,
     password: null,
@@ -78,69 +78,72 @@ export default function LoginForm() {
   }
 
   return (
-    <div className={isVisible ? 'fade-in' : ''}>
+    <div className={isVisible ? "fade-in" : ""}>
       <Form
         action={onSubmit}
         className="form-container" // Add custom class for styling
       >
-          <h1>Welcome to Bingus</h1> {/* Use <h1> for the title */}
-          <Form.Group controlId="email">
-            <Form.Label className="label">Email</Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              disabled={pending}
-            />
-            {validateErrors.email && (
-              <Form.Label className="text-red-600">{validateErrors.email}</Form.Label>
+        <h1>Welcome to Bingus</h1> {/* Use <h1> for the title */}
+        <Form.Group controlId="email">
+          <Form.Label className="label">Email</Form.Label>
+          <Form.Control
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            disabled={pending}
+          />
+          {validateErrors.email && (
+            <Form.Label className="text-red-600">
+              {validateErrors.email}
+            </Form.Label>
+          )}
+        </Form.Group>
+        <Form.Group controlId="password">
+          <Form.Label className="label">Password</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            disabled={pending}
+          />
+          {validateErrors.password && (
+            <Form.Label className="text-red-600">
+              {validateErrors.password}
+            </Form.Label>
+          )}
+        </Form.Group>
+        <Form.Group controlId="submit" className="flex justify-center flex-col">
+          <Button
+            variant="primary"
+            type="submit"
+            disabled={pending}
+            className="flex justify-center"
+            style={{ marginTop: 20 }}
+          >
+            {pending ? (
+              <div className="flex gap-2 items-center">
+                <Spinner size="sm" animation="border" />
+                Submitting...
+              </div>
+            ) : (
+              "Login"
             )}
-          </Form.Group>
-          <Form.Group controlId="password">
-            <Form.Label className="label">Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              disabled={pending}
-            />
-            {validateErrors.password && (
-              <Form.Label className="text-red-600">{validateErrors.password}</Form.Label>
-            )}
-          </Form.Group>
-          <Form.Group controlId="submit" className="flex justify-center flex-col">
-            <Button
-              variant="primary"
-              type="submit"
-              disabled={pending}
-              className="flex justify-center"
-              style={{marginTop:20}}
-            >
-              {pending ? (
-                <div className="flex gap-2 items-center">
-                  <Spinner size="sm" animation="border" />
-                  Submitting...
-                </div>
-              ) : (
-                "Login"
-              )}
-            </Button>
-            {invalid && (
-              <Form.Label className="text-red-600">
-                Email and/or password is incorrect.
-              </Form.Label>
-            )}
-          </Form.Group>
-          <div className="link" >
-            Don&apos;t have an account?{" "}
-            <Link href="/register" className="text-[#8f6ccc]">
-              Register
-            </Link>
-          </div>
+          </Button>
+          {invalid && (
+            <Form.Label className="text-red-600">
+              Email and/or password is incorrect.
+            </Form.Label>
+          )}
+        </Form.Group>
+        <div className="link">
+          Don&apos;t have an account?{" "}
+          <Link href="/register" className="text-[#8f6ccc]">
+            Register
+          </Link>
+        </div>
       </Form>
     </div>
-
   );
 }
