@@ -13,7 +13,7 @@ import { Socket } from "dgram";
 const app = express();
 
 app.use(cors({
-    origin: ["http://localhost:3000", "https://production.d3drl1bcjmxovs.amplifyapp.com"],
+    origin: ["http://localhost:3000", "https://production.d3drl1bcjmxovs.amplifyapp.com", "https://bingus.website"],
     methods: ["GET", "POST"],
     credentials: true,
 }));
@@ -26,7 +26,7 @@ const server = https.createServer({
 //const server = createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: ["http://localhost:3000", "https://production.d3drl1bcjmxovs.amplifyapp.com"],
+        origin: ["http://localhost:3000", "https://production.d3drl1bcjmxovs.amplifyapp.com", "https://bingus.website"],
         methods: ["GET", "POST"],
         credentials: true,
     },
