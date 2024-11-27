@@ -17,8 +17,7 @@ export async function GET(request: Request): Promise<Response> {
             {
                 commentVoteId: row.comment_vote_id,
                 postCommentId: row.post_comment_id,
-                userId: row.user_id,
-                commentVoteValue: row.comment_vote_value
+                userId: row.user_id
             }
         ));
         return new Response(JSON.stringify(commentVotes), { status: 200 });
@@ -50,8 +49,8 @@ export async function POST(request: Request): Promise<Response> {
         commentVote.userId = userId;
         client = await pool.connect();
         const result = await client.query(
-            "INSERT INTO comment_vote (post_comment_id, user_id, comment_vote_value) VALUES ($1, $2, $3) RETURNING comment_vote_id",
-            [commentVote.postCommentId, commentVote.userId, commentVote.commentVoteValue]
+            "INSERT INTO comment_vote (post_comment_id, user_id) VALUES ($1, $2) RETURNING comment_vote_id",
+            [commentVote.postCommentId, commentVote.userId]
         );
         const id = result.rows[0].comment_vote_id;
         return new Response(JSON.stringify({ commentVoteId: id }), { status: 201 });
@@ -83,8 +82,8 @@ export async function PUT(request: Request): Promise<Response> {
         commentVote.userId = userId;
         client = await pool.connect();
         await client.query(
-            "UPDATE comment_vote SET post_comment_id = $2, user_id = $3, comment_vote_value = $4 WHERE comment_vote_id = $1",
-            [commentVote.commentVoteId, commentVote.postCommentId, commentVote.userId, commentVote.commentVoteValue]
+            "UPDATE comment_vote SET post_comment_id = $2, user_id = $3 WHERE comment_vote_id = $1",
+            [commentVote.commentVoteId, commentVote.postCommentId, commentVote.userId]
         );
 
         return new Response("OK", { status: 200 });
@@ -110,7 +109,7 @@ export async function DELETE(request: Request): Promise<Response> {
     try {
         const { id } = await request.json();
         const userId = await getCurrentSessionUserId();
-        if (userId === -1 || userId !== id) {
+        if (userId === -1) {
             return new Response("Unauthorized API call", { status: 401 });
         }
         client = await pool.connect();

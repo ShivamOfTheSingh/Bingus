@@ -10,8 +10,7 @@ import { UserAuth, UserProfile, UserSettings } from "@/lib/db/models";
 import { Alert } from "react-bootstrap";
 import Link from "next/link";
 import ApiError from "@/lib/errors/ApiError";
-import '@/public/RegisterFormStyle.css'
-
+import "@/public/RegisterFormStyle.css";
 
 interface RegisterValidateErrors {
   firstName: string | null;
@@ -125,7 +124,7 @@ export default function RegisterForm() {
         gender: gender,
         birthDate: new Date(birthdate),
         about: "",
-        profilePicture: ""
+        profilePicture: "",
       };
       const userProfileResponse = await fetch(
         "https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/user_profile",
@@ -138,26 +137,27 @@ export default function RegisterForm() {
       if (userProfileResponse.status === 409) {
         setUserExistsError(true);
         setPending(false);
-      }
-      else if (userProfileResponse.status === 201) {
+      } else if (userProfileResponse.status === 201) {
         const userProfileResponseBody = await userProfileResponse.json();
         const userId = userProfileResponseBody.userId;
 
         const userSettings: UserSettings = {
           userId: userId,
           showName: false,
-          profilePublic: true
+          profilePublic: true,
         };
-        const userSettingsResponse = await fetch("https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/user_settings", {
-          method: "POST",
-          body: JSON.stringify(userSettings)
-        });
+        const userSettingsResponse = await fetch(
+          "https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/user_settings",
+          {
+            method: "POST",
+            body: JSON.stringify(userSettings),
+          }
+        );
 
         if (userSettingsResponse.status === 409) {
           setUserExistsError(true);
           setPending(false);
-        }
-        else if (userSettingsResponse.status === 201) {
+        } else if (userSettingsResponse.status === 201) {
           const userAuth: UserAuth = {
             password: password,
             dateRegistered: new Date(),
@@ -195,13 +195,10 @@ export default function RegisterForm() {
   }
 
   return (
-    <div className={isVisible ? 'fade-in' : ''}>
-      <Form
-        action={onSubmit}
-        className="form-container"
-      >
+    <div className={isVisible ? "fade-in" : ""}>
+      <Form action={onSubmit} className="form-container">
         <h1> Sign Up for Bingus</h1>
-        
+
         <Form.Group controlId="firstname">
           <Form.Label className="form-label">First Name</Form.Label>
           <Form.Control
@@ -334,7 +331,12 @@ export default function RegisterForm() {
           )}
         </Form.Group>
         <Form.Group controlId="submit" className="flex justify-center flex-col">
-          <Button variant="primary" type="submit" disabled={pending} style={{marginTop:20}}>
+          <Button
+            variant="primary"
+            type="submit"
+            disabled={pending}
+            style={{ marginTop: 20 }}
+          >
             {pending ? (
               <div className="flex gap-2 items-center">
                 <Spinner size="sm" animation="border" />
@@ -345,7 +347,9 @@ export default function RegisterForm() {
             )}
           </Button>
           {userExistsError && (
-            <Form.Label className="text-red-600">User already exists.</Form.Label>
+            <Form.Label className="text-red-600">
+              User already exists.
+            </Form.Label>
           )}
         </Form.Group>
         <div>
@@ -355,7 +359,10 @@ export default function RegisterForm() {
           </Link>
         </div>
         {success && (
-          <div className="position-fixed top-0 end-0 p-3" style={{ zIndex: 1050 }}>
+          <div
+            className="position-fixed top-0 end-0 p-3"
+            style={{ zIndex: 1050 }}
+          >
             <Alert variant="success">
               <Alert.Heading>User registered successfully.</Alert.Heading>
               <p>Redirecting to login page...</p>
@@ -364,6 +371,5 @@ export default function RegisterForm() {
         )}
       </Form>
     </div>
-
   );
 }

@@ -23,8 +23,7 @@ export async function GET(request: Request, { params }: { params: { id: string }
         const postVote: PostVote = {
             postVoteId: result.rows[0].post_likes_id,
             postId: result.rows[0].post_id,
-            userId: result.rows[0].user_id,
-            postVoteValue: result.rows[0].post_vote_value
+            userId: result.rows[0].user_id
         };
         return new Response(JSON.stringify(postVote), { status: 200 });
     } 
