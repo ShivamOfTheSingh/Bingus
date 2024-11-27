@@ -87,10 +87,8 @@ export default function NavBar2() {
             Notifications
           </Link>
         </Nav.Item>
-        <Nav.Item
-          className={`nav-item-custom ${pathName === "/post" ? "active" : ""}`}
-        >
-          <Link className="link" href="/profile">
+        <Nav.Item className={`nav-item-custom ${pathName === "/post" ? "active" : ""}`}>
+          <Link className="link" href="/post">
             <span className="icon">
               <FontAwesomeIcon icon={faPlus} style={{ color: "black" }} />
             </span>

@@ -1,0 +1,9 @@
+.container{
+    margin-left: 200px; 
+    
+    max-height: 100vh;
+    overflow-y: scroll;
+    justify-items: center;
+    
+    background-color: #ffffff; 
+}

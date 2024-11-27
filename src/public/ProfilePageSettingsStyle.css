@@ -1,0 +1,23 @@
+.settings-label{
+    font-family: Geneva;
+    font-size: large;
+    font-weight: bold;
+}
+
+.settings-info{
+    font-family: Geneva;
+    font-size: medium;
+    font-style: italic;
+
+}
+
+.button{
+    margin-left: 260px;
+    width: fit-content;
+    justify-self:center;
+}
+
+.button-text{
+    text-decoration-line: none;
+    color: white;
+}

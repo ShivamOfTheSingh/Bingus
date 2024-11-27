@@ -1,6 +1,7 @@
 import { UserProfile, UserSettings } from "@/lib/db/models";
 import formatDate from "@/lib/utils/formatDate";
 import Image from "next/image";
+import '@/public/ProfilePageSettingsStyle.css'
 
 export interface ProfilePageSettingsProps {
     profile: UserProfile;
@@ -15,30 +16,30 @@ export default function ProfilePageSettings({ profile, settings, className }: Pr
                 <Image src={profile.profilePicture} alt={profile.username} width={200} height={200} className="rounded-full" />
             </div>
             <div>
-                <div>Profile Visibility</div>
-                <div>{settings.profilePublic ? "Public" : "Private"}</div>
+                <div className="settings-label">Profile Visibility</div>
+                <div className="settings-info">{settings.profilePublic ? "Public" : "Private"}</div>
             </div>
             <div>
-                <div>Username</div>
-                <div>{profile.username}</div>
+                <div className="settings-label">Username</div>
+                <div className="settings-info">{profile.username}</div>
             </div>
             <div>
-                <div>Full Name</div>
-                <div>{profile.firstName} {profile.lastName}</div>
-                <div>Full Name Visibility</div>
-                <div>{settings.showName ? "Public" : "Private"}</div>
+                <div className="settings-label">Full Name</div>
+                <div className="settings-info">{profile.firstName} {profile.lastName} </div>
+                <div className="settings-label">Full Name Visibility</div>
+                <div className="settings-info">{settings.showName ? "Public" : "Private"}</div>
             </div>
             <div>
-                <div>Email</div>
-                <div>{profile.email}</div>
+                <div className="settings-label">Email</div>
+                <div className="settings-info">{profile.email}</div>
             </div>
             <div>
-                <div>Birthdate</div>
-                <div>{formatDate(profile.birthDate)}</div>
+                <div className="settings-label">Birthdate</div>
+                <div className="settings-info">{formatDate(profile.birthDate)}</div>
             </div>
             <div>
-                <div>About</div>
-                <div>{profile.about}</div>
+                <div className="settings-label">About</div>
+                <div className="settings-info">{profile.about}</div>
             </div>
         </div>
     );
