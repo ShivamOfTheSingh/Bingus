@@ -14,7 +14,7 @@ export default async function Page({ params }: { params: { id: string } }) {
     }
 
     const { post, user, media, voteCount, userVote, commentsWithReplies, userSelf } = await getPostPageData(parseInt(params.id), userId);
-    console.log(commentsWithReplies[0].replies);
+    //console.log(commentsWithReplies[0].replies);
     return (
         <div>
             <PostComponent post={post} media={media} user={user} voteCount={voteCount} userVote={userVote} userIdSelf={userId} />

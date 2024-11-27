@@ -51,7 +51,8 @@ export default function NavBar2() {
             Home
           </Link>
         </Nav.Item>
-        <Nav.Item
+        
+        {/* <Nav.Item
           className={`nav-item-custom ${
             pathName === "/search" ? "active" : ""
           }`}
@@ -62,7 +63,8 @@ export default function NavBar2() {
             </span>
             Search
           </Link>
-        </Nav.Item>
+        </Nav.Item> */}
+
         <Nav.Item
           className={`nav-item-custom ${
             isMessageActive ? "active" : ""
@@ -75,18 +77,21 @@ export default function NavBar2() {
             Messages
           </Link>
         </Nav.Item>
-        <Nav.Item
+        
+        {/* <Nav.Item
           className={`nav-item-custom ${
             pathName === "/notifications" ? "active" : ""
           }`}
         >
+          
           <Link className="link" href="/profile">
             <span className="icon">
               <FontAwesomeIcon icon={faBell} style={{ color: "black" }} />
             </span>
             Notifications
           </Link>
-        </Nav.Item>
+        </Nav.Item> */}
+
         <Nav.Item className={`nav-item-custom ${pathName === "/post" ? "active" : ""}`}>
           <Link className="link" href="/post">
             <span className="icon">
