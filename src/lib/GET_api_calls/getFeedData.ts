@@ -28,7 +28,7 @@ export default async function getFeedData(): Promise<PostsList> {
     const posts: Post[] = await resPosts.json();
 
     const postsWithMedia: { post: Post; media: Media[] }[] = [];
-    
+
     // Fetch media for each post and combine post data with its media
     for (let i = 0; i < posts.length; i++) {
       const resMedia = await fetch(`https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/posts/media/${posts[i].postId}`);

@@ -57,6 +57,6 @@ export async function unfollowUser(followingId: number): Promise<boolean> {
         return response.status === 200; // Assuming your API returns { userId, followedUserId }
     } catch (error) {
         console.error("Error unfollowing user:", error);
-        throw error; 
+        throw error;
     }
 }

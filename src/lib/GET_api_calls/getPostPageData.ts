@@ -22,7 +22,7 @@ export default async function getPostPageData(postId: number, userId: number): P
     const media: Media[] = await mediaResponse.json();
     const voteCountObject = await votesResponse.json();
     const voteCount: number = voteCountObject.count;
-    
+
     const userVoteResponse = await fetch(`https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/post_vote/user_post_pair?userId=${userId}&postId=${postId}`);
     let userVote;
     if (userVoteResponse.status === 404) {
@@ -54,7 +54,7 @@ export default async function getPostPageData(postId: number, userId: number): P
         const voteCountObject = await votesResponse.json();
         const voteCount: number = voteCountObject.count;
         const replies: CommentReply[] = await repliesResponse.json();
-        
+
         const replyObjects: { reply: CommentReply, user: UserProfile }[] = [];
         for (let j = 0; j < replies.length; j++) {
             const replyUserResponse = await fetch(`https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/user_profile/${replies[j].userId}`);
