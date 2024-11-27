@@ -14,7 +14,7 @@ export default async function getFeedData(): Promise<PostsList> {
   console.log("Fetching feed data...");
 
   // Fetch all user profiles
-  const users = await fetch('https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/user_profile').then(res => res.json());
+  const users = await fetch('https://bingus.website//api/crud/user_profile').then(res => res.json());
 
   const postsList: PostsList = { posts: [] };
 
@@ -24,14 +24,14 @@ export default async function getFeedData(): Promise<PostsList> {
     console.log(`Fetching posts for user ID: ${userId}`);
 
     // Fetch posts for the user
-    const resPosts = await fetch(`https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/user_profile/posts/${userId}`);
+    const resPosts = await fetch(`https://bingus.website//api/crud/user_profile/posts/${userId}`);
     const posts: Post[] = await resPosts.json();
 
     const postsWithMedia: { post: Post; media: Media[] }[] = [];
 
     // Fetch media for each post and combine post data with its media
     for (let i = 0; i < posts.length; i++) {
-      const resMedia = await fetch(`https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/posts/media/${posts[i].postId}`);
+      const resMedia = await fetch(`https://bingus.website//api/crud/posts/media/${posts[i].postId}`);
       const mediaArray: Media[] = await resMedia.json();
       postsWithMedia.push({
         post: posts[i],
@@ -40,7 +40,7 @@ export default async function getFeedData(): Promise<PostsList> {
     }
 
     // Fetch user profile for the current user
-    const resProfile = await fetch(`https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/user_profile/${userId}`);
+    const resProfile = await fetch(`https://bingus.website//api/crud/user_profile/${userId}`);
     if (resProfile.status === 404) {
       notFound(); // Handle 404 error for missing profile
     }

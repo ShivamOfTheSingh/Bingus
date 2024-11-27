@@ -123,14 +123,14 @@ export default function ProfilePageSettingsForm({
       };
 
       const profileResponse = await fetch(
-        "https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/user_profile",
+        "https://bingus.website//api/crud/user_profile",
         {
           method: "PUT",
           body: JSON.stringify(upadtedProfile),
         }
       );
       const settingsResponse = await fetch(
-        "https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/user_settings",
+        "https://bingus.website//api/crud/user_settings",
         {
           method: "PUT",
           body: JSON.stringify(updatedSettings),

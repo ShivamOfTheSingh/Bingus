@@ -13,7 +13,7 @@ interface ReturnData {
 export async function getFollowingPageData(userId: number): Promise<ReturnData> {
     try {
         // 1. Get all users
-        const usersResponse = await fetch("https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/user_profile");
+        const usersResponse = await fetch("https://bingus.website//api/crud/user_profile");
         const users: UserProfile[] = await usersResponse.json();
 
         // 2.  filter out yourself
@@ -24,7 +24,7 @@ export async function getFollowingPageData(userId: number): Promise<ReturnData> 
         const followingReturnData: SubReturnData[] = [];
         const suggestedReturnData: SubReturnData[] = [];
         for (let i = 0; i < usersFiltered.length; i++) {
-            const followingResponse = await fetch(`https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/followings/pair?selfId=${userId}&otherId=${usersFiltered[i].userId}`);
+            const followingResponse = await fetch(`https://bingus.website//api/crud/followings/pair?selfId=${userId}&otherId=${usersFiltered[i].userId}`);
             if (followingResponse.status === 200) {
                 const following: Following = await followingResponse.json();
                 followingReturnData.push({

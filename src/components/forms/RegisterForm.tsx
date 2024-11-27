@@ -127,7 +127,7 @@ export default function RegisterForm() {
         profilePicture: "",
       };
       const userProfileResponse = await fetch(
-        "https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/user_profile",
+        "https://bingus.website//api/crud/user_profile",
         {
           method: "POST",
           body: JSON.stringify(userProfile),
@@ -147,7 +147,7 @@ export default function RegisterForm() {
           profilePublic: true,
         };
         const userSettingsResponse = await fetch(
-          "https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/user_settings",
+          "https://bingus.website//api/crud/user_settings",
           {
             method: "POST",
             body: JSON.stringify(userSettings),
@@ -164,7 +164,7 @@ export default function RegisterForm() {
             userId: userId,
           };
           const registerUserResponse = await fetch(
-            "https://production.d3drl1bcjmxovs.amplifyapp.com/api/session/register",
+            "https://bingus.website//api/session/register",
             {
               method: "POST",
               body: JSON.stringify(userAuth),

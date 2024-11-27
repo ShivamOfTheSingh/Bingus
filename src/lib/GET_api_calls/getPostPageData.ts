@@ -12,18 +12,18 @@ interface ReturnData {
 }
 
 export default async function getPostPageData(postId: number, userId: number): Promise<ReturnData> {
-    const postResponse = await fetch(`https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/posts/${postId}`);
+    const postResponse = await fetch(`https://bingus.website//api/crud/posts/${postId}`);
 
     if (postResponse.status === 404) notFound();
 
-    const mediaResponse = await fetch(`https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/posts/media/${postId}`);
-    const votesResponse = await fetch(`https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/posts/voteCounts/${postId}`);
+    const mediaResponse = await fetch(`https://bingus.website//api/crud/posts/media/${postId}`);
+    const votesResponse = await fetch(`https://bingus.website//api/crud/posts/voteCounts/${postId}`);
     const post: Post = await postResponse.json();
     const media: Media[] = await mediaResponse.json();
     const voteCountObject = await votesResponse.json();
     const voteCount: number = voteCountObject.count;
 
-    const userVoteResponse = await fetch(`https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/post_vote/user_post_pair?userId=${userId}&postId=${postId}`);
+    const userVoteResponse = await fetch(`https://bingus.website//api/crud/post_vote/user_post_pair?userId=${userId}&postId=${postId}`);
     let userVote;
     if (userVoteResponse.status === 404) {
         userVote = null;
@@ -32,18 +32,18 @@ export default async function getPostPageData(postId: number, userId: number): P
         userVote = await userVoteResponse.json();
     }
 
-    const userResponse = await fetch(`https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/user_profile/${post.userId}`);
+    const userResponse = await fetch(`https://bingus.website//api/crud/user_profile/${post.userId}`);
     const user: UserProfile = await userResponse.json();
 
-    const commentsResponse = await fetch(`https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/posts/comments/${post.postId}`);
+    const commentsResponse = await fetch(`https://bingus.website//api/crud/posts/comments/${post.postId}`);
     const comments: PostComment[] = await commentsResponse.json();
 
     const commentsWithReplies: { user: UserProfile, userVote: CommentVote, voteCount: number, comment: PostComment, replies: { reply: CommentReply, user: UserProfile }[] }[] = [];
     for (let i = 0; i < comments.length; i++) {
-        const repliesResponse = await fetch(`https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/post_comment/replies/${comments[i].postCommentId}`);
-        const userResponse = await fetch(`https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/user_profile/${comments[i].userId}`);
-        const votesResponse = await fetch(`https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/post_comment/voteCounts/${comments[i].postCommentId}`);
-        const userVoteResponse = await fetch(`https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/comment_vote/user_comment_pair?userId=${userId}&postCommentId=${comments[i].postCommentId}`);
+        const repliesResponse = await fetch(`https://bingus.website//api/crud/post_comment/replies/${comments[i].postCommentId}`);
+        const userResponse = await fetch(`https://bingus.website//api/crud/user_profile/${comments[i].userId}`);
+        const votesResponse = await fetch(`https://bingus.website//api/crud/post_comment/voteCounts/${comments[i].postCommentId}`);
+        const userVoteResponse = await fetch(`https://bingus.website//api/crud/comment_vote/user_comment_pair?userId=${userId}&postCommentId=${comments[i].postCommentId}`);
         let userVote;
         if (userVoteResponse.status === 404) {
             userVote = null;
@@ -57,7 +57,7 @@ export default async function getPostPageData(postId: number, userId: number): P
 
         const replyObjects: { reply: CommentReply, user: UserProfile }[] = [];
         for (let j = 0; j < replies.length; j++) {
-            const replyUserResponse = await fetch(`https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/user_profile/${replies[j].userId}`);
+            const replyUserResponse = await fetch(`https://bingus.website//api/crud/user_profile/${replies[j].userId}`);
             const replyUser: UserProfile = await replyUserResponse.json();
             replyObjects.push({
                 reply: replies[j],
@@ -75,7 +75,7 @@ export default async function getPostPageData(postId: number, userId: number): P
         });
     }
 
-    const userSelfResponse = await fetch(`https://production.d3drl1bcjmxovs.amplifyapp.com/api/crud/user_profile/${userId}`);
+    const userSelfResponse = await fetch(`https://bingus.website//api/crud/user_profile/${userId}`);
     const userSelf: UserProfile = await userSelfResponse.json();
 
     return { post, user, media, voteCount, userVote, commentsWithReplies, userSelf };

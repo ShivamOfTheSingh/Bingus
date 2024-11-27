@@ -25,7 +25,7 @@ export default function NavBar2() {
   const router = useRouter();
   const isMessageActive = pathName.startsWith("/conversations");
   async function logout() {
-    const response = await fetch("https://production.d3drl1bcjmxovs.amplifyapp.com/api/session/logout", {
+    const response = await fetch("https://bingus.website//api/session/logout", {
       method: "PATCH",
     });
     if (response.status == 200) {

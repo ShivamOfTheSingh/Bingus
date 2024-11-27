@@ -54,7 +54,7 @@ export default function LoginForm() {
       });
       setPending(false);
     } else {
-      const response = await fetch("https://production.d3drl1bcjmxovs.amplifyapp.com/api/session/login", {
+      const response = await fetch("https://bingus.website//api/session/login", {
         method: "POST",
         body: JSON.stringify({
           email: email,
