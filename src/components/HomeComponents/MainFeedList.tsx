@@ -30,11 +30,11 @@ export default function MainFeedList({ postData, className }: MainFeedListSelfPr
   }, [postData]);
 
   return (
-    <Container fluid className={className} style={{ marginLeft: '250px', paddingTop: '60px' }}>
+    <Container fluid className={className} style={{ paddingTop: '60px' }}>
       {/* Render posts as a list */}
       <div>
         {sortedPosts.map((pd, index) => (
-          <div key={index} style={{ marginBottom: '20px' }}>
+          <div key={index} style={{ marginBottom: '40px' }}>
             {/* Pass the required props to MainFeedPost */}
             <MainFeedPost 
               post={pd.post} 
