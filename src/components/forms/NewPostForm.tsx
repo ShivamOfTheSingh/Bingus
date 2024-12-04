@@ -69,7 +69,7 @@ export default function NewPostForm() {
                 caption: postCaption,
                 datePosted: new Date()
             };
-            const postResponse = await fetch("https://bingus.website//api/crud/posts", {
+            const postResponse = await fetch("https://bingus.website/api/crud/posts", {
                 method: "POST",
                 body: JSON.stringify(post)
             });
@@ -82,7 +82,7 @@ export default function NewPostForm() {
                         postId: postId,
                         mediaUrl: data
                     };
-                    const mediaResponse = await fetch("https://bingus.website//api/crud/media", {
+                    const mediaResponse = await fetch("https://bingus.website/api/crud/media", {
                         method: "POST",
                         body: JSON.stringify(media)
                     });
