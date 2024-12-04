@@ -9,6 +9,8 @@ import timestampToTimeAgo from "@/lib/utils/timestampToTimeAgo";
 import LikeButton from "./LikeButton";
 import { useState } from "react";
 
+import "@/public/PostComponent.css";
+
 interface PostComponentProps {
     post: Post;
     media: Media[];
@@ -19,25 +21,32 @@ interface PostComponentProps {
     className?: string;
 }
 
-export default function PostComponent({ post, media, user, voteCount, userVote, userIdSelf, className }: PostComponentProps) {
+export default function PostComponent({
+    post,
+    media,
+    user,
+    voteCount,
+    userVote,
+    userIdSelf,
+    className,
+}: PostComponentProps) {
     const [userVoteState, setUserVoteState] = useState<PostVote | null>(userVote);
 
     async function onLike() {
         if (userVoteState) {
             await fetch("https://bingus.website//api/crud/post_vote", {
                 method: "DELETE",
-                body: JSON.stringify({ id: userVoteState.postVoteId })
+                body: JSON.stringify({ id: userVoteState.postVoteId }),
             });
             setUserVoteState(null);
-        }
-        else {
+        } else {
             const newVote: PostVote = {
                 userId: userIdSelf,
-                postId: post.postId || -1
+                postId: post.postId || -1,
             };
             const response = await fetch("https://bingus.website//api/crud/post_vote", {
                 method: "POST",
-                body: JSON.stringify(newVote)
+                body: JSON.stringify(newVote),
             });
             const { postVoteId } = await response.json();
             newVote.postVoteId = postVoteId;
@@ -46,8 +55,8 @@ export default function PostComponent({ post, media, user, voteCount, userVote, 
     }
 
     return (
-        <Container className={`${className} flex flex-col items-center`}>
-            <Row>
+        <Container className={`${className} post-container`}>
+            <Row className="post-header">
                 <Col>
                     <Image src={user.profilePicture} alt={user.username} height={50} width={50} />
                 </Col>
@@ -57,18 +66,19 @@ export default function PostComponent({ post, media, user, voteCount, userVote, 
                     </Link>
                 </Col>
             </Row>
-            <Row>
+            <Row className="post-media">
                 <MediaScroll media={media} />
             </Row>
-            <Row>
+            <Row className="post-caption">
                 {post.caption}
             </Row>
-            <Row>
+            <Row className="post-timestamp">
                 {timestampToTimeAgo(post.datePosted)}
             </Row>
-            <Row>
-                <Col>
+            <Row className="post-footer">
+                <Col className="like-button-container">
                     <LikeButton liked={userVoteState ? true : false} count={voteCount} onClick={onLike} size={"lg"} />
+                    <span className="like-count">{voteCount}</span>
                 </Col>
             </Row>
         </Container>

@@ -5,6 +5,7 @@ import { Card } from "react-bootstrap";
 import timestampToTimeAgo from "@/lib/utils/timestampToTimeAgo";
 import Image from "next/image";
 import Link from "next/link";
+import "@/public/ProfilePagePost.css"; 
 
 interface ProfilePagePostProps {
     post: Post,
@@ -13,10 +14,9 @@ interface ProfilePagePostProps {
 }
 
 export default function ProfilePagePost({ post, thumbnail, className }: ProfilePagePostProps) {
-    console.log(thumbnail);
     return (
         <Link href={`/post/${post.postId}`} className="no-underline">
-            <Card className={`${className} w-72 h-80`}>
+            <Card className={`profile-post-card ${className}`}>
                 <Card.Body>
                     <Card.Text>
                         {post.caption}

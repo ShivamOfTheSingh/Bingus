@@ -7,6 +7,7 @@ import FollowButton from "../FollowButton";
 import Image from "next/image";
 import profilePicTemp from "@/public/profile-pic-temp.jpg";
 import Link from "next/link";
+import '@/public/ProfileInfo.css'
 
 interface ProfilePageInfoOtherProps {
     profile: UserProfile;
@@ -17,45 +18,44 @@ interface ProfilePageInfoOtherProps {
     settings: UserSettings;
     className?: string;
 }
-
-export default function ProfilePageInfoOther({ profile, numPosts, following, numFollowers, numFollowing, settings, className }: ProfilePageInfoOtherProps) {
+export default function ProfilePageInfoOther({ profile, numPosts, numFollowers, numFollowing, settings, className }: ProfilePageInfoOtherProps) {
     return (
-        <Container className={`${className} py-4`}>
+        <Container className={`${className} py-4 custom-container`} > {/* Adjust margin for the vertical navbar */}
             <Row className="justify-content-center">
                 {/* Profile Picture */}
                 <Col xs={12} md={4} className="text-center mb-4">
                     <Image
-                        src={profilePicTemp}
-                        style={{ width: "150px", height: "150px", borderRadius: "50%" }}
+                        src={profile.profilePicture || profilePicTemp} // Fallback to a temporary image if none provided
                         alt={`${profile.username}'s profile`}
+                        width={200} height={200} className="rounded-circle"
                     />
                 </Col>
-
                 {/* User Info */}
                 <Col xs={12} md={8} className="text-center text-md-left">
-                <div className="text-2xl font-semibold">{settings.showName ? profile.firstName + " " + profile.lastName : profile.username}</div>
-                <div>{settings.showName ? profile.username : null}</div>
+                  <div className="text-2xl font-semibold">{settings.showName ? profile.firstName + "  " + profile.lastName : profile.username}</div>
+                  <div className="italic">{settings.showName ? profile.username : null}</div>
+                  <Button variant="outline-secondary" size="sm" className="mb-2">
+                    <Link href="/profile/settings">Edit Profile</Link>
+                  </Button>
 
-                    <FollowButton following={following} />
-
-                    {/* Stats */}
-                    <Row className="justify-content-center justify-content-md-start my-3">
-                        <Col xs={4} className="text-center">
-                            <strong>{numPosts}</strong>
-                            <p>Posts</p>
-                        </Col>
-                        <Col xs={4} className="text-center">
-                            <strong>{numFollowers}</strong>
-                            <Link href={`/profile/followers/${profile.userId}`}>Followers</Link>
-                        </Col>
-                        <Col xs={4} className="text-center">
-                            <strong>{numFollowing}</strong>
-                            <Link href={`/profile/following/${profile.userId}`}>Following</Link>
-                        </Col>
-                    </Row>
+                  {/* Stats */}
+                  <Row className="justify-content-center justify-content-md-start my-3">
+                    <Col xs={4} className="text-center">
+                      <strong className="large-font">{numPosts}</strong>
+                      <p className="large-font">Posts</p>
+                    </Col>
+                    <Col xs={4} className="text-center">
+                      <strong className="large-font">{numFollowers}</strong>
+                      <Link href="/profile/followers" className="large-font-link">Followers</Link>
+                    </Col>
+                    <Col xs={4} className="text-center">
+                      <strong className="large-font">{numFollowing}</strong>
+                      <Link className="large-font-link" href="/profile/following">Following</Link>
+                    </Col>
+                  </Row>
 
                     {/* Bio */}
-                    <p>{profile.about}</p>
+                    <p className="bio">{profile.about}</p>
                 </Col>
             </Row>
         </Container>

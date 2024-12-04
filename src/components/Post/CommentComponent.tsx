@@ -58,14 +58,14 @@ export default function CommentComponent({ user, comment, replies, voteCount, us
         <Container className="flex flex-col items-center">
             <Row>
                 <Col lg={4}>
-                    <Image src={user.profilePicture || profilePicTemp} alt={user.username} height={50} width={50}/>
+                    <Image src={user.profilePicture || profilePicTemp} alt={user.username} height={50} width={50} />
                 </Col>
                 <Col lg={8}>
                     {user.username}
                 </Col>
             </Row>
             <Row>
-                <Col lg={8}>
+                <Col lg={8} style={{ wordWrap: "break-word", whiteSpace: "normal" }}>
                     {comment.postComment}
                 </Col>
                 <Col lg={4}>
@@ -75,7 +75,7 @@ export default function CommentComponent({ user, comment, replies, voteCount, us
             <Row className="text-xs">
                 {formatDate(comment.dateCommented)}
             </Row>
-            <NewReplyForm onSubmitDecorator={handleSubmitStateChange} commentId={comment.postCommentId || -1 } />
+            <NewReplyForm onSubmitDecorator={handleSubmitStateChange} commentId={comment.postCommentId || -1} />
             <Row>
                 {repliesState.map((r: { reply: CommentReply, user: UserProfile }) => {
                     return (
@@ -89,7 +89,9 @@ export default function CommentComponent({ user, comment, replies, voteCount, us
                                 </Col>
                             </Row>
                             <Row>
-                                {r.reply.reply}
+                                <Col style={{ wordWrap: "break-word", whiteSpace: "normal" }}>
+                                    {r.reply.reply}
+                                </Col>
                             </Row>
                         </div>
                     );
