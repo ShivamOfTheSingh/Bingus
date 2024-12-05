@@ -127,7 +127,7 @@ export default function RegisterForm() {
         profilePicture: "",
       };
       const userProfileResponse = await fetch(
-        "https://bingus.website//api/crud/user_profile",
+        "http://localhost:3000/api/crud/user_profile",
         {
           method: "POST",
           body: JSON.stringify(userProfile),
@@ -147,7 +147,7 @@ export default function RegisterForm() {
           profilePublic: true,
         };
         const userSettingsResponse = await fetch(
-          "https://bingus.website//api/crud/user_settings",
+          "http://localhost:3000/api/crud/user_settings",
           {
             method: "POST",
             body: JSON.stringify(userSettings),
@@ -164,7 +164,7 @@ export default function RegisterForm() {
             userId: userId,
           };
           const registerUserResponse = await fetch(
-            "https://bingus.website//api/session/register",
+            "http://localhost:3000/api/session/register",
             {
               method: "POST",
               body: JSON.stringify(userAuth),

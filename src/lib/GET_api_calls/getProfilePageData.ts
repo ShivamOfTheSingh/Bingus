@@ -18,16 +18,16 @@ interface ReturnData {
  *                       and an array of objects that each contain a post and an array of that post's media.
  */
 export default async function getProfilePageData(userId: number): Promise<ReturnData> {
-  const resProfile = await fetch(`https://bingus.website//api/crud/user_profile/${userId}`);
+  const resProfile = await fetch(`http://localhost:3000/api/crud/user_profile/${userId}`);
   if (resProfile.status === 404) notFound();
   const profile: UserProfile = await resProfile.json();
 
-  const resPosts = await fetch(`https://bingus.website//api/crud/user_profile/posts/${userId}`);
+  const resPosts = await fetch(`http://localhost:3000/api/crud/user_profile/posts/${userId}`);
   const posts: Post[] = await resPosts.json();
 
   const postsWithMedia: { post: Post, media: Media[] }[] = [];
   for (let i = 0; i < posts.length; i++) {
-    const resMedia = await fetch(`https://bingus.website//api/crud/posts/media/${posts[i].postId}`);
+    const resMedia = await fetch(`http://localhost:3000/api/crud/posts/media/${posts[i].postId}`);
     const mediaArray: Media[] = await resMedia.json();
     postsWithMedia.push({
       post: posts[i],
@@ -35,13 +35,13 @@ export default async function getProfilePageData(userId: number): Promise<Return
     });
   }
 
-  const resFollowers = await fetch(`https://bingus.website//api/crud/followings/numFollowers/${userId}`);
+  const resFollowers = await fetch(`http://localhost:3000/api/crud/followings/numFollowers/${userId}`);
   const numFollowers = await resFollowers.json();
 
-  const resFollowing = await fetch(`https://bingus.website//api/crud/followings/numFollowing/${userId}`);
+  const resFollowing = await fetch(`http://localhost:3000/api/crud/followings/numFollowing/${userId}`);
   const numFollowing = await resFollowing.json();
 
-  const resSettings = await fetch(`https://bingus.website//api/crud/user_settings/user/${userId}`);
+  const resSettings = await fetch(`http://localhost:3000/api/crud/user_settings/user/${userId}`);
   if (resSettings.status === 404) notFound();
   const settings: UserSettings = await resSettings.json();
 
