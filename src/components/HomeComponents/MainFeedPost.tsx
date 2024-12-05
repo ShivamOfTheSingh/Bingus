@@ -5,6 +5,9 @@ import { Card } from "react-bootstrap";
 import timestampToTimeAgo from "@/lib/utils/timestampToTimeAgo";
 import Image from "next/image";
 import Link from "next/link";
+import '@/public/FeedPostStyle.css'
+import LikeButton from "@/components/Post/LikeButton";
+import { useState } from "react";
 
 interface PostProps {
     post: Post;
@@ -24,42 +27,42 @@ export default function MainFeedPost({
     className,
 }: PostProps) {
     return (
-        <div className="d-flex justify-content-center align-items-center w-100 my-4"> {/* Centering the card */}
+        <div className="post-container">
             <Link href={`/post/${post.postId}`} className="no-underline">
-                <Card className={`${className} w-72 h-auto`}>
-                    <Card.Header className="d-flex align-items-center">
+                <Card className={`${className} post-card`}>
+                    <Card.Header className="post-header">
                         <Image
                             src={userProfileImage}
                             alt="User Profile Image"
                             width={40}
                             height={40}
-                            className="rounded-circle me-2"
+                            className="user-profile-img"
                         />
-                        <div>
-                            <div className="font-weight-bold">{userName}</div>
-                            <div className="text-muted">@{userUsername}</div>
+                        <div className="user-info">
+                            <div className="user-name">{userName}</div>
+                            <div className="user-username">@{userUsername}</div>
                         </div>
                     </Card.Header>
 
                     {/* Media and Caption */}
-                    <Card.Body>
+                    <Card.Body className="post-body">
                         {media && media.mediaUrl && (
-                            <div className="mb-3">
+                            <div className="post-media">
                                 <Image
                                     src={media.mediaUrl}
                                     alt="Post Media"
                                     width={300}
                                     height={300}
-                                    className="rounded-lg"
+                                    className="media-img"
                                 />
                             </div>
                         )}
                         {/* Display Caption */}
-                        <Card.Text>{post.caption}</Card.Text>
+                        <Card.Text className="post-caption">{post.caption}</Card.Text>
                     </Card.Body>
 
                     {/* Timestamp Footer */}
-                    <Card.Footer className="text-muted">
+                    <Card.Footer className="post-footer">
                         {timestampToTimeAgo(new Date(post.datePosted))}
                     </Card.Footer>
                 </Card>

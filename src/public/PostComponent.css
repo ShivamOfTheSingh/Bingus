@@ -1,0 +1,78 @@
+.post-container {
+    background-color: #ffffff;         
+    border-radius: 10px;              
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
+    padding: 20px;                     
+    margin-bottom: 20px;              
+    box-sizing: border-box;           
+    width: 100%;                       
+    max-width: 800px;                 
+    margin: 10px auto;                 
+}
+
+.post-header {
+    display: flex;
+    flex-direction: column;            
+    align-items: center;               
+    margin-bottom: 15px;   
+    font-family: Geneva;                  
+}
+
+.post-header img {
+    border-radius: 50%;                
+    margin-bottom: 10px;               
+}
+
+.post-header a {
+    font-size: 1.2rem;                 
+    font-weight: bold;                 
+    color: #333;                       
+    text-decoration: none;             
+}
+
+.post-header a:hover {
+    text-decoration: underline;        
+}
+
+.post-media {
+    margin-top: 15px;                 
+    display: flex;
+    flex-direction: column;            
+    justify-content: center;           
+    align-items: center;
+}
+
+.post-caption {
+    margin-top: 15px;                 
+    font-size: 3rem;
+    font-family: Geneva;                   
+    color: #555;                       
+    line-height: 1.5;                   
+}
+
+.post-footer {
+    display: flex;
+    flex-direction: column;           /* Ensure like button and timestamp are stacked vertically */
+    align-items: center;
+    margin-top: 15px;                  
+    gap: 10px;                         /* Space between like button and timestamp */
+}
+
+.like-button-container {
+    display: flex;
+    flex-direction: column;            
+    align-items: center;
+    gap: 10px;                         
+}
+
+.like-button-container .like-count {
+    font-size: 1rem;
+    color: #555;
+}
+
+.post-timestamp {
+    font-size: 0.9rem;                 
+    color: #888;                       
+    margin-top: 10px;
+    font-family: Geneva;                 
+}

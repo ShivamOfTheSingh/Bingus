@@ -1,34 +1,102 @@
+/* FollowCard.css */
+
+/* General Card Styling */
 .user-profile-card {
-    display: flex; 
-    align-items: center; 
-    border: 1px solid #ddd; 
-    padding: 10px; 
-    border-radius: 5px; 
-    max-width: 310px; 
-    margin: 10px; 
-  }
-  .profile-image {
-    width: 50px;
-    height: 50px; 
-    border-radius: 50%; 
-    margin-right: 10px; 
-  }
-  h3 {
-    margin: 0 10px; 
-    font-size: 1.2rem; 
-  }
-  .follow-btn {
-    background-color: #8f6ccc; 
-    color: white; 
-    border: none; 
-    padding: 5px 10px; 
-    border-radius: 5px; 
-    cursor: pointer; 
-    transition: background-color 0.3s; 
-  }
-  .follow-btn.following {
-    background-color: #a09c9c; 
-  }
-  .follow-btn:hover {
-    opacity: 0.9; 
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  padding: 15px;
+  margin: 15px;
+  min-height: 250px; /* Ensure a minimum height for the card */
+  text-decoration: none;
+}
+
+/* Hover Effect for Cards */
+.user-profile-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Profile Image Styling */
+.user-profile-card .profile-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  border: 2px solid #ddd; 
+  transition: all 0.3s ease;
+}
+
+.user-profile-card .profile-image:hover {
+  transform: scale(1.05); /* Slight zoom on hover */
+}
+
+/* Username Text Styling */
+.user-profile-card h3 {
+  font-size: 1.1rem;
+  color: #930ac9;
+  font-family: Geneva;   
+  text-decoration: none;
+  margin-bottom: 10px;
+  font-weight: 500;
+  text-transform: lowercase;
+  letter-spacing: 0.5px;
+}
+
+/* Follow Button Styles for FollowCardSelf */
+.user-profile-card .follow-button {
+  margin-top: 10px;
+  background-color: #8f6ccc; 
+  border-color: #8f6ccc; 
+  color: #fff;
+  font-family: Geneva;   
+  padding: 8px 20px;
+  font-size: 0.9rem;
+  border-radius: 25px;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.user-profile-card .follow-button:hover {
+  background-color: #0056b3;
+}
+
+/* Follow Button Styles when Following */
+.user-profile-card .follow-button.following {
+  background-color: #28a745;  /* Green for "Following" state */
+}
+
+/* Follow Button Styles when Not Following */
+.user-profile-card .follow-button.not-following {
+  background-color: #dc3545;  /* Red for "Follow" state */
+}
+
+/* For FollowCardOther (hide button) */
+.user-profile-card.other .follow-button {
+  display: none; /* Hide the follow button for 'Other' profile */
+}
+
+/* Ensuring the card has enough space */
+.user-profile-card {
+  padding: 20px; 
+  display: flex;
+  flex-direction: column; 
+  justify-content: space-between;
+  background-color: #ffffff; 
+  border-radius: 10px; 
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
+}
+
+
+
