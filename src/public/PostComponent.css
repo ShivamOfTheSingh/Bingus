@@ -5,8 +5,8 @@
     padding: 20px;                     
     margin-bottom: 20px;              
     box-sizing: border-box;           
-    width: 100%;                      
-    max-width: 800px;                  
+    width: 100%;                       
+    max-width: 800px;                 
     margin: 10px auto;                 
 }
 
@@ -14,7 +14,8 @@
     display: flex;
     flex-direction: column;            
     align-items: center;               
-    margin-bottom: 15px;               
+    margin-bottom: 15px;   
+    font-family: Geneva;                  
 }
 
 .post-header img {
@@ -42,23 +43,19 @@
 }
 
 .post-caption {
-    margin-top: 15px;                  
-    font-size: 1rem;                  
+    margin-top: 15px;                 
+    font-size: 3rem;
+    font-family: Geneva;                   
     color: #555;                       
-    line-height: 1.5;                  
-}
-
-.post-timestamp {
-    margin-top: 10px;                  
-    font-size: 0.9rem;                 
-    color: #888;                      
+    line-height: 1.5;                   
 }
 
 .post-footer {
     display: flex;
-    justify-content: space-between;   
+    flex-direction: column;           /* Ensure like button and timestamp are stacked vertically */
     align-items: center;
-    margin-top: 15px;                 
+    margin-top: 15px;                  
+    gap: 10px;                         /* Space between like button and timestamp */
 }
 
 .like-button-container {
@@ -71,4 +68,11 @@
 .like-button-container .like-count {
     font-size: 1rem;
     color: #555;
+}
+
+.post-timestamp {
+    font-size: 0.9rem;                 
+    color: #888;                       
+    margin-top: 10px;
+    font-family: Geneva;                 
 }

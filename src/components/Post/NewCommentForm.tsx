@@ -5,6 +5,7 @@ import { Form, Button, Spinner } from "react-bootstrap";
 import commentFormSchema from "@/lib/form_schemas/commentFormSchema";
 import { PostComment } from "@/lib/db/models";
 import ApiError from "@/lib/errors/ApiError";
+import '@/public/NewCommentForm.css';  
 
 interface NewPostFormProps {
     onSubmitDecorator: (comment: PostComment) => void;
@@ -68,7 +69,7 @@ export default function NewCommentForm({ onSubmitDecorator, postId, className }:
     }
 
     return (
-        <Form action={onSubmit}>
+        <Form action={onSubmit} className={`new-comment-form ${className || ''}`}>
             <Form.Group controlId="comment">
                 <Form.Control type="text"
                     placeholder="Write a comment..."
@@ -76,19 +77,18 @@ export default function NewCommentForm({ onSubmitDecorator, postId, className }:
                     disabled={pending}
                 />
                 {validateErrors.comment ? (
-                    <Form.Label>
+                    <Form.Label className="form-label">
                         {validateErrors.comment}
                     </Form.Label>
                 ) : null}
             </Form.Group>
-            <Button type="submit">
-                {pending ?
-                    <div className="flex gap-2 items-center">
+            <Button type="submit" className="btn-submit">
+                {pending ? (
+                    <div className="spinner-container">
                         <Spinner size="sm" animation="border" />
                         Submitting...
                     </div>
-                    : "Submit"
-                }
+                ) : "Submit"}
             </Button>
         </Form>
     );

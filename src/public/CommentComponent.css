@@ -1,0 +1,64 @@
+/* General Comment Styles */
+.comment-header {
+    margin-bottom: 10px;
+}
+
+.comment-user {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #930ac9;
+    font-family: Geneva;
+}
+
+.comment-content {
+    margin-bottom: 10px;
+}
+
+.comment-text {
+    font-size: 1rem;
+    color: #333; 
+    font-family: Geneva;
+}
+
+.comment-timestamp {
+    font-size: 0.85rem;
+    color: #999; 
+    font-family: Geneva;
+}
+
+/* Like Button */
+.comment-footer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+/* Reply Styles */
+.reply-header {
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.reply-user {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #930ac9;
+    font-family: Geneva;
+}
+
+.reply-content {
+    margin-bottom: 5px;
+}
+
+.reply-text {
+    font-size: .9rem;
+    color: #555; 
+    font-family: Geneva;
+}
+
+/* Adjusting Image sizes */
+.comment-header img, .reply-header img {
+    border-radius: 50%;
+}
+
+

@@ -72,14 +72,14 @@ export default function PostComponent({
             <Row className="post-caption">
                 {post.caption}
             </Row>
-            <Row className="post-timestamp">
-                {timestampToTimeAgo(post.datePosted)}
-            </Row>
             <Row className="post-footer">
                 <Col className="like-button-container">
                     <LikeButton liked={userVoteState ? true : false} count={voteCount} onClick={onLike} size={"lg"} />
-                    <span className="like-count">{voteCount}</span>
+                    {/*<span className="like-count">{voteCount}</span> */}
                 </Col>
+            </Row>
+            <Row className="post-timestamp">
+                {timestampToTimeAgo(post.datePosted)}
             </Row>
         </Container>
     );

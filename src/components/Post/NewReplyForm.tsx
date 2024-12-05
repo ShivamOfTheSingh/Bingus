@@ -5,6 +5,7 @@ import { Form, Button, Spinner } from "react-bootstrap";
 import commentReplyFormSchema from "@/lib/form_schemas/commentReplyFormSchema";
 import { CommentReply } from "@/lib/db/models";
 import ApiError from "@/lib/errors/ApiError";
+import '@/public/NewCommentForm.css';  // Import the same CSS file
 
 interface NewPostFormProps {
     onSubmitDecorator: (reply: CommentReply) => void;
@@ -68,7 +69,7 @@ export default function NewReplyForm({ onSubmitDecorator, commentId, className }
     }
 
     return (
-        <Form action={onSubmit}>
+        <Form action={onSubmit} className={`new-reply-form ${className || ''}`}>
             <Form.Group controlId="reply">
                 <Form.Control type="text"
                     placeholder="Write a reply..."
@@ -76,19 +77,18 @@ export default function NewReplyForm({ onSubmitDecorator, commentId, className }
                     disabled={pending}
                 />
                 {validateErrors.reply ? (
-                    <Form.Label>
+                    <Form.Label className="form-label">
                         {validateErrors.reply}
                     </Form.Label>
                 ) : null}
             </Form.Group>
-            <Button type="submit">
-                {pending ?
-                    <div className="flex gap-2 items-center">
+            <Button type="submit" className="btn-submit">
+                {pending ? (
+                    <div className="spinner-container">
                         <Spinner size="sm" animation="border" />
                         Submitting...
                     </div>
-                    : "Submit"
-                }
+                ) : "Submit"}
             </Button>
         </Form>
     );

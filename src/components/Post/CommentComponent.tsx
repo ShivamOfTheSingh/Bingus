@@ -8,6 +8,7 @@ import profilePicTemp from "@/public/profile-pic-temp.jpg";
 import formatDate from "@/lib/utils/formatDate";
 import LikeButton from "./LikeButton";
 import NewReplyForm from "./NewReplyForm";
+import "@/public/CommentComponent.css"
 
 interface CommentComponentProps {
     user: UserProfile;
@@ -56,41 +57,41 @@ export default function CommentComponent({ user, comment, replies, voteCount, us
 
     return (
         <Container className="flex flex-col items-center">
-            <Row>
+            <Row className="comment-header">
                 <Col lg={4}>
                     <Image src={user.profilePicture || profilePicTemp} alt={user.username} height={50} width={50} />
                 </Col>
                 <Col lg={8}>
-                    {user.username}
+                    <span className="comment-user">{user.username}</span>
                 </Col>
             </Row>
-            <Row>
+            <Row className="comment-content">
                 <Col lg={8} style={{ wordWrap: "break-word", whiteSpace: "normal" }}>
-                    {comment.postComment}
+                    <p className="comment-text">{comment.postComment}</p>
                 </Col>
                 <Col lg={4}>
                     <LikeButton liked={userVoteState ? true : false} count={voteCount} onClick={onLike} size={"sm"} />
                 </Col>
             </Row>
-            <Row className="text-xs">
-                {formatDate(comment.dateCommented)}
+            <Row className="comment-timestamp">
+                <span>{formatDate(comment.dateCommented)}</span>
             </Row>
             <NewReplyForm onSubmitDecorator={handleSubmitStateChange} commentId={comment.postCommentId || -1} />
             <Row>
                 {repliesState.map((r: { reply: CommentReply, user: UserProfile }) => {
                     return (
                         <div>
-                            <Row>
+                            <Row className="reply-header">
                                 <Col>
-                                    <Image src={r.user.profilePicture} alt={r.user.username} width={20} height={20} />
+                                    <Image src={r.user.profilePicture} alt={r.user.username} width={50} height={50} />
                                 </Col>
                                 <Col>
-                                    {r.user.username}
+                                    <span className="reply-user">{r.user.username}</span>
                                 </Col>
                             </Row>
-                            <Row>
+                            <Row className="reply-content">
                                 <Col style={{ wordWrap: "break-word", whiteSpace: "normal" }}>
-                                    {r.reply.reply}
+                                    <p className="reply-text">{r.reply.reply}</p>
                                 </Col>
                             </Row>
                         </div>
