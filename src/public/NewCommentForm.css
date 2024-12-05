@@ -21,7 +21,7 @@
 }
 
 .new-comment-form .form-control:focus {
-    border-color: #007bff;
+    border-color: #b890f3;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
 }
 
@@ -43,7 +43,7 @@
 }
 
 .new-comment-form .btn:hover {
-    background-color: #0056b3;
+    background-color: #b890f3;
 }
 
 /* Error message styling */
@@ -111,7 +111,7 @@
 }
 
 .new-reply-form .btn:hover {
-    background-color: #0056b3;
+    background-color: #b890f3;
 }
 
 /* Error message styling */

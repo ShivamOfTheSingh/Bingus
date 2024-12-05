@@ -2,11 +2,12 @@
     background-color: #ffffff;         
     border-radius: 10px;              
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
-    padding: 20px;                     
+    padding: 20px;
+                        
     margin-bottom: 20px;              
     box-sizing: border-box;           
     width: 100%;                       
-    max-width: 800px;                 
+    max-width: 1000px;                 
     margin: 10px auto;                 
 }
 
@@ -52,10 +53,10 @@
 
 .post-footer {
     display: flex;
-    flex-direction: column;           /* Ensure like button and timestamp are stacked vertically */
+    flex-direction: column;           
     align-items: center;
     margin-top: 15px;                  
-    gap: 10px;                         /* Space between like button and timestamp */
+    gap: 10px;                         
 }
 
 .like-button-container {

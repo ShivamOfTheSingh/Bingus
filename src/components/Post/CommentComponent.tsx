@@ -8,7 +8,7 @@ import profilePicTemp from "@/public/profile-pic-temp.jpg";
 import formatDate from "@/lib/utils/formatDate";
 import LikeButton from "./LikeButton";
 import NewReplyForm from "./NewReplyForm";
-import "@/public/CommentComponent.css"
+import "@/public/CommentComponent.css";
 
 interface CommentComponentProps {
     user: UserProfile;
@@ -20,7 +20,15 @@ interface CommentComponentProps {
     className?: string;
 }
 
-export default function CommentComponent({ user, comment, replies, voteCount, userVote, userSelf, className }: CommentComponentProps) {
+export default function CommentComponent({
+    user,
+    comment,
+    replies,
+    voteCount,
+    userVote,
+    userSelf,
+    className,
+}: CommentComponentProps) {
     const [repliesState, setRepliesState] = useState<{ reply: CommentReply, user: UserProfile }[]>(replies);
     const [userVoteState, setUserVoteState] = useState<CommentVote | null>(userVote);
 
@@ -76,28 +84,32 @@ export default function CommentComponent({ user, comment, replies, voteCount, us
             <Row className="comment-timestamp">
                 <span>{formatDate(comment.dateCommented)}</span>
             </Row>
-            <NewReplyForm onSubmitDecorator={handleSubmitStateChange} commentId={comment.postCommentId || -1} />
-            <Row>
+            
+            {/* Replies Section */}
+            <Row className="comment-replies">
                 {repliesState.map((r: { reply: CommentReply, user: UserProfile }) => {
                     return (
-                        <div>
+                        <Col style={{ wordWrap: "break-word", paddingLeft: "20px" }}>
                             <Row className="reply-header">
                                 <Col>
-                                    <Image src={r.user.profilePicture} alt={r.user.username} width={50} height={50} />
+                                    <Image src={r.user.profilePicture} alt={r.user.username} width={30} height={0} />
                                 </Col>
                                 <Col>
                                     <span className="reply-user">{r.user.username}</span>
                                 </Col>
                             </Row>
                             <Row className="reply-content">
-                                <Col style={{ wordWrap: "break-word", whiteSpace: "normal" }}>
+                                <Col>
                                     <p className="reply-text">{r.reply.reply}</p>
                                 </Col>
                             </Row>
-                        </div>
+                        </Col>
                     );
                 })}
             </Row>
+            
+            {/* New Reply Form */}
+            <NewReplyForm onSubmitDecorator={handleSubmitStateChange} commentId={comment.postCommentId || -1} />
         </Container>
     );
 }

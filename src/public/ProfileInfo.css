@@ -17,6 +17,8 @@
   
   .large-font-link {
     font-size: 18px;
+    text-decoration: none;
+    color: #000;
   }
 
 .italic{
