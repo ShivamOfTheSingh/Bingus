@@ -1,3 +1,33 @@
+.custom-container{ 
+   
+    justify-content: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* Align the content to the start */
+    align-items: flex-start; /* Align items to the top */
+    overflow: hidden;
+    background: linear-gradient(135deg, #b890f3 30%, #bcb3c9 100%);
+    max-width: 90%;
+    margin-left: 200px;
+    
+}
+
+.large-font {
+    font-size: 24px;
+  }
+  
+  .large-font-link {
+    font-size: 18px;
+    text-decoration: none;
+    color: #000;
+  }
+
+.italic{
+    font-style: italic;
+}
+
+.bio{
+    font-size: x-large;
+=======
 /* Navbar (unchanged, spans full width) */
 .navbar {
   background: none;

@@ -1,14 +1,34 @@
-.post-container {
-    background-color: #ffffff;         
-    border-radius: 10px;              
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
-    padding: 20px;                     
-    margin-bottom: 20px;              
-    box-sizing: border-box;           
-    width: 100%;                       
-    max-width: 800px;                 
-    margin: 10px auto;                 
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0; 
+    }
+    100% {
+        opacity: 1; 
+    }
 }
+
+
+.post-container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1000px;
+    margin: 10px auto;
+    animation: fadeIn 1.5s ease-out forwards; 
+}
+
+/* Hover effects */
+.post-container:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+    background-color: #f9f9f9; 
+}
+
 
 .post-header {
     display: flex;
@@ -21,6 +41,10 @@
 .post-header img {
     border-radius: 50%;                
     margin-bottom: 10px;               
+}
+
+.post-header img:hover {
+    transform: scale(1.05);              
 }
 
 .post-header a {
@@ -42,6 +66,10 @@
     align-items: center;
 }
 
+.post-media:hover{
+    transform: scale(1.05); 
+}
+
 .post-caption {
     margin-top: 15px;                 
     font-size: 3rem;
@@ -52,10 +80,10 @@
 
 .post-footer {
     display: flex;
-    flex-direction: column;           /* Ensure like button and timestamp are stacked vertically */
+    flex-direction: column;           
     align-items: center;
     margin-top: 15px;                  
-    gap: 10px;                         /* Space between like button and timestamp */
+    gap: 10px;                         
 }
 
 .like-button-container {

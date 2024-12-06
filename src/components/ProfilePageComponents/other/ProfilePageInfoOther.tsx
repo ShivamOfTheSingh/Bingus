@@ -34,15 +34,13 @@ export default function ProfilePageInfoOther({ profile, numPosts, numFollowers, 
                 <Col xs={12} md={8} className="text-center text-md-left">
                   <div className="text-2xl font-semibold">{settings.showName ? profile.firstName + "  " + profile.lastName : profile.username}</div>
                   <div className="italic">{settings.showName ? profile.username : null}</div>
-                  <Button variant="outline-secondary" size="sm" className="mb-2">
-                    <Link href="/profile/settings">Edit Profile</Link>
-                  </Button>
+                  
 
                   {/* Stats */}
                   <Row className="justify-content-center justify-content-md-start my-3">
                     <Col xs={4} className="text-center">
                       <strong className="large-font">{numPosts}</strong>
-                      <p className="large-font">Posts</p>
+                      <p className="large-font">Post(s)</p>
                     </Col>
                     <Col xs={4} className="text-center">
                       <strong className="large-font">{numFollowers}</strong>
