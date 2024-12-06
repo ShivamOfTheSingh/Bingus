@@ -5,12 +5,13 @@
     /* Soft shadow */
     border-radius: 8px;
     /* Rounded edges */
-    padding: 24px;
+    padding: 16px;
     /* Padding for content */
     max-width: 800px;
     /* Constrain the width */
     margin: 20px auto;
     /* Center and give space */
+    margin-top: 14vh;
 }
 
 .text-2xl {
@@ -22,7 +23,7 @@
 }
 
 .mb-4 {
-    margin-bottom: 16px;
+    margin-bottom: 12px;
 }
 
 .settings-content {

@@ -6,10 +6,10 @@ form {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    gap: 24px;
-    width: 100%;
-    max-width: 600px;
-    margin: 40px auto;
+    gap: 5px;
+    max-width: 1000px;
+    margin: 0 auto;
+    /* Removed top gap */
     font-family: "Inter", sans-serif;
     opacity: 0;
     /* Start invisible */
@@ -23,8 +23,10 @@ form img {
     border: 4px solid #ddd;
     border-radius: 50%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 200px;
-    height: 200px;
+    width: 115px;
+    /* Reduced size */
+    height: 115px;
+    /* Reduced size */
     object-fit: cover;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     margin: 0 auto 16px;
@@ -69,8 +71,10 @@ form .form-control,
 form .form-select {
     border-radius: 8px;
     border: 1px solid #ccc;
-    padding: 10px;
-    font-size: 1rem;
+    padding: 8px;
+    /* Reduced padding */
+    font-size: 0.95rem;
+    /* Slightly reduced font size */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     transition: box-shadow 0.3s ease, border-color 0.3s ease;
     opacity: 0;
@@ -78,7 +82,10 @@ form .form-select {
     transform: translateY(20px);
     animation: fadeIn 0.8s ease forwards;
     animation-delay: 0.6s;
-    font-family: Corier New;
+    width: 80%;
+    /* Make the input fields thinner (80% of the container width) */
+    margin: 0 auto;
+    /* Center the input fields */
 }
 
 form .form-control:focus,
@@ -86,6 +93,7 @@ form .form-select:focus {
     box-shadow: 0 4px 8px rgba(134, 128, 255, 0.2);
     border-color: #8680ff;
 }
+
 
 /* Checkbox Styles */
 form .form-check-input {
@@ -173,7 +181,8 @@ form .flex {
     }
 
     form img {
-        width: 150px;
-        height: 150px;
+        width: 120px;
+        /* Further reduce the image size on smaller screens */
+        height: 120px;
     }
 }
