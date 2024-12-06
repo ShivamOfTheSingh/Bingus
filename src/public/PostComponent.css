@@ -1,110 +1,79 @@
-@keyframes fadeIn {
-    0% {
-        opacity: 0; 
-    }
-    100% {
-        opacity: 1; 
-    }
-}
-
-
-.post-container {
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-bottom: 20px;
-    box-sizing: border-box;
-    width: 100%;
-    max-width: 75%;
-    margin: 10px auto;
-    animation: fadeIn 1.5s ease-out forwards; 
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px; /* Space between the post and the comments */
-}
-
-
-
-
-/* Header styling */
+/* Ensure the profile section is stacked above the post image */
 .post-header {
     display: flex;
-    flex-direction: column;            
-    align-items: center;               
-    margin-bottom: 15px;   
-    font-family: "Courier New";                  
+    flex-direction: row; /* Keep profile image and username in a row */
+    align-items: center;
+    margin-bottom: 15px;
+    font-family: "Courier New";
+}
+
+.post-header .profile-image {
+    margin-right: 10px; /* Space between the image and username */
 }
 
 .post-header img {
-    border-radius: 50%;                
-    margin-bottom: 10px;               
+    border-radius: 50%; /* Make the image circular */
+    transition: transform 0.2s ease-in-out;
 }
 
 .post-header img:hover {
-    transform: scale(1.05);              
+    transform: scale(1.05); /* Slight zoom effect on hover */
 }
 
-.post-header a {
-    font-size: 1.2rem;                 
-    font-weight: bold;                 
-    color: #333;                       
+.post-header .profile-username {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
     text-decoration: none;
-    font-family: "Courier New";              
+    font-family: Corier New;
 }
 
-.post-header a:hover {
-    text-decoration: underline;        
+.post-header .profile-username:hover {
+    text-decoration: underline;
 }
 
-/* Media section styling */
+/* Media section - keep image centered and allow scaling */
 .post-media {
-    margin-top: 15px;                 
+    margin-top: 15px;
     display: flex;
-    flex-direction: column;            
-    justify-content: center;           
+    justify-content: center; /* Ensure the media is centered */
     align-items: center;
+    width: 100%;
 }
 
 .post-media:hover {
-    transform: scale(1.05); 
+    transform: scale(1.05); /* Zoom effect on hover */
 }
 
 /* Caption styling */
 .post-caption {
-    margin-top: 15px;                 
-    font-size: 3rem;
-    font-family: "Courier New";                   
-    color: #555;                       
-    line-height: 1.5;                   
+    margin-top: 15px;
+    font-size: 1.5rem; /* Adjusted font size for readability */
+    font-family: "Courier New";
+    color: #555;
+    line-height: 1.5;
 }
 
 /* Footer styling */
 .post-footer {
     display: flex;
-    flex-direction: column;           
-    align-items: center;
-    margin-top: 15px;                  
-    gap: 10px;                         
+    justify-content: center; /* Center the footer elements */
+    gap: 10px;
+    margin-top: 15px;
 }
 
-/* Like button container styling */
+/* Like button container */
 .like-button-container {
     display: flex;
-    flex-direction: column;            
+    flex-direction: column;
     align-items: center;
-    gap: 10px;                         
-}
-
-.like-button-container .like-count {
-    font-size: 1rem;
-    color: #555;
+    gap: 10px;
 }
 
 /* Timestamp styling */
 .post-timestamp {
-    font-size: 0.9rem;                 
-    color: #888;                       
+    font-size: 0.9rem;
+    color: #888;
     margin-top: 10px;
-    font-family: "Courier New";                  
+    font-family: "Courier New";
 }

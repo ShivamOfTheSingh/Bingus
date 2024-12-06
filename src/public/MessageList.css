@@ -31,6 +31,28 @@
     font-family: Corier New;
 }
 
+.userSearchResults {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.userSearchItem {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    padding: 12px;
+    border: 1px solid #f0f0f0;
+    border-radius: 8px;
+    background-color: #f0f0f0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
 .searchBar {
     position: relative;
     margin-bottom: 1rem;
@@ -68,6 +90,10 @@
     text-decoration: none;
 }
 
+.dmItem a{
+    text-decoration: none;
+}
+
 
 .dmItem:hover {
     background-color: #f0f0f0;
@@ -75,7 +101,7 @@
 }
 
 .dmItem.selected {
-    background-color: #dce6f5;
+    background-color: #f0f0f0;
 }
 
 .avatar {

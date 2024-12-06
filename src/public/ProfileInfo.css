@@ -46,7 +46,7 @@ body {
   font-weight: bold;
   color: white;
   margin-bottom: 8px;
-  font-family: Corier New;
+  font-family: Corier New; 
 }
 
 .stats-section {
@@ -58,7 +58,21 @@ body {
   padding: 10px;
   font-size: 2vh;
   /* Increased general font size for stats */
+  font-family: Corier New; 
 }
+
+.stats-section a {
+  text-decoration: none;
+  color: white; /* Ensure the links match the text color */
+  font-family: Corier New; 
+}
+
+.mt-3 a {
+  text-decoration: none;
+  font-family: Corier New; 
+}
+
+
 
 .large-font {
   font-size: 4vh;
@@ -68,8 +82,8 @@ body {
 .stats-item {
   color: white;
   font-size: 2.5vh;
+  text-decoration: none;
   /* Larger font size for text (Followers, Posts, Following) */
-  font-family: Corier New;
 }
 
 .stats-item .large-font {
@@ -85,7 +99,7 @@ body {
   padding: 10px;
   color: white;
   width: fit-content;
-  font-family: Corier New;
+  font-family: Corier New; 
 }
 
 @media (max-width: 768px) {

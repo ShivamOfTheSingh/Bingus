@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 import "@/public/MessageList.css";
 import { UserProfile, CreateNewChat } from "@/lib/db/models";
 import Link from "next/link";
-
+import Image from "next/image";
+import "@/public/profile-pic-temp.jpg"
 interface DM {
   username: string;
   lastMessage: string;

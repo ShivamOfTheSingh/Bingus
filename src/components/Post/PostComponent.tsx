@@ -56,27 +56,36 @@ export default function PostComponent({
 
     return (
         <Container className={`${className} post-container`}>
+            {/* Profile section (Image and Username) */}
             <Row className="post-header">
-                <Col>
-                    <Image src={user.profilePicture} alt={user.username} height={50} width={50} />
+                <Col className="profile-image">
+                    <Image src={user.profilePicture} alt={user.username} height={100} width={100} />
                 </Col>
-                <Col>
+                <Col className="profile-username">
                     <Link href={`/profile/${user.userId}`}>
                         {user.username}
                     </Link>
                 </Col>
             </Row>
+    
+            {/* Post Image */}
             <Row className="post-media">
                 <MediaScroll media={media} />
             </Row>
+    
+            {/* Caption Section */}
             <Row className="post-caption">
                 {post.caption}
             </Row>
+    
+            {/* Footer (Like Button and Timestamp) */}
             <Row className="post-footer">
                 <Col className="like-button-container">
                     <LikeButton liked={userVoteState ? true : false} count={voteCount} onClick={onLike} size={"lg"} />
                 </Col>
             </Row>
+    
+            {/* Timestamp */}
             <Row className="post-timestamp">
                 {timestampToTimeAgo(post.datePosted)}
             </Row>
