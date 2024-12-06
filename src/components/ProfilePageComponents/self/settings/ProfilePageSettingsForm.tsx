@@ -9,6 +9,7 @@ import readFile from "@/lib/utils/readFile";
 import tempProfilePicture from "@/public/profile-pic-temp.jpg";
 import ApiError from "@/lib/errors/ApiError";
 import { redirect } from "next/navigation";
+import '@/public/ProfilePageSettingsForm.css';
 
 export interface ProfilePageSettingsFormProps {
   profile: UserProfile;
@@ -123,14 +124,14 @@ export default function ProfilePageSettingsForm({
       };
 
       const profileResponse = await fetch(
-        "https://bingus.website/api/crud/user_profile",
+        "http://localhost:3000/api/crud/user_profile",
         {
           method: "PUT",
           body: JSON.stringify(upadtedProfile),
         }
       );
       const settingsResponse = await fetch(
-        "https://bingus.website/api/crud/user_settings",
+        "http://localhost:3000/api/crud/user_settings",
         {
           method: "PUT",
           body: JSON.stringify(updatedSettings),

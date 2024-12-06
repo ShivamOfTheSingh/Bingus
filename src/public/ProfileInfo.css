@@ -1,28 +1,117 @@
-.custom-container{ 
-   
-    justify-content: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start; /* Align the content to the start */
-    align-items: flex-start; /* Align items to the top */
-    overflow: hidden;
-    background: linear-gradient(135deg, #b890f3 30%, #bcb3c9 100%);
-    max-width: 90%;
-    margin-left: 200px;
-    
+/* Prevent Horizontal Scrolling */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  /* Disable horizontal scrolling */
+  width: 100%;
 }
 
-.large-font {
-    font-size: 24px;
-  }
-  
-  .large-font-link {
-    font-size: 18px;
-  }
-
-.italic{
-    font-style: italic;
+/* Container Styles */
+.custom-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Center content horizontally and vertically */
+  overflow: hidden;
+  /* Prevent content overflow */
+  background: linear-gradient(135deg, #b890f3 30%, #bcb3c9 100%);
+  width: calc(100% - 300px);
+  /* Subtract the navigation bar width */
+  margin-left: 250px;
+  margin-top: 30px;
+  /* Add top margin for alignment */
+  padding: 20px;
+  /* Add padding for better spacing */
+  border-radius: 16px;
+  /* Rounded corners for a modern look */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  /* Subtle shadow */
+  opacity: 0;
+  /* Start invisible */
+  transform: translateY(20px);
+  /* Start slightly below */
+  animation: fadeInContainer 0.8s ease forwards;
+  /* Add fade-in animation */
 }
 
-.bio{
-    font-size: x-large;
+/* Content Wrapper */
+.content {
+  text-align: center;
+  opacity: 0;
+  /* Start invisible */
+  transform: translateY(20px);
+  /* Start slightly below */
+  animation: fadeInContent 1s ease forwards;
+  /* Fade-in animation for content */
+}
+
+.content .large-font {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.content .large-font-link {
+  font-size: 18px;
+  color: #6c63ff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.content .large-font-link:hover {
+  color: #574bdb;
+}
+
+.content .italic {
+  font-style: italic;
+  font-size: 18px;
+  color: #555;
+}
+
+.content .bio {
+  font-size: 20px;
+  font-weight: 500;
+  color: #444;
+  margin-top: 16px;
+}
+
+/* Animations */
+@keyframes fadeInContainer {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInContent {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .custom-container {
+    margin-left: 0;
+    width: 100%;
+    padding: 16px;
+  }
+
+  .content {
+    text-align: center;
+  }
 }
