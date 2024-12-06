@@ -40,7 +40,7 @@ export default function ProfilePageInfoOther({ profile, numPosts, numFollowers, 
                   <Row className="justify-content-center justify-content-md-start my-3">
                     <Col xs={4} className="text-center">
                       <strong className="large-font">{numPosts}</strong>
-                      <p className="large-font">Posts</p>
+                      <p className="large-font">Post(s)</p>
                     </Col>
                     <Col xs={4} className="text-center">
                       <strong className="large-font">{numFollowers}</strong>

@@ -16,7 +16,7 @@ export default function ProfilePagePostGridOther({ postData, className }: Profil
     });
 
     return (
-        <Container>
+        <Container  style={{ marginLeft: '250px', paddingTop: '60px' }}>
             {postData.length > 0 && 
                 postData.map((pd: any, index: number) => {
                     if (index % 4 === 0) {

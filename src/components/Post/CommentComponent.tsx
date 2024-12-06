@@ -64,7 +64,7 @@ export default function CommentComponent({
     }
 
     return (
-        <Container className="flex flex-col items-center">
+        <Container className={`flex flex-col items-center ${className}`}>
             <Row className="comment-header">
                 <Col lg={4}>
                     <Image src={user.profilePicture || profilePicTemp} alt={user.username} height={50} width={50} />
@@ -92,7 +92,7 @@ export default function CommentComponent({
                         <Col style={{ wordWrap: "break-word", paddingLeft: "20px" }}>
                             <Row className="reply-header">
                                 <Col>
-                                    <Image src={r.user.profilePicture} alt={r.user.username} width={30} height={0} />
+                                    <Image src={r.user.profilePicture} alt={r.user.username} width={30} height={30} />
                                 </Col>
                                 <Col>
                                     <span className="reply-user">{r.user.username}</span>
@@ -109,7 +109,7 @@ export default function CommentComponent({
             </Row>
             
             {/* New Reply Form */}
-            <NewReplyForm onSubmitDecorator={handleSubmitStateChange} commentId={comment.postCommentId || -1} />
+            <NewReplyForm className="new-reply-form" onSubmitDecorator={handleSubmitStateChange} commentId={comment.postCommentId || -1} />
         </Container>
     );
 }
