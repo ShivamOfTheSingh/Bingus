@@ -33,9 +33,9 @@ export interface Post {
 }
 
 export interface Media {
-    mediaId?: number;
+    mediaId: number;
     postId: number;
-    mediaUrl: string;
+    format: string;
 }
 
 export interface CommentReply {

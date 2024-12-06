@@ -7,7 +7,17 @@ const nextConfig = {
       DB_USER: process.env.DB_USER,
       SESSION_SECRET_KEY: process.env.SESSION_SECRET_KEY
     },
-    reactStrictMode: false
+    reactStrictMode: false,
+    images: {
+      remotePatterns: [
+        {
+          protocol: 'http',
+          hostname: 'localhost',
+          port: '3000',
+          pathname: '/api/crud/media/bytestream/**',
+        },
+      ],
+    }
   };
   
   export default nextConfig;

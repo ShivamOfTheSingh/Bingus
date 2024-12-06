@@ -17,7 +17,7 @@ export async function GET(request: Request): Promise<Response> {
             {
                 mediaId: row.media_id,
                 postId: row.post_id,
-                mediaUrl: row.mime_type_prefix + Buffer.from(row.media_url, 'base64').toString('base64')
+                format: row.format
             }
         ));
         return new Response(JSON.stringify(mediaList), { status: 200 });
@@ -45,22 +45,23 @@ export async function POST(request: Request): Promise<Response> {
         if (userId === -1) {
             return new Response("Unauthorized API call", { status: 401 });
         }
-        const media: Media = await request.json();
-        const mimeTypePrefix = media.mediaUrl.slice(0, media.mediaUrl.indexOf(",") + 1);
-        const mediaUrlBuffer = Buffer.from(media.mediaUrl.slice(mimeTypePrefix.length), 'base64');  // Convert Base64 to Buffer
-        console.log("AFTER BUFFER");
+
+        const { postId, base64Data } = await request.json();
+
+        const prefix = base64Data.split(",")[0];
+        const data = base64Data.split(",")[1];
+        const format = prefix.split(";")[0].split("/")[1];
+        const binaryData = Buffer.from(data, 'base64');
+
         client = await pool.connect();
-        const result = await client.query(
-            "INSERT INTO media (post_id, media_url, mime_type_prefix) VALUES ($1, $2, $3) RETURNING media_id", 
-            [media.postId, mediaUrlBuffer, mimeTypePrefix]
-        );
-        console.log("AFTER QUERY");
-        const id = result.rows[0].media_id;
-        return new Response(JSON.stringify({ mediaId: id }), { status: 201 });
+        const result = await client.query("INSERT INTO media (post_id, data, format) VALUES ($1, $2, $3) RETURNING media_id", [postId, binaryData, format]);
+        const mediaId = result.rows[0].media_id;
+
+        return new Response(JSON.stringify({ id: mediaId }), { status: 201 });
     } 
     catch (error) {
         console.log(error);
-        return new Response("Failed to create data", { status: 500 });
+        return new Response("Internal Server Error", { status: 500 });
     }
     finally {
         if (client) {
@@ -82,15 +83,16 @@ export async function PUT(request: Request): Promise<Response> {
         if (userId === -1) {
             return new Response("Unauthorized API call", { status: 401 });
         }
-        const media: Media = await request.json();
-        const mimeTypePrefix = media.mediaUrl.slice(0, media.mediaUrl.indexOf(",") + 1);
-        const mediaUrlBuffer = Buffer.from(media.mediaUrl.slice(mimeTypePrefix.length), 'base64');
+
+        const { mediaId, postId, base64Data } = await request.json();
+
+        const prefix = base64Data.split(",")[0];
+        const data = base64Data.split(",")[1];
+        const format = prefix.split(";")[0].split("/")[1];
+        const binaryData = Buffer.from(data, 'base64');
 
         client = await pool.connect();
-        await client.query(
-            "UPDATE media SET post_id = $2, media_url = $3, mime_type_prefix = $4 WHERE media_id = $1", 
-            [media.mediaId, media.postId, mediaUrlBuffer, mimeTypePrefix]
-        );
+        const result = await client.query("UPDATE media SET post_id = $1, data = $2, format = $3 WHERE media_id = $4", [postId, binaryData, format, mediaId]);
 
         return new Response("OK", { status: 200 });
     } 

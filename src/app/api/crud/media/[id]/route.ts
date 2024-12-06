@@ -1,7 +1,5 @@
 import { Media } from "@/lib/db/models";
-import pool from "../../../../../lib/db/pool";
-import getCurrentSessionUserId from "@/lib/cookies/getCurrentSessionUserId";
-
+import pool from "@/lib/db/pool";
 /**
  * GET endpoint for table media - single row by id
  * 
@@ -17,16 +15,16 @@ export async function GET(request: Request, { params }: { params: { id: string }
         const result = await client.query("SELECT * FROM media WHERE media_id = $1", [id]);
 
         if (result.rows.length === 0) {
-            return new Response("Media record not found", { status: 404 });
-        }
+            return new Response("Not found", { status: 404 });
+        }  
 
-        const media: Media = {
+        const mediaInfo: Media = {
             mediaId: result.rows[0].media_id,
             postId: result.rows[0].post_id,
-            mediaUrl: result.rows[0].mime_type_prefix + Buffer.from(result.rows[0].media_url, 'base64').toString('base64')
+            format: result.rows[0].format
         };
 
-        return new Response(JSON.stringify(media), { status: 200 });
+        return new Response(JSON.stringify(mediaInfo), { status: 200 });
     } 
     catch (error) {
         return new Response("Failed to retrieve data", { status: 500 });

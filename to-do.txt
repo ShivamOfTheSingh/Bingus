@@ -1,0 +1,16 @@
+1. Adjust model interfaces to new media logic DONE FOR POSTS
+2. Change up the rest of the API (info endpoint) DONE FOR POSTS
+3. Create image and video components to load and display media DONE
+4. Style the new component spinners DONE
+4. Change up how data is fetched for pages to use the new components
+    - Proifle page data fetch DONE
+    - Home page data fetch
+    - Post page data fetch (media scroller etc)
+
+
+5. Apply same changes for profile pictures
+    - profile page
+    - profile settings
+    - followers
+    - following
+    - home page

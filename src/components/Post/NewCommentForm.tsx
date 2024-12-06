@@ -50,7 +50,7 @@ export default function NewCommentForm({ onSubmitDecorator, postId, className }:
                 dateCommented: new Date()
             };
 
-            const response = await fetch("https://bingus.website/api/crud/post_comment", {
+            const response = await fetch("http://localhost:3000/api/crud/post_comment", {
                 method: "POST",
                 body: JSON.stringify(newComment)
             });

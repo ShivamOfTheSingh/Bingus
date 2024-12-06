@@ -19,7 +19,7 @@ export async function GET(request: Request, { params }: { params: { id: string }
             {
                 mediaId: row.media_id,
                 postId: row.post_id,
-                mediaUrl: row.media_url ? row.mime_type_prefix + Buffer.from(row.media_url, 'base64').toString('base64') : ""
+                format: row.format
             }
         ));
         return new Response(JSON.stringify(mediaList), { status: 200 });

@@ -3,7 +3,7 @@
 import getCurrentSessionUserId from "@/lib/cookies/getCurrentSessionUserId";
 import { redirect } from "next/navigation";
 import getProfilePageData from "@/lib/GET_api_calls/getProfilePageData";
-import ProfilePagePostGridOther from "@/components/ProfilePageComponents/other/ProfilePagePostGridOther";
+import ProfilePagePostGrid from "@/components/ProfilePageComponents/other/ProfilePagePostGrid";
 import ProfilePageInfoOther from "@/components/ProfilePageComponents/other/ProfilePageInfoOther";
 import { Following } from "@/lib/db/models";
 
@@ -12,7 +12,7 @@ async function getFollowingStatus(
   otherId: number
 ): Promise<Following> {
   const response = await fetch(
-    `https://bingus.website/api/crud/followings/pair?selfId=${selfId}&otherId=${otherId}`
+    `http://localhost:3000/api/crud/followings/pair?selfId=${selfId}&otherId=${otherId}`
   );
   if (response.status === 200) {
     const following: Following = await response.json();
@@ -50,7 +50,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         numFollowing={pageData.numFollowing}
         settings={pageData.settings}
       />
-      <ProfilePagePostGridOther postData={pageData.posts} />
+      <ProfilePagePostGrid postData={pageData.posts} />
     </div>
   );
 }

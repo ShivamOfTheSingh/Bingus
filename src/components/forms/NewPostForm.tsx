@@ -69,7 +69,7 @@ export default function NewPostForm() {
                 caption: postCaption,
                 datePosted: new Date()
             };
-            const postResponse = await fetch("https://bingus.website/api/crud/posts", {
+            const postResponse = await fetch("http://localhost:3000/api/crud/posts", {
                 method: "POST",
                 body: JSON.stringify(post)
             });
@@ -77,14 +77,11 @@ export default function NewPostForm() {
                 const postResponseJson = await postResponse.json();
                 const postId = postResponseJson.postId;
                 
-                postFileData.forEach(async (data: string) => {
-                    const media: Media = {
-                        postId: postId,
-                        mediaUrl: data
-                    };
-                    const mediaResponse = await fetch("https://bingus.website/api/crud/media", {
+                console.log("HERE");
+                postFileData.forEach(async (base64Data: string) => {
+                    const mediaResponse = await fetch("http://localhost:3000/api/crud/media", {
                         method: "POST",
-                        body: JSON.stringify(media)
+                        body: JSON.stringify({ postId, base64Data })
                     });
                     if (mediaResponse.status !== 201) {
                         throw new ApiError("What the Bingus? An unexpected error occured.", mediaResponse.status); 
@@ -108,6 +105,7 @@ export default function NewPostForm() {
             setPostFiles([...postFiles, e.target.files[0]]);
             readFile(e.target.files[0], (base64String: string) => {
                 setPostFileData([...postFileData, base64String]);
+                console.log(base64String);
             });
             setValidateErrors({
                 ...validateErrors,
