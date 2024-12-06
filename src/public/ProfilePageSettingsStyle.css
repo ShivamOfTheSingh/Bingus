@@ -3,15 +3,16 @@
     background: linear-gradient(135deg, #b890f3 30%, #bcb3c9 100%);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     border-radius: 16px;
-    padding: 40px;
+    padding: 24px;
+    /* Reduced padding */
     max-width: 1000px;
-    margin: 40px auto;
+    margin: 0px auto;
     font-family: "Inter", sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 32px;
-
+    gap: 16px;
+    /* Reduced gap between items */
 }
 
 /* Profile Image Section */
@@ -22,16 +23,20 @@
 
 .profile-image {
     border: 4px solid #ddd;
-    padding: 8px;
+    padding: 6px;
+    /* Reduced padding */
     border-radius: 50%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     opacity: 0;
     /* Start invisible */
-    transform: scale(0.95);
+    transform: scale(0.75);
+    /* Reduced scale */
     /* Start slightly smaller */
     animation: fadeInImage 0.8s ease forwards;
     /* Apply fade-in animation */
     transition: transform 0.3s ease;
+    width: 180px;
+    height: 180px;
 }
 
 .profile-image:hover {
@@ -43,7 +48,7 @@
 @keyframes fadeInImage {
     0% {
         opacity: 0;
-        transform: scale(0.95);
+        transform: scale(0.85);
         /* Slightly smaller at start */
     }
 
@@ -58,7 +63,8 @@
 .profile-info {
     display: flex;
     flex-direction: column;
-    gap: 32px;
+    gap: 16px;
+    /* Reduced gap between info items */
     width: 100%;
 }
 
@@ -66,7 +72,8 @@
 .info-row {
     display: flex;
     justify-content: space-between;
-    gap: 24px;
+    gap: 16px;
+    /* Reduced gap between items */
     width: 100%;
 }
 
@@ -74,7 +81,8 @@
 .info-item {
     flex: 1;
     text-align: center;
-    padding: 24px;
+    padding: 16px;
+    /* Reduced padding */
     background: linear-gradient(135deg, #ecefff, #f5f5ff);
     /* Light gradient background */
     border: none;
@@ -97,7 +105,6 @@
     /* Slight lift effect */
 }
 
-
 .info-item.active {
     box-shadow: 0 12px 24px rgba(134, 128, 255, 0.4), 0 6px 12px rgba(0, 0, 0, 0.2);
     transform: scale(1.05);
@@ -105,8 +112,6 @@
     z-index: 2;
     /* Ensures active card is above others */
 }
-
-
 
 /* Animation for Fade-In Effect */
 @keyframes fadeIn {
