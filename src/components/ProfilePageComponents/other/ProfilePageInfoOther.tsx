@@ -5,7 +5,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import Image from "next/image";
 import profilePicTemp from "@/public/profile-pic-temp.jpg";
 import Link from "next/link";
-import '@/public/ProfileInfo.css';
+import "@/public/ProfileInfo.css";
 
 interface ProfilePageInfoOtherProps {
   profile: UserProfile;
@@ -22,22 +22,24 @@ export default function ProfilePageInfoOther({
   numFollowers,
   numFollowing,
   settings,
-  className,
+  className = "",
 }: ProfilePageInfoOtherProps) {
+  const displayName = settings.showName
+    ? `${profile.firstName} ${profile.lastName}`
+    : profile.username;
+
+  const profileImage = profile.profilePicture || profilePicTemp;
+
   return (
     <Container className={`${className} py-4 custom-container`}>
       <Row className="align-items-center">
-        {/* Red Section - Profile Image and Name */}
+        {/* Profile Section */}
         <Col xs={4} className="profile-section">
-          <div className="pfp-info">
-            <h2>
-              {settings.showName
-                ? `${profile.firstName} ${profile.lastName}`
-                : profile.username}
-            </h2>
+          <div className="pfp-info text-center">
+            <h2>{displayName}</h2>
             <Image
-              src={profile.profilePicture || profilePicTemp}
-              alt={`${profile.username}'s profile`}
+              src={profileImage}
+              alt={`${profile.username}'s profile picture`}
               width={200}
               height={200}
               className="rounded-circle"
@@ -45,8 +47,8 @@ export default function ProfilePageInfoOther({
           </div>
         </Col>
 
-        {/* Blue Section - Stats */}
-        <Col xs={4} className="stats-section">
+        {/* Stats Section */}
+        <Col xs={4} className="stats-section text-center">
           <div className="stats-item">
             <p className="large-font">{numPosts}</p>
             <p>Posts</p>
@@ -65,9 +67,9 @@ export default function ProfilePageInfoOther({
           </div>
         </Col>
 
-        {/* Green Section - Bio */}
+        {/* Bio Section */}
         {profile.about && (
-          <Col xs={4} className="bio-section">
+          <Col xs={4} className="bio-section text-center">
             <p>{profile.about}</p>
           </Col>
         )}
