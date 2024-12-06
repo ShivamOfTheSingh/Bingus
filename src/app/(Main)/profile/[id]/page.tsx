@@ -39,7 +39,7 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   const following = await getFollowingStatus(selfId, parseInt(params.id));
 
-  console.log(following);
+  //console.log(following);
   return (
     <div>
       <ProfilePageInfoOther

@@ -53,6 +53,7 @@ form .form-label {
     /* Start slightly below */
     animation: fadeIn 0.8s ease forwards;
     animation-delay: 0.4s;
+    font-family: Corier New;
 }
 
 form .text-red-600 {
@@ -77,6 +78,7 @@ form .form-select {
     transform: translateY(20px);
     animation: fadeIn 0.8s ease forwards;
     animation-delay: 0.6s;
+    font-family: Corier New;
 }
 
 form .form-control:focus,
@@ -110,6 +112,7 @@ form .btn-primary {
     transform: translateY(20px);
     animation: fadeIn 0.8s ease forwards;
     animation-delay: 1s;
+    font-family: Corier New;
 }
 
 form .btn-primary:hover {

@@ -13,7 +13,7 @@ export default async function Page() {
     }
 
     const pageData = await getProfilePageData(userId);
-    console.log(pageData);
+    //console.log(pageData);
     return (
         <div>
             <div>

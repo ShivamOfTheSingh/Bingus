@@ -25,7 +25,7 @@ export default async function layout({
 
   // Fetch existing users in the db
   const profiles = await getAllUsers(userId);
-  console.log(profiles);
+  //console.log(profiles);
 
   return (
     <div style={{ display: "flex" }}>

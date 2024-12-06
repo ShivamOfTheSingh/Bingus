@@ -56,7 +56,7 @@ export async function POST(request: Request): Promise<Response> {
         const userExists = await client.query("SELECT * FROM user_profile WHERE user_name = $1 OR email = $2", [userProfile.username, userProfile.email]);
         console.log("John Pork", userExists.rows.length);
         if (userExists.rows.length >= 1) {
-            console.log("Hi");
+            //console.log("Hi");
             return new Response("User already exists", { status: 409 });
         }
 

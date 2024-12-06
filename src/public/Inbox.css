@@ -26,6 +26,7 @@ body {
     flex-grow: 1;
     margin: 5px;
     overflow: hidden;
+    margin-top:10vh;
 }
 
 .message-list-container {

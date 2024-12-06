@@ -27,18 +27,19 @@ body {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); 
   }
   .label{
-    font-family: Geneva;
+    font-family: Corier New;
   }
   
   h1 {
     text-align: center; 
     color: #4a4a4a; 
-    font-family:Geneva;
+    font-family: Corier New;
   }
   
   .btn-primary {
     background-color: #8f6ccc; 
-    border-color: #8f6ccc; 
+    border-color: #8f6ccc;
+    font-family: Corier New; 
   }
   
   .btn-primary:hover {
@@ -52,12 +53,14 @@ body {
   
   .link {
     text-align: center; 
-    margin-top: 10px; 
+    margin-top: 10px;
+    font-family: Corier New; 
   }
   
   .link a {
     color: #8f6ccc; 
-    text-decoration: none; 
+    text-decoration: none;
+    font-family: Corier New; 
   }
   
   .link a:hover {

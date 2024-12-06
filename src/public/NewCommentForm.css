@@ -27,7 +27,7 @@
 .new-reply-form .form-control {
     padding: 10px;
     font-size: 16px;
-    font-family: Geneva;
+    font-family: Corier New;
     border-radius: 6px;
     border: 1px solid #ccc;
     width: 100%;
@@ -43,7 +43,7 @@
 .new-reply-form .btn {
     padding: 12px 20px;
     font-size: 16px;
-    font-family: Geneva;
+    font-family: Corier New;
     border-radius: 6px;
     background-color: #8f6ccc;
     border-color: #8f6ccc;
@@ -64,6 +64,7 @@
     opacity: 0;
     animation: fadeIn 1s ease-out forwards;
     animation-delay: 0.7s; /* Stagger the fade-in for error messages */
+    font-family: Corier New;
 }
 
 /* Spinner inside the button */
@@ -91,13 +92,14 @@
     background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Corier New;
 }
 
 /* Form control (text input) */
 .new-reply-form .form-control {
     padding: 10px;
     font-size: 16px;
-    font-family: Geneva;   
+    font-family: Corier New;   
     border-radius: 6px;
     border: 1px solid #ccc;
     width: 100%;

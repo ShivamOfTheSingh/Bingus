@@ -45,6 +45,7 @@ body {
   font-weight: bold;
   color: white;
   margin-bottom: 8px;
+  font-family: Corier New;
 }
 
 .stats-section {
@@ -67,6 +68,7 @@ body {
   color: white;
   font-size: 2.5vh;
   /* Larger font size for text (Followers, Posts, Following) */
+  font-family: Corier New;
 }
 
 .stats-item .large-font {
@@ -82,6 +84,7 @@ body {
   padding: 10px;
   color: white;
   width: fit-content;
+  font-family: Corier New;
 }
 
 @media (max-width: 768px) {

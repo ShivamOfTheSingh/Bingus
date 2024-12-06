@@ -1,11 +1,10 @@
 /* Container to hold both post and comments */
 .post-page-container {
-    max-width: 1500px;
+    max-width: 95%; /* Increased width for a wider container */
     margin: 0 auto;
+    margin-top: 10vh;
     padding: 20px;
-    background-color: #f4f4f9;
-    padding-left: 250px;
-   
+    background-color: #ffffff;
 }
 
 /* Flex container for the post and comments */
@@ -17,32 +16,20 @@
 
 /* Post section styling */
 .post-left {
-    flex: 2; /* Take up more space */
+    flex: 6; /* Take up more space, increased from 2 */
     background-color: #ffffff;
     border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 20px;
 }
 
 /* Comments section styling */
 .post-right {
-    flex: 1; /* Take up less space */
+    flex: 3;
     max-height: 600px;
-    max-width: min-content; 
-    overflow-y: auto; 
+    max-width: min-content;
+    overflow-y: auto;
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 20px;
-}
-
-/* Responsive styles for smaller screens */
-@media (max-width: 768px) {
-    .post-container {
-        flex-direction: column; /* Stack post and comments vertically on small screens */
-    }
-
-    .post-left, .post-right {
-        max-width: 100%;
-    }
 }

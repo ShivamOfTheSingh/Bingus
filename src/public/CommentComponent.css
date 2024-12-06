@@ -8,7 +8,7 @@
     font-weight: bold;
     font-size: 1.1rem;
     color: #930ac9;
-    font-family: Geneva;
+    font-family: Corier New;
     
 }
 
@@ -20,14 +20,14 @@
 .comment-text {
     font-size: 1rem;
     color: #333;
-    font-family: Geneva;
+    font-family: Corier New;
     
 }
 
 .comment-timestamp {
     font-size: 0.85rem;
     color: #999;
-    font-family: Geneva;
+    font-family: Corier New;
     
 }
 
@@ -54,7 +54,7 @@
     font-weight: bold;
     font-size: .9rem;
     color: #930ac9;
-    font-family: Geneva;
+    font-family: Corier New;
 }
 
 .reply-content {
@@ -64,7 +64,7 @@
 .reply-text {
     font-size: .9rem;
     color: #555;
-    font-family: Geneva;
+    font-family: Corier New;
     word-wrap: break-word; /* Ensures long words break */
     white-space: normal;
     overflow-wrap: break-word;
