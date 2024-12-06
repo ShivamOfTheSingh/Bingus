@@ -45,7 +45,6 @@ export default async function Page({ params }: { params: { id: string } }) {
       <ProfilePageInfoOther
         profile={pageData.profile}
         numPosts={pageData.numPosts}
-        following={following}
         numFollowers={pageData.numFollowers}
         numFollowing={pageData.numFollowing}
         settings={pageData.settings}
