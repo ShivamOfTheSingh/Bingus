@@ -34,7 +34,7 @@ export default function CommentComponent({ user, comment, replies, voteCount, us
 
     async function onLike() {
         if (userVoteState) {
-            await fetch("https://bingus.website/api/crud/comment_vote", {
+            await fetch("http://localhost:3000/api/crud/comment_vote", {
                 method: "DELETE",
                 body: JSON.stringify({ id: userVoteState.commentVoteId })
             });
@@ -45,7 +45,7 @@ export default function CommentComponent({ user, comment, replies, voteCount, us
                 userId: userSelf.userId || -1,
                 postCommentId: comment.postCommentId || -1
             };
-            const response = await fetch("https://bingus.website/api/crud/comment_vote", {
+            const response = await fetch("http://localhost:3000/api/crud/comment_vote", {
                 method: "POST",
                 body: JSON.stringify(newVote)
             });
