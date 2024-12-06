@@ -1,3 +1,5 @@
+"use client";
+
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { UserProfile, UserSettings } from "@/lib/db/models";
 import Image from "next/image";
@@ -14,45 +16,64 @@ interface ProfilePageInfoSelfProps {
   className?: string;
 }
 
-export default function ProfilePageInfoSelf({ profile, numPosts, numFollowers, numFollowing, settings, className }: ProfilePageInfoSelfProps) {
-    return (
-        <Container className={`${className} py-4 custom-container`} > {/* Adjust margin for the vertical navbar */}
-            <Row className="justify-content-center">
-                {/* Profile Picture */}
-                <Col xs={12} md={4} className="text-center mb-4">
-                    <Image
-                        src={profile.profilePicture || profilePicTemp} // Fallback to a temporary image if none provided
-                        alt={`${profile.username}'s profile`}
-                        width={200} height={200} className="rounded-circle"
-                    />
-                </Col>
-                {/* User Info */}
-                <Col xs={12} md={8} className="text-center text-md-left">
-                  <div className="text-2xl font-semibold">{settings.showName ? profile.firstName + "  " + profile.lastName : profile.username}</div>
-                  <div className="italic">{settings.showName ? profile.username : null}</div>
-                  <Button variant="outline-secondary" size="sm" className="mb-2">
-                    <Link href="/profile/settings">Edit Profile</Link>
-                  </Button>
+export default function ProfilePageInfoSelf({
+  profile,
+  numPosts,
+  numFollowers,
+  numFollowing,
+  settings,
+  className,
+}: ProfilePageInfoSelfProps) {
+  return (
+    <Container className={`${className} py-4 custom-container`}>
+      <Row className="align-items-center">
+        {/* Red Section - Profile Image and Name */}
+        <Col xs={4} className="profile-section">
+          <h2>
+            {settings.showName
+              ? `${profile.firstName} ${profile.lastName}`
+              : profile.username}
+          </h2>
+          <Image
+            src={profile.profilePicture || profilePicTemp}
+            alt={`${profile.username}'s profile`}
+            width={100}
+            height={100}
+            className="rounded-circle"
+          />
+          {/* Edit Profile Button */}
+          <Button variant="outline-secondary" size="sm" className="mt-3">
+            <Link href="/profile/settings">Edit Profile</Link>
+          </Button>
+        </Col>
 
-                  {/* Stats */}
-                  <Row className="justify-content-center justify-content-md-start my-3">
-                    <Col xs={4} className="text-center">
-                      <strong className="large-font">{numPosts}</strong>
-                      <p className="large-font">Post(s)</p>
-                    </Col>
-                    <Col xs={4} className="text-center">
-                      <strong className="large-font">{numFollowers}</strong>
-                      <Link href="/profile/followers" className="large-font-link">Followers</Link>
-                    </Col>
-                    <Col xs={4} className="text-center">
-                      <strong className="large-font">{numFollowing}</strong>
-                      <Link className="large-font-link" href="/profile/following">Following</Link>
-                    </Col>
-                  </Row>
+        {/* Blue Section - Stats */}
+        <Col xs={4} className="stats-section">
+          <div className="stats-item">
+            <p className="large-font">{numPosts}</p>
+            <p>Posts</p>
+          </div>
+          <div className="stats-item">
+            <p className="large-font">{numFollowers}</p>
+            <p>
+              <Link href="/profile/followers">Followers</Link>
+            </p>
+          </div>
+          <div className="stats-item">
+            <p className="large-font">{numFollowing}</p>
+            <p>
+              <Link href="/profile/following">Following</Link>
+            </p>
+          </div>
+        </Col>
 
-                    {/* Bio */}
-                    <p className="bio">{profile.about}</p>
-                </Col>
-            </Row>
-        </Container>
-    );
+        {/* Green Section - Bio */}
+        {profile.about && (
+          <Col xs={4} className="bio-section">
+            <p>{profile.about}</p>
+          </Col>
+        )}
+      </Row>
+    </Container>
+  );
+}

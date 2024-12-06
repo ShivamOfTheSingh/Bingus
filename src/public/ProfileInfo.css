@@ -4,114 +4,78 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  /* Disable horizontal scrolling */
-  width: 100%;
 }
 
-/* Container Styles */
+.align-items-center {
+  background-color: purple;
+}
+
+/* Container */
 .custom-container {
+  margin-top: 12.5vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* Center content horizontally and vertically */
-  overflow: hidden;
-  /* Prevent content overflow */
   background: linear-gradient(135deg, #b890f3 30%, #bcb3c9 100%);
-  width: calc(100% - 300px);
-  /* Subtract the navigation bar width */
-  margin-left: 250px;
-  margin-top: 30px;
-  /* Add top margin for alignment */
+  width: 100%;
   padding: 20px;
-  /* Add padding for better spacing */
   border-radius: 16px;
-  /* Rounded corners for a modern look */
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  /* Subtle shadow */
-  opacity: 0;
-  /* Start invisible */
-  transform: translateY(20px);
-  /* Start slightly below */
-  animation: fadeInContainer 0.8s ease forwards;
-  /* Add fade-in animation */
 }
 
-/* Content Wrapper */
-.content {
-  text-align: center;
-  opacity: 0;
-  /* Start invisible */
-  transform: translateY(20px);
-  /* Start slightly below */
-  animation: fadeInContent 1s ease forwards;
-  /* Fade-in animation for content */
+/* Red Section - Profile */
+.profile-section {
+  background-color: red;
+  text-align: left;
+  padding: 10px;
 }
 
-.content .large-font {
+.profile-section h2 {
   font-size: 24px;
   font-weight: bold;
-  color: #333;
-  margin-bottom: 16px;
+  color: white;
+  margin-bottom: 8px;
 }
 
-.content .large-font-link {
-  font-size: 18px;
-  color: #6c63ff;
-  text-decoration: none;
-  transition: color 0.3s ease;
+/* Blue Section - Stats */
+.stats-section {
+  background-color: blue;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  padding: 10px;
 }
 
-.content .large-font-link:hover {
-  color: #574bdb;
+.stats-item {
+  color: white;
 }
 
-.content .italic {
-  font-style: italic;
-  font-size: 18px;
-  color: #555;
-}
-
-.content .bio {
+.stats-item .large-font {
   font-size: 20px;
-  font-weight: 500;
-  color: #444;
-  margin-top: 16px;
+  font-weight: bold;
 }
 
-/* Animations */
-@keyframes fadeInContainer {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeInContent {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Green Section - Bio */
+.bio-section {
+  background-color: green;
+  text-align: right;
+  padding: 10px;
+  color: white;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
   .custom-container {
-    margin-left: 0;
-    width: 100%;
-    padding: 16px;
+    flex-direction: column;
+    align-items: stretch;
   }
 
-  .content {
+  .profile-section,
+  .stats-section,
+  .bio-section {
     text-align: center;
+    margin-bottom: 10px;
   }
 }
