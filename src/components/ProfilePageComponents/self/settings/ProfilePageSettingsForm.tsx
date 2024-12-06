@@ -9,6 +9,7 @@ import readFile from "@/lib/utils/readFile";
 import tempProfilePicture from "@/public/profile-pic-temp.jpg";
 import ApiError from "@/lib/errors/ApiError";
 import { redirect } from "next/navigation";
+import '@/public/ProfilePageSettingsForm.css';
 
 export interface ProfilePageSettingsFormProps {
   profile: UserProfile;

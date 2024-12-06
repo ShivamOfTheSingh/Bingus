@@ -23,16 +23,6 @@ export default function NavBar2() {
   const [isClicked, setIsClicked] = useState(false);
 
   async function logout() {
-    console.log("Logout clicked!"); // Debug log for click
-    setIsClicked(true);
-
-    // Reset animation after 500ms
-    setTimeout(() => {
-      console.log("Resetting click state."); // Debug log for reset
-      setIsClicked(false);
-    }, 500);
-
-    // Simulate logout process
     const response = await fetch("https://bingus.website/api/session/logout", {
       method: "PATCH",
     });
@@ -77,7 +67,7 @@ export default function NavBar2() {
       </Nav>
       <div
         className={`logout ${isClicked ? "animate-click" : ""}`}
-        onClick={logout} // Bind onClick here for debugging
+        onClick={logout}
       >
         <Nav.Link className="logout-link">
           <FontAwesomeIcon icon={faRightFromBracket} />

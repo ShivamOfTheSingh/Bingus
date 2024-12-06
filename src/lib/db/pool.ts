@@ -9,9 +9,9 @@ const pool = new Pool({
     host: process.env.DB_HOST,
     port: 5432,
     database: process.env.DB_NAME,
-    ssl: {
-        rejectUnauthorized: false,
-    },
+    //ssl: {
+    //  rejectUnauthorized: false,
+    //},
 });
 
 export default pool

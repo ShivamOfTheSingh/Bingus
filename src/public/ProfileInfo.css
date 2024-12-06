@@ -1,122 +1,117 @@
-.custom-container{ 
-   
-    justify-content: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start; /* Align the content to the start */
-    align-items: flex-start; /* Align items to the top */
-    overflow: hidden;
-    background: linear-gradient(135deg, #b890f3 30%, #bcb3c9 100%);
-    max-width: 90%;
-    margin-left: 200px;
-    
-}
-
-.large-font {
-    font-size: 24px;
-  }
-  
-  .large-font-link {
-    font-size: 18px;
-    text-decoration: none;
-    color: #000;
-  }
-
-.italic{
-    font-style: italic;
-}
-
-.bio{
-    font-size: x-large;
-=======
-/* Navbar (unchanged, spans full width) */
-.navbar {
-  background: none;
-  width: 100vw;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 10vh;
-  z-index: 10;
-}
-
-/* Profile Section */
-.profile-section {
-  display: flex;
-  align-items: center;
-  margin-top: 10vh;
-  /* Offset for the navbar */
-  padding: 20px;
-}
-
-/* Profile Picture */
-.profile-picture {
-  margin-left: 10vw;
-  /* Position the PFP 10vw from the left */
-  flex-shrink: 0;
-  /* Prevent it from resizing */
-}
-
-.profile-picture img {
-  width: 150px;
-  /* Set a fixed size for the profile picture */
-  height: 150px;
-  border-radius: 50%;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-/* Stats Box */
-.profile-stats-box {
-  background: linear-gradient(135deg, #b890f3, #bcb3c9);
-  /* Gradient color */
-  color: white;
-  border-radius: 12px;
-  padding: 20px;
-  margin-left: 20px;
-  /* Space between PFP and stats box */
-  flex-grow: 1;
-  /* Allow the box to take up remaining space */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.profile-stats-box .stat-item {
-  display: inline-block;
-  margin-right: 20px;
-  text-align: center;
-}
-
-.profile-stats-box .stat-item strong {
-  font-size: 24px;
-}
-
-.profile-stats-box .stat-item p {
-  font-size: 16px;
+/* Prevent Horizontal Scrolling */
+html,
+body {
   margin: 0;
-}
-
-/* Post Grid */
-.post-grid {
-  margin: 20px 10vw;
-  /* Align with profile section */
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
-}
-
-.post-grid .post-card {
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  transition: transform 0.3s ease;
-}
-
-.post-grid .post-card:hover {
-  transform: translateY(-5px);
-}
-
-.post-grid img {
+  padding: 0;
+  overflow-x: hidden;
+  /* Disable horizontal scrolling */
   width: 100%;
-  height: 150px;
-  object-fit: cover;
-  /* Ensure image fits nicely */
+}
+
+/* Container Styles */
+.custom-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Center content horizontally and vertically */
+  overflow: hidden;
+  /* Prevent content overflow */
+  background: linear-gradient(135deg, #b890f3 30%, #bcb3c9 100%);
+  width: calc(100% - 300px);
+  /* Subtract the navigation bar width */
+  margin-left: 250px;
+  margin-top: 30px;
+  /* Add top margin for alignment */
+  padding: 20px;
+  /* Add padding for better spacing */
+  border-radius: 16px;
+  /* Rounded corners for a modern look */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  /* Subtle shadow */
+  opacity: 0;
+  /* Start invisible */
+  transform: translateY(20px);
+  /* Start slightly below */
+  animation: fadeInContainer 0.8s ease forwards;
+  /* Add fade-in animation */
+}
+
+/* Content Wrapper */
+.content {
+  text-align: center;
+  opacity: 0;
+  /* Start invisible */
+  transform: translateY(20px);
+  /* Start slightly below */
+  animation: fadeInContent 1s ease forwards;
+  /* Fade-in animation for content */
+}
+
+.content .large-font {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.content .large-font-link {
+  font-size: 18px;
+  color: #6c63ff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.content .large-font-link:hover {
+  color: #574bdb;
+}
+
+.content .italic {
+  font-style: italic;
+  font-size: 18px;
+  color: #555;
+}
+
+.content .bio {
+  font-size: 20px;
+  font-weight: 500;
+  color: #444;
+  margin-top: 16px;
+}
+
+/* Animations */
+@keyframes fadeInContainer {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInContent {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .custom-container {
+    margin-left: 0;
+    width: 100%;
+    padding: 16px;
+  }
+
+  .content {
+    text-align: center;
+  }
 }

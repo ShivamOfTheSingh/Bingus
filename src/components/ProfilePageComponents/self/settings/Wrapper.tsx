@@ -5,6 +5,7 @@ import ProfilePageSettings from "./ProfilePageSettings";
 import ProfilePageSettingsForm from "./ProfilePageSettingsForm";
 import { useState } from "react";
 import { UserProfile, UserSettings } from "@/lib/db/models";
+import "@/public/Wrapper.css";
 
 interface WrapperProps {
     profile: UserProfile;
@@ -15,13 +16,25 @@ interface WrapperProps {
 export default function Wrapper({ profile, settings, className }: WrapperProps) {
     const [editing, setEditing] = useState<boolean>(false);
 
+    const toggleEditing = () => setEditing(!editing);
+
     return (
-        <div className={`${className} flex flex-col items-center`}>
-            Profile Settings
-            <Button onClick={() => { setEditing(!editing) }} variant={ editing ? "secondary" : "primary" }>
-                { editing ? "Cancel" : "Edit" }
+        <div className={`${className} wrapper-container flex flex-col items-center p-6 bg-white shadow-md rounded-md`}>
+            <h1 className="text-2xl font-bold mb-4">Profile Settings</h1>
+            <Button
+                onClick={toggleEditing}
+                className={`mb-4 custom-button ${editing ? "cancel-button" : "edit-button"}`}
+            >
+                {editing ? "Cancel" : "Edit"}
             </Button>
-            { editing ? <ProfilePageSettingsForm profile={profile} settings={settings} /> : <ProfilePageSettings profile={profile} settings={settings} /> }
+
+            <div className="settings-content w-full">
+                {editing ? (
+                    <ProfilePageSettingsForm profile={profile} settings={settings} />
+                ) : (
+                    <ProfilePageSettings profile={profile} settings={settings} />
+                )}
+            </div>
         </div>
     );
 }
