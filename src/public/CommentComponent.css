@@ -1,77 +1,77 @@
-/* General Comment Styles */
-.comment-header {
-    margin-bottom: 10px;
-    
+/* Updated CSS */
+.main-container {
+    padding: 20px;
+    width: 85vw;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
 }
 
-.comment-user {
+.comment-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.profile-pic {
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.username {
     font-weight: bold;
     font-size: 1.1rem;
-    color: #930ac9;
-    font-family: Corier New;
-    
+    color: #333;
+}
+
+.timestamp {
+    font-size: 0.85rem;
+    color: #666;
 }
 
 .comment-content {
-    margin-bottom: 10px;
-    
+    margin: 10px 0;
 }
 
 .comment-text {
-    font-size: 1rem;
-    color: #333;
-    font-family: Corier New;
-    
+    font-size: 1.2rem;
+    font-weight: normal;
+    color: #444;
 }
 
-.comment-timestamp {
-    font-size: 0.85rem;
-    color: #999;
-    font-family: Corier New;
-    
-}
-
-/* Like Button */
-.comment-footer {
+.comment-actions {
     display: flex;
-    justify-content: flex-end;
-}
-
-/* Reply Styles */
-.comment-replies {
+    justify-content: space-between;
+    align-items: center;
     margin-top: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+}
+
+.comment-replies {
+    margin-top: 20px;
+}
+
+.reply-container {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #fff;
+    border: 1px solid #eee;
 }
 
 .reply-header {
-    margin-top: 15px;
+    display: flex;
+    align-items: center;
     margin-bottom: 5px;
 }
 
-.reply-user {
+.reply-username {
+    margin-left: 10px;
     font-weight: bold;
-    font-size: .9rem;
-    color: #930ac9;
-    font-family: Corier New;
+    font-size: 0.9rem;
+    color: #333;
 }
-
-.reply-content {
-    margin-bottom: 5px;
-}
-
-.reply-text {
-    font-size: .9rem;
-    color: #555;
-    font-family: Corier New;
-    word-wrap: break-word; /* Ensures long words break */
-    white-space: normal;
-    overflow-wrap: break-word;
-}
-
-/* Adjusting Image sizes */
-.comment-header img, .reply-header img {
-    border-radius: 50%;
-}
-

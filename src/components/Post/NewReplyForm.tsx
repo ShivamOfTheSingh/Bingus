@@ -50,7 +50,7 @@ export default function NewReplyForm({ onSubmitDecorator, commentId, className }
                 dateReplied: new Date()
             };
 
-            const response = await fetch("https://bingus.website/api/crud/comment_reply", {
+            const response = await fetch("http://localhost:3000/api/crud/comment_reply", {
                 method: "POST",
                 body: JSON.stringify(newReply)
             });
@@ -70,26 +70,30 @@ export default function NewReplyForm({ onSubmitDecorator, commentId, className }
 
     return (
         <Form action={onSubmit} className={`new-reply-form ${className || ''}`}>
-            <Form.Group controlId="reply">
-                <Form.Control type="text"
-                    placeholder="   "
-                    value={reply} onChange={(e) => { setReply(e.target.value) }}
-                    disabled={pending}
-                />
-                {validateErrors.reply ? (
-                    <Form.Label className="form-label">
-                        {validateErrors.reply}
-                    </Form.Label>
-                ) : null}
-            </Form.Group>
-            <Button type="submit" className="btn-submit">
-                {pending ? (
-                    <div className="spinner-container">
-                        <Spinner size="sm" animation="border" />
-                        Submitting...
-                    </div>
-                ) : "Reply"}
-            </Button>
+            <div className="form-row">
+                <Form.Group controlId="reply" className="form-control-container">
+                    <Form.Control type="text"
+                        placeholder="Type your reply..."
+                        value={reply}
+                        onChange={(e) => setReply(e.target.value)}
+                        disabled={pending}
+                    />
+                </Form.Group>
+                <Button type="submit" className="btn-submit">
+                    {pending ? (
+                        <div className="spinner-container">
+                            <Spinner size="sm" animation="border" />
+                            Submitting...
+                        </div>
+                    ) : "Reply"}
+                </Button>
+            </div>
+            {validateErrors.reply ? (
+                <Form.Label className="form-label">
+                    {validateErrors.reply}
+                </Form.Label>
+            ) : null}
         </Form>
+
     );
 }

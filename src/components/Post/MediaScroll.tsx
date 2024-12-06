@@ -33,7 +33,7 @@ export default function MediaScroll({ media, className }: MediaScrollProps) {
 
     return (
         <div className={`${className} flex flex-col items-center`}>
-            <Image src={media[currentMediaIndex].mediaUrl} alt={currentMediaIndex.toString()} height={700} width={400} />
+            <Image src={media[currentMediaIndex].mediaUrl} alt={currentMediaIndex.toString()} height={1000} width={1000} />
             <ScrollButton range={media.length} onIncrement={onIncrement} onDecrement={onDecrement} />
         </div>
     );
