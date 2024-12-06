@@ -124,14 +124,14 @@ export default function ProfilePageSettingsForm({
       };
 
       const profileResponse = await fetch(
-        "http://localhost:3000/api/crud/user_profile",
+        "https://bingus.website/api/crud/user_profile",
         {
           method: "PUT",
           body: JSON.stringify(upadtedProfile),
         }
       );
       const settingsResponse = await fetch(
-        "http://localhost:3000/api/crud/user_settings",
+        "https://bingus.website/api/crud/user_settings",
         {
           method: "PUT",
           body: JSON.stringify(updatedSettings),

@@ -13,7 +13,7 @@ interface ReturnData {
 export async function getAllUsers(userId: number): Promise<UserProfile[]> {
     try {
         // 1. Get all users
-        const usersResponse = await fetch("http://localhost:3000/api/crud/user_profile");
+        const usersResponse = await fetch("https://bingus.website/api/crud/user_profile");
         const users: UserProfile[] = await usersResponse.json();
 
         // 2.  filter out yourself

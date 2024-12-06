@@ -7,6 +7,7 @@ import '@/public/MainPage.css';
 import { Post, Media } from "@/lib/db/models";
 import MainFeedList from "@/components/HomeComponents/MainFeedList";
 import getFeedData from "@/lib/GET_api_calls/getFeedData";
+import Friends from "@/components/Friends";
 
 export default async function Page() {
     const userId = await getCurrentSessionUserId();
@@ -19,8 +20,10 @@ export default async function Page() {
     return (
         <div className="page-container">
             <div className="content-container">
-                <h1>Bingus Feed</h1>
                 <MainFeedList postData={pageData} />
+            </div>
+            <div className="friends-container">
+                <Friends userId={userId} />
             </div>
         </div>
     );

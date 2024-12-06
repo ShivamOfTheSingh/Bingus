@@ -34,7 +34,7 @@ export default function PostComponent({
 
     async function onLike() {
         if (userVoteState) {
-            await fetch("http://localhost:3000/api/crud/post_vote", {
+            await fetch("https://bingus.website/api/crud/post_vote", {
                 method: "DELETE",
                 body: JSON.stringify({ id: userVoteState.postVoteId }),
             });
@@ -44,7 +44,7 @@ export default function PostComponent({
                 userId: userIdSelf,
                 postId: post.postId || -1,
             };
-            const response = await fetch("http://localhost:3000/api/crud/post_vote", {
+            const response = await fetch("https://bingus.website/api/crud/post_vote", {
                 method: "POST",
                 body: JSON.stringify(newVote),
             });
