@@ -14,15 +14,10 @@ export default async function getCurrentSessionUserId(): Promise<number> {
     if (!session) {
         return -1;
     }
-    console.log("before db connect");
     const client = await pool.connect();
-    console.log("before decrypt");
     const sessionJson = JSON.parse(decrypt(session.value));
-    console.log("after decrypt");
     const result = await client.query("SELECT user_id FROM user_auth WHERE user_auth_id = $1", [sessionJson.userAuthId]);
-    console.log("after query");
     const userId = result.rows[0].user_id;
     client.release();
-    console.log("before return, userID:", userId);
     return userId;
 }
