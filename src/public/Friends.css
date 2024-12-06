@@ -1,0 +1,140 @@
+/* Main container for the friends list */
+.friend-main {
+    background-color: #dcd0ff;
+    /* Light purple background */
+    color: #333;
+    /* Darker text for readability */
+    width: 25vw;
+    /* Define container width */
+    margin: 7.5vh 0 0 1.5vh;
+    /* Positioning with top and left margins */
+    padding: 2vw;
+    /* Padding inside the container */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-family: "Arial", sans-serif;
+    border-radius: 16px;
+    /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    /* Subtle shadow */
+}
+
+/* Header styling */
+.friend-main h2 {
+    font-size: 2rem;
+    /* Larger font size for the header */
+    font-weight: bold;
+    margin-bottom: 1rem;
+    /* Space below the header */
+    color: #333;
+}
+
+/* Error message styling */
+.error {
+    color: red;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Friends list styling */
+.friends-list {
+    list-style: none;
+    /* Remove bullet points */
+    padding: 0;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    /* Spacing between friend items */
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Individual friend item */
+.friend-item {
+    display: flex;
+    align-items: center;
+    /* Vertically center PFP and username */
+    gap: 1rem;
+    /* Space between avatar and username */
+    padding: 1rem;
+    border: 1px solid #bfa8ff;
+    /* Light border matching theme */
+    border-radius: 12px;
+    /* Rounded corners */
+    background-color: #a288f0;
+    /* Red background for friend item */
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    width: 100%;
+    /* Full width of the container */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow for depth */
+}
+
+/* Hover effect for friend item */
+.friend-item:hover {
+    background-color: #d4c2ff;
+    /* Lighter purple on hover */
+    transform: translateY(-3px);
+    /* Lift effect */
+    box-shadow: 0 4px 15px rgba(106, 90, 205, 0.3);
+    /* Glow effect */
+}
+
+/* Avatar container */
+.friend-avatar {
+    width: 50px;
+    /* Fixed size for avatar */
+    height: 50px;
+    border-radius: 50%;
+    /* Circular avatar */
+    overflow: hidden;
+    /* Ensure the image fits inside the circle */
+    border: 2px solid #bfa8ff;
+    /* Themed border around avatar */
+    flex-shrink: 0;
+    /* Prevent avatar from shrinking */
+}
+
+/* Avatar image */
+.avatar-img {
+    margin-right: 0.5vh;
+    width: 100%;
+    /* Fill the avatar container */
+    height: 100%;
+    object-fit: cover;
+    /* Maintain aspect ratio */
+}
+
+/* Username styling */
+.friend-username {
+    font-size: 1.1rem;
+    /* Slightly larger font size */
+    font-weight: 600;
+    /* Bold username */
+    color: #333;
+    /* Dark text for contrast */
+    font-family: "Arial", sans-serif;
+    white-space: nowrap;
+    /* Prevent text wrapping */
+    overflow: hidden;
+    /* Hide overflow text */
+    text-overflow: ellipsis;
+    /* Add ellipsis for long names */
+}
+
+/* Link styling */
+.friend-link {
+    display: flex;
+    align-items: center;
+    /* Vertically align avatar and username */
+    text-decoration: none;
+    /* Remove link underline */
+    color: inherit;
+    /* Inherit text color */
+    width: 100%;
+    /* Full width clickable link */
+}

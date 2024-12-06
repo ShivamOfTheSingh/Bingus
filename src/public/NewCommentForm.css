@@ -1,70 +1,88 @@
-/* Container for the form */
-.new-comment-form {
+/* General fade-in animation */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px); /* Optional: Adds a little upward motion */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Apply fade-in to the form container */
+.new-comment-form,
+.new-reply-form {
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 1s ease-out forwards; /* Fade-in effect for the form */
 }
 
-/* Form control (text input) */
-.new-comment-form .form-control {
+/* Apply fade-in to individual form controls */
+.new-comment-form .form-control,
+.new-reply-form .form-control {
     padding: 10px;
     font-size: 16px;
+    font-family: Corier New;
     border-radius: 6px;
-    font-family: Geneva;   
     border: 1px solid #ccc;
     width: 100%;
     margin-bottom: 10px;
     transition: border 0.3s ease-in-out;
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+    animation-delay: 0.3s; /* Stagger the fade-in for inputs */
 }
 
-.new-comment-form .form-control:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
-}
-
-/* Button styling */
-.new-comment-form .btn {
+/* Apply fade-in to the buttons */
+.new-comment-form .btn,
+.new-reply-form .btn {
     padding: 12px 20px;
     font-size: 16px;
-    font-family: Geneva;   
+    font-family: Corier New;
     border-radius: 6px;
-    background-color: #8f6ccc; 
-    border-color: #8f6ccc; 
+    background-color: #8f6ccc;
+    border-color: #8f6ccc;
     color: white;
     border: none;
     transition: background-color 0.3s ease;
-}
-
-.new-comment-form .btn:disabled {
-    background-color: #ccc;
-}
-
-.new-comment-form .btn:hover {
-    background-color: #0056b3;
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+    animation-delay: 0.5s; /* Stagger the fade-in for buttons */
 }
 
 /* Error message styling */
-.new-comment-form .form-label {
+.new-comment-form .form-label,
+.new-reply-form .form-label {
     color: red;
     font-size: 14px;
     margin-top: 5px;
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+    animation-delay: 0.7s; /* Stagger the fade-in for error messages */
+    font-family: Corier New;
 }
 
 /* Spinner inside the button */
-.new-comment-form .spinner-container {
+.new-comment-form .spinner-container,
+.new-reply-form .spinner-container {
     display: flex;
     gap: 10px;
     align-items: center;
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+    animation-delay: 0.6s; /* Stagger the fade-in for spinner */
 }
 
 /* Add margin for the submit button */
-.new-comment-form .btn-submit {
+.new-comment-form .btn-submit,
+.new-reply-form .btn-submit {
     margin-top: 10px;
 }
-
 
 /* Container for the form */
 .new-reply-form {
@@ -74,13 +92,14 @@
     background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Corier New;
 }
 
 /* Form control (text input) */
 .new-reply-form .form-control {
     padding: 10px;
     font-size: 16px;
-    font-family: Geneva;   
+    font-family: Corier New;   
     border-radius: 6px;
     border: 1px solid #ccc;
     width: 100%;
@@ -88,47 +107,8 @@
     transition: border 0.3s ease-in-out;
 }
 
-.new-reply-form .form-control:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
-}
 
-/* Button styling */
-.new-reply-form .btn {
-    padding: 12px 20px;
-    font-size: 16px;
-    font-family: Geneva;   
-    border-radius: 6px;
-    background-color: #8f6ccc; 
-    border-color: #8f6ccc; 
-    color: white;
-    border: none;
-    transition: background-color 0.3s ease;
-}
-
-.new-reply-form .btn:disabled {
-    background-color: #ccc;
-}
-
+.new-comment-form .btn:hover,
 .new-reply-form .btn:hover {
-    background-color: #0056b3;
-}
-
-/* Error message styling */
-.new-reply-form .form-label {
-    color: red;
-    font-size: 14px;
-    margin-top: 5px;
-}
-
-/* Spinner inside the button */
-.new-reply-form .spinner-container {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
-
-/* Add margin for the submit button */
-.new-reply-form .btn-submit {
-    margin-top: 10px;
+    background-color: #b890f3;
 }

@@ -10,7 +10,7 @@ const pool = new Pool({
     port: 5432,
     database: process.env.DB_NAME,
     ssl: {
-        rejectUnauthorized: false,
+      rejectUnauthorized: false,
     },
 });
 

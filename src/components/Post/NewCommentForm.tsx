@@ -50,7 +50,7 @@ export default function NewCommentForm({ onSubmitDecorator, postId, className }:
                 dateCommented: new Date()
             };
 
-            const response = await fetch("http://localhost:3000/api/crud/post_comment", {
+            const response = await fetch("https://bingus.website/api/crud/post_comment", {
                 method: "POST",
                 body: JSON.stringify(newComment)
             });
@@ -72,7 +72,7 @@ export default function NewCommentForm({ onSubmitDecorator, postId, className }:
         <Form action={onSubmit} className={`new-comment-form ${className || ''}`}>
             <Form.Group controlId="comment">
                 <Form.Control type="text"
-                    placeholder="Write a comment..."
+                    placeholder="   "
                     value={comment} onChange={(e) => { setComment(e.target.value) }}
                     disabled={pending}
                 />
@@ -88,7 +88,7 @@ export default function NewCommentForm({ onSubmitDecorator, postId, className }:
                         <Spinner size="sm" animation="border" />
                         Submitting...
                     </div>
-                ) : "Submit"}
+                ) : "Comment"}
             </Button>
         </Form>
     );

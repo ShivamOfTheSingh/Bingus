@@ -44,7 +44,7 @@
 .user-profile-card h3 {
   font-size: 1.1rem;
   color: #930ac9;
-  font-family: Geneva;   
+  font-family: Corier New;   
   text-decoration: none;
   margin-bottom: 10px;
   font-weight: 500;
@@ -58,7 +58,7 @@
   background-color: #8f6ccc; 
   border-color: #8f6ccc; 
   color: #fff;
-  font-family: Geneva;   
+  font-family: Corier New;   
   padding: 8px 20px;
   font-size: 0.9rem;
   border-radius: 25px;
@@ -69,18 +69,9 @@
 }
 
 .user-profile-card .follow-button:hover {
-  background-color: #0056b3;
+  background-color: #930ac9;
 }
 
-/* Follow Button Styles when Following */
-.user-profile-card .follow-button.following {
-  background-color: #28a745;  /* Green for "Following" state */
-}
-
-/* Follow Button Styles when Not Following */
-.user-profile-card .follow-button.not-following {
-  background-color: #dc3545;  /* Red for "Follow" state */
-}
 
 /* For FollowCardOther (hide button) */
 .user-profile-card.other .follow-button {

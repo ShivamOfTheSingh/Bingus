@@ -12,7 +12,7 @@ async function getFollowingStatus(
   otherId: number
 ): Promise<Following> {
   const response = await fetch(
-    `http://localhost:3000/api/crud/followings/pair?selfId=${selfId}&otherId=${otherId}`
+    `https://bingus.website/api/crud/followings/pair?selfId=${selfId}&otherId=${otherId}`
   );
   if (response.status === 200) {
     const following: Following = await response.json();
@@ -39,7 +39,7 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   const following = await getFollowingStatus(selfId, parseInt(params.id));
 
-  console.log(following);
+  //console.log(following);
   return (
     <div>
       <ProfilePageInfoOther

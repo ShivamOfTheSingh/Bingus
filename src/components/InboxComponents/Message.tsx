@@ -23,10 +23,21 @@ const MessageComponent: React.FC<MessageProps> = ({ type, position, message }) =
       <div className="bubble-container">
         <div className="bubble">{message.messageText || "Message not available"}</div>
       </div>
-      {position === "last" && timeString && (
-        <div className={`timestamp ${type}`}>
-          <p>{timeString}</p>
-        </div>
+      {position === "last" && (
+        <>
+          {timeString && (
+            <div className={`timestamp ${type}`}>
+              <p>{timeString}</p>
+            </div>
+          )}
+          <div className="gif-container">
+            <img
+              src="https://cdn3.emoji.gg/emojis/5214-dancing-sphynx-cat.gif"
+              alt="Dancing Sphynx Cat"
+              className="dancing-cat"
+            />
+          </div>
+        </>
       )}
     </div>
   );

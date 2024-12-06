@@ -3,17 +3,19 @@
     flex-direction: column;
     max-width: 100%;
     margin: 0;
+    /* Remove top margin */
     padding: 0;
     box-sizing: border-box;
 }
 
 .Message .bubble-container {
-    font-size: 14px;
+    font-size: 2vh;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     width: 100%;
-    margin: 2px 0;
+    margin: 0.5vh 0;
+    /* Keep minimal margin for spacing */
     padding: 0;
 }
 
@@ -29,24 +31,56 @@
     max-width: 70%;
     word-wrap: break-word;
     margin: 2px 0;
+    /* Reduce vertical margin */
     box-shadow: 0 2px 4px rgba(61, 52, 52, 0.1);
     white-space: pre-wrap;
     overflow-wrap: break-word;
+    font-family: Corier New;
 }
 
 .Message.me .bubble-container .bubble {
-    background: #1e6ddc;
+    background: #a288f0;
     color: #fff;
+    font-family: Corier New;
 }
 
 .timestamp {
     font-size: 0.75rem;
     color: #602626;
     margin: 0;
+    /* Remove margin to reduce spacing */
     padding: 0;
     text-align: left;
+    font-family: Corier New;
 }
 
 .timestamp.me {
     text-align: right;
+}
+
+.gif-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.dancing-cat {
+    width: 10vw;
+    height: auto;
+    animation: bounce 1.5s infinite;
+    opacity: 0.8;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
 }

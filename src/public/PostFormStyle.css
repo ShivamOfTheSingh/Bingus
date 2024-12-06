@@ -14,7 +14,8 @@
 
   .form-container {
 
-    max-width: 450px; 
+    max-width: 450px;
+    
     margin: auto; 
     padding: 20px;
     
@@ -27,14 +28,14 @@
 
   .label-heading{
     font-size:xx-large;
-    font-family: Geneva;
+    font-family: Corier New;
     text-align: center;
     
   }
 
   .label{
     font-size: large;
-    font-family: Geneva;
+    font-family: Corier New;
     font-style: italic;
     
   }
@@ -44,7 +45,8 @@
   }
   .btn-primary {
     background-color: #8f6ccc; 
-    border-color: #8f6ccc; 
+    border-color: #8f6ccc;
+    font-family: Corier New;  
   }
   
   .btn-primary:hover {

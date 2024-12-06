@@ -1,0 +1,65 @@
+.wrapper-container {
+    background: #fff;
+    /* White background for clarity */
+    box-shadow: 0 50px 100px rgba(58, 29, 136, 0.1);
+    /* Soft shadow */
+    border-radius: 8px;
+    /* Rounded edges */
+    padding: 16px;
+    /* Padding for content */
+    max-width: 800px;
+    /* Constrain the width */
+    margin: 20px auto;
+    /* Center and give space */
+    margin-top: 14vh;
+}
+
+.text-2xl {
+    font-size: 1.5rem;
+}
+
+.font-bold {
+    font-weight: bold;
+}
+
+.mb-4 {
+    margin-bottom: 12px;
+}
+
+.settings-content {
+    width: 100%;
+    /* Full-width content */
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.custom-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.edit-button {
+    background-color: #b088ed;
+    /* Purple */
+    color: white;
+}
+
+.edit-button:hover {
+    background-color: #928ae5;
+    /* Darker purple */
+}
+
+.cancel-button {
+    background-color: #ff6b6b;
+    /* Red */
+    color: white;
+}
+
+.cancel-button:hover {
+    background-color: #ff4b4b;
+    /* Darker red */
+}

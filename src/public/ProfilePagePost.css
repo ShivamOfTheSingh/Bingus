@@ -1,9 +1,50 @@
-/* ProfilePagePost.css */
+/* Profile Page Container */
+.profile-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    /* Space between profile info and posts */
+    padding: 20px;
+    margin-left: 250px;
+    /* Account for the navigation bar width */
+    margin-top: 30px;
+    /* Space from the top */
+    width: calc(100% - 250px);
+}
 
-/* Card styling */
+/* Profile Information Styling */
+.profile-info {
+    text-align: center;
+    /* Center align the text */
+    background: linear-gradient(135deg, #ffffff, #f9f9f9);
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 600px;
+    width: 100%;
+    font-family: Corier New;
+}
+
+/* Posts Grid Container */
+.profile-posts-container {
+    display: flex;
+    flex-wrap: wrap;
+    /* Allow posts to wrap to the next line */
+    justify-content: center;
+    /* Center align the posts */
+    gap: 20px;
+    /* Space between post cards */
+    width: 100%;
+    max-width: 1200px;
+    /* Limit the width of the posts section */
+}
+
+/* Individual Post Card */
 .profile-post-card {
-    width: 18rem; /* Adjust card width */
-    height: auto; /* Let the card height adjust based on content */
+    width: 18rem;
+    /* Set a fixed width for post cards */
+    height: auto;
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -14,43 +55,4 @@
 .profile-post-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 4px 15px 20px rgba(182, 23, 182, 0.1);
-}
-
-/* Body of the card (Caption) */
-.profile-post-card .card-body {
-    padding: 15px;
-}
-
-.profile-post-card .card-text {
-    font-size: 1rem;
-    color: #333;
-    margin-bottom: 10px;
-    word-wrap: break-word; /* Allow text to wrap */
-    white-space: normal; /* Ensure the text wraps normally */
-}
-
-/* Image Styling */
-.profile-post-card img {
-    width: 100%; /* Make the image take the full width of its container */
-    height: auto;
-    border-radius: 8px;
-    margin-top: 10px;
-}
-
-/* Footer (Timestamp) */
-.profile-post-card .card-footer {
-    font-size: 0.85rem;
-    color: #888;
-    text-align: right;
-    padding: 10px 15px;
-    background-color: #f9f9f9;
-}
-
-/* Link styling */
-.profile-post-card .no-underline {
-    text-decoration: none;
-}
-
-.profile-post-card .no-underline:hover {
-    text-decoration: none;
 }

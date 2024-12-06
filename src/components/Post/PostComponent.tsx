@@ -9,7 +9,7 @@ import timestampToTimeAgo from "@/lib/utils/timestampToTimeAgo";
 import LikeButton from "./LikeButton";
 import { useState } from "react";
 
-import "@/public/PostComponent.css";
+import "@/public/PostComponent.css"; 
 
 interface PostComponentProps {
     post: Post;
@@ -34,7 +34,7 @@ export default function PostComponent({
 
     async function onLike() {
         if (userVoteState) {
-            await fetch("http://localhost:3000/api/crud/post_vote", {
+            await fetch("https://bingus.website/api/crud/post_vote", {
                 method: "DELETE",
                 body: JSON.stringify({ id: userVoteState.postVoteId }),
             });
@@ -44,7 +44,7 @@ export default function PostComponent({
                 userId: userIdSelf,
                 postId: post.postId || -1,
             };
-            const response = await fetch("http://localhost:3000/api/crud/post_vote", {
+            const response = await fetch("https://bingus.website/api/crud/post_vote", {
                 method: "POST",
                 body: JSON.stringify(newVote),
             });
@@ -56,28 +56,36 @@ export default function PostComponent({
 
     return (
         <Container className={`${className} post-container`}>
+            {/* Profile section (Image and Username) */}
             <Row className="post-header">
-                <Col>
-                    <Image src={user.profilePicture} alt={user.username} height={50} width={50} />
+                <Col className="profile-image">
+                    <Image src={user.profilePicture} alt={user.username} height={100} width={100} />
                 </Col>
-                <Col>
+                <Col className="profile-username">
                     <Link href={`/profile/${user.userId}`}>
                         {user.username}
                     </Link>
                 </Col>
             </Row>
+    
+            {/* Post Image */}
             <Row className="post-media">
                 <MediaScroll media={media} />
             </Row>
+    
+            {/* Caption Section */}
             <Row className="post-caption">
                 {post.caption}
             </Row>
+    
+            {/* Footer (Like Button and Timestamp) */}
             <Row className="post-footer">
                 <Col className="like-button-container">
                     <LikeButton liked={userVoteState ? true : false} count={voteCount} onClick={onLike} size={"lg"} />
-                    {/*<span className="like-count">{voteCount}</span> */}
                 </Col>
             </Row>
+    
+            {/* Timestamp */}
             <Row className="post-timestamp">
                 {timestampToTimeAgo(post.datePosted)}
             </Row>
