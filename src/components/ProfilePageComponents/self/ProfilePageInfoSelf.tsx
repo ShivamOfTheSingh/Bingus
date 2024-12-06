@@ -3,15 +3,15 @@ import { UserProfile, UserSettings } from "@/lib/db/models";
 import Image from "next/image";
 import profilePicTemp from "@/public/profile-pic-temp.jpg";
 import Link from "next/link";
-import '@/public/ProfileInfo.css'
+import '@/public/ProfileInfo.css';
 
 interface ProfilePageInfoSelfProps {
-    profile: UserProfile;
-    numPosts: number;
-    numFollowers: number;
-    numFollowing: number;
-    settings: UserSettings;
-    className?: string;
+  profile: UserProfile;
+  numPosts: number;
+  numFollowers: number;
+  numFollowing: number;
+  settings: UserSettings;
+  className?: string;
 }
 
 export default function ProfilePageInfoSelf({ profile, numPosts, numFollowers, numFollowing, settings, className }: ProfilePageInfoSelfProps) {
@@ -38,7 +38,7 @@ export default function ProfilePageInfoSelf({ profile, numPosts, numFollowers, n
                   <Row className="justify-content-center justify-content-md-start my-3">
                     <Col xs={4} className="text-center">
                       <strong className="large-font">{numPosts}</strong>
-                      <p className="large-font">Posts</p>
+                      <p className="large-font">Post(s)</p>
                     </Col>
                     <Col xs={4} className="text-center">
                       <strong className="large-font">{numFollowers}</strong>
@@ -56,4 +56,3 @@ export default function ProfilePageInfoSelf({ profile, numPosts, numFollowers, n
             </Row>
         </Container>
     );
-}

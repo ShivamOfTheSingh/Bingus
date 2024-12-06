@@ -21,7 +21,6 @@ export default async function getFeedData(): Promise<PostsList> {
   // Loop over users to fetch their profiles and posts with media
   for (const user of users) {
     const userId = user.userId;
-    console.log(`Fetching posts for user ID: ${userId}`);
 
     // Fetch posts for the user
     const resPosts = await fetch(`http://localhost:3000/api/crud/user_profile/posts/${userId}`);

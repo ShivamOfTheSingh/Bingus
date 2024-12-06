@@ -2,38 +2,36 @@
 
 import { useState } from "react";
 import { Post, Media } from "@/lib/db/models";
-import { Container, Col, Row, CloseButton, Card, Button } from "react-bootstrap";
-
+import { Container, Col, Row } from "react-bootstrap";
 import ProfilePagePost from "../ProfilePagePost";
 
-
 interface ProfilePagePostGridSelfProps {
-    postData: { post: Post, media: Media[] }[]; 
+    postData: { post: Post, media: Media[] }[];
     className?: string;
 }
 
 export default function ProfilePagePostGridSelf({ postData, className }: ProfilePagePostGridSelfProps) {
     const [posting, setPosting] = useState(false);
 
-    postData.sort((a: any, b: any) => {
+    postData.sort((a, b) => {
         return new Date(b.post.datePosted).getTime() - new Date(a.post.datePosted).getTime();
     });
 
     return (
-        <Container fluid className={className} style={{ marginLeft: '250px', paddingTop: '60px' }}> 
+        <Container fluid className={`${className} post-grid-container`} style={{ marginTop: '10vh', paddingTop: '20px' }}>
             <Row>
-                {postData.slice(0, 3).map((pd: any, index: number) => (
+                {postData.slice(0, 3).map((pd, index) => (
                     <Col key={index} xs={12} sm={6} md={4} lg={3}>
                         <ProfilePagePost post={pd.post} thumbnail={pd.media[0]} />
                     </Col>
                 ))}
             </Row>
             {postData.length > 0 &&
-                postData.slice(3).map((pd: any, index: number) => {
+                postData.slice(3).map((pd, index) => {
                     if (index % 4 === 0) {
                         return (
                             <Row key={index}>
-                                {postData.slice(3).slice(index, index + 4).map((subPd: any, subIndex: number) => (
+                                {postData.slice(3).slice(index, index + 4).map((subPd, subIndex) => (
                                     <Col key={subIndex} xs={12} sm={6} md={4} lg={3}>
                                         <ProfilePagePost post={subPd.post} thumbnail={subPd.media[0]} />
                                     </Col>
@@ -41,7 +39,7 @@ export default function ProfilePagePostGridSelf({ postData, className }: Profile
                             </Row>
                         );
                     }
-                    return null; // Avoid returning undefined in the loop
+                    return null;
                 })
             }
         </Container>

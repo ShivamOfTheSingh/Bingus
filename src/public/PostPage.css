@@ -1,16 +1,18 @@
 /* Container to hold both post and comments */
 .post-page-container {
-    max-width: 1200px;
+    max-width: 1500px;
     margin: 0 auto;
     padding: 20px;
     background-color: #f4f4f9;
+    padding-left: 250px;
+   
 }
 
 /* Flex container for the post and comments */
 .post-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px; /* Space between post and comments */
+    gap: 20px;
 }
 
 /* Post section styling */
@@ -25,8 +27,9 @@
 /* Comments section styling */
 .post-right {
     flex: 1; /* Take up less space */
-    max-height: 600px; /* Set a max height for the comments section */
-    overflow-y: auto; /* Enable scrolling when content exceeds max-height */
+    max-height: 600px;
+    max-width: min-content; 
+    overflow-y: auto; 
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);

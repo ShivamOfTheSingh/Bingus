@@ -72,7 +72,7 @@ export default function NewReplyForm({ onSubmitDecorator, commentId, className }
         <Form action={onSubmit} className={`new-reply-form ${className || ''}`}>
             <Form.Group controlId="reply">
                 <Form.Control type="text"
-                    placeholder="Write a reply..."
+                    placeholder="   "
                     value={reply} onChange={(e) => { setReply(e.target.value) }}
                     disabled={pending}
                 />
@@ -88,7 +88,7 @@ export default function NewReplyForm({ onSubmitDecorator, commentId, className }
                         <Spinner size="sm" animation="border" />
                         Submitting...
                     </div>
-                ) : "Submit"}
+                ) : "Reply"}
             </Button>
         </Form>
     );

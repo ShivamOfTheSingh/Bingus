@@ -9,7 +9,7 @@ import timestampToTimeAgo from "@/lib/utils/timestampToTimeAgo";
 import LikeButton from "./LikeButton";
 import { useState } from "react";
 
-import "@/public/PostComponent.css";
+import "@/public/PostComponent.css"; 
 
 interface PostComponentProps {
     post: Post;
@@ -75,7 +75,6 @@ export default function PostComponent({
             <Row className="post-footer">
                 <Col className="like-button-container">
                     <LikeButton liked={userVoteState ? true : false} count={voteCount} onClick={onLike} size={"lg"} />
-                    {/*<span className="like-count">{voteCount}</span> */}
                 </Col>
             </Row>
             <Row className="post-timestamp">

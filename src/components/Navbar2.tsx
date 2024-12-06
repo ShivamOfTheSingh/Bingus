@@ -1,126 +1,78 @@
 "use client";
-import Button from "react-bootstrap/Button";
+import React, { useState } from "react";
 import Nav from "react-bootstrap/Nav";
-import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-//import ApiError from "@/lib/ApiError";
-import "@/public/NavBarStyle.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { notFound } from "next/navigation";
 import { usePathname } from "next/navigation";
+import "@/public/NavBarStyle.css";
 import {
   faHome,
-  faSearch,
   faComment,
-  faBell,
   faPlus,
   faRightFromBracket,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 
-
 export default function NavBar2() {
-  //John Pork
   const pathName = usePathname();
   const router = useRouter();
   const isMessageActive = pathName.startsWith("/conversations");
+
+  const [isClicked, setIsClicked] = useState(false);
+
   async function logout() {
-    const response = await fetch("http://localhost:3000/api/session/logout", {
+    const response = await fetch("https://bingus.website/api/session/logout", {
       method: "PATCH",
     });
-    if (response.status == 200) {
+
+    if (response.status === 200) {
       router.push("/login");
     } else {
       notFound();
     }
   }
-  
+
   return (
     <div className="navbar">
       <div className="branding">
-        <h2>Bingus</h2>
+        <img
+          src="https://text.media.giphy.com/v1/media/giphy.gif?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOiJwcm9kLTIwMjAtMDQtMjIiLCJzdHlsZSI6Im1pZGlmaWxlcyIsInRleHQiOiJCaW5ndXMiLCJpYXQiOjE3MzM0NTcyNTR9.SuNT-NmvCKixXPF3avR186S6D0KtFQ4alic73jSis8Y"
+          alt="Branding GIF"
+          className="branding-gif"
+        />
       </div>
-      <Nav defaultActiveKey="/profile" className="flex-column">
-        <Nav.Item
-          className={`nav-item-custom ${pathName === "/" ? "active" : ""}`}
-        >
+      <Nav className="nav-icons">
+        <Nav.Item className={`nav-item-custom ${pathName === "/" ? "active" : ""}`}>
           <Link className="link" href="/">
-            <span className="icon">
-              <FontAwesomeIcon icon={faHome} style={{ color: "black" }} />
-            </span>
-            Home
+            <FontAwesomeIcon icon={faHome} />
           </Link>
         </Nav.Item>
-        
-        {/* <Nav.Item
-          className={`nav-item-custom ${
-            pathName === "/search" ? "active" : ""
-          }`}
-        >
-          <Link className="link" href="/profile">
-            <span className="icon">
-              <FontAwesomeIcon icon={faSearch} style={{ color: "black" }} />
-            </span>
-            Search
-          </Link>
-        </Nav.Item> */}
-
-        <Nav.Item
-          className={`nav-item-custom ${
-            isMessageActive ? "active" : ""
-          }`}
-        >
+        <Nav.Item className={`nav-item-custom ${isMessageActive ? "active" : ""}`}>
           <Link className="link" href="/conversations">
-            <span className="icon">
-              <FontAwesomeIcon icon={faComment} style={{ color: "black" }} />
-            </span>
-            Messages
+            <FontAwesomeIcon icon={faComment} />
           </Link>
         </Nav.Item>
-        
-        {/* <Nav.Item
-          className={`nav-item-custom ${
-            pathName === "/notifications" ? "active" : ""
-          }`}
-        >
-          
-          <Link className="link" href="/profile">
-            <span className="icon">
-              <FontAwesomeIcon icon={faBell} style={{ color: "black" }} />
-            </span>
-            Notifications
-          </Link>
-        </Nav.Item> */}
-
         <Nav.Item className={`nav-item-custom ${pathName === "/post" ? "active" : ""}`}>
           <Link className="link" href="/post">
-            <span className="icon">
-              <FontAwesomeIcon icon={faPlus} style={{ color: "black" }} />
-            </span>
-            Post
+            <FontAwesomeIcon icon={faPlus} />
           </Link>
         </Nav.Item>
-        <Nav.Item
-          className={`nav-item-custom profile ${
-            pathName === "/profile" ? "active" : ""
-          }`}
-        >
+        <Nav.Item className={`nav-item-custom ${pathName === "/profile" ? "active" : ""}`}>
           <Link className="link" href="/profile">
-            <img
-              src="https://via.placeholder.com/50"
-              alt="Profile"
-              className="profile-pic"
-            />
-            Profile
+            <FontAwesomeIcon icon={faUser} />
           </Link>
         </Nav.Item>
       </Nav>
-      <Nav.Item className="nav-item-custom logout">
-        <Nav.Link onClick={logout} className="logout">
-          <FontAwesomeIcon icon={faRightFromBracket} className="icon" />
-          Logout
+      <div
+        className={`logout ${isClicked ? "animate-click" : ""}`}
+        onClick={logout}
+      >
+        <Nav.Link className="logout-link">
+          <FontAwesomeIcon icon={faRightFromBracket} />
         </Nav.Link>
-      </Nav.Item>
+      </div>
     </div>
   );
 }
