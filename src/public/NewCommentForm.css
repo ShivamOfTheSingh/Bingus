@@ -1,114 +1,107 @@
-/* General fade-in animation */
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-        transform: translateY(20px); /* Optional: Adds a little upward motion */
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+/* Form Row for Input and Button */
+.new-comment-form .form-row,
+.new-reply-form .form-row {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    /* Remove gap to connect input and button */
 }
 
-/* Apply fade-in to the form container */
-.new-comment-form,
-.new-reply-form {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    animation: fadeIn 1s ease-out forwards; /* Fade-in effect for the form */
-}
-
-/* Apply fade-in to individual form controls */
+/* Form Control (Text Input) */
 .new-comment-form .form-control,
 .new-reply-form .form-control {
+    flex: 1;
+    /* Input field takes up remaining space */
     padding: 10px;
     font-size: 16px;
-    font-family: Corier New;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    width: 100%;
-    margin-bottom: 10px;
-    transition: border 0.3s ease-in-out;
-    opacity: 0;
-    animation: fadeIn 1s ease-out forwards;
-    animation-delay: 0.3s; /* Stagger the fade-in for inputs */
+    font-family: "Courier New", monospace;
+    border-radius: 0;
+    /* Remove border radius for seamless connection */
+    border-top-left-radius: 6px;
+    /* Rounded left corners */
+    border-bottom-left-radius: 6px;
+    /* Rounded left corners */
+    border: 1px solid #8f6ccc;
+    /* Match button border color */
 }
 
-/* Apply fade-in to the buttons */
-.new-comment-form .btn,
-.new-reply-form .btn {
-    padding: 12px 20px;
+/* Button Styling */
+.new-comment-form .btn-submit,
+.new-reply-form .btn-submit {
+    padding: 10px 20px;
+    /* Match padding with the input */
     font-size: 16px;
-    font-family: Corier New;
-    border-radius: 6px;
+    font-family: "Courier New", monospace;
     background-color: #8f6ccc;
-    border-color: #8f6ccc;
+    border: 1px solid #8f6ccc;
+    /* Match input border color */
     color: white;
-    border: none;
-    transition: background-color 0.3s ease;
-    opacity: 0;
-    animation: fadeIn 1s ease-out forwards;
-    animation-delay: 0.5s; /* Stagger the fade-in for buttons */
+    border-radius: 0;
+    /* Remove border radius for seamless connection */
+    border-top-right-radius: 6px;
+    /* Rounded right corners */
+    border-bottom-right-radius: 6px;
+    /* Rounded right corners */
+    flex-shrink: 0;
+    /* Prevent shrinking */
 }
 
-/* Error message styling */
+/* Button Hover Effect */
+.new-comment-form .btn-submit:hover,
+.new-reply-form .btn-submit:hover {
+    background-color: #b890f3;
+}
+
+/* Error Message Styling */
 .new-comment-form .form-label,
 .new-reply-form .form-label {
     color: red;
     font-size: 14px;
     margin-top: 5px;
-    opacity: 0;
-    animation: fadeIn 1s ease-out forwards;
-    animation-delay: 0.7s; /* Stagger the fade-in for error messages */
-    font-family: Corier New;
+    font-family: "Courier New", monospace;
 }
 
-/* Spinner inside the button */
+/* Spinner Inside Button */
 .new-comment-form .spinner-container,
 .new-reply-form .spinner-container {
     display: flex;
     gap: 10px;
     align-items: center;
-    opacity: 0;
-    animation: fadeIn 1s ease-out forwards;
-    animation-delay: 0.6s; /* Stagger the fade-in for spinner */
 }
 
-/* Add margin for the submit button */
-.new-comment-form .btn-submit,
-.new-reply-form .btn-submit {
-    margin-top: 10px;
+/* Responsive Design */
+@media (max-width: 768px) {
+
+    .new-comment-form .form-row,
+    .new-reply-form .form-row {
+        flex-direction: column;
+        /* Stack input and button vertically */
+        align-items: stretch;
+    }
+
+    .new-comment-form .form-control,
+    .new-reply-form .form-control {
+        border-radius: 6px;
+        /* Reset border radius */
+        margin-bottom: 10px;
+    }
+
+    .new-comment-form .btn-submit,
+    .new-reply-form .btn-submit {
+        border-radius: 6px;
+        /* Reset border radius */
+    }
 }
 
-/* Container for the form */
-.new-reply-form {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    font-family: Corier New;
+.new-comment-form {
+    margin-bottom: 2vh;
+    width: 85vw;
 }
 
-/* Form control (text input) */
+.new-comment-form .form-control {
+    width: 80vw;
+}
+
 .new-reply-form .form-control {
-    padding: 10px;
-    font-size: 16px;
-    font-family: Corier New;   
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    width: 100%;
-    margin-bottom: 10px;
-    transition: border 0.3s ease-in-out;
-}
-
-
-.new-comment-form .btn:hover,
-.new-reply-form .btn:hover {
-    background-color: #b890f3;
+    width: 60vw;
 }

@@ -1,8 +1,9 @@
 /* Ensure the profile section is stacked above the post image */
 .post-header {
     display: flex;
-    flex-direction: row; /* Keep profile image and username in a row */
+    flex-direction: row;
     align-items: center;
+    justify-content: center;
     margin-bottom: 15px;
     font-family: "Courier New";
 }
@@ -76,4 +77,11 @@
     color: #888;
     margin-top: 10px;
     font-family: "Courier New";
+}
+
+.post-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }

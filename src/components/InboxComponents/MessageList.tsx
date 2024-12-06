@@ -37,7 +37,7 @@ const MessageList = ({ username, currentUserId, profiles }: DMListProp) => {
 
   const fetchChats = async () => {
     try {
-      const response = await fetch("https://bingus.website/api/crud/create_chat", {
+      const response = await fetch("http://localhost:3000/api/crud/create_chat", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -58,7 +58,7 @@ const MessageList = ({ username, currentUserId, profiles }: DMListProp) => {
 
   const startChat = async ({ selfUserId, otherUserId }: CreateNewChat) => {
     try {
-      const response = await fetch("https://bingus.website/api/crud/create_chat", {
+      const response = await fetch("http://localhost:3000/api/crud/create_chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

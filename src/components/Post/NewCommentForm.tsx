@@ -50,7 +50,7 @@ export default function NewCommentForm({ onSubmitDecorator, postId, className }:
                 dateCommented: new Date()
             };
 
-            const response = await fetch("https://bingus.website/api/crud/post_comment", {
+            const response = await fetch("http://localhost:3000/api/crud/post_comment", {
                 method: "POST",
                 body: JSON.stringify(newComment)
             });
@@ -70,26 +70,31 @@ export default function NewCommentForm({ onSubmitDecorator, postId, className }:
 
     return (
         <Form action={onSubmit} className={`new-comment-form ${className || ''}`}>
-            <Form.Group controlId="comment">
-                <Form.Control type="text"
-                    placeholder="   "
-                    value={comment} onChange={(e) => { setComment(e.target.value) }}
-                    disabled={pending}
-                />
-                {validateErrors.comment ? (
-                    <Form.Label className="form-label">
-                        {validateErrors.comment}
-                    </Form.Label>
-                ) : null}
-            </Form.Group>
-            <Button type="submit" className="btn-submit">
-                {pending ? (
-                    <div className="spinner-container">
-                        <Spinner size="sm" animation="border" />
-                        Submitting...
-                    </div>
-                ) : "Comment"}
-            </Button>
+            <div className="form-row">
+                <Form.Group controlId="comment" className="form-control-container">
+                    <Form.Control
+                        type="text"
+                        placeholder="Type your comment..."
+                        value={comment}
+                        onChange={(e) => setComment(e.target.value)}
+                        disabled={pending}
+                    />
+                </Form.Group>
+                <Button type="submit" className="btn-submit">
+                    {pending ? (
+                        <div className="spinner-container">
+                            <Spinner size="sm" animation="border" />
+                            Submitting...
+                        </div>
+                    ) : (
+                        "Comment"
+                    )}
+                </Button>
+            </div>
+            {validateErrors.comment ? (
+                <Form.Label className="form-label">{validateErrors.comment}</Form.Label>
+            ) : null}
         </Form>
+
     );
 }
