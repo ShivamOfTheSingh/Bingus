@@ -72,15 +72,6 @@
   background-color: #0056b3;
 }
 
-/* Follow Button Styles when Following */
-.user-profile-card .follow-button.following {
-  background-color: #28a745;  /* Green for "Following" state */
-}
-
-/* Follow Button Styles when Not Following */
-.user-profile-card .follow-button.not-following {
-  background-color: #dc3545;  /* Red for "Follow" state */
-}
 
 /* For FollowCardOther (hide button) */
 .user-profile-card.other .follow-button {

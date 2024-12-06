@@ -2,6 +2,7 @@ import FollowCardSelf from "@/components/Followers/FollowCardSelf"
 import getCurrentSessionUserId from "@/lib/cookies/getCurrentSessionUserId";
 import { redirect } from "next/navigation";
 import { getFollowingPageData } from "@/lib/GET_api_calls/getFollowingPageDataSelf";
+import "@/public/FollowersPage.css";
 
 
 export default async function Page() {
@@ -13,7 +14,7 @@ export default async function Page() {
 
     return (
         <div>
-            <div className="container" style={{paddingLeft: '200px'}} >
+            <div className="container">
                 <h3>Following</h3>
                 {following.map((f: any) => <FollowCardSelf profile={f.profile} following={f.following} />)}
                 <h3>Suggested</h3>
