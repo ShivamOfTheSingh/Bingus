@@ -29,18 +29,20 @@ export default function ProfilePageInfoOther({
       <Row className="align-items-center">
         {/* Red Section - Profile Image and Name */}
         <Col xs={4} className="profile-section">
-          <h2>
-            {settings.showName
-              ? `${profile.firstName} ${profile.lastName}`
-              : profile.username}
-          </h2>
-          <Image
-            src={profile.profilePicture || profilePicTemp}
-            alt={`${profile.username}'s profile`}
-            width={100}
-            height={100}
-            className="rounded-circle"
-          />
+          <div className="pfp-info">
+            <h2>
+              {settings.showName
+                ? `${profile.firstName} ${profile.lastName}`
+                : profile.username}
+            </h2>
+            <Image
+              src={profile.profilePicture || profilePicTemp}
+              alt={`${profile.username}'s profile`}
+              width={200}
+              height={200}
+              className="rounded-circle"
+            />
+          </div>
         </Col>
 
         {/* Blue Section - Stats */}

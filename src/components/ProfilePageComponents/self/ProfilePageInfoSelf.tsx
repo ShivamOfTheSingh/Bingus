@@ -5,7 +5,7 @@ import { UserProfile, UserSettings } from "@/lib/db/models";
 import Image from "next/image";
 import profilePicTemp from "@/public/profile-pic-temp.jpg";
 import Link from "next/link";
-import '@/public/ProfileInfo.css';
+import "@/public/ProfileInfo.css";
 
 interface ProfilePageInfoSelfProps {
   profile: UserProfile;
@@ -27,27 +27,28 @@ export default function ProfilePageInfoSelf({
   return (
     <Container className={`${className} py-4 custom-container`}>
       <Row className="align-items-center">
-        {/* Red Section - Profile Image and Name */}
+        {/* Profile Image and Name Section */}
         <Col xs={4} className="profile-section">
-          <h2>
-            {settings.showName
-              ? `${profile.firstName} ${profile.lastName}`
-              : profile.username}
-          </h2>
-          <Image
-            src={profile.profilePicture || profilePicTemp}
-            alt={`${profile.username}'s profile`}
-            width={100}
-            height={100}
-            className="rounded-circle"
-          />
-          {/* Edit Profile Button */}
+          <div className="pfp-info">
+            <h2>
+              {settings.showName
+                ? `${profile.firstName} ${profile.lastName}`
+                : profile.username}
+            </h2>
+            <Image
+              src={profile.profilePicture || profilePicTemp}
+              alt={`${profile.username}'s profile`}
+              width={200}
+              height={200}
+              className="rounded-circle"
+            />
+          </div>
           <Button variant="outline-secondary" size="sm" className="mt-3">
             <Link href="/profile/settings">Edit Profile</Link>
           </Button>
         </Col>
 
-        {/* Blue Section - Stats */}
+        {/* Stats Section */}
         <Col xs={4} className="stats-section">
           <div className="stats-item">
             <p className="large-font">{numPosts}</p>
@@ -67,7 +68,7 @@ export default function ProfilePageInfoSelf({
           </div>
         </Col>
 
-        {/* Green Section - Bio */}
+        {/* Bio Section */}
         {profile.about && (
           <Col xs={4} className="bio-section">
             <p>{profile.about}</p>
